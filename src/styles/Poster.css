@@ -1,0 +1,35 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.poster {
+  position: relative;
+  background-color: #915ee4de !important;
+}
+.poster p,
+h2 {
+  margin-left: 60px;
+  position: absolute;
+  color: white;
+}
+.poster .p1 {
+  position: absolute;
+  margin-top: 40px;
+}
+.poster h2 {
+  margin-top: 140px;
+}
+.poster .p2 {
+  margin-top: 180px;
+}
+.icon {
+  position: relative;
+  right: 0;
+}
+.studentt {
+  position: absolute;
+  right: 0px;
+  height: 100%;
+  width: 500px;
+}

@@ -1,0 +1,130 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.login-page {
+  background-color: black !important;
+  width: 1349px;
+}
+.login-container {
+  width: 70%;
+  height: 100vh;
+  color: white;
+  margin: auto;
+  display: flex;
+}
+.login-container .login {
+  width: 50%;
+  height: 100%;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.login-container .login .Title {
+  position: relative;
+  margin-bottom: 20px;
+}
+.login-container .login .Title h2 {
+  margin-left: 0;
+  position: absolute;
+  color: white;
+}
+.login-container .login .Title p {
+  position: absolute;
+  top: 40px;
+}
+.login-container .login .inputs {
+  display: flex;
+  flex-direction: column;
+  /* margin-top: 10px; */
+  position: relative;
+  margin-top: 20px;
+}
+.login-container .login .inputs h4 {
+  margin-top: 40px;
+  /* margin-bottom: 14px; */
+}
+.login-container .login .inputs .kind {
+  margin-bottom: 25px;
+}
+.login-container .login .inputs input {
+  width: 70%;
+  height: 40px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  margin-top: 10px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  border-bottom: 1px solid white;
+  color: white;
+}
+.login-container .login .inputs .error {
+  font-size: 13px;
+  color: red;
+}
+.login-container .login .inputs .kind {
+  position: absolute;
+  left: -25px;
+  bottom: 120px;
+}
+.login-container .login .inputs .kind input {
+  width: 20px;
+  height: 10px;
+  margin-left: 20px;
+}
+.login-container .login .inputs a {
+  margin-top: 10px;
+  text-decoration: none;
+  color: white;
+}
+.login-container .login .inputs h4 {
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+.login-container .login .button {
+  margin-top: 30px;
+  width: 70%;
+  height: 40px;
+  background-color: #8448e6;
+  border: none;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  cursor: pointer;
+}
+.login-container .login .button:hover {
+  background-color: #7c2ff8;
+}
+.login-container .logo {
+  width: 50%;
+  height: 99.41%;
+  background-color: #996ae4;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.login-container .logo h1 {
+  width: 70%;
+  font-size: 40px;
+  margin: auto;
+  margin-top: 50px;
+}
+.login-container .logo p {
+  width: 70%;
+  margin: auto;
+  margin-top: 5px;
+  font-size: 12px;
+}
+.login-container .logo img {
+  width: 100%;
+  height: 100%;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}

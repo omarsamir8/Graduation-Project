@@ -1,0 +1,35 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: rgb(224, 224, 224);
+}
+.mainpage {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  flex-wrap: wrap;
+}
+.mainpage .sidebar {
+  width: 95%;
+}
+.mainpage .container-page {
+  width: 1000px;
+  position: absolute;
+  margin-left: 300px;
+  margin-top: 20px;
+}
+.mainpage .poster {
+  margin-top: 10px;
+  width: 100%;
+  height: 240px;
+  background-color: #996ae4;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
