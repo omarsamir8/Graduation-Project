@@ -45,7 +45,8 @@ body {
   -o-transition: 0s;
 }
 .main:hover {
-  border: 4px solid rgba(57, 2, 121, 0.753);
+  border: 2px solid rgba(57, 2, 121, 0.753);
+
 }
 .main i {
   font-size: 55px;

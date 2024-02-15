@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
+import Form from "react-bootstrap/Form";
 
 function Login() {
   const navigate = useNavigate();
@@ -132,16 +133,20 @@ function Login() {
   };
   return (
     <>
-      <div className="login-page">
-        <div className="login-container">
-          <div className="login">
-            <div className="Title">
-              <h2>Login</h2>
-              <p>Enter Your Account Details</p>
+      <div className="col-12 login-page">
+        <div className="col-12 login-container">
+          <div className=" col-12 login">
+            <div className="col-12">
+              <h1 className="col-12 login_title">Login</h1>
+              <h1 className="col-12 login_title">Welcome back !</h1>
             </div>
-            <div className="inputs">
-              <h4>Login As .......</h4>
-              <div className="kind">
+
+            {/* <div className="inputs col-12"> */}
+            {/* <h4>Login As .......</h4> */}
+            {/* <p className="col-12">Enter Your Account Details</p> */}
+            <div className="kind">
+              <label className="col-12">Login As...</label>
+              <div className="col-12 radio_inputs">
                 <input
                   type="radio"
                   name="kind"
@@ -171,33 +176,47 @@ function Login() {
                 />
                 Admin
               </div>
-              <input
-                type="Text"
-                placeholder="Enter Your Code Or Email"
+            </div>
+            <div className="col-12 labelWithInput">
+              <Form.Label className="input_label">email or code *</Form.Label>
+              <Form.Control
+                type="text"
                 name={name}
-                required
                 value={name}
                 onChange={type2}
-              />
-              <input
-                type="password"
-                placeholder="Enter Your Password"
-                name="password"
                 required
+                placeholder="Enter email or code here"
+                className="login_input"
+              />
+            </div>
+            <div className="col-12 labelWithInput">
+              <Form.Label className="input_label">password *</Form.Label>
+              <Form.Control
+                type="password"
+                name="password"
                 value={password}
                 onChange={(e) => {
                   setpassword(e.target.value);
                 }}
-              />{" "}
-              <p className="error">{message.message}</p>
-              <a href="#forgetpassword">Forget Password?</a>
+                required
+                placeholder="Enter your password here"
+                className="login_input"
+              />
             </div>
+
+            <p className="error">{message.message}</p>
+            <a href="#forgetpassword">Forget Password?</a>
+            {/* </div> */}
             <button to="/student" className="button" onClick={check}>
               Login
             </button>
           </div>
           <div className="logo">
-            <img src="./assets/images/login.jpg" alt="" />
+            <img
+              src="./assets/images/login_logo.jpg"
+              alt=""
+              className="login_logo"
+            />
           </div>
         </div>
       </div>

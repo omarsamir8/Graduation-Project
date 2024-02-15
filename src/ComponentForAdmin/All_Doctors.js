@@ -1,5 +1,5 @@
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
-function AllDoctor() {
+function AllDoctors() {
   return (
     <>
       <div className="get_all_student">
@@ -220,4 +220,4 @@ function AllDoctor() {
     </>
   );
 }
-export default AllDoctor;
+export default AllDoctors;

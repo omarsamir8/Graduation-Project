@@ -1,6 +1,10 @@
-import { React } from "react";
+import { React, useState } from "react";
 import "../styles/Dashboard.css";
-function Dashboard() {
+function DashBoard() {
+  const [selectedComponent, setSelectedComponent] = useState(null);
+  const handleSidebarClick = (componentName) => {
+    setSelectedComponent(componentName);
+  };
   return (
     <>
       <div className="dashboard-container">
@@ -64,4 +68,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default DashBoard;

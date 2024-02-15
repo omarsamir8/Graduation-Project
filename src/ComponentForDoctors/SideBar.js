@@ -13,32 +13,32 @@ function SideBar() {
           {/* <i class="fa-solid fa-graduation-cap"></i> */}
           <img src="./assets/images/art.jpeg" alt=""></img>
         </div>
-        <div className="item selected">
+        <div className="item col-12">
           <i class="fa-solid fa-gauge"></i>
-          <a href="#dashboard">Dashboard</a>
+          <p>Dashboard</p>
         </div>
-        <div className="item">
+        <div className="item col-12">
           <i class="fa-solid fa-registered"></i>
-          <a href="#register"> Department</a>
+          <p> Department</p>
         </div>
-        <div className="item">
+        <div className="item col-12">
           <i class="fa-solid fa-book-open"></i>
-          <a href="#courses">Courses</a>
+          <p>Courses</p>
         </div>
-        <div className="item">
+        <div className="item col-12">
           <i class="fa-brands fa-stack-overflow"></i>
-          <a href="#training"> Training</a>
+          <p> Training</p>
         </div>
-        <div className="item">
+        <div className="item col-12">
           <i class="fa-solid fa-address-card"></i>
-          <a href="#results">Results</a>
+          <p>Results</p>
         </div>
 
-        <div className="login">
+        <div className="login col-12">
           <i class="fa-solid fa-right-from-bracket"></i>
-          <a href="#login" onClick={logout}>
+          <p onClick={logout}>
             Logout
-          </a>
+          </p>
         </div>
       </div>
     </>

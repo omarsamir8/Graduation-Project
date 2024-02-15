@@ -49,7 +49,7 @@ function CreateTraining() {
         <button type="button" class="btn btn-primary mt-3">
           Submit
         </button>
-        <h2>Enroll Training</h2>
+        <h2>All Trainings Added</h2>
       </div>
       <div className="enrollcourse">
         <div className="course">

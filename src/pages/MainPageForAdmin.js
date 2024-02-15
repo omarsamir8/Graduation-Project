@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import SideBar from "../ComponentForAdmin/SideBar";
 import NavBar from "../ComponentForAdmin/NavBar";
 import Poster from "../ComponentForAdmin/Poster";
 import CreateCourse from "../ComponentForAdmin/CreateCourse";
-// import CreateDoctor from "../ComponentForAdmin/CreateDoctor";
-// import AllStudent from "../ComponentForAdmin/All_Student";
-// import AllDoctor from "../ComponentForAdmin/All_Doctor";
-// import Dashboard from "../ComponentForAdmin/DashBoard";
-// import CreateStudent from "../ComponentForAdmin/CreateStudent";
-// import CreateTraining from "../ComponentForAdmin/CreateTraining";
+import CreateDoctor from "../ComponentForAdmin/CreateDoctor";
+import AllStudent from "../ComponentForAdmin/All_Students";
+import AllDoctor from "../ComponentForAdmin/All_Doctors";
+
+import CreateStudent from "../ComponentForAdmin/CreateStudent";
+import CreateTraining from "../ComponentForAdmin/CreateTraining";
 import "../styles/MainPage.css";
+import DashBoard from "../ComponentForAdmin/DashBoard";
+import { useRecoilState } from "recoil";
+import { $Dashboard_Components } from "../Atoms";
+import All_Students from "../ComponentForAdmin/All_Students";
+import AllDoctors from "../ComponentForAdmin/All_Doctors";
 
 function MainPageForAdmin() {
+  const [selectedComponent, setSelectedComponent] = useRecoilState(
+    $Dashboard_Components
+  );
+
   return (
     <>
       <div className="mainpage">
@@ -26,13 +35,13 @@ function MainPageForAdmin() {
             <Poster name="Admin" />
           </div>
           <div>
-            {/* <Dashboard /> */}
-            {/* <CreateStudent /> */}
-            {/* <CreateDoctor /> */}
-            {/* <AllStudent /> */}
-            {/* <AllDoctor /> */}
-            {/* <CreateCourse /> */}
-            {/* <CreateTraining /> */}
+            {selectedComponent === "DashBoard" && <DashBoard />}
+            {selectedComponent === "CreateStudent" && <CreateStudent />}
+            {selectedComponent === "All_Students" && <All_Students />}
+            {selectedComponent === "CreateDoctor" && <CreateDoctor />}
+            {selectedComponent === "AllDoctors" && <AllDoctors />}
+            {selectedComponent === "CreateCourse" && <CreateCourse />}
+            {selectedComponent === "CreateTraining" && <CreateTraining />}
           </div>
         </div>
       </div>
