@@ -3,9 +3,7 @@
   margin: 0;
   box-sizing: border-box;
 }
-body {
-  width: 1000px;
-}
+
 .dashboard-container {
   display: flex;
   justify-content: space-between;
@@ -46,19 +44,19 @@ body {
 }
 .main:hover {
   border: 2px solid rgba(57, 2, 121, 0.753);
-
 }
 .main i {
-  font-size: 55px;
+  font-size: 45px;
   color: rgba(57, 2, 121, 0.753);
 }
 .main h3 {
-  font-size: 23px;
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
   color: black;
   font-weight: bold;
 }
 .main p {
-  font-size: 23px;
+  font-size: 20px;
   color: gray;
   font-weight: bold;
 }

@@ -39,7 +39,7 @@ function NavBar() {
           <img src="./assets/images/1.png" alt="" />
           <div className="details">
             <h3>{doctorinfo.FullName}</h3>
-            <p>3rd year</p>
+            <p>{doctorinfo.department}</p>
           </div>
         </div>
       </div>

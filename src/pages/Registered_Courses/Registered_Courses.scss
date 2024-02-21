@@ -1,0 +1,75 @@
+.Registered_Courses {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: beige;
+  min-height: 100vh;
+}
+.Benha_img {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 150px;
+}
+.BFCAI_img {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  width: 150px;
+}
+.Table_courses {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.Title_registered {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: absolute;
+  top: 1rem;
+
+  p {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    font-size: 1.1rem;
+    color: gray;
+  }
+}
+.BackToStu {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+gap: 10px;
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 1000;
+
+  .BackToStuBtn {
+    padding: 0.5rem 1.8rem !important;
+    background-color: #8042e6 !important;
+    border: 0 !important;
+  }
+  .Print_semester {
+    padding: 0.5rem 1.8rem !important;
+    background-color: #8042e6 !important;
+    border: 0 !important;
+  }
+}
+.Line_div{
+  height: 2px;
+  width: 95%;
+  background-color: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ margin-bottom: 3rem;
+}

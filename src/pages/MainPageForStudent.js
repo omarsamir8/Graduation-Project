@@ -4,9 +4,17 @@ import NavBar from "../ComponentForStudents/NavBar";
 import "../styles/MainPage.css";
 import Poster from "../ComponentForStudents/Poster";
 import Dashboard from "../ComponentForStudents/DashBoard";
+import RegisterForCourse from "../ComponentForStudents/RegisterForCourse";
+import RegisterForTraining from "../ComponentForStudents/RegisterForTraining";
+import RegisteredTraining from "../ComponentForStudents/RegisteredTraining";
+import { useRecoilState } from "recoil";
+import { $Dashboard_Components } from "../Atoms";
 // import axios from "axios";
 
 function MainPageForStudents() {
+  const [selectedComponent, setSelectedComponent] = useRecoilState(
+    $Dashboard_Components
+  );
   return (
     <>
       <div className="mainpage">
@@ -22,7 +30,14 @@ function MainPageForStudents() {
             <Poster />
           </div>
           <div>
-            <Dashboard />
+            {selectedComponent === "DashBoard" && <Dashboard />}
+            {selectedComponent === "RegisterForCourse" && <RegisterForCourse />}
+            {selectedComponent === "RegisterForTraining" && (
+              <RegisterForTraining />
+            )}
+            {selectedComponent === "RegisteredTraining" && (
+              <RegisteredTraining />
+            )}
           </div>
         </div>
       </div>

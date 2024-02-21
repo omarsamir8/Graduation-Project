@@ -4,8 +4,8 @@
   box-sizing: border-box;
 }
 .login-page {
-  background-color: #c6b4d8 !important;
-  width: 1300px;
+  background-color: #b893dd !important;
+  width: 100%;
   height: 100vh;
   overflow-x: hidden !important;
   overflow-y: hidden !important;
@@ -89,7 +89,7 @@
   margin-top: 20px;
 }
 
- .login-container .login .inputs input {
+.login-container .login .inputs input {
   width: 70%;
   height: 40px;
   border-radius: 5px;
@@ -108,9 +108,6 @@
   font-size: 13px;
   color: red;
 }
-
-
-
 
 .login-container .login .inputs a {
   margin-top: 10px;
@@ -149,4 +146,4 @@
 .login_logo {
   width: 400px;
   border-radius: 50%;
-} 
+}

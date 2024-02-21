@@ -34,7 +34,7 @@ function Poster() {
       <div className="poster">
         <div>
           <p className="p1">September ,2024</p>
-          <h2>Welcom Back,{studentinfo.Full_Name}!</h2>
+          <h2>Welcome Back,{studentinfo.Full_Name}!</h2>
           <p className="p2">Alwayes Stay Updated In Your Student Portal</p>
         </div>
 

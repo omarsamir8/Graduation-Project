@@ -44,7 +44,7 @@ function NavBar() {
           <img src="./assets/images/2.png" alt=""></img>
           <div className="details">
             <h3>{admininfo.FullName}</h3>
-            <p>Four Years</p>
+            <p>{admininfo.role}</p>
           </div>
         </div>
       </div>

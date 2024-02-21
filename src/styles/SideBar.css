@@ -24,11 +24,11 @@
 }
 .sidebar-container .icon-container {
   margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   width: 120px;
   height: 100px;
   /* background-color: midnightblue; */
-  margin-right: 30px;
+  margin-right: 20px;
   text-align: center;
   border-radius: 20px;
   -webkit-border-radius: 20px;
@@ -69,7 +69,7 @@
   width: 100%;
   display: flex;
   position: absolute;
-  left: 32px;
+  left: 35px;
   bottom: 10px;
   margin-top: 90px;
   transition: 0.3s;
@@ -84,6 +84,10 @@
   align-items: baseline;
   cursor: pointer;
 }
+.sidebar-container .login p {
+  margin-left: 0.3rem;
+  font-size: 1.05rem;
+}
 
 .sidebar-container .item:hover {
   color: black;
@@ -95,13 +99,17 @@
 .NavLink {
   color: white;
   padding-top: 0.7rem;
+  margin-left: 0.3rem;
+  font-size: 1.05rem;
 }
 .NavLink:hover {
   color: black;
   transition: ease all 800ms;
- 
 }
 
 .NavLink:focus {
   color: black;
+}
+.NavLink{
+  text-decoration: none;
 }

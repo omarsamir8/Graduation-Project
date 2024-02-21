@@ -4,9 +4,6 @@ import NavBar from "../ComponentForAdmin/NavBar";
 import Poster from "../ComponentForAdmin/Poster";
 import CreateCourse from "../ComponentForAdmin/CreateCourse";
 import CreateDoctor from "../ComponentForAdmin/CreateDoctor";
-import AllStudent from "../ComponentForAdmin/All_Students";
-import AllDoctor from "../ComponentForAdmin/All_Doctors";
-
 import CreateStudent from "../ComponentForAdmin/CreateStudent";
 import CreateTraining from "../ComponentForAdmin/CreateTraining";
 import "../styles/MainPage.css";

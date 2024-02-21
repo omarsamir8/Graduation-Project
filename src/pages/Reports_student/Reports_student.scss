@@ -1,0 +1,68 @@
+.Head_table {
+  background-color: rgba(128, 128, 128, 0.734) !important;
+
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-top: 2rem;
+}
+.Title_table {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  p {
+    margin: 0;
+  }
+  
+}
+.Head_table_2 {
+    background-color: rgba(128, 128, 128, 0.734) !important;
+    margin: 0;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content:center !important;
+    align-items: center !important;
+    text-align: center;
+  }
+  .Title_table_2 {
+   text-align: center;
+    padding: 0.5rem 1rem;
+    p {
+      margin: 0;
+    }
+    
+  }
+  .Line_div_report{
+    height: 2px;
+    width: 95%;
+    background-color: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  margin-top: 10rem;
+  }
+ .BackToStu_report{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  gap: 10px;
+   padding: 1rem;
+    z-index: 1000;
+    .BackToStuBtn {
+        padding: 0.5rem 1.8rem !important;
+        background-color: #8042e6 !important;
+        border: 0 !important;
+      }
+      .Print_semester {
+        padding: 0.5rem 1.8rem !important;
+        background-color: #8042e6 !important;
+        border: 0 !important;
+      }
+ }

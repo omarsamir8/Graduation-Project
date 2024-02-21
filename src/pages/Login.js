@@ -106,7 +106,7 @@ function Login() {
   const handleLoginforadmin = async () => {
     try {
       const response = await fetch(
-        "https://university-system-dmg7.onrender.com/Api/admin/login",
+        "https://university-system-rosy.vercel.app/Api/admin/login",
         {
           method: "POST",
           headers: {
@@ -120,6 +120,8 @@ function Login() {
 
       localStorage.setItem("accesstoken", data.accessToken);
       localStorage.setItem("refreshtoken", data.refreshToken);
+      // console.log(data.accessToken);
+      // console.loglog(data.refreshToken);
 
       if (response.ok) {
         // If login is successful, navigate to the "/admin" page
@@ -135,6 +137,7 @@ function Login() {
     <>
       <div className="col-12 login-page">
         <div className="col-12 login-container">
+          {/* <form></form> */}
           <div className=" col-12 login">
             <div className="col-12">
               <h1 className="col-12 login_title">Login</h1>
@@ -178,7 +181,7 @@ function Login() {
               </div>
             </div>
             <div className="col-12 labelWithInput">
-              <Form.Label className="input_label">email or code *</Form.Label>
+              <Form.Label className="input_label">Email Or Code *</Form.Label>
               <Form.Control
                 type="text"
                 name={name}
@@ -190,7 +193,7 @@ function Login() {
               />
             </div>
             <div className="col-12 labelWithInput">
-              <Form.Label className="input_label">password *</Form.Label>
+              <Form.Label className="input_label">Password *</Form.Label>
               <Form.Control
                 type="password"
                 name="password"

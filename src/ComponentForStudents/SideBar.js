@@ -1,11 +1,18 @@
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "../styles/SideBar.css";
+import { useRecoilState } from "recoil";
+import { $Dashboard_Components } from "../Atoms";
 function SideBar() {
   const navigate = useNavigate();
+
   function logout() {
     navigate("/");
     localStorage.clear();
   }
+
+  const [selectedComponent, setSelectedComponent] = useRecoilState(
+    $Dashboard_Components
+  );
   return (
     <>
       <div className="sidebar-container">
@@ -13,47 +20,85 @@ function SideBar() {
           {/* <i class="fa-solid fa-graduation-cap"></i> */}
           <img src="./assets/images/art.jpeg" alt=""></img>
         </div>
-        <div className="item selected">
+        <div className="item col-12">
           <i class="fa-solid fa-gauge"></i>
-          <a href="#dashboard">Dashboard</a>
+          <NavLink
+            className="NavLink"
+            onClick={() => setSelectedComponent("DashBoard")}
+            style={{ color: "green" }}
+          >
+            Dashboard
+          </NavLink>
         </div>
-        <div className="item">
-          <i class="fa-solid fa-registered"></i>
-          <a href="#register"> Registration</a>
-        </div>
-        <div className="item">
+
+        <div className="item col-12">
           <i class="fa-solid fa-book-open"></i>
-          <a href="#courses">Courses</a>
+          <NavLink
+            className="NavLink"
+            onClick={() => setSelectedComponent("RegisterForCourse")}
+          >
+            Register For Course
+          </NavLink>
         </div>
-        <div className="item">
+        <div className="item col-12">
           <i class="fa-brands fa-stack-overflow"></i>
-          <a href="#training">Training</a>
+          <NavLink to="/Registered_Courses" className="NavLink">
+            Registered Courses
+          </NavLink>
         </div>
-        <div className="item">
+        <div className="item col-12">
           <i class="fa-solid fa-layer-group"></i>
-          <a href="#semester">Semester</a>
+          <NavLink
+            className="NavLink"
+            onClick={() => setSelectedComponent("RegisterForTraining")}
+          >
+            Register For Training
+          </NavLink>
         </div>
-        <div className="item">
+        <div className="item col-12">
           <i class="fa-solid fa-layer-group"></i>
-          <a href="#semester">Department</a>
+          <NavLink
+            className="NavLink"
+            onClick={() => setSelectedComponent("RegisteredTraining")}
+          >
+            Registered Training
+          </NavLink>
         </div>
-        <div className="item">
-          <i class="fa-solid fa-address-card"></i>
-          <a href="#results">Results</a>
-        </div>
-        <div className="item">
+        <div className="item col-12">
           <i class="fa-solid fa-square-plus"></i>
-          <a href="#schedules">Scheduale</a>
+          <NavLink to="/Reports_student" className="NavLink">
+            Semester
+          </NavLink>
         </div>
-        <div className="item">
+        <div className="item col-12">
+          <i class="fa-solid fa-address-card"></i>
+          <NavLink
+            className="NavLink"
+            onClick={() => setSelectedComponent("Department")}
+          >
+            Department
+          </NavLink>
+        </div>
+        <div className="item col-12">
+          <i class="fa-solid fa-registered"></i>
+          <NavLink
+            className="NavLink"
+            onClick={() => setSelectedComponent("Scheduale")}
+          >
+            {" "}
+            Scheduale
+          </NavLink>
+        </div>
+
+        <div className="item col-12">
           <i class="fa-solid fa-message"></i>
-          <a href="#chat">Chat</a>
+          <NavLink className="NavLink">Chat</NavLink>
         </div>
-        <div className="login">
+        <div className="login col-12">
           <i class="fa-solid fa-right-from-bracket"></i>
-          <a href="#login" onClick={logout}>
+          <p onClick={logout} className="logout_Button">
             Logout
-          </a>
+          </p>
         </div>
       </div>
     </>

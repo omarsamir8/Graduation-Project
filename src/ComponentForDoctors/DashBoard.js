@@ -1,6 +1,10 @@
-import { React } from "react";
+import { React, useState } from "react";
 import "../styles/Dashboard.css";
 function Dashboard() {
+  const [selectedComponent2, setSelectedComponent2] = useState(null);
+  const handleSidebarClick = (componentName) => {
+    setSelectedComponent2(componentName);
+  };
   return (
     <>
       <div className="dashboard-container">
