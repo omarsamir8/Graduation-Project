@@ -10,23 +10,23 @@ function CreateCourse() {
               type="text"
               class="form-control"
               placeholder="Enter Course_Name"
-              aria-label="Course_Name"
-              name="Course_Name"
+              aria-label="course_name"
+              name="course_name"
             />
 
             <input
               type="text"
               class="form-control mt-3"
-              placeholder="Enter Course_Id"
-              aria-label="Course_Id"
-              name="Course_Id"
+              placeholder="Enter Prerequisites"
+              aria-label="Prerequisites"
+              name="Prerequisites"
             />
             <input
               type="text"
               class="form-control mt-3"
-              placeholder="Enter Minimum Grade"
-              aria-label="Minimum Grade"
-              name="minimum Grade"
+              placeholder="Enter OpenForRegistration"
+              aria-label="OpenForRegistration"
+              name="OpenForRegistration "
             />
           </div>
           <div class="col">
@@ -40,9 +40,16 @@ function CreateCourse() {
             <input
               type="text"
               class="form-control mt-3"
-              placeholder="Enter Maximum Grade"
-              aria-label="Maximum Grade"
-              name="Maximum Grade"
+              placeholder="Enter instructorId "
+              aria-label="instructorId "
+              name="instructorId"
+            />
+            <input
+              type="text"
+              class="form-control mt-3"
+              placeholder="Enter Description "
+              aria-label="desc "
+              name="desc"
             />
           </div>
         </div>

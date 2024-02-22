@@ -11,6 +11,7 @@ function CreateDoctor() {
   const [Date_of_Birth, setDate_of_Birth] = useState("");
   const [gender, setgender] = useState("");
   const [department, setdepartment] = useState("");
+  // const [Materials, setMaterials] = useState([]);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
 
@@ -33,6 +34,7 @@ function CreateDoctor() {
             Date_of_Birth,
             gender,
             department,
+            // Materials, // Send the array directly
           }),
         }
       );
@@ -48,15 +50,6 @@ function CreateDoctor() {
           showConfirmButton: false,
           timer: 3500,
         });
-
-        // Reset the form or perform any other actions on success
-        setFullName("");
-        setpassword("");
-        setemail("");
-        setphone("");
-        setDate_of_Birth("");
-        setgender("");
-        setdepartment("");
       } else {
         // Show an error message if needed
         Swal.fire({
@@ -67,13 +60,7 @@ function CreateDoctor() {
         });
 
         // Reset the form or perform any other actions on error
-        setFullName("");
-        setpassword("");
-        setemail("");
-        setphone("");
-        setDate_of_Birth("");
-        setgender("");
-        setdepartment("");
+        // Reset the Materials array
       }
     } catch (error) {
       console.error("Login failed", error);
@@ -159,6 +146,16 @@ function CreateDoctor() {
                 setDate_of_Birth(e.target.value);
               }}
             />
+            {/* <input
+              type="text"
+              class="form-control mt-3"
+              placeholder="Enter Materials"
+              aria-label="Materials"
+              name="Materials"
+              onChange={(e) => {
+                setMaterials(e.target.value);
+              }}
+            /> */}
           </div>
         </div>
         <button
