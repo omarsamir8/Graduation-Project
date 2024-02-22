@@ -12,27 +12,6 @@ function CreateStudent() {
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
-  const initialFormData = {
-    Full_Name: "",
-    National_Id: "",
-    Student_Code: "",
-    PhoneNumber: "",
-    Date_of_Birth: "",
-    gender: "",
-    semesterId: "",
-  };
-  const [formData, setFormData] = useState(initialFormData);
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const resetForm = () => {
-    setFormData(initialFormData);
-  };
   const createstudent = async () => {
     try {
       const response = await fetch(
@@ -66,7 +45,6 @@ function CreateStudent() {
           showConfirmButton: false,
           timer: 3500,
         });
-        resetForm();
 
         // Reset the form or perform any other actions on success
         // setFull_Name("");
@@ -84,7 +62,6 @@ function CreateStudent() {
           text: "Student created failed, please try again later",
           timer: 4500,
         });
-        resetForm();
 
         // Reset the form or perform any other actions on error
         // setFull_Name("");
