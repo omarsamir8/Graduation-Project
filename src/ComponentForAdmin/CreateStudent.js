@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Swal from "sweetalert2";
+import { Form } from "react-router-dom";
 function CreateStudent() {
   const [Full_Name, setFull_Name] = useState("");
   const [National_Id, setNational_Id] = useState("");
@@ -12,27 +13,7 @@ function CreateStudent() {
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
-  const initialFormData = {
-    Full_Name: "",
-    National_Id: "",
-    Student_Code: "",
-    PhoneNumber: "",
-    Date_of_Birth: "",
-    gender: "",
-    semesterId: "",
-  };
-  const [formData, setFormData] = useState(initialFormData);
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
 
-  const resetForm = () => {
-    setFormData(initialFormData);
-  };
   const createstudent = async () => {
     try {
       const response = await fetch(
@@ -66,16 +47,6 @@ function CreateStudent() {
           showConfirmButton: false,
           timer: 3500,
         });
-        resetForm();
-
-        // Reset the form or perform any other actions on success
-        // setFull_Name("");
-        // setNational_Id("");
-        // setStudent_Code("");
-        // setPhoneNumber("");
-        // setDate_of_Birth("");
-        // setgender("");
-        // setsemesterId("");
       } else {
         // Show an error message if needed
         Swal.fire({
@@ -84,16 +55,6 @@ function CreateStudent() {
           text: "Student created failed, please try again later",
           timer: 4500,
         });
-        resetForm();
-
-        // Reset the form or perform any other actions on error
-        // setFull_Name("");
-        // setNational_Id("");
-        // setStudent_Code("");
-        // setPhoneNumber("");
-        // setDate_of_Birth("");
-        // setgender("");
-        // setsemesterId("");
       }
     } catch (error) {
       console.error("Login failed", error);
@@ -104,7 +65,7 @@ function CreateStudent() {
     <>
       <div className="Create_Student">
         <h2 className="create_student">Add Student</h2>
-        <div class="row mt-4">
+        <form class="row mt-4">
           <div class="col">
             <input
               type="text"
@@ -180,7 +141,7 @@ function CreateStudent() {
               }}
             />
           </div>
-        </div>
+        </form>
         <button
           type="button"
           class="btn btn-primary mt-3"
