@@ -1,5 +1,85 @@
+import { useState } from "react";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
+
 function CreateDoctor() {
+  const [FullName, setFullName] = useState("");
+  const [password, setpassword] = useState("");
+  const [email, setemail] = useState("");
+  const [phone, setphone] = useState("");
+  const [Date_of_Birth, setDate_of_Birth] = useState("");
+  const [gender, setgender] = useState("");
+  const [department, setdepartment] = useState("");
+  const accessToken = localStorage.getItem("accesstoken");
+  const refreshToken = localStorage.getItem("refreshtoken");
+
+  const createdoctor = async () => {
+    try {
+      const response = await fetch(
+        "https://university-system-rosy.vercel.app/Api/Instructor/create",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+          body: JSON.stringify({
+            FullName,
+            password,
+            email,
+            phone,
+            Date_of_Birth,
+            gender,
+            department,
+          }),
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+
+      if (response.ok) {
+        // Show SweetAlert on success
+
+        Swal.fire({
+          icon: "success",
+          title: "Doctor added successfully",
+          showConfirmButton: false,
+          timer: 3500,
+        });
+
+        // Reset the form or perform any other actions on success
+        setFullName("");
+        setpassword("");
+        setemail("");
+        setphone("");
+        setDate_of_Birth("");
+        setgender("");
+        setdepartment("");
+      } else {
+        // Show an error message if needed
+        Swal.fire({
+          icon: "error",
+          title: "Fail",
+          text: "Doctor creation failed, please try again later",
+          timer: 4500,
+        });
+
+        // Reset the form or perform any other actions on error
+        setFullName("");
+        setpassword("");
+        setemail("");
+        setphone("");
+        setDate_of_Birth("");
+        setgender("");
+        setdepartment("");
+      }
+    } catch (error) {
+      console.error("Login failed", error);
+    }
+  };
+
   return (
     <>
       <div className="Create_Student">
@@ -10,30 +90,42 @@ function CreateDoctor() {
               type="text"
               class="form-control"
               placeholder="Enter Full Name"
-              aria-label="Full Name"
-              name="Full_Name"
+              aria-label="FullName"
+              name="FullName"
+              onChange={(e) => {
+                setFullName(e.target.value);
+              }}
             />
 
             <input
               type="text"
               class="form-control mt-3"
               placeholder="Enter Phone Number"
-              aria-label="Phone Number"
-              name="PhoneNumber"
+              aria-label="phone "
+              name="phone"
+              onChange={(e) => {
+                setphone(e.target.value);
+              }}
             />
             <input
               type="gender"
               class="form-control mt-3"
               placeholder="Enter Gender"
-              aria-label="Gender"
-              name="Gender"
+              aria-label="gender"
+              name="gender"
+              onChange={(e) => {
+                setgender(e.target.value);
+              }}
             />
             <input
-              type="file"
+              type="text"
               class="form-control mt-3"
-              placeholder="Enter Image"
-              aria-label="Image"
-              name="Image"
+              placeholder="Enter Department"
+              aria-label="department"
+              name="department"
+              onChange={(e) => {
+                setdepartment(e.target.value);
+              }}
             />
           </div>
           <div class="col">
@@ -41,33 +133,39 @@ function CreateDoctor() {
               type="email"
               class="form-control"
               placeholder="Enter Email"
-              aria-label="Email"
+              aria-label="email"
               name="email"
+              onChange={(e) => {
+                setemail(e.target.value);
+              }}
             />
             <input
               type="text"
               class="form-control mt-3"
-              placeholder="Enter National Id"
-              aria-label="National Id"
-              name="National_Id"
+              placeholder="Enter Password "
+              aria-label="password"
+              name="password"
+              onChange={(e) => {
+                setpassword(e.target.value);
+              }}
             />
             <input
               type="date"
               class="form-control mt-3"
               placeholder="Enter Date Of Birth"
-              aria-label="Date Of Birth"
-              name="Date_Of_Birth"
-            />
-            <input
-              type="text"
-              class="form-control mt-3"
-              placeholder="Enter Department"
-              aria-label="Department"
-              name="Department"
+              aria-label="Date_of_Birth"
+              name="Date_of_Birth"
+              onChange={(e) => {
+                setDate_of_Birth(e.target.value);
+              }}
             />
           </div>
         </div>
-        <button type="button" class="btn btn-primary mt-3">
+        <button
+          type="button"
+          className="btn btn-primary mt-3"
+          onClick={createdoctor}
+        >
           Submit
         </button>
       </div>

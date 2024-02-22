@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 function CreateStudent() {
   const [Full_Name, setFull_Name] = useState("");
@@ -35,6 +35,8 @@ function CreateStudent() {
       );
       const data = await response.json();
       console.log(data);
+      if (response.ok) {
+      }
     } catch (error) {
       console.error("Login failed", error);
     }
