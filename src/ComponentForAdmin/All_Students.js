@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
+
 function All_Students() {
   const [allstudents, setallstudents] = useState([]);
+  const [size, setsize] = useState("30");
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
 
@@ -11,7 +13,7 @@ function All_Students() {
         const response = await fetch(
           "https://university-system-rosy.vercel.app/Api/user/searchuser?sort=-Full_Name&select=Full_Name,Student_Code,semesterId&page=1&size=12&search=ahmed",
           {
-            method: "GET", // Change to GET method
+            method: "GET",
             headers: {
               Authorization: `Bearer ${accessToken}`,
               "refresh-token": refreshToken,
@@ -20,23 +22,51 @@ function All_Students() {
         );
 
         const data = await response.json();
-        setallstudents(data);
-
-        console.log(data);
-        // console.log(data.students)
-        console.log(allstudents);
+        setallstudents(data.students);
       } catch (error) {
         console.error("Fetch failed", error);
       }
     };
 
-    fetchData(); // Call the fetchData function when the component mounts
-  }, []); // Empty dependency array to ensure it runs only once
+    fetchData();
+  }, [accessToken, refreshToken]);
+
+  useEffect(() => {
+    console.log(allstudents);
+  }, [allstudents]);
+
+  const handleDelete = async (studentId) => {
+    try {
+      const response = await fetch(
+        `https://university-system-rosy.vercel.app/Api/user/deleteStudent?userId=${studentId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+        }
+      );
+
+      if (response.ok) {
+        // Remove the deleted student from the state
+        setallstudents((prevStudents) =>
+          prevStudents.filter((student) => student._id !== studentId)
+        );
+        console.log(`Student with ID ${studentId} deleted successfully.`);
+      } else {
+        console.error(`Failed to delete student with ID ${studentId}.`);
+      }
+    } catch (error) {
+      console.error("Delete failed", error);
+    }
+  };
+
   return (
     <>
       <div className="get_all_student">
         <h2>Get All Students </h2>
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th scope="col">#ID</th>
@@ -44,212 +74,38 @@ function All_Students() {
               <th scope="col">Student_code</th>
               <th scope="col">Phone</th>
               <th scope="col">Level</th>
-              <th scope="col">Opreations</th>
+              <th scope="col">Operations</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Omar Samir</td>
-              <td>2132515155</td>
-              <td>01558849371</td>
-              <td>Four</td>
-              <td>
-                {" "}
-                <div className="row">
-                  <button type="button" class="btn btn-primary">
-                    Update
-                  </button>
-                  <button type="button" class="btn btn-danger">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Lionel Messi </td>
-              <td>2132515155</td>
-              <td>01558849371</td>
-              <td>One</td>
-              <td>
-                {" "}
-                <div className="row">
-                  <button type="button" class="btn btn-primary">
-                    Update
-                  </button>
-                  <button type="button" class="btn btn-danger">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Andres Inesta</td>
-              <td>2132515155</td>
-              <td>01558849371</td>
-              <td>Four</td>
-              <td>
-                {" "}
-                <div className="row">
-                  <button type="button" class="btn btn-primary">
-                    Update
-                  </button>
-                  <button type="button" class="btn btn-danger">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">4</th>
-              <td>Mohame Samir</td>
-              <td>2132515155</td>
-              <td>01558849371</td>
-              <td>Three</td>
-              <td>
-                {" "}
-                <div className="row">
-                  <button type="button" class="btn btn-primary">
-                    Update
-                  </button>
-                  <button type="button" class="btn btn-danger">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">5</th>
-              <td>Phil Phoden</td>
-              <td>2132515155</td>
-              <td>01558849371</td>
-              <td>Four</td>
-              <td>
-                {" "}
-                <div className="row">
-                  <button type="button" class="btn btn-primary">
-                    Update
-                  </button>
-                  <button type="button" class="btn btn-danger">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">6</th>
-              <td>Bernaldo Silva</td>
-              <td>2132515155</td>
-              <td>01558849371</td>
-              <td>one</td>
-              <td>
-                {" "}
-                <div className="row">
-                  <button type="button" class="btn btn-primary">
-                    Update
-                  </button>
-                  <button type="button" class="btn btn-danger">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7</th>
-              <td>Luka Modric</td>
-              <td>2132515155</td>
-              <td>01558849371</td>
-              <td>one</td>
-              <td>
-                {" "}
-                <div className="row">
-                  <button type="button" class="btn btn-primary">
-                    Update
-                  </button>
-                  <button type="button" class="btn btn-danger">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">8</th>
-              <td>Jack Girlish</td>
-              <td>2132515155</td>
-              <td>01558849371</td>
-              <td>two</td>
-              <td>
-                {" "}
-                <div className="row">
-                  <button type="button" class="btn btn-primary">
-                    Update
-                  </button>
-                  <button type="button" class="btn btn-danger">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">9</th>
-              <td>Ashraf Bensharki </td>
-              <td>2132515155</td>
-              <td>01558849371</td>
-              <td>two</td>
-              <td>
-                {" "}
-                <div className="row">
-                  <button type="button" class="btn btn-primary">
-                    Update
-                  </button>
-                  <button type="button" class="btn btn-danger">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">10</th>
-              <td>YaYa Touraih </td>
-              <td>2132515155</td>
-              <td>01558849371</td>
-              <td>three</td>
-              <td>
-                {" "}
-                <div className="row">
-                  <button type="button" class="btn btn-primary">
-                    Update
-                  </button>
-                  <button type="button" class="btn btn-danger">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">11</th>
-              <td>Ederson</td>
-              <td>2132515155</td>
-              <td>01558849371</td>
-              <td>three</td>
-              <td>
-                {" "}
-                <div className="row">
-                  <button type="button" class="btn btn-primary">
-                    Update
-                  </button>
-                  <button type="button" class="btn btn-danger">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
+            {allstudents.map((student) => (
+              <tr key={student._id}>
+                <th scope="row">{student._id}</th>
+                <td>{student.Full_Name}</td>
+                <td>{student.Student_Code}</td>
+                <td>01558849371</td>
+                <td>{student.semesterId.level}</td>
+                <td>
+                  <div className="row">
+                    <button type="button" className="btn btn-primary">
+                      Update
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-danger"
+                      onClick={() => handleDelete(student._id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
     </>
   );
 }
+
 export default All_Students;

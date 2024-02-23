@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Swal from "sweetalert2";
-import Select from "react-select";
+
 function CreateCourse() {
   const [course_name, setcourse_name] = useState("");
   const [Prerequisites, setPrerequisites] = useState("");
