@@ -21,10 +21,9 @@ function All_Students() {
 
         const data = await response.json();
         setallstudents(data);
-
         console.log(data);
+        
         // console.log(data.students)
-        console.log(allstudents);
       } catch (error) {
         console.error("Fetch failed", error);
       }
