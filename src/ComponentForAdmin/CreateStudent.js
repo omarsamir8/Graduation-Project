@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Swal from "sweetalert2";
+// import { Form } from "react-router-dom";
 function CreateStudent() {
   const [Full_Name, setFull_Name] = useState("");
   const [National_Id, setNational_Id] = useState("");
@@ -12,6 +13,7 @@ function CreateStudent() {
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
+
   const createstudent = async () => {
     try {
       const response = await fetch(
@@ -81,7 +83,7 @@ function CreateStudent() {
     <>
       <div className="Create_Student">
         <h2 className="create_student">Add Student</h2>
-        <div class="row mt-4">
+        <form class="row mt-4">
           <div class="col">
             <input
               type="text"
@@ -157,7 +159,7 @@ function CreateStudent() {
               }}
             />
           </div>
-        </div>
+        </form>
         <button
           type="button"
           class="btn btn-primary mt-3"
