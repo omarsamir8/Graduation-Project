@@ -1,10 +1,10 @@
 import { useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Swal from "sweetalert2";
-import Select from "react-select";
+
 function CreateCourse() {
   const [course_name, setcourse_name] = useState("");
-  // const [Prerequisites, setPrerequisites] = useState("");
+  const [Prerequisites, setPrerequisites] = useState("");
   const [credit_hour, setcredit_hour] = useState("");
   const [instructorId, setinstructorId] = useState("");
   const [OpenForRegistration, setOpenForRegistration] = useState("");
@@ -28,7 +28,6 @@ function CreateCourse() {
             credit_hour,
             OpenForRegistration,
             desc,
-
             // Materials, // Send the array directly
           }),
         }
@@ -78,7 +77,7 @@ function CreateCourse() {
               }}
             />
 
-            {/* <input
+            <input
               type="text"
               class="form-control mt-3"
               placeholder="Enter Prerequisites"
@@ -87,7 +86,7 @@ function CreateCourse() {
               onChange={(e) => {
                 setPrerequisites(e.target.value);
               }}
-            /> */}
+            />
             <input
               type="text"
               class="form-control mt-3"

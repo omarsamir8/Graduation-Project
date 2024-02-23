@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Swal from "sweetalert2";
-import { Form } from "react-router-dom";
+// import { Form } from "react-router-dom";
 function CreateStudent() {
   const [Full_Name, setFull_Name] = useState("");
   const [National_Id, setNational_Id] = useState("");
@@ -47,6 +47,15 @@ function CreateStudent() {
           showConfirmButton: false,
           timer: 3500,
         });
+
+        // Reset the form or perform any other actions on success
+        // setFull_Name("");
+        // setNational_Id("");
+        // setStudent_Code("");
+        // setPhoneNumber("");
+        // setDate_of_Birth("");
+        // setgender("");
+        // setsemesterId("");
       } else {
         // Show an error message if needed
         Swal.fire({
@@ -55,6 +64,15 @@ function CreateStudent() {
           text: "Student created failed, please try again later",
           timer: 4500,
         });
+
+        // Reset the form or perform any other actions on error
+        // setFull_Name("");
+        // setNational_Id("");
+        // setStudent_Code("");
+        // setPhoneNumber("");
+        // setDate_of_Birth("");
+        // setgender("");
+        // setsemesterId("");
       }
     } catch (error) {
       console.error("Login failed", error);
