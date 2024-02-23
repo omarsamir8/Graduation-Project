@@ -1,5 +1,37 @@
+import { useEffect, useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 function All_Students() {
+  const [allstudents, setallstudents] = useState([]);
+  const accessToken = localStorage.getItem("accesstoken");
+  const refreshToken = localStorage.getItem("refreshtoken");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://university-system-rosy.vercel.app/Api/user/searchuser?sort=-Full_Name&select=Full_Name,Student_Code,semesterId&page=1&size=12&search=ahmed",
+          {
+            method: "GET", // Change to GET method
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+
+        const data = await response.json();
+        setallstudents(data);
+
+        console.log(data);
+        // console.log(data.students)
+        console.log(allstudents);
+      } catch (error) {
+        console.error("Fetch failed", error);
+      }
+    };
+
+    fetchData(); // Call the fetchData function when the component mounts
+  }, []); // Empty dependency array to ensure it runs only once
   return (
     <>
       <div className="get_all_student">

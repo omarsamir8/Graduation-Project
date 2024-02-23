@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Swal from "sweetalert2";
+import Select from "react-select";
 function CreateCourse() {
   const [course_name, setcourse_name] = useState("");
   const [Prerequisites, setPrerequisites] = useState("");
@@ -89,6 +90,16 @@ function CreateCourse() {
             <input
               type="text"
               class="form-control mt-3"
+              placeholder="Enter Description "
+              aria-label="desc "
+              name="desc"
+              onChange={(e) => {
+                setdesc(e.target.value);
+              }}
+            />
+            <input
+              type="text"
+              class="form-control mt-3"
               placeholder="Enter OpenForRegistration"
               aria-label="OpenForRegistration"
               name="OpenForRegistration "
@@ -116,16 +127,6 @@ function CreateCourse() {
               name="instructorId"
               onChange={(e) => {
                 setinstructorId(e.target.value);
-              }}
-            />
-            <input
-              type="text"
-              class="form-control mt-3"
-              placeholder="Enter Description "
-              aria-label="desc "
-              name="desc"
-              onChange={(e) => {
-                setdesc(e.target.value);
               }}
             />
           </div>
