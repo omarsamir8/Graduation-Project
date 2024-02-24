@@ -31,15 +31,21 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  gap: 20px;
 }
 .enrollcourse .course {
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 310px;
-  height: 150px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 320px;
+  height: auto;
+  padding: 0.5rem;
   background-color: #caadfa;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  gap: 20px;
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 10px;
@@ -49,27 +55,22 @@
   -o-border-radius: 10px;
 }
 .enrollcourse .course:hover {
-  border: 4px solid #8042e6de;
+  border: 2px solid #8042e6de;
 }
 .enrollcourse .course p {
-  width: 150px;
+  width: 165px;
   font-size: 20px;
-  margin-left: 20px;
+
   color: #8042e6de;
   font-weight: bold;
 }
-.enrollcourse .course button {
-  margin-left: 20px;
-  width: 100px;
-  background-color: #8042e6de;
-  border-color: #8a4fe9de;
-}
+
 .enrollcourse .course .img {
   background-image: url("/public/assets/images/oop.png");
   background-repeat: no-repeat;
   background-size: cover;
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -91,4 +92,25 @@
 .enrollcourse .course .img6 {
   background-image: url("/public/assets/images/CRISP_en.png");
   background-size: cover;
+}
+.delete_btn {
+  width: 77.75px;
+  height: 38px;
+}
+.info {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.up-del-btn {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
 }

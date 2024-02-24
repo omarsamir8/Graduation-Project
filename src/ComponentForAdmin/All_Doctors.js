@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Swal from "sweetalert2";
+import { useEffect } from "react";
 
 function AllDoctors() {
   const [alldoctors, setalldoctors] = useState([]);
@@ -22,7 +23,7 @@ function AllDoctors() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-system-rosy.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials&size=10",
+          "https://university-system-rosy.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials&size=5",
           {
             method: "GET",
             headers: {
@@ -83,13 +84,13 @@ function AllDoctors() {
     setgender(doctor.gender || ""); // Provide a default value for gender
     setphone(doctor.phone);
     setdepartment(doctor.department);
-    setpassword(doctor.password)
+    setpassword(doctor.password);
   };
   // update Doctor
   const updateDoctor = async () => {
     try {
       const response = await fetch(
-        `https://university-system-rosy.vercel.app/Api/instructor/update?userId=${selecteddoctor.id}`,
+        `https://university-system-rosy.vercel.app/Api/instructor/update?userId=${selecteddoctor._id}`,
         {
           method: "PUT",
           headers: {
@@ -101,11 +102,10 @@ function AllDoctors() {
             FullName,
             email,
             gender,
-            phone,
             Date_of_Birth,
             password,
+            phone,
             department,
-
           }),
         }
       );
@@ -114,31 +114,30 @@ function AllDoctors() {
         // Show SweetAlert on success
         Swal.fire({
           icon: "success",
-          title: "Student updated successfully",
+          title: "Doctor updated successfully",
           showConfirmButton: false,
           timer: 3500,
         });
 
-        // Update the state with the modified student
+        // Update the state with the modified doctor
         setalldoctors((prevDoctors) =>
           prevDoctors.map((prevDoctor) =>
             prevDoctor._id === selecteddoctor._id
               ? {
                   ...prevDoctor,
                   FullName,
-                email,
-                phone,
-                gender,
-                department,
-                password,
-                Date_of_Birth,
-            
+                  email,
+                  phone,
+                  gender,
+                  department,
+                  password,
+                  Date_of_Birth,
                 }
               : prevDoctor
           )
         );
 
-        // Clear the selected student and reset input fields
+        // Clear the selected doctor and reset input fields
         setSelecteddoctor(null);
         setFullName("");
         setemail("");
@@ -146,15 +145,13 @@ function AllDoctors() {
         setgender("");
         setpassword("");
         setphone("");
-        setpassword("")
-        setdepartment("")
-        
+        setdepartment("");
       } else {
         // Show an error message if needed
         Swal.fire({
           icon: "error",
           title: "Fail",
-          text: "Student update failed, please try again later",
+          text: "Doctor update failed, please try again later",
           timer: 4500,
         });
       }
@@ -162,7 +159,6 @@ function AllDoctors() {
       console.error("Update failed", error);
     }
   };
-
   return (
     <>
       <div className="Create_Student" style={{ display: showform }}>
@@ -179,7 +175,6 @@ function AllDoctors() {
               onChange={(e) => {
                 setFullName(e.target.value);
               }}
-
             />
 
             <input
@@ -289,11 +284,15 @@ function AllDoctors() {
                 <th scope="row">{doctor._id}</th>
                 <td>{doctor.FullName}</td>
                 <td>{doctor.email}</td>
-                <td>01124367646</td>
+                <td>01558849371</td>
                 <td>Four</td>
                 <td>
                   <div style={{ flexWrap: "nowrap" }} className="row">
-                    <button type="button" className="btn btn-primary"    onClick={() => openUpdateModal(doctor)}>
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      onClick={() => openUpdateModal(doctor)}
+                    >
                       Update
                     </button>
                     <button

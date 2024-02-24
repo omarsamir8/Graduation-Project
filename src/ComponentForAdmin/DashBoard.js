@@ -1,10 +1,70 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import "../styles/Dashboard.css";
 function DashBoard() {
   const [selectedComponent, setSelectedComponent] = useState(null);
+  const [allstudents, setallstudents] = useState([]);
+  const [alldoctors, setalldoctors] = useState([]);
   const handleSidebarClick = (componentName) => {
     setSelectedComponent(componentName);
   };
+
+  const accessToken = localStorage.getItem("accesstoken");
+  const refreshToken = localStorage.getItem("refreshtoken");
+  // get all students
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://university-system-rosy.vercel.app/Api/user/searchuser?select=Full_Name,Student_Code,semesterId,PhoneNumber&size=15",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+
+        const data = await response.json();
+        setallstudents(data.students);
+        console.log(data.students);
+      } catch (error) {
+        console.error("Fetch failed", error);
+      }
+    };
+
+    fetchData();
+  }, [accessToken, refreshToken]);
+
+  // get all doctors
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://university-system-rosy.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials&size=5",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+
+        const data = await response.json();
+        setalldoctors(data.Instructor);
+        console.log(data);
+      } catch (error) {
+        console.error("Fetch failed", error);
+      }
+    };
+
+    fetchData();
+  }, [accessToken, refreshToken]);
+
+  useEffect(() => {
+    console.log(alldoctors);
+  }, [alldoctors]);
   return (
     <>
       <div className="dashboard-container">
@@ -12,12 +72,12 @@ function DashBoard() {
           <div className="main-container">
             <div className="main">
               <i class="fa-solid fa-book-open"></i>
-              <h3>3685</h3>
+              <h3>{allstudents.length}</h3>
               <p>Total Students</p>
             </div>
             <div className="main">
               <i class="fa-solid fa-check"></i>
-              <h3>40</h3>
+              <h3>{alldoctors.length}</h3>
               <p>Total Doctor </p>
             </div>
             <div className="main">

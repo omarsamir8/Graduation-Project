@@ -46,7 +46,7 @@ function CreateTraining() {
             />
           </div>
         </div>
-        <button type="button" class="btn btn-primary mt-3">
+        <button type="button" className="btn btn-primary mt-3">
           Submit
         </button>
         <h2>All Trainings Added</h2>
@@ -55,56 +55,86 @@ function CreateTraining() {
         <div className="course">
           <div className="info">
             <p>Object Oriented programming</p>
-            <button type="button" class="btn btn-primary">
+            <div className="img"></div>
+            <div className="up-del-btn">
+            <button type="button" className="btn btn-primary">
               Update
             </button>
+            <button type="button" className="btn btn-danger delete_btn">
+              Delete
+            </button>
+            </div>
           </div>
-          <div className="img "></div>
         </div>
         <div className="course">
           <div className="info">
             <p>Basics Of Lang Programming</p>
-            <button type="button" class="btn btn-primary">
+            <div className="img img2"></div>
+            <div className="up-del-btn">
+            <button type="button" className="btn btn-primary">
               Update
             </button>
+            <button type="button" className="btn btn-danger delete_btn">
+              Delete
+            </button>
+            </div>
           </div>
-          <div className="img img2"></div>
         </div>
         <div className="course">
           <div className="info">
             <p>Algorithms & Data Structure</p>
-            <button type="button" class="btn btn-primary">
+            <div className="img img3"></div>
+            <div className="up-del-btn">
+            <button type="button" className="btn btn-primary">
               Update
             </button>
+            <button type="button" className="btn btn-danger delete_btn">
+              Delete
+            </button>
+            </div>
           </div>
-          <div className="img img3"></div>
         </div>
         <div className="course">
           <div className="info">
             <p>Opreating System</p>
-            <button type="button" class="btn btn-primary">
+            <div className="img img4"></div>
+            <div className="up-del-btn">
+            <button type="button" className="btn btn-primary">
               Update
             </button>
+            <button type="button" className="btn btn-danger delete_btn">
+              Delete
+            </button>
+            </div>
           </div>
-          <div className="img img4"></div>
         </div>
         <div className="course">
           <div className="info">
             <p>E-Commerce & E-bussniss</p>
-            <button type="button" class="btn btn-primary">
+            <div className="img img5"></div>
+            <div className="up-del-btn">
+            <button type="button" className="btn btn-primary">
               Update
             </button>
+            <button type="button" className="btn btn-danger delete_btn">
+              Delete
+            </button>
+            </div>
           </div>
-          <div className="img img5"></div>
         </div>
         <div className="course">
           <div className="info">
             <p>Data-----Mining</p>
-            <button type="button" class="btn btn-primary">
+            <div className="img img6"></div>
+            <div className="up-del-btn">
+            <button type="button" className="btn btn-primary">
               Update
             </button>
+            <button type="button" className="btn btn-danger delete_btn">
+              Delete
+            </button>
+            </div>
           </div>
-          <div className="img img6"></div>
         </div>
       </div>
     </>
