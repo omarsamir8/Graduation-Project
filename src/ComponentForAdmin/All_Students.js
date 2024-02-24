@@ -10,7 +10,7 @@ function All_Students() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-system-rosy.vercel.app/Api/user/searchuser?sort=-Full_Name&select=Full_Name,Student_Code,semesterId&page=1&size=12&search=ahmed",
+          "https://university-system-rosy.vercel.app/Api/user/searchuser?select=Full_Name,Student_Code,semesterId,PhoneNumber&size=15",
           {
             method: "GET",
             headers: {
@@ -82,7 +82,7 @@ function All_Students() {
                 <th scope="row">{student._id}</th>
                 <td>{student.Full_Name}</td>
                 <td>{student.Student_Code}</td>
-                <td>01558849371</td>
+                <td>{student.PhoneNumber}</td>
                 <td>{student.semesterId.level}</td>
                 <td>
                   <div className="row">
