@@ -22,7 +22,7 @@ function AllDoctors() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-system-rosy.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials&size=5",
+          "https://university-system-rosy.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials&size=10",
           {
             method: "GET",
             headers: {
@@ -85,11 +85,11 @@ function AllDoctors() {
     setdepartment(doctor.department);
     setpassword(doctor.password)
   };
-  // update doctors
+  // update Doctor
   const updateDoctor = async () => {
     try {
       const response = await fetch(
-        `https://university-system-rosy.vercel.app/Api/instructor/update?userId=${selecteddoctor._id}`,
+        `https://university-system-rosy.vercel.app/Api/instructor/update?userId=${selecteddoctor.id}`,
         {
           method: "PUT",
           headers: {
@@ -289,7 +289,7 @@ function AllDoctors() {
                 <th scope="row">{doctor._id}</th>
                 <td>{doctor.FullName}</td>
                 <td>{doctor.email}</td>
-                <td>01558849371</td>
+                <td>01124367646</td>
                 <td>Four</td>
                 <td>
                   <div style={{ flexWrap: "nowrap" }} className="row">
