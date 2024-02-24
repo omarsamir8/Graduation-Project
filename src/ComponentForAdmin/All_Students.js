@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
-import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
+import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 function All_Students() {
   const [allstudents, setallstudents] = useState([]);
+  const [size, setsize] = useState("30");
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
-
+  // get all students
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -22,6 +23,7 @@ function All_Students() {
 
         const data = await response.json();
         setallstudents(data.students);
+        console.log(data.students);
       } catch (error) {
         console.error("Fetch failed", error);
       }
@@ -29,11 +31,7 @@ function All_Students() {
 
     fetchData();
   }, [accessToken, refreshToken]);
-
-  useEffect(() => {
-    console.log(allstudents);
-  }, [allstudents]);
-
+  // delete student
   const handleDelete = async (studentId) => {
     try {
       const response = await fetch(
@@ -60,10 +58,189 @@ function All_Students() {
       console.error("Delete failed", error);
     }
   };
+  // return data into inputes
+  const openUpdateModal = (student) => {
+    test === false ? setshowform("block") : setshowform("none");
+    setSelectedStudent(student);
+    setFull_Name(student.Full_Name);
+    setNational_Id(student.National_Id);
+    setStudent_Code(student.Student_Code);
+    setPhoneNumber(student.PhoneNumber);
+    setDate_of_Birth(student.Date_of_Birth);
+    setgender(student.gender);
+    setsemesterId(student.semesterId);
+  };
+  // update students
+  const updateStudent = async () => {
+    try {
+      const response = await fetch(
+        `https://university-system-rosy.vercel.app/Api/user/updateStudent?userId=${selectedStudent._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+          body: JSON.stringify({
+            Full_Name,
+            National_Id,
+            Student_Code,
+            PhoneNumber,
+            Date_of_Birth,
+            gender,
+            semesterId,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        // Show SweetAlert on success
+        Swal.fire({
+          icon: "success",
+          title: "Student updated successfully",
+          showConfirmButton: false,
+          timer: 3500,
+        });
+
+        // Update the state with the modified student
+        setallstudents((prevStudents) =>
+          prevStudents.map((prevStudent) =>
+            prevStudent._id === selectedStudent._id
+              ? {
+                  ...prevStudent,
+                  Full_Name,
+                  Student_Code,
+                  PhoneNumber,
+                  semesterId,
+                  National_Id,
+                  Date_of_Birth,
+                  gender,
+                }
+              : prevStudent
+          )
+        );
+
+        // Clear the selected student and reset input fields
+        setSelectedStudent("");
+        setFull_Name("");
+        setNational_Id("");
+        setStudent_Code("");
+        setPhoneNumber("");
+        setDate_of_Birth("");
+        setgender("");
+        setsemesterId("");
+      } else {
+        // Show an error message if needed
+        Swal.fire({
+          icon: "error",
+          title: "Fail",
+          text: "Student update failed, please try again later",
+          timer: 4500,
+        });
+      }
+    } catch (error) {
+      console.error("Update failed", error);
+    }
+  };
 
   return (
     <>
       <div className="get_all_student">
+        <div className="Create_Student" style={{ display: showform }}>
+          <h2 className="create_student">Update Student</h2>
+          <form class="row mt-4">
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter Full Name"
+                aria-label="Full_Name"
+                name="Full_Name"
+                value={Full_Name}
+                onChange={(e) => {
+                  setFull_Name(e.target.value);
+                }}
+              />
+              <input
+                type="text"
+                class="form-control mt-3"
+                placeholder="Enter Phone Number"
+                aria-label="PhoneNumber"
+                name="PhoneNumber"
+                value={PhoneNumber}
+                onChange={(e) => {
+                  setPhoneNumber(e.target.value);
+                }}
+              />
+              <input
+                type="text"
+                class="form-control mt-3"
+                placeholder="Enter Gender"
+                aria-label="gender"
+                name="gender"
+                value={gender}
+                onChange={(e) => {
+                  setgender(e.target.value);
+                }}
+              />
+
+              <input
+                type="text"
+                class="form-control mt-3"
+                placeholder="semesterId"
+                aria-label="semesterId"
+                name="semesterId"
+                value={semesterId}
+                onChange={(e) => {
+                  setsemesterId(e.target.value);
+                }}
+              />
+            </div>
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter Student Code"
+                aria-label="Student_Code"
+                name="Student_Code"
+                value={Student_Code}
+                onChange={(e) => {
+                  setStudent_Code(e.target.value);
+                }}
+              />
+              <input
+                type="text"
+                class="form-control mt-3"
+                placeholder="Enter National Id"
+                aria-label="National_Id"
+                name="National_Id"
+                value={National_Id}
+                onChange={(e) => {
+                  setNational_Id(e.target.value);
+                }}
+              />
+              <input
+                type="date"
+                class="form-control mt-3"
+                placeholder="Enter Date Of Birth"
+                aria-label="Date_of_Birth"
+                name="Date_of_Birth"
+                value={Date_of_Birth}
+                onChange={(e) => {
+                  setDate_of_Birth(e.target.value);
+                }}
+              />
+            </div>
+          </form>
+          <button
+            type="button"
+            class="btn btn-primary mt-3"
+            onClick={updateStudent}
+          >
+            Update
+          </button>
+        </div>
         <h2>Get All Students </h2>
         <table className="table">
           <thead>
@@ -86,7 +263,11 @@ function All_Students() {
                 <td>{student.semesterId.level}</td>
                 <td>
                   <div className="row">
-                    <button type="button" className="btn btn-primary">
+                    <button
+                      type="button"
+                      onClick={() => openUpdateModal(student)}
+                      className="btn btn-primary"
+                    >
                       Update
                     </button>
                     <button

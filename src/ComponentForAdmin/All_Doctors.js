@@ -6,6 +6,7 @@ function AllDoctors() {
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
 
+  // get all doctors
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -34,7 +35,7 @@ function AllDoctors() {
   useEffect(() => {
     console.log(alldoctors);
   }, [alldoctors]);
-
+  //  delete doctors
   const handleDelete = async (doctorId) => {
     try {
       const response = await fetch(

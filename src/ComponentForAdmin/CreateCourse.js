@@ -12,6 +12,8 @@ function CreateCourse() {
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
+
+  // create course
   const createcourse = async () => {
     try {
       const response = await fetch(
@@ -97,16 +99,6 @@ function CreateCourse() {
                 setdesc(e.target.value);
               }}
             />
-            <input
-              type="text"
-              class="form-control mt-3"
-              placeholder="Enter OpenForRegistration"
-              aria-label="OpenForRegistration"
-              name="OpenForRegistration "
-              onChange={(e) => {
-                setOpenForRegistration(e.target.value);
-              }}
-            />
           </div>
           <div class="col">
             <input
@@ -127,6 +119,16 @@ function CreateCourse() {
               name="instructorId"
               onChange={(e) => {
                 setinstructorId(e.target.value);
+              }}
+            />{" "}
+            <input
+              type="text"
+              class="form-control mt-3"
+              placeholder="Enter OpenForRegistration"
+              aria-label="OpenForRegistration"
+              name="OpenForRegistration "
+              onChange={(e) => {
+                setOpenForRegistration(e.target.value);
               }}
             />
           </div>
