@@ -83,7 +83,7 @@ function AllDoctors() {
     setgender(doctor.gender || ""); // Provide a default value for gender
     setphone(doctor.phone);
     setdepartment(doctor.department);
-    setpassword(doctor.password)
+    setpassword(doctor.password);
   };
   // update doctors
   const updateDoctor = async () => {
@@ -105,7 +105,6 @@ function AllDoctors() {
             Date_of_Birth,
             password,
             department,
-
           }),
         }
       );
@@ -126,13 +125,12 @@ function AllDoctors() {
               ? {
                   ...prevDoctor,
                   FullName,
-                email,
-                phone,
-                gender,
-                department,
-                password,
-                Date_of_Birth,
-            
+                  email,
+                  phone,
+                  gender,
+                  department,
+                  password,
+                  Date_of_Birth,
                 }
               : prevDoctor
           )
@@ -146,9 +144,8 @@ function AllDoctors() {
         setgender("");
         setpassword("");
         setphone("");
-        setpassword("")
-        setdepartment("")
-        
+        setpassword("");
+        setdepartment("");
       } else {
         // Show an error message if needed
         Swal.fire({
@@ -179,7 +176,6 @@ function AllDoctors() {
               onChange={(e) => {
                 setFullName(e.target.value);
               }}
-
             />
 
             <input
@@ -293,7 +289,11 @@ function AllDoctors() {
                 <td>Four</td>
                 <td>
                   <div style={{ flexWrap: "nowrap" }} className="row">
-                    <button type="button" className="btn btn-primary"    onClick={() => openUpdateModal(doctor)}>
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      onClick={() => openUpdateModal(doctor)}
+                    >
                       Update
                     </button>
                     <button
