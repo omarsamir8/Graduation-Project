@@ -20,6 +20,7 @@ body {
 .mainpage .container-page {
   width: 63.5rem;
   margin-left: 17.5rem;
+  position: absolute;
   margin-top: 20px;
 }
 .mainpage .poster {
@@ -34,7 +35,7 @@ body {
   -o-border-radius: 20px;
 }
 
-@media only screen and (min-width: 1500px) {
+/* @media only screen and (min-width: 1500px) {
   .mainpage .container-page {
     margin-left: 0rem;
   }
@@ -44,4 +45,4 @@ body {
   .mainpage .container-page {
     margin-left: 0rem;
   }
-}
+} */
