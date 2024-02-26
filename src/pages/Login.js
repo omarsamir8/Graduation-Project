@@ -41,7 +41,7 @@ function Login() {
       handleLoginforadmin();
       console.log("this login for admin");
     } else {
-      console.log("you must select type");
+      console.log("you must select typee ");
     }
   };
 
