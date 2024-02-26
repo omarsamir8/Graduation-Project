@@ -8,11 +8,11 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  width: 900px;
+  width: 58rem;
   margin-top: -10px;
 }
 .nav-bar .search input {
-  width: 250px;
+  width: 15.5rem;
   height: 40px;
   border-radius: 10px;
   -webkit-border-radius: 10px;
