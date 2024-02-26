@@ -24,7 +24,7 @@ function MainPageForAdmin() {
         <div className="sidebar">
           <SideBar />
         </div>
-        <div className="container-page">
+        <div className="container-page ">
           <div className="navbar">
             <NavBar />
           </div>
