@@ -21,7 +21,7 @@ function All_Students() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-system-rosy.vercel.app/Api/user/searchuser?select=Full_Name,Student_Code,semesterId,PhoneNumber&size=15",
+          "https://university-system-rosy.vercel.app/Api/user/searchuser?select=Full_Name,Student_Code,semesterId,PhoneNumber,level&size=15",
           {
             method: "GET",
             headers: {

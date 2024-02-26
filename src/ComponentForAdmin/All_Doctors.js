@@ -23,7 +23,7 @@ function AllDoctors() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-system-rosy.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials&size=5",
+          "https://university-system-rosy.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials,phone,department&size=5",
           {
             method: "GET",
             headers: {
@@ -284,8 +284,8 @@ function AllDoctors() {
                 <th scope="row">{doctor._id}</th>
                 <td>{doctor.FullName}</td>
                 <td>{doctor.email}</td>
-                <td>01558849371</td>
-                <td>Four</td>
+                <td>{doctor.phone}</td>
+                <td>{doctor.department}</td>
                 <td>
                   <div style={{ flexWrap: "nowrap" }} className="row">
                     <button
