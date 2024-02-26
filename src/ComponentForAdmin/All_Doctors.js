@@ -23,7 +23,7 @@ function AllDoctors() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-system-rosy.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials,phone,department&size=5",
+          "https://university-system-rosy.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials,phone,department&size=10",
           {
             method: "GET",
             headers: {
