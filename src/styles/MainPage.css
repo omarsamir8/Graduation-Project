@@ -33,3 +33,15 @@ body {
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
 }
+
+@media only screen and (min-width: 1500px) {
+  .mainpage .container-page {
+    margin-left: 68rem;
+  }
+}
+
+@media only screen and (min-width: 1366px) {
+  .mainpage .container-page {
+    margin-left: 68rem;
+  }
+}
