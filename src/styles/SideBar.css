@@ -12,8 +12,7 @@
   flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
-  /* justify-content: center; */
-  width: 18%;
+  width: 15rem;
   height: 35.5rem !important;
   margin: 1.25rem 1.25rem;
   border-radius: 10px;
@@ -41,7 +40,6 @@
   width: 6.3rem;
   height: 6.3rem;
   border-radius: 50%;
-
   font-size: 70px;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
