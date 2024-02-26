@@ -17,9 +17,9 @@ body {
   width: 95%;
 }
 .mainpage .container-page {
-  width: 1000px;
+  width: 65rem;
   position: absolute;
-  margin-left: 280px;
+  margin-left: 17.5rem;
   margin-top: 20px;
 }
 .mainpage .poster {
