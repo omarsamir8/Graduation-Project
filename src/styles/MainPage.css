@@ -18,7 +18,7 @@ body {
   position: fixed;
 }
 .mainpage .container-page {
-  width: 63.5rem;
+  width: 80%;
   margin-left: 17.5rem;
   margin-top: 20px;
 }
@@ -34,8 +34,8 @@ body {
   -o-border-radius: 20px;
 }
 
-@media only screen and (min-width: 1500px) {
+/* @media only screen and (min-width: 1500px) {
   .mainpage .container-page {
     margin-left: 20rem;
   }
-}
+} */
