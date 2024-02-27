@@ -266,7 +266,7 @@ function AllDoctors() {
         </button>
       </div>
       <div className="get_all_student">
-        <h2>Get All Doctor </h2>
+        <h2 style={{ marginLeft: "4rem" }}>Get All Doctor </h2>
         <table className="table">
           <thead>
             <tr>
