@@ -16,11 +16,13 @@ body {
 }
 .mainpage .sidebar {
   position: fixed;
+  flex-wrap: wrap;
 }
 .mainpage .container-page {
   width: 63.5rem;
   margin-left: 17.5rem;
   margin-top: 20px;
+  flex-wrap: wrap;
 }
 .mainpage .poster {
   margin-top: 10px;
@@ -33,9 +35,15 @@ body {
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
 }
-
-/* @media only screen and (min-width: 1500px) {
-  .mainpage .container-page {
-    margin-left: 20rem;
+@media (max-width: 410px) {
+  .mainpage .sidebar {
+    position: relative;
+    margin-left: 3rem;
   }
-} */
+  .mainpage .poster {
+    display: none;
+  }
+  .mainpage .container-page {
+    margin-left: 0; /* Adjust the margin as needed for smaller screens */
+  }
+}

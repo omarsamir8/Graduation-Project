@@ -102,3 +102,15 @@
   margin-top: 2rem;
   margin-left: 1.2rem;
 }
+@media (max-width: 410px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+  .main-container {
+    flex-wrap: wrap;
+    margin-left: 4rem;
+  }
+  .instructor {
+    margin-left: 2.5rem;
+  }
+}

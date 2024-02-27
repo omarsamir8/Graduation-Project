@@ -2,6 +2,7 @@
   background-color: #996ae4 !important;
   border-color: #996ae4 !important;
   width: 100px;
+  margin-bottom: 1rem;
 }
 .Create_Student h2 {
   margin-top: 15px;
@@ -9,6 +10,7 @@
   position: relative;
   color: black;
   /* text-align: center; */
+  display: block;
   font-size: 25px;
   font-weight: bold;
 }
@@ -113,4 +115,28 @@
   justify-content: flex-start;
   align-items: center;
   gap: 15px;
+}
+@media (max-width: 410px) {
+  .Create_Student {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 4rem;
+  }
+  .Create_Student .part2 {
+    margin-top: 0.7rem;
+  }
+  .Create_Student input {
+    flex-wrap: wrap;
+    width: 15rem;
+  }
+  .enrollcourse .course {
+    margin-left: 2rem;
+  }
+  /* .get_all_student .part2 {
+    margin-top: 0.7rem;
+  }
+  .get_all_student input {
+    flex-wrap: wrap;
+    width: 15rem;
+  } */
 }

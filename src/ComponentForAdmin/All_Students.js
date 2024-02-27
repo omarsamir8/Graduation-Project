@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Swal from "sweetalert2";
 
 function All_Students() {
@@ -207,7 +208,7 @@ function All_Students() {
                 }}
               />
             </div>
-            <div class="col">
+            <div class="col part2">
               <input
                 type="text"
                 class="form-control"
@@ -251,7 +252,7 @@ function All_Students() {
             Update
           </button>
         </div>
-        <h2>Get All Students </h2>
+        <h2 style={{ marginLeft: "4rem" }}>Get All Students </h2>
         <table className="table">
           <thead>
             <tr>

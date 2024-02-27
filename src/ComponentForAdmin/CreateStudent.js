@@ -84,7 +84,7 @@ function CreateStudent() {
       <div className="Create_Student">
         <h2 className="create_student">Add Student</h2>
         <form class="row mt-4">
-          <div class="col">
+          <div class="col ">
             <input
               type="text"
               class="form-control"
@@ -127,7 +127,7 @@ function CreateStudent() {
               }}
             />
           </div>
-          <div class="col">
+          <div class="col part2">
             <input
               type="text"
               class="form-control"

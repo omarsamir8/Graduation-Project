@@ -115,7 +115,7 @@ function CreateDoctor() {
               }}
             />
           </div>
-          <div class="col">
+          <div class="col part2">
             <input
               type="email"
               class="form-control"
