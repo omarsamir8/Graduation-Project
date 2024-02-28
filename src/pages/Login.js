@@ -139,7 +139,7 @@ function Login() {
         <div className="col-12 login-container">
           {/* <form></form> */}
           <div className=" col-12 login">
-            <div className="col-12">
+            <div className="col-12 title">
               <h1 className="col-12 login_title">Login</h1>
               <h1 className="col-12 login_title">Welcome back !</h1>
             </div>
