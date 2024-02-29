@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Swal from "sweetalert2";
 
@@ -10,6 +10,7 @@ function CreateCourse() {
   const [OpenForRegistration, setOpenForRegistration] = useState("");
   const [desc, setdesc] = useState("");
   const [allcourses, setallcourses] = useState([]);
+  const [selectedCourseId, setSelectedCourseId] = useState(null);
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
@@ -31,7 +32,6 @@ function CreateCourse() {
             credit_hour,
             OpenForRegistration,
             desc,
-            // Materials, // Send the array directly
           }),
         }
       );
@@ -40,7 +40,6 @@ function CreateCourse() {
 
       if (response.ok) {
         // Show SweetAlert on success
-
         Swal.fire({
           icon: "success",
           title: "Course added successfully",
@@ -55,12 +54,9 @@ function CreateCourse() {
           text: "Course creation failed, please try again later",
           timer: 4500,
         });
-
-        // Reset the form or perform any other actions on error
-        // Reset the Materials array
       }
     } catch (error) {
-      console.error("Login failed", error);
+      console.error("Create course failed", error);
     }
   };
 
@@ -69,7 +65,7 @@ function CreateCourse() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-lyart.vercel.app/Api/courses/searchcourse?size=5",
+          "https://university-lyart.vercel.app/Api/courses/searchcourse?size=20",
           {
             method: "GET",
             headers: {
@@ -109,7 +105,7 @@ function CreateCourse() {
       );
 
       if (response.ok) {
-        // عند النجاح، يمكنك إعادة تحميل الكورسات أو تحديث الحالة بطريقة أخرى
+        // On success, update the state to remove the deleted course
         setallcourses((prevCourses) =>
           prevCourses.filter((course) => course._id !== courseId)
         );
@@ -117,13 +113,73 @@ function CreateCourse() {
       } else {
         console.error(`Failed to delete course with ID ${courseId}.`);
       }
-      // أو أي عمليات أخرى ترغب في تنفيذها بعد حذف الكورس
-      // } else {
-      //   // إذا كان هناك خطأ في الحذف، يمكنك إظهار رسالة خطأ
-      //   console.error("Failed to delete course");
-      // }
     } catch (error) {
       console.error("Delete failed", error);
+    }
+  };
+
+  // update course
+  const updateCourse = async () => {
+    try {
+      const response = await fetch(
+        `https://university-lyart.vercel.app/Api/courses/updatecourse?courseId=${selectedCourseId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+          body: JSON.stringify({
+            course_name,
+            credit_hour,
+            OpenForRegistration,
+            desc,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        // Show SweetAlert on success
+        Swal.fire({
+          icon: "success",
+          title: "Course updated successfully",
+          showConfirmButton: false,
+          timer: 3500,
+        });
+
+        // Update the state with the modified course
+        setallcourses((prevCourses) =>
+          prevCourses.map((prevCourse) =>
+            prevCourse._id === selectedCourseId
+              ? {
+                  ...prevCourse,
+                  course_name,
+                  credit_hour,
+                  OpenForRegistration,
+                  desc,
+                }
+              : prevCourse
+          )
+        );
+
+        // Clear the selected course and reset input fields
+        setSelectedCourseId(null);
+        setcourse_name("");
+        setdesc("");
+        setOpenForRegistration("");
+        setcredit_hour("");
+      } else {
+        // Show an error message if needed
+        Swal.fire({
+          icon: "error",
+          title: "Fail",
+          text: "Course update failed, please try again later",
+          timer: 4500,
+        });
+      }
+    } catch (error) {
+      console.error("Update failed", error);
     }
   };
 
@@ -131,14 +187,15 @@ function CreateCourse() {
     <>
       <div className="Create_Student">
         <h2 className="create_student">Add Course</h2>
-        <form class="row mt-4">
-          <div class="col">
+        <form className="row mt-4">
+          <div className="col">
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               placeholder="Enter Course_Name"
               aria-label="course_name"
               name="course_name"
+              value={course_name}
               onChange={(e) => {
                 setcourse_name(e.target.value);
               }}
@@ -146,52 +203,57 @@ function CreateCourse() {
 
             <input
               type="text"
-              class="form-control mt-3"
+              className="form-control mt-3"
               placeholder="Enter Prerequisites"
               aria-label="Prerequisites"
               name="Prerequisites"
+              value={Prerequisites}
               onChange={(e) => {
                 setPrerequisites(e.target.value);
               }}
             />
             <input
               type="text"
-              class="form-control mt-3"
+              className="form-control mt-3"
               placeholder="Enter Description "
               aria-label="desc "
               name="desc"
+              value={desc}
               onChange={(e) => {
                 setdesc(e.target.value);
               }}
             />
           </div>
-          <div class="col part2">
+          <div className="col part2">
             <input
               type="email"
-              class="form-control"
+              className="form-control"
               placeholder="Enter Course_hours"
               aria-label="Course_hours"
               name="credit_hour"
+              value={credit_hour}
               onChange={(e) => {
                 setcredit_hour(e.target.value);
               }}
             />
             <input
               type="text"
-              class="form-control mt-3"
+              className="form-control mt-3"
               placeholder="Enter instructorId "
               aria-label="instructorId "
               name="instructorId"
+              value={instructorId}
               onChange={(e) => {
                 setinstructorId(e.target.value);
               }}
-            />{" "}
+            />
             <input
               type="text"
-              class="form-control mt-3"
+              className="form-control mt-3"
               placeholder="Enter OpenForRegistration"
               aria-label="OpenForRegistration"
               name="OpenForRegistration "
+              value={OpenForRegistration}
               onChange={(e) => {
                 setOpenForRegistration(e.target.value);
               }}
@@ -200,40 +262,48 @@ function CreateCourse() {
         </form>
         <button
           type="button"
-          class="btn btn-primary mt-3"
-          onClick={createcourse}
+          className="btn btn-primary mt-3"
+          onClick={selectedCourseId ? updateCourse : createcourse}
         >
-          Submit
+          {selectedCourseId ? "Update" : "Submit"}
         </button>
         <h2 className="col-12">All Courses Added</h2>
       </div>
       <div className="enrollcourse">
-        {allcourses.map((course) => {
-          return (
-            <div className="course">
-              <div className="info">
-                <p>
-                  course name= {course.course_name}, total hour=
-                  {course.credit_hour}
-                </p>
-
-                <div className="img"></div>
-                <div className="up-del-btn">
-                  <button type="button" className="btn btn-primary">
-                    Update
-                  </button>
-                  <button
-                    onClick={() => deleteCourse(course._id)}
-                    type="button"
-                    className="btn btn-danger delete_btn"
-                  >
-                    Delete
-                  </button>
-                </div>
+        {allcourses.map((course) => (
+          <div className="course" key={course._id}>
+            <div className="info">
+              <p>
+                course name= {course.course_name}, total hour=
+                {course.credit_hour}
+              </p>
+              <div className="img"></div>
+              <div className="up-del-btn">
+                <button
+                  onClick={() => {
+                    setSelectedCourseId(course._id);
+                    // Set the values of the selected course to the input fields
+                    setcourse_name(course.course_name);
+                    setcredit_hour(course.credit_hour);
+                    setOpenForRegistration(course.OpenForRegistration);
+                    setdesc(course.desc);
+                  }}
+                  type="button"
+                  className="btn btn-primary"
+                >
+                  Update
+                </button>
+                <button
+                  onClick={() => deleteCourse(course._id)}
+                  type="button"
+                  className="btn btn-danger delete_btn"
+                >
+                  Delete
+                </button>
               </div>
             </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
     </>
   );
