@@ -17,7 +17,7 @@ function CreateStudent() {
   const createstudent = async () => {
     try {
       const response = await fetch(
-        "https://university-system-rosy.vercel.app/Api/user/addstudent",
+        "https://university-lyart.vercel.app/Api/user/addstudent",
         {
           method: "POST",
           headers: {

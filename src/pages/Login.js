@@ -106,7 +106,7 @@ function Login() {
   const handleLoginforadmin = async () => {
     try {
       const response = await fetch(
-        "https://university-system-rosy.vercel.app/Api/admin/login",
+        "https://university-lyart.vercel.app/Api/admin/login",
         {
           method: "POST",
           headers: {

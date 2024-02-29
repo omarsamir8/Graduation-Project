@@ -23,7 +23,7 @@ function AllDoctors() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-system-rosy.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials,phone,department&size=10",
+          "https://university-lyart.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials,phone,department&size=10",
           {
             method: "GET",
             headers: {
@@ -51,7 +51,7 @@ function AllDoctors() {
   const handleDelete = async (doctorId) => {
     try {
       const response = await fetch(
-        `https://university-system-rosy.vercel.app/Api/instructor/delete?userId=${doctorId}`,
+        `https://university-lyart.vercel.app/Api/instructor/delete?userId=${doctorId}`,
         {
           method: "DELETE",
           headers: {
@@ -90,7 +90,7 @@ function AllDoctors() {
   const updateDoctor = async () => {
     try {
       const response = await fetch(
-        `https://university-system-rosy.vercel.app/Api/instructor/update?userId=${selecteddoctor._id}`,
+        `https://university-lyart.vercel.app/Api/instructor/update?userId=${selecteddoctor._id}`,
         {
           method: "PUT",
           headers: {

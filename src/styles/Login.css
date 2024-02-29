@@ -148,15 +148,19 @@
   border-radius: 50%;
 }
 @media (max-width: 410px) {
+  .login-page {
+    height: 120vh;
+  }
   .login-container {
     flex-direction: column;
+    gap: 50px;
   }
   .kind {
     width: 20rem;
     margin-left: 2rem;
   }
   .labelWithInput {
-    width: 22rem;
+    width: 22.5rem;
   }
   .login-container .login {
     width: 400px;
@@ -167,8 +171,12 @@
   }
   .login-container .logo {
     flex: 1;
+    order: -2;
+    margin-top: 15rem;
+    height: 300px; /* تغيير ترتيب العنصر .logo ليظهر فوق .login */
   }
-  .title {
-    margin-top: 13rem;
+  .login_logo {
+    width: 300px;
+    border-radius: 50%;
   }
 }
