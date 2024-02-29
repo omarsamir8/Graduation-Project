@@ -19,7 +19,7 @@ function CreateCourse() {
   const createcourse = async () => {
     try {
       const response = await fetch(
-        "http://16.16.200.210:5000/Api/courses/addcourse",
+        "https://university-lyart.vercel.app/Api/courses/addcourse",
         {
           method: "POST",
           headers: {
@@ -65,7 +65,7 @@ function CreateCourse() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://16.16.200.210:5000/Api/courses/searchcourse?size=20",
+          "https://university-lyart.vercel.app/Api/courses/searchcourse?size=20",
           {
             method: "GET",
             headers: {
@@ -94,7 +94,7 @@ function CreateCourse() {
   const deleteCourse = async (courseId) => {
     try {
       const response = await fetch(
-        `http://16.16.200.210:5000/Api/courses/deletecourse?courseId=${courseId}`,
+        `https://university-lyart.vercel.app/Api/courses/deletecourse?courseId=${courseId}`,
         {
           method: "DELETE",
           headers: {
@@ -122,7 +122,7 @@ function CreateCourse() {
   const updateCourse = async () => {
     try {
       const response = await fetch(
-        `http://16.16.200.210:5000/Api/courses/updatecourse?courseId=${selectedCourseId}`,
+        `https://university-lyart.vercel.app/Api/courses/updatecourse?courseId=${selectedCourseId}`,
         {
           method: "PUT",
           headers: {
