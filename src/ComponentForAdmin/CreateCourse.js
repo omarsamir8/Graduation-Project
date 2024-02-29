@@ -273,10 +273,7 @@ function CreateCourse() {
         {allcourses.map((course) => (
           <div className="course" key={course._id}>
             <div className="info">
-              <p>
-                course name= {course.course_name}, total hour=
-                {course.credit_hour}
-              </p>
+              <p>{course.course_name}</p>
               <div className="img"></div>
               <div className="up-del-btn">
                 <button
