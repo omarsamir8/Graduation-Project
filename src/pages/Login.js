@@ -47,16 +47,13 @@ function Login() {
 
   const handleLoginForStudent = async () => {
     try {
-      const response = await fetch(
-        "https://university-system-dmg7.onrender.com/Api/user/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ Student_Code, password }),
-        }
-      );
+      const response = await fetch("http://16.16.200.210:5000/Api/user/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ Student_Code, password }),
+      });
       const data = await response.json();
       console.log(data);
 
@@ -77,7 +74,7 @@ function Login() {
   const handleLoginforDoctor = async () => {
     try {
       const response = await fetch(
-        "https://university-system-dmg7.onrender.com/Api/Instructor/login",
+        "http://16.16.200.210:5000/Api/Instructor/login",
         {
           method: "POST",
           headers: {
@@ -106,7 +103,7 @@ function Login() {
   const handleLoginforadmin = async () => {
     try {
       const response = await fetch(
-        "https://university-lyart.vercel.app/Api/admin/login",
+        "http://16.16.200.210:5000/Api/admin/login",
         {
           method: "POST",
           headers: {

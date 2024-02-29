@@ -62,7 +62,7 @@
 .enrollcourse .course p {
   width: 165px;
   font-size: 20px;
-
+  margin-bottom: 1rem;
   color: #8042e6de;
   font-weight: bold;
 }
@@ -78,6 +78,7 @@
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
+  margin-top: 1rem;
 }
 .enrollcourse .course .img2 {
   background-image: url("/public/assets/images/c++.png");
@@ -108,6 +109,7 @@
   align-items: center;
   gap: 10px;
 }
+
 .up-del-btn {
   display: flex;
   flex-wrap: wrap;
@@ -115,6 +117,7 @@
   justify-content: flex-start;
   align-items: center;
   gap: 15px;
+  margin-right: 7rem;
 }
 @media (max-width: 410px) {
   .Create_Student {

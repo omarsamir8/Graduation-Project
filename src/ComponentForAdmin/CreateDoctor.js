@@ -18,7 +18,7 @@ function CreateDoctor() {
   const createdoctor = async () => {
     try {
       const response = await fetch(
-        "https://university-lyart.vercel.app/Api/Instructor/create",
+        "http://16.16.200.210:5000/Api/Instructor/create",
         {
           method: "POST",
           headers: {

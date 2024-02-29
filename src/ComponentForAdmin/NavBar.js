@@ -10,7 +10,7 @@ function NavBar() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://university-lyart.vercel.app/Api/admin/getinfo      ",
+          "http://16.16.200.210:5000/Api/admin/getinfo      ",
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,

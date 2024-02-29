@@ -15,7 +15,7 @@ function DashBoard() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-system-rosy.vercel.app/Api/user/searchuser?select=Full_Name,Student_Code,semesterId,PhoneNumber&size=15",
+          "http://16.16.200.210:5000/Api/user/searchuser?select=Full_Name,Student_Code,semesterId,PhoneNumber&size=15",
           {
             method: "GET",
             headers: {
@@ -41,7 +41,7 @@ function DashBoard() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-lyart.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials&size=15",
+          "http://16.16.200.210:5000/Api/instructor/search?sort=1&select=email,FullName,Materials&size=15",
           {
             method: "GET",
             headers: {

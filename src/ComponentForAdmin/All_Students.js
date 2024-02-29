@@ -22,7 +22,7 @@ function All_Students() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-lyart.vercel.app/Api/user/searchuser?select=Full_Name,Student_Code,semesterId,PhoneNumber,level&size=15",
+          "http://16.16.200.210:5000/Api/user/searchuser?select=Full_Name,Student_Code,semesterId,PhoneNumber,level&size=15",
           {
             method: "GET",
             headers: {
@@ -46,7 +46,7 @@ function All_Students() {
   const handleDelete = async (studentId) => {
     try {
       const response = await fetch(
-        `https://university-lyart.vercel.app/Api/user/deleteStudent?userId=${studentId}`,
+        `http://16.16.200.210:5000/Api/user/deleteStudent?userId=${studentId}`,
         {
           method: "DELETE",
           headers: {
@@ -85,7 +85,7 @@ function All_Students() {
   const updateStudent = async () => {
     try {
       const response = await fetch(
-        `https://university-lyart.vercel.app/Api/user/updateStudent?userId=${selectedStudent._id}`,
+        `http://16.16.200.210:5000/Api/user/updateStudent?userId=${selectedStudent._id}`,
         {
           method: "PUT",
           headers: {
