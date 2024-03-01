@@ -109,3 +109,9 @@
 .NavLink {
   text-decoration: none;
 }
+@media (max-width: 410px) {
+  .sidebar-container {
+    width: 17.5rem;
+    margin-left: 0;
+  }
+}

@@ -252,7 +252,7 @@ function All_Students() {
             Update
           </button>
         </div>
-        <h2 style={{ marginLeft: "4rem" }}>Get All Students </h2>
+        <h2 style={{ marginLeft: "2rem" }}>Get All Students </h2>
         <table className="table">
           <thead>
             <tr>

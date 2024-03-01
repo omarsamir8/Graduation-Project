@@ -57,11 +57,14 @@
 }
 @media (max-width: 410px) {
   .nav-bar {
-    margin-left: 4rem;
+    margin-left: 2rem;
     width: 20rem;
     flex-wrap: wrap;
   }
   .nav-bar .info {
     margin-top: 1rem;
+  }
+  .nav-bar .search input {
+    width: 17rem;
   }
 }

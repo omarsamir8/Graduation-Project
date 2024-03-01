@@ -38,7 +38,7 @@ body {
 @media (max-width: 410px) {
   .mainpage .sidebar {
     position: relative;
-    margin-left: 3rem;
+    margin-left: 2rem;
   }
   .mainpage .poster {
     display: none;

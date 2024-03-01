@@ -108,9 +108,12 @@
   }
   .main-container {
     flex-wrap: wrap;
-    margin-left: 4rem;
+    margin-left: 2rem;
   }
   .instructor {
-    margin-left: 2.5rem;
+    margin-left: 1rem;
+  }
+  .main {
+    width: 17rem;
   }
 }

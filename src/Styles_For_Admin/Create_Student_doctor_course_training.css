@@ -123,23 +123,16 @@
   .Create_Student {
     display: flex;
     flex-wrap: wrap;
-    margin-left: 4rem;
+    margin-left: 2rem;
   }
   .Create_Student .part2 {
     margin-top: 0.7rem;
   }
   .Create_Student input {
     flex-wrap: wrap;
-    width: 15rem;
+    width: 17rem;
   }
   .enrollcourse .course {
-    margin-left: 2rem;
+    margin-left: 0.5rem;
   }
-  /* .get_all_student .part2 {
-    margin-top: 0.7rem;
-  }
-  .get_all_student input {
-    flex-wrap: wrap;
-    width: 15rem;
-  } */
 }
