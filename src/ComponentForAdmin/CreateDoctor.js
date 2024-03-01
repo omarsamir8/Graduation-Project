@@ -11,6 +11,7 @@ function CreateDoctor() {
   const [Date_of_Birth, setDate_of_Birth] = useState("");
   const [gender, setgender] = useState("");
   const [department, setdepartment] = useState("");
+  const [message, setmessage] = useState("");
   // const [Materials, setMaterials] = useState([]);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
@@ -40,7 +41,7 @@ function CreateDoctor() {
       );
       const data = await response.json();
       console.log(data);
-
+      setmessage(data.message);
       if (response.ok) {
         // Show SweetAlert on success
 
@@ -157,7 +158,9 @@ function CreateDoctor() {
               }}
             /> */}
           </div>
+          <p style={{ color: "red", fontSize: "13px" }}>{message}</p>
         </div>
+
         <button
           type="button"
           className="btn btn-primary mt-3"

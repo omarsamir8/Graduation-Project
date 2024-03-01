@@ -104,10 +104,6 @@
   border-bottom: 1px solid white;
   color: white;
 }
-.login-container .login .inputs .error {
-  font-size: 13px;
-  color: red;
-}
 
 .login-container .login .inputs a {
   margin-top: 10px;

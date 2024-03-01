@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Swal from "sweetalert2";
+import { red } from "@mui/material/colors";
 // import { Form } from "react-router-dom";
 function CreateStudent() {
   const [Full_Name, setFull_Name] = useState("");
@@ -10,6 +11,7 @@ function CreateStudent() {
   const [Date_of_Birth, setDate_of_Birth] = useState("");
   const [gender, setgender] = useState("");
   const [semesterId, setsemesterId] = useState("");
+  const [message, setmessage] = useState("");
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
@@ -38,6 +40,7 @@ function CreateStudent() {
       );
       const data = await response.json();
       console.log(data);
+      setmessage(data.message);
       if (response.ok) {
         // Show SweetAlert on success
 
@@ -159,7 +162,9 @@ function CreateStudent() {
               }}
             />
           </div>
+          <p style={{ color: "red", fontSize: "13px" }}>{message}</p>
         </form>
+
         <button
           type="button"
           class="btn btn-primary mt-3"

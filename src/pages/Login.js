@@ -120,8 +120,6 @@ function Login() {
 
       localStorage.setItem("accesstoken", data.accessToken);
       localStorage.setItem("refreshtoken", data.refreshToken);
-      // console.log(data.accessToken);
-      // console.loglog(data.refreshToken);
 
       if (response.ok) {
         // If login is successful, navigate to the "/admin" page
@@ -133,6 +131,7 @@ function Login() {
       console.error("Login failed", error);
     }
   };
+  console.log(message);
   return (
     <>
       <div className="col-12 login-page">
@@ -207,7 +206,9 @@ function Login() {
               />
             </div>
 
-            <p className="error">{message.message}</p>
+            <p style={{ fontSize: "15px", color: "red" }} className="error">
+              {message}
+            </p>
             <a href="#forgetpassword">Forget Password?</a>
             {/* </div> */}
             <button to="/student" className="button" onClick={check}>
