@@ -11,6 +11,7 @@ function CreateCourse() {
   const [desc, setdesc] = useState("");
   const [allcourses, setallcourses] = useState([]);
   const [selectedCourseId, setSelectedCourseId] = useState(null);
+  const [message, setmessage] = useState("");
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
@@ -37,6 +38,8 @@ function CreateCourse() {
       );
       const data = await response.json();
       console.log(data);
+      setmessage(data.message);
+      console.log(data.message);
 
       if (response.ok) {
         // Show SweetAlert on success
@@ -48,12 +51,21 @@ function CreateCourse() {
         });
       } else {
         // Show an error message if needed
-        Swal.fire({
-          icon: "error",
-          title: "Fail",
-          text: "Course creation failed, please try again later",
-          timer: 4500,
-        });
+        if (data.message === "Course name already exists") {
+          Swal.fire({
+            icon: "error",
+            title: "Fail",
+            text: `${data.message}`,
+            timer: 4500,
+          });
+        } else if (data.message === "validation Error") {
+          Swal.fire({
+            icon: "error",
+            title: "Fail",
+            text: `other error`,
+            timer: 4500,
+          });
+        }
       }
     } catch (error) {
       console.error("Create course failed", error);

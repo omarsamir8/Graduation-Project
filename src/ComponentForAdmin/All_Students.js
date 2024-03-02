@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Swal from "sweetalert2";
+import { useStudentContext } from "../StudentContext";
 
 function All_Students() {
-  const [allstudents, setallstudents] = useState([]);
+  const { allstudents, setallstudents } = useStudentContext();
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [showform, setshowform] = useState("none");
   const [test, settest] = useState(false);
@@ -18,30 +19,30 @@ function All_Students() {
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
   // get all students
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://university-lyart.vercel.app/Api/user/searchuser?select=Full_Name,Student_Code,semesterId,PhoneNumber,level&size=15",
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "refresh-token": refreshToken,
-            },
-          }
-        );
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         "https://university-lyart.vercel.app/Api/user/searchuser?select=Full_Name,Student_Code,semesterId,PhoneNumber,level&size=15",
+  //         {
+  //           method: "GET",
+  //           headers: {
+  //             Authorization: `Bearer ${accessToken}`,
+  //             "refresh-token": refreshToken,
+  //           },
+  //         }
+  //       );
 
-        const data = await response.json();
-        setallstudents(data.students);
-        console.log(data.students);
-      } catch (error) {
-        console.error("Fetch failed", error);
-      }
-    };
+  //       const data = await response.json();
+  //       setallstudents(data.students);
+  //       console.log(data.students);
+  //     } catch (error) {
+  //       console.error("Fetch failed", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, [accessToken, refreshToken]);
+  //   fetchData();
+  // }, [accessToken, refreshToken]);
   // delete student
   const handleDelete = async (studentId) => {
     try {

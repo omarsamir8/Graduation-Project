@@ -2,9 +2,11 @@ import { useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Swal from "sweetalert2";
 import { useEffect } from "react";
+import { useDoctorContext } from "../DoctorContext";
 
 function AllDoctors() {
-  const [alldoctors, setalldoctors] = useState([]);
+  const { alldoctors, setalldoctors } = useDoctorContext();
+
   const [selecteddoctor, setSelecteddoctor] = useState(null);
   const [FullName, setFullName] = useState("");
   const [email, setemail] = useState("");
@@ -19,34 +21,34 @@ function AllDoctors() {
   const refreshToken = localStorage.getItem("refreshtoken");
 
   // get all doctors
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://university-lyart.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials,phone,department&size=10",
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "refresh-token": refreshToken,
-            },
-          }
-        );
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         "https://university-lyart.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials,phone,department&size=10",
+  //         {
+  //           method: "GET",
+  //           headers: {
+  //             Authorization: `Bearer ${accessToken}`,
+  //             "refresh-token": refreshToken,
+  //           },
+  //         }
+  //       );
 
-        const data = await response.json();
-        setalldoctors(data.Instructor);
-        console.log(data);
-      } catch (error) {
-        console.error("Fetch failed", error);
-      }
-    };
+  //       const data = await response.json();
+  //       setalldoctors(data.Instructor);
+  //       console.log(data);
+  //     } catch (error) {
+  //       console.error("Fetch failed", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, [accessToken, refreshToken]);
+  //   fetchData();
+  // }, [accessToken, refreshToken]);
 
-  useEffect(() => {
-    console.log(alldoctors);
-  }, [alldoctors]);
+  // useEffect(() => {
+  //   console.log(alldoctors);
+  // }, [alldoctors]);
   //  delete doctors
   const handleDelete = async (doctorId) => {
     try {
