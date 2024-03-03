@@ -41,14 +41,14 @@ function Login() {
       handleLoginforadmin();
       console.log("this login for admin");
     } else {
-      console.log("you must select type");
+      console.log("you must select typee ");
     }
   };
 
   const handleLoginForStudent = async () => {
     try {
       const response = await fetch(
-        "https://university-system-dmg7.onrender.com/Api/user/login",
+        "https://university-lyart.vercel.app/Api/user/login",
         {
           method: "POST",
           headers: {
@@ -77,7 +77,7 @@ function Login() {
   const handleLoginforDoctor = async () => {
     try {
       const response = await fetch(
-        "https://university-system-dmg7.onrender.com/Api/Instructor/login",
+        "https://university-lyart.vercel.app/Api/Instructor/login",
         {
           method: "POST",
           headers: {
@@ -106,7 +106,7 @@ function Login() {
   const handleLoginforadmin = async () => {
     try {
       const response = await fetch(
-        "https://university-system-rosy.vercel.app/Api/admin/login",
+        "https://university-lyart.vercel.app/Api/admin/login",
         {
           method: "POST",
           headers: {
@@ -120,8 +120,6 @@ function Login() {
 
       localStorage.setItem("accesstoken", data.accessToken);
       localStorage.setItem("refreshtoken", data.refreshToken);
-      // console.log(data.accessToken);
-      // console.loglog(data.refreshToken);
 
       if (response.ok) {
         // If login is successful, navigate to the "/admin" page
@@ -133,13 +131,14 @@ function Login() {
       console.error("Login failed", error);
     }
   };
+  console.log(message);
   return (
     <>
       <div className="col-12 login-page">
         <div className="col-12 login-container">
           {/* <form></form> */}
           <div className=" col-12 login">
-            <div className="col-12">
+            <div className="col-12 title">
               <h1 className="col-12 login_title">Login</h1>
               <h1 className="col-12 login_title">Welcome back !</h1>
             </div>
@@ -207,7 +206,9 @@ function Login() {
               />
             </div>
 
-            <p className="error">{message.message}</p>
+            <p style={{ fontSize: "15px", color: "red" }} className="error">
+              {message}
+            </p>
             <a href="#forgetpassword">Forget Password?</a>
             {/* </div> */}
             <button to="/student" className="button" onClick={check}>

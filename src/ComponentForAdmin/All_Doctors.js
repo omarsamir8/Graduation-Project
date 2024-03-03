@@ -2,9 +2,11 @@ import { useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Swal from "sweetalert2";
 import { useEffect } from "react";
+import { useDoctorContext } from "../DoctorContext";
 
 function AllDoctors() {
-  const [alldoctors, setalldoctors] = useState([]);
+  const { alldoctors, setalldoctors } = useDoctorContext();
+
   const [selecteddoctor, setSelecteddoctor] = useState(null);
   const [FullName, setFullName] = useState("");
   const [email, setemail] = useState("");
@@ -23,7 +25,7 @@ function AllDoctors() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-system-rosy.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials,phone,department&size=20",
+          "https://university-system-rosy.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials&size=5",
           {
             method: "GET",
             headers: {
@@ -33,25 +35,25 @@ function AllDoctors() {
           }
         );
 
-        const data = await response.json();
-        setalldoctors(data.Instructor);
-        console.log(data);
-      } catch (error) {
-        console.error("Fetch failed", error);
-      }
-    };
+  //       const data = await response.json();
+  //       setalldoctors(data.Instructor);
+  //       console.log(data);
+  //     } catch (error) {
+  //       console.error("Fetch failed", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, [accessToken, refreshToken]);
+  //   fetchData();
+  // }, [accessToken, refreshToken]);
 
-  useEffect(() => {
-    console.log(alldoctors);
-  }, [alldoctors]);
+  // useEffect(() => {
+  //   console.log(alldoctors);
+  // }, [alldoctors]);
   //  delete doctors
   const handleDelete = async (doctorId) => {
     try {
       const response = await fetch(
-        `https://university-system-rosy.vercel.app/Api/instructor/delete?userId=${doctorId}`,
+        `https://university-lyart.vercel.app/Api/instructor/delete?userId=${doctorId}`,
         {
           method: "DELETE",
           headers: {
@@ -90,7 +92,7 @@ function AllDoctors() {
   const updateDoctor = async () => {
     try {
       const response = await fetch(
-        `https://university-system-rosy.vercel.app/Api/instructor/update?userId=${selecteddoctor._id}`,
+        `https://university-lyart.vercel.app/Api/instructor/update?userId=${selecteddoctor._id}`,
         {
           method: "PUT",
           headers: {
@@ -266,7 +268,7 @@ function AllDoctors() {
         </button>
       </div>
       <div className="get_all_student">
-        <h2>Get All Doctor </h2>
+        <h2 style={{ marginLeft: "2rem" }}>Get All Doctor </h2>
         <table className="table">
           <thead>
             <tr>

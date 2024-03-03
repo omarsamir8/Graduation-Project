@@ -9,19 +9,19 @@
 }
 .poster p,
 h2 {
-  margin-left: 60px;
+  margin-left: 3.7rem;
   position: absolute;
   color: white;
 }
 .poster .p1 {
   position: absolute;
-  margin-top: 40px;
+  margin-top: 2.3rem;
 }
 .poster h2 {
-  margin-top: 140px;
+  margin-top: 9rem;
 }
 .poster .p2 {
-  margin-top: 180px;
+  margin-top: 11.5rem;
 }
 .icon {
   position: relative;
@@ -31,5 +31,10 @@ h2 {
   position: absolute;
   right: 0px;
   height: 100%;
-  width: 500px;
+  width: 30rem;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
 }

@@ -20,14 +20,14 @@
   justify-content: space-between;
 }
 .main {
-  width: 230px;
+  width: 15rem;
   height: 150px;
   background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 1.9rem;
   text-align: center;
   color: black;
   border-radius: 10px;
@@ -62,8 +62,8 @@
 }
 /* instructor */
 .instructor {
-  width: 300px;
-  height: 300px;
+  width: 20rem;
+  height: 20rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -90,8 +90,8 @@
 }
 .instructor .images img {
   margin-left: 10px;
-  width: 80px;
-  height: 80px;
+  width: 5rem;
+  height: 5rem;
   border-radius: 50%;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -99,6 +99,21 @@
   -o-border-radius: 50%;
 }
 .notics {
-  margin-top: 50px;
-  margin-left: 20px;
+  margin-top: 2rem;
+  margin-left: 1.2rem;
+}
+@media (max-width: 410px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+  .main-container {
+    flex-wrap: wrap;
+    margin-left: 2rem;
+  }
+  .instructor {
+    margin-left: 1rem;
+  }
+  .main {
+    width: 17rem;
+  }
 }

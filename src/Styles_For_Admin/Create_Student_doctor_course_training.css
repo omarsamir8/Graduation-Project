@@ -2,6 +2,7 @@
   background-color: #996ae4 !important;
   border-color: #996ae4 !important;
   width: 100px;
+  margin-bottom: 1rem;
 }
 .Create_Student h2 {
   margin-top: 15px;
@@ -9,6 +10,7 @@
   position: relative;
   color: black;
   /* text-align: center; */
+  display: block;
   font-size: 25px;
   font-weight: bold;
 }
@@ -60,7 +62,7 @@
 .enrollcourse .course p {
   width: 165px;
   font-size: 20px;
-
+  margin-bottom: 1rem;
   color: #8042e6de;
   font-weight: bold;
 }
@@ -76,6 +78,7 @@
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
+  margin-top: 1rem;
 }
 .enrollcourse .course .img2 {
   background-image: url("/public/assets/images/c++.png");
@@ -106,11 +109,30 @@
   align-items: center;
   gap: 10px;
 }
+
 .up-del-btn {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 15px;
+  margin-right: 7rem;
+}
+@media (max-width: 410px) {
+  .Create_Student {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 2rem;
+  }
+  .Create_Student .part2 {
+    margin-top: 0.7rem;
+  }
+  .Create_Student input {
+    flex-wrap: wrap;
+    width: 17rem;
+  }
+  .enrollcourse .course {
+    margin-left: 0.5rem;
+  }
 }

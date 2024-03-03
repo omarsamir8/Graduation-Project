@@ -1,13 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { StudentProvider } from "./StudentContext";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { RecoilRoot } from "recoil";
+import { DoctorProvider } from "./DoctorContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <RecoilRoot>
-    <App />
+    <StudentProvider>
+      <DoctorProvider>
+        <App />
+      </DoctorProvider>
+    </StudentProvider>
   </RecoilRoot>
 );
 

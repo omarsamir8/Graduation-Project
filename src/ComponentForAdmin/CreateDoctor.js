@@ -11,6 +11,7 @@ function CreateDoctor() {
   const [Date_of_Birth, setDate_of_Birth] = useState("");
   const [gender, setgender] = useState("");
   const [department, setdepartment] = useState("");
+  const [message, setmessage] = useState("");
   // const [Materials, setMaterials] = useState([]);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
@@ -18,7 +19,7 @@ function CreateDoctor() {
   const createdoctor = async () => {
     try {
       const response = await fetch(
-        "https://university-system-rosy.vercel.app/Api/Instructor/create",
+        "https://university-lyart.vercel.app/Api/Instructor/create",
         {
           method: "POST",
           headers: {
@@ -40,7 +41,7 @@ function CreateDoctor() {
       );
       const data = await response.json();
       console.log(data);
-
+      setmessage(data.message);
       if (response.ok) {
         // Show SweetAlert on success
 
@@ -115,7 +116,7 @@ function CreateDoctor() {
               }}
             />
           </div>
-          <div class="col">
+          <div class="col part2">
             <input
               type="email"
               class="form-control"
@@ -157,7 +158,9 @@ function CreateDoctor() {
               }}
             /> */}
           </div>
+          <p style={{ color: "red", fontSize: "13px" }}>{message}</p>
         </div>
+
         <button
           type="button"
           className="btn btn-primary mt-3"

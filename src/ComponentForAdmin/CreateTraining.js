@@ -29,7 +29,7 @@ function CreateTraining() {
               name="minimum Grade"
             />
           </div>
-          <div class="col">
+          <div class="col part2">
             <input
               type="email"
               class="form-control"
@@ -57,12 +57,12 @@ function CreateTraining() {
             <p>Object Oriented programming</p>
             <div className="img"></div>
             <div className="up-del-btn">
-            <button type="button" className="btn btn-primary">
-              Update
-            </button>
-            <button type="button" className="btn btn-danger delete_btn">
-              Delete
-            </button>
+              <button type="button" className="btn btn-primary">
+                Update
+              </button>
+              <button type="button" className="btn btn-danger delete_btn">
+                Delete
+              </button>
             </div>
           </div>
         </div>
@@ -71,12 +71,12 @@ function CreateTraining() {
             <p>Basics Of Lang Programming</p>
             <div className="img img2"></div>
             <div className="up-del-btn">
-            <button type="button" className="btn btn-primary">
-              Update
-            </button>
-            <button type="button" className="btn btn-danger delete_btn">
-              Delete
-            </button>
+              <button type="button" className="btn btn-primary">
+                Update
+              </button>
+              <button type="button" className="btn btn-danger delete_btn">
+                Delete
+              </button>
             </div>
           </div>
         </div>
@@ -85,12 +85,12 @@ function CreateTraining() {
             <p>Algorithms & Data Structure</p>
             <div className="img img3"></div>
             <div className="up-del-btn">
-            <button type="button" className="btn btn-primary">
-              Update
-            </button>
-            <button type="button" className="btn btn-danger delete_btn">
-              Delete
-            </button>
+              <button type="button" className="btn btn-primary">
+                Update
+              </button>
+              <button type="button" className="btn btn-danger delete_btn">
+                Delete
+              </button>
             </div>
           </div>
         </div>
@@ -99,12 +99,12 @@ function CreateTraining() {
             <p>Opreating System</p>
             <div className="img img4"></div>
             <div className="up-del-btn">
-            <button type="button" className="btn btn-primary">
-              Update
-            </button>
-            <button type="button" className="btn btn-danger delete_btn">
-              Delete
-            </button>
+              <button type="button" className="btn btn-primary">
+                Update
+              </button>
+              <button type="button" className="btn btn-danger delete_btn">
+                Delete
+              </button>
             </div>
           </div>
         </div>
@@ -113,12 +113,12 @@ function CreateTraining() {
             <p>E-Commerce & E-bussniss</p>
             <div className="img img5"></div>
             <div className="up-del-btn">
-            <button type="button" className="btn btn-primary">
-              Update
-            </button>
-            <button type="button" className="btn btn-danger delete_btn">
-              Delete
-            </button>
+              <button type="button" className="btn btn-primary">
+                Update
+              </button>
+              <button type="button" className="btn btn-danger delete_btn">
+                Delete
+              </button>
             </div>
           </div>
         </div>
@@ -127,12 +127,12 @@ function CreateTraining() {
             <p>Data-----Mining</p>
             <div className="img img6"></div>
             <div className="up-del-btn">
-            <button type="button" className="btn btn-primary">
-              Update
-            </button>
-            <button type="button" className="btn btn-danger delete_btn">
-              Delete
-            </button>
+              <button type="button" className="btn btn-primary">
+                Update
+              </button>
+              <button type="button" className="btn btn-danger delete_btn">
+                Delete
+              </button>
             </div>
           </div>
         </div>

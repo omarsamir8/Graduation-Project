@@ -21,10 +21,10 @@ function MainPageForAdmin() {
   return (
     <>
       <div className="mainpage">
-        <div className="sidebar">
+        <div className="sidebar ">
           <SideBar />
         </div>
-        <div className="container-page">
+        <div className="container-page ">
           <div className="navbar">
             <NavBar />
           </div>

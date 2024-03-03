@@ -4,6 +4,7 @@ function DashBoard() {
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [allstudents, setallstudents] = useState([]);
   const [alldoctors, setalldoctors] = useState([]);
+  const [allcourses, setallcourses] = useState([]);
   const handleSidebarClick = (componentName) => {
     setSelectedComponent(componentName);
   };
@@ -15,7 +16,7 @@ function DashBoard() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-system-rosy.vercel.app/Api/user/searchuser?select=Full_Name,Student_Code,semesterId,PhoneNumber&size=15",
+          "https://university-lyart.vercel.app/Api/user/searchuser?select=Full_Name,Student_Code,semesterId,PhoneNumber&size=15",
           {
             method: "GET",
             headers: {
@@ -41,7 +42,7 @@ function DashBoard() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-system-rosy.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials&size=5",
+          "https://university-lyart.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials&size=15",
           {
             method: "GET",
             headers: {
@@ -65,6 +66,35 @@ function DashBoard() {
   useEffect(() => {
     console.log(alldoctors);
   }, [alldoctors]);
+  // get all courses
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://university-lyart.vercel.app/Api/courses/searchcourse?size=20",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+
+        const data = await response.json();
+        setallcourses(data.course);
+        console.log(data);
+      } catch (error) {
+        console.error("Fetch failed", error);
+      }
+    };
+
+    fetchData();
+  }, [accessToken, refreshToken]);
+
+  useEffect(() => {
+    console.log(allcourses);
+  }, [allcourses]);
   return (
     <>
       <div className="dashboard-container">
@@ -82,7 +112,7 @@ function DashBoard() {
             </div>
             <div className="main">
               <i class="fa-solid fa-square-xmark"></i>
-              <h3>80</h3>
+              <h3>{allcourses.length}</h3>
               <p> Total Courses </p>
             </div>
           </div>
