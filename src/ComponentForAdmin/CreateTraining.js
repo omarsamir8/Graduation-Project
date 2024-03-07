@@ -12,6 +12,8 @@ function CreateTraining() {
   const [selectedTrainingId, setselectedTrainingId] = useState(null);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
+  const [count, setcount] = useState(1);
+
 
   // create Training
   const createTraining = async () => {
@@ -75,7 +77,7 @@ function CreateTraining() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-lyart.vercel.app/Api/training/alltraining?select=training_name,size=5",
+          `https://university-lyart.vercel.app/Api/training/alltraining?select=training_name&page=${count}&size=9`,
           {
             method: "GET",
             headers: {
@@ -132,7 +134,7 @@ function CreateTraining() {
   const updateTraining = async (trainingId) => {
     try {
       const response = await fetch(
-        `https://university-lyart.vercel.app/Api/training/updatetraining?training_id=${trainingId}`,
+        `https://university-lyart.vercel.app//Api/training/updatetraining?training_id=${trainingId}`,
         {
           method: "PUT",
           headers: {
@@ -177,10 +179,10 @@ function CreateTraining() {
 
         // Clear the selected course and reset input fields
         setselectedTrainingId(null);
-        settraining_name(""),
-          setdesc(""),
-          setinstructor_id(""),
-          setstart_date(""),
+        settraining_name("");
+          setdesc("");
+          setinstructor_id("");
+          setstart_date("");
           setend_date("");
       } else {
         // Show an error message if needed
@@ -195,6 +197,11 @@ function CreateTraining() {
       console.error("Update failed", error);
     }
   };
+  const loadMore = () => {
+    // Increment the count when loading more
+    setcount((prevCount) => prevCount + 1);
+  };
+
   return (
     <>
       <div className="Create_Student">
@@ -303,6 +310,8 @@ function CreateTraining() {
     </div>
   ))}
 </div>
+<button onClick={loadMore}>Loading More</button>
+
     </>
   );
 }
