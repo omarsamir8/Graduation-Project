@@ -25,7 +25,7 @@ function AllDoctors() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-system-rosy.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials&size=5",
+          "https://university-lyart.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials,phone,department&size=10",
           {
             method: "GET",
             headers: {
@@ -35,20 +35,20 @@ function AllDoctors() {
           }
         );
 
-  //       const data = await response.json();
-  //       setalldoctors(data.Instructor);
-  //       console.log(data);
-  //     } catch (error) {
-  //       console.error("Fetch failed", error);
-  //     }
-  //   };
+        const data = await response.json();
+        setalldoctors(data.Instructor);
+        console.log(data);
+      } catch (error) {
+        console.error("Fetch failed", error);
+      }
+    };
 
-  //   fetchData();
-  // }, [accessToken, refreshToken]);
+    fetchData();
+  }, [accessToken, refreshToken]);
 
-  // useEffect(() => {
-  //   console.log(alldoctors);
-  // }, [alldoctors]);
+  useEffect(() => {
+    console.log(alldoctors);
+  }, [alldoctors]);
   //  delete doctors
   const handleDelete = async (doctorId) => {
     try {
