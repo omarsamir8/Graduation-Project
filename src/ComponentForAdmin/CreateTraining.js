@@ -14,7 +14,6 @@ function CreateTraining() {
   const refreshToken = localStorage.getItem("refreshtoken");
   const [count, setcount] = useState(1);
 
-
   // create Training
   const createTraining = async () => {
     try {
@@ -88,7 +87,11 @@ function CreateTraining() {
         );
 
         const data = await response.json();
-        setallTrainings(data.training);
+        // Update allTrainings with the new data
+        setallTrainings((prevTrainings) => [
+          ...prevTrainings,
+          ...data.training,
+        ]);
         console.log(data);
       } catch (error) {
         console.error("Fetch failed", error);
@@ -96,7 +99,7 @@ function CreateTraining() {
     };
 
     fetchData();
-  }, [accessToken, refreshToken]);
+  }, [accessToken, refreshToken, count]);
 
   useEffect(() => {
     console.log(allTrainings);
@@ -180,10 +183,10 @@ function CreateTraining() {
         // Clear the selected course and reset input fields
         setselectedTrainingId(null);
         settraining_name("");
-          setdesc("");
-          setinstructor_id("");
-          setstart_date("");
-          setend_date("");
+        setdesc("");
+        setinstructor_id("");
+        setstart_date("");
+        setend_date("");
       } else {
         // Show an error message if needed
         Swal.fire({
@@ -197,6 +200,7 @@ function CreateTraining() {
       console.error("Update failed", error);
     }
   };
+
   const loadMore = () => {
     // Increment the count when loading more
     setcount((prevCount) => prevCount + 1);
@@ -245,7 +249,7 @@ function CreateTraining() {
           </div>
           <div class="col part2">
             <input
-              type="text"
+              type="date"
               class="form-control"
               placeholder="Enter Starting Date"
               aria-label="training_Starting_Date"
@@ -256,7 +260,7 @@ function CreateTraining() {
               }}
             />
             <input
-              type="text"
+              type="date"
               class="form-control mt-3"
               placeholder="Enter Ending Date"
               aria-label="training_Ending_Date"
@@ -278,40 +282,39 @@ function CreateTraining() {
         <h2>All Trainings Added</h2>
       </div>
       <div className="enrollcourse">
-  {allTrainings.map((training) => (
-    <div className="course" key={training._id}>
-      <div className="info">
-        <p>{training.training_name}</p>
-        <div className="img"></div>
-        <div className="up-del-btn">
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => {
-              setselectedTrainingId(training._id);
-              settraining_name(training.training_name);
-              setdesc(training.desc);
-              setinstructor_id(training.instructor_id);
-              setstart_date(training.start_date);
-              setend_date(training.end_date);
-            }}
-          >
-            Update
-          </button>
-          <button
-            type="button"
-            className="btn btn-danger delete_btn"
-            onClick={() => deleteTraining(training._id)}
-          >
-            Delete
-          </button>
-        </div>
+        {allTrainings.map((training) => (
+          <div className="course" key={training._id}>
+            <div className="info">
+              <p>{training.training_name}</p>
+              <div className="img"></div>
+              <div className="up-del-btn">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => {
+                    setselectedTrainingId(training._id);
+                    settraining_name(training.training_name);
+                    setdesc(training.desc);
+                    setinstructor_id(training.instructor_id);
+                    setstart_date(training.start_date);
+                    setend_date(training.end_date);
+                  }}
+                >
+                  Update
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-danger delete_btn"
+                  onClick={() => deleteTraining(training._id)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
-    </div>
-  ))}
-</div>
-<button onClick={loadMore}>Loading More</button>
-
+      <button onClick={loadMore}>Loading More</button>
     </>
   );
 }
