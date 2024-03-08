@@ -314,7 +314,23 @@ function CreateTraining() {
           </div>
         ))}
       </div>
-      <button onClick={loadMore}>Loading More</button>
+      <button
+        style={{
+          width: "200px",
+          height: "50px",
+          border: "none",
+          outline: "none",
+          background: "#996ae4",
+          borderRadius: "10px",
+          color: "white",
+          marginLeft: "400px",
+          marginBottom: "20px",
+          fontSize: "22px",
+        }}
+        onClick={loadMore}
+      >
+        Loading More
+      </button>
     </>
   );
 }

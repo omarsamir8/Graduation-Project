@@ -12,6 +12,7 @@ function CreateCourse() {
   const [allcourses, setallcourses] = useState([]);
   const [selectedCourseId, setSelectedCourseId] = useState(null);
   const [message, setmessage] = useState("");
+  const [count, setcount] = useState(1);
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
@@ -77,7 +78,7 @@ function CreateCourse() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-lyart.vercel.app/Api/courses/searchcourse?size=20",
+          `https://university-lyart.vercel.app/Api/courses/searchcourse?size=9&page=${count}`,
           {
             method: "GET",
             headers: {
@@ -86,9 +87,8 @@ function CreateCourse() {
             },
           }
         );
-
         const data = await response.json();
-        setallcourses(data.course);
+        setallcourses((prevCourses) => [...prevCourses, ...data.course]);
         console.log(data);
       } catch (error) {
         console.error("Fetch failed", error);
@@ -96,7 +96,7 @@ function CreateCourse() {
     };
 
     fetchData();
-  }, [accessToken, refreshToken]);
+  }, [accessToken, refreshToken, count]);
 
   useEffect(() => {
     console.log(allcourses);
@@ -193,6 +193,11 @@ function CreateCourse() {
     } catch (error) {
       console.error("Update failed", error);
     }
+  };
+
+  const loadMore = () => {
+    // Increment the count when loading more
+    setcount((prevCount) => prevCount + 1);
   };
 
   return (
@@ -314,6 +319,23 @@ function CreateCourse() {
           </div>
         ))}
       </div>
+      <button
+        style={{
+          width: "200px",
+          height: "50px",
+          border: "none",
+          outline: "none",
+          background: "#996ae4",
+          borderRadius: "10px",
+          color: "white",
+          marginLeft: "400px",
+          marginBottom: "20px",
+          fontSize: "22px",
+        }}
+        onClick={loadMore}
+      >
+        Loading More
+      </button>
     </>
   );
 }

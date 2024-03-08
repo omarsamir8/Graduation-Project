@@ -15,6 +15,7 @@ function All_Students() {
   const [Date_of_Birth, setDate_of_Birth] = useState("");
   const [gender, setgender] = useState("");
   const [semesterId, setsemesterId] = useState("");
+  const [count, setcount] = useState(1);
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
@@ -23,7 +24,7 @@ function All_Students() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-lyart.vercel.app/Api/user/searchuser?select=Full_Name,Student_Code,semesterId,PhoneNumber,level&size=15",
+          `https://university-lyart.vercel.app/Api/user/searchuser?select=Full_Name,Student_Code,semesterId,PhoneNumber&size=10&page=${count}`,
           {
             method: "GET",
             headers: {
@@ -34,7 +35,8 @@ function All_Students() {
         );
 
         const data = await response.json();
-        setallstudents(data.students);
+        setallstudents((prevStudents) => [...prevStudents, ...data.students]);
+
         console.log(data.students);
       } catch (error) {
         console.error("Fetch failed", error);
@@ -42,7 +44,7 @@ function All_Students() {
     };
 
     fetchData();
-  }, [accessToken, refreshToken]);
+  }, [accessToken, refreshToken, count]);
   // delete student
   const handleDelete = async (studentId) => {
     try {
@@ -156,6 +158,10 @@ function All_Students() {
     }
   };
 
+  const loadMore = () => {
+    // Increment the count when loading more
+    setcount((prevCount) => prevCount + 1);
+  };
   return (
     <>
       <div className="get_all_student">
@@ -296,6 +302,23 @@ function All_Students() {
           </tbody>
         </table>
       </div>
+      <button
+        style={{
+          width: "200px",
+          height: "50px",
+          border: "none",
+          outline: "none",
+          background: "#996ae4",
+          borderRadius: "10px",
+          color: "white",
+          marginLeft: "400px",
+          marginBottom: "20px",
+          fontSize: "22px",
+        }}
+        onClick={loadMore}
+      >
+        Loading More
+      </button>
     </>
   );
 }
