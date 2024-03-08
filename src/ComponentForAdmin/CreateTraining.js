@@ -163,7 +163,6 @@ function CreateTraining() {
           showConfirmButton: false,
           timer: 3500,
         });
-
         // Update the state with the modified course
         setallTrainings((prevTrainings) =>
           prevTrainings.map((prevTraining) =>
