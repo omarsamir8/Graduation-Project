@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Swal from "sweetalert2";
+import { useCourseContext } from "../CourseContext";
 
 function CreateCourse() {
   const [course_name, setcourse_name] = useState("");
@@ -9,10 +10,9 @@ function CreateCourse() {
   const [instructorId, setinstructorId] = useState("");
   const [OpenForRegistration, setOpenForRegistration] = useState("");
   const [desc, setdesc] = useState("");
-  const [allcourses, setallcourses] = useState([]);
+  const { allcourses, setallcourses } = useCourseContext();
   const [selectedCourseId, setSelectedCourseId] = useState(null);
   const [message, setmessage] = useState("");
-  const [count, setcount] = useState(1);
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
@@ -74,33 +74,34 @@ function CreateCourse() {
   };
 
   // get all Courses
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `https://university-lyart.vercel.app/Api/courses/searchcourse?size=9&page=${count}`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "refresh-token": refreshToken,
-            },
-          }
-        );
-        const data = await response.json();
-        setallcourses((prevCourses) => [...prevCourses, ...data.course]);
-        console.log(data);
-      } catch (error) {
-        console.error("Fetch failed", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `https://university-lyart.vercel.app/Api/courses/searchcourse?page=${count}&size=3`,
+  //         {
+  //           method: "GET",
+  //           headers: {
+  //             Authorization: `Bearer ${accessToken}`,
+  //             "refresh-token": refreshToken,
+  //           },
+  //         }
+  //       );
+  //       const data = await response.json();
+  //       if (Array.isArray(data.course)) {
+  //         setallcourses((prevCourses) => [...prevCourses, ...data.course]);
+  //       }
+  //     } catch (error) {
+  //       console.error("Fetch failed", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, [accessToken, refreshToken, count]);
+  //   fetchData();
+  // }, [accessToken, refreshToken, count]);
 
-  useEffect(() => {
-    console.log(allcourses);
-  }, [allcourses]);
+  // useEffect(() => {
+  //   console.log(allcourses);
+  // }, [allcourses]);
 
   // delete course
   const deleteCourse = async (courseId) => {
@@ -193,11 +194,6 @@ function CreateCourse() {
     } catch (error) {
       console.error("Update failed", error);
     }
-  };
-
-  const loadMore = () => {
-    // Increment the count when loading more
-    setcount((prevCount) => prevCount + 1);
   };
 
   return (
@@ -335,7 +331,6 @@ function CreateCourse() {
           fontSize: "22px",
           marginLeft: "10px",
         }}
-        onClick={loadMore}
       >
         Loading More
       </button>

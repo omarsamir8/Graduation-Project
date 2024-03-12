@@ -7,13 +7,16 @@ import reportWebVitals from "./reportWebVitals";
 import { RecoilRoot } from "recoil";
 import { DoctorProvider } from "./DoctorContext";
 import { TrainingProvider } from "./TrainingContext";
+import { CourseProvider } from "./CourseContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <RecoilRoot>
     <StudentProvider>
       <DoctorProvider>
         <TrainingProvider>
-          <App />
+          <CourseProvider>
+            <App />
+          </CourseProvider>
         </TrainingProvider>
       </DoctorProvider>
     </StudentProvider>

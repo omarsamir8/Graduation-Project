@@ -4,12 +4,16 @@ import { useState, useEffect } from "react";
 import { useStudentContext } from "../StudentContext";
 import { useDoctorContext } from "../DoctorContext";
 import { useTrainingContext } from "../TrainingContext";
+import { useCourseContext } from "../CourseContext";
 
 function NavBar() {
   const [admininfo, setadmininfo] = useState([]);
   const [search_student_value, setsearch_student_value] = useState("");
   const [doctor_value, setdoctor_value] = useState("");
   const [training_value, settraining_value] = useState("");
+  const [course_value, setcourse_value] = useState("");
+  const [count, setcount] = useState(1);
+  const { allcourses, setallcourses } = useCourseContext();
   const { allTrainings, setAllTrainings } = useTrainingContext();
   const { allstudents, setallstudents } = useStudentContext();
   const { alldoctors, setalldoctors } = useDoctorContext();
@@ -44,7 +48,7 @@ function NavBar() {
       try {
         // if (searchvalue.trim() !== "") {
         const response = await axios.get(
-          `https://university-system-rosy.vercel.app/Api/user/searchuser?page=1&size=20&search=${search_student_value}`,
+          `https://university-system-rosy.vercel.app/Api/user/searchuser?page=${count}&size=20&search=${search_student_value}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -83,7 +87,7 @@ function NavBar() {
       try {
         // if (searchvalue.trim() !== "") {
         const response = await axios.get(
-          `https://university-system-rosy.vercel.app/Api/instructor/search?sort=1&page=1&size=20&search=${doctor_value}`,
+          `https://university-system-rosy.vercel.app/Api/instructor/search?sort=1&page=${count}&size=20&search=${doctor_value}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -123,7 +127,7 @@ function NavBar() {
       try {
         // if (searchvalue.trim() !== "") {
         const response = await axios.get(
-          `https://university-lyart.vercel.app/Api/training/alltraining?select=training_name&page=1&size=9&search=${training_value}`,
+          `https://university-lyart.vercel.app/Api/training/alltraining?select=training_name&page=${count}&size=9&search=${training_value}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -157,6 +161,52 @@ function NavBar() {
     };
   }, [accessToken, refreshToken, training_value]);
 
+  // serach for course
+  useEffect(() => {
+    const fetchsearchforcourse = async () => {
+      try {
+        // if (searchvalue.trim() !== "") {
+        const response = await axios.get(
+          `https://university-lyart.vercel.app/Api/courses/searchcourse?page=${count}&size=9
+          &search=${training_value}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+        console.log(response.data);
+        const data = response.data;
+        console.log(data);
+        setallcourses(data.course);
+        console.log(allcourses);
+
+        // Here you can update the state related to the search or perform any other actions with the data
+      } catch (error) {
+        // }
+        console.error("Error fetching search results:", error);
+      }
+    };
+    fetchsearchforcourse();
+    const handleKeyPress = (e) => {
+      if (e.key === "Enter") {
+        fetchsearchforcourse();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [accessToken, refreshToken, course_value]);
+
+  // loading more
+  const loadMore = () => {
+    // Increment the count when loading more
+    setcount((prevCount) => prevCount + 1);
+  };
   return (
     <>
       <div className="nav-bar">
@@ -169,6 +219,7 @@ function NavBar() {
               setsearch_student_value(e.target.value);
               setdoctor_value(e.target.value);
               settraining_value(e.target.value);
+              setcourse_value(e.target.value);
             }}
           />
         </div>

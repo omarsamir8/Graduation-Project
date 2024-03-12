@@ -73,42 +73,42 @@ function CreateTraining() {
   };
 
   // get all Trainings
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `https://university-lyart.vercel.app/Api/training/alltraining?select=training_name&page=${count}&size=9`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "refresh-token": refreshToken,
-            },
-          }
-        );
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `https://university-lyart.vercel.app/Api/training/alltraining?select=training_name&page=${count}&size=9`,
+  //         {
+  //           method: "GET",
+  //           headers: {
+  //             Authorization: `Bearer ${accessToken}`,
+  //             "refresh-token": refreshToken,
+  //           },
+  //         }
+  //       );
 
-        const data = await response.json();
+  //       const data = await response.json();
 
-        // Ensure data.training is an array before updating state
-        if (Array.isArray(data.training)) {
-          setAllTrainings((prevTrainings) => [
-            ...prevTrainings,
-            ...data.training,
-          ]);
-        } else {
-          console.error("Invalid data format received from the server.");
-        }
-      } catch (error) {
-        console.error("Fetch failed", error);
-      }
-    };
+  //       // Ensure data.training is an array before updating state
+  //       if (Array.isArray(data.training)) {
+  //         setAllTrainings((prevTrainings) => [
+  //           ...prevTrainings,
+  //           ...data.training,
+  //         ]);
+  //       } else {
+  //         console.error("Invalid data format received from the server.");
+  //       }
+  //     } catch (error) {
+  //       console.error("Fetch failed", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, [accessToken, refreshToken, count]);
+  //   fetchData();
+  // }, [accessToken, refreshToken, count]);
 
-  useEffect(() => {
-    console.log(allTrainings);
-  }, [allTrainings]);
+  // useEffect(() => {
+  //   console.log(allTrainings);
+  // }, [allTrainings]);
 
   // delete course
   const deleteTraining = async (trainingId) => {
