@@ -95,26 +95,37 @@ function CreateDoctor() {
                 setphone(e.target.value);
               }}
             />
-            <input
-              type="gender"
-              class="form-control mt-3"
-              placeholder="Enter Gender"
+            <select
+              className="form-control mt-3"
               aria-label="gender"
               name="gender"
               onChange={(e) => {
                 setgender(e.target.value);
               }}
-            />
-            <input
-              type="text"
-              class="form-control mt-3"
-              placeholder="Enter Department"
+            >
+              <option value="" disabled selected hidden>
+                Select Gender
+              </option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+            <select
+              className="form-control mt-3"
               aria-label="department"
               name="department"
               onChange={(e) => {
                 setdepartment(e.target.value);
               }}
-            />
+            >
+              <option value="" disabled selected hidden>
+                Select Department
+              </option>
+              <option value="is">IS</option>
+              <option value="cs">CS </option>
+              <option value="ai">AI </option>
+              <option value="sc">SC</option>
+              {/* Add more options as needed */}
+            </select>
           </div>
           <div class="col part2">
             <input
@@ -158,7 +169,6 @@ function CreateDoctor() {
               }}
             /> */}
           </div>
-          <p style={{ color: "red", fontSize: "13px" }}>{message}</p>
         </div>
 
         <button

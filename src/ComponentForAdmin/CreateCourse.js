@@ -238,17 +238,21 @@ function CreateCourse() {
             />
           </div>
           <div className="col part2">
-            <input
-              type="email"
+            <select
               className="form-control"
-              placeholder="Enter Course_hours"
               aria-label="Course_hours"
               name="credit_hour"
               value={credit_hour}
               onChange={(e) => {
                 setcredit_hour(e.target.value);
               }}
-            />
+            >
+              <option value="" disabled>
+                Select Course Hours
+              </option>
+              <option value="2">2 </option>
+              <option value="3">3 </option>
+            </select>
             <input
               type="text"
               className="form-control mt-3"
@@ -260,17 +264,21 @@ function CreateCourse() {
                 setinstructorId(e.target.value);
               }}
             />
-            <input
-              type="text"
+            <select
               className="form-control mt-3"
-              placeholder="Enter OpenForRegistration"
               aria-label="OpenForRegistration"
-              name="OpenForRegistration "
+              name="OpenForRegistration"
               value={OpenForRegistration}
               onChange={(e) => {
                 setOpenForRegistration(e.target.value);
               }}
-            />
+            >
+              <option value="" disabled>
+                OpenForRegistration
+              </option>
+              <option value="true">True </option>
+              <option value="false">False</option>
+            </select>
           </div>
         </form>
         <button
