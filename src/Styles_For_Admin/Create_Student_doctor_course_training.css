@@ -132,6 +132,10 @@
     flex-wrap: wrap;
     width: 17rem;
   }
+  .Create_Student select {
+    flex-wrap: wrap;
+    width: 17rem;
+  }
   .enrollcourse .course {
     margin-left: 0.5rem;
   }
