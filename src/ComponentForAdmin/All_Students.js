@@ -277,7 +277,7 @@ function All_Students() {
           </tbody>
         </table>
       </div>
-      <button
+      {/* <button
         style={{
           width: "320px",
           height: "50px",
@@ -295,7 +295,7 @@ function All_Students() {
         onClick={loadMore}
       >
         Loading More
-      </button>
+      </button> */}
     </>
   );
 }

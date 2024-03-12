@@ -287,7 +287,7 @@ function AllDoctors() {
           </tbody>
         </table>
       </div>
-      <button
+      {/* <button
         style={{
           width: "320px",
           height: "50px",
@@ -305,7 +305,7 @@ function AllDoctors() {
         onClick={loadMore}
       >
         Loading More
-      </button>
+      </button> */}
     </>
   );
 }

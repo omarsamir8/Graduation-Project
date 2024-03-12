@@ -315,7 +315,7 @@ function CreateCourse() {
           </div>
         ))}
       </div>
-      <button
+      {/* <button
         style={{
           width: "320px",
           height: "50px",
@@ -333,7 +333,7 @@ function CreateCourse() {
         }}
       >
         Loading More
-      </button>
+      </button> */}
     </>
   );
 }
