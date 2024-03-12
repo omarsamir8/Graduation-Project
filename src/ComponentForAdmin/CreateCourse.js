@@ -321,16 +321,19 @@ function CreateCourse() {
       </div>
       <button
         style={{
-          width: "200px",
+          width: "320px",
           height: "50px",
           border: "none",
           outline: "none",
           background: "#996ae4",
           borderRadius: "10px",
+          paddingLeft: "2rem",
+          paddingRight: "2rem",
           color: "white",
-          marginLeft: "4rem",
+          marginLeft: "0rem",
           marginBottom: "20px",
           fontSize: "22px",
+          marginLeft: "10px",
         }}
         onClick={loadMore}
       >

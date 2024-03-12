@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Swal from "sweetalert2";
+import { useTrainingContext } from "../TrainingContext";
 function CreateTraining() {
   const [training_name, settraining_name] = useState("");
   const [desc, setdesc] = useState("");
   const [instructor_id, setinstructor_id] = useState("");
   const [start_date, setstart_date] = useState("");
   const [end_date, setend_date] = useState("");
-  const [allTrainings, setallTrainings] = useState([]);
+  const { allTrainings, setAllTrainings } = useTrainingContext();
   const [message, setmessage] = useState("");
   const [selectedTrainingId, setselectedTrainingId] = useState(null);
   const accessToken = localStorage.getItem("accesstoken");
@@ -87,12 +88,16 @@ function CreateTraining() {
         );
 
         const data = await response.json();
-        // Update allTrainings with the new data
-        setallTrainings((prevTrainings) => [
-          ...prevTrainings,
-          ...data.training,
-        ]);
-        console.log(data);
+
+        // Ensure data.training is an array before updating state
+        if (Array.isArray(data.training)) {
+          setAllTrainings((prevTrainings) => [
+            ...prevTrainings,
+            ...data.training,
+          ]);
+        } else {
+          console.error("Invalid data format received from the server.");
+        }
       } catch (error) {
         console.error("Fetch failed", error);
       }
@@ -121,7 +126,7 @@ function CreateTraining() {
 
       if (response.ok) {
         // On success, update the state to remove the deleted course
-        setallTrainings((prevTrainings) =>
+        setAllTrainings((prevTrainings) =>
           prevTrainings.filter((training) => training._id !== trainingId)
         );
         console.log(`Training with ID ${trainingId} deleted successfully.`);
@@ -165,7 +170,7 @@ function CreateTraining() {
         });
 
         // Update the state with the modified course
-        setallTrainings((prevTrainings) =>
+        setAllTrainings((prevTrainings) =>
           prevTrainings.map((prevTraining) =>
             prevTraining._id === selectedTrainingId
               ? {
@@ -282,49 +287,52 @@ function CreateTraining() {
         <h2>All Trainings Added</h2>
       </div>
       <div className="enrollcourse">
-        {allTrainings.map((training) => (
-          <div className="course" key={training._id}>
-            <div className="info">
-              <p>{training.training_name}</p>
-              <div className="img"></div>
-              <div className="up-del-btn">
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={() => {
-                    setselectedTrainingId(training._id);
-                    settraining_name(training.training_name);
-                    setdesc(training.desc);
-                    setinstructor_id(training.instructor_id);
-                    setstart_date(training.start_date);
-                    setend_date(training.end_date);
-                  }}
-                >
-                  Update
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-danger delete_btn"
-                  onClick={() => deleteTraining(training._id)}
-                >
-                  Delete
-                </button>
+        {allTrainings &&
+          allTrainings.map((training) => (
+            <div className="course" key={training._id}>
+              <div className="info">
+                <p>{training.training_name}</p>
+                <div className="img"></div>
+                <div className="up-del-btn">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() => {
+                      setselectedTrainingId(training._id);
+                      settraining_name(training.training_name);
+                      setdesc(training.desc);
+                      setinstructor_id(training.instructor_id);
+                      setstart_date(training.start_date);
+                      setend_date(training.end_date);
+                    }}
+                  >
+                    Update
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-danger delete_btn"
+                    onClick={() => deleteTraining(training._id)}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
       <button
         className="loadmore"
         style={{
-          width: "200px",
+          width: "320px",
           height: "50px",
           border: "none",
           outline: "none",
           background: "#996ae4",
           borderRadius: "10px",
+          paddingLeft: "2rem",
+          paddingRight: "2rem",
           color: "white",
-          marginLeft: "4rem",
+          marginLeft: "10px",
           marginBottom: "20px",
           fontSize: "22px",
         }}

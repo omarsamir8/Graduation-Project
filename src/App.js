@@ -6,9 +6,6 @@ import Login from "./pages/Login";
 import Registered_Courses from "./pages/Registered_Courses/Registered_Courses";
 import Reports_student from "./pages/Reports_student/Reports_student";
 
-
- 
-
 function App() {
   return (
     <>
@@ -19,11 +16,14 @@ function App() {
             <Route path="/student" element={<MainPageForStudent />}></Route>
             <Route path="/doctor" element={<MainPageForDoctor />}></Route>
             <Route path="/admin" element={<MainPageForAdmin />}></Route>
-            <Route path="/Registered_Courses" element={<Registered_Courses />}></Route>
-            <Route path="/Reports_student" element={<Reports_student />}></Route>
-          
-           
-
+            <Route
+              path="/Registered_Courses"
+              element={<Registered_Courses />}
+            ></Route>
+            <Route
+              path="/Reports_student"
+              element={<Reports_student />}
+            ></Route>
           </Routes>
         </BrowserRouter>
       </div>

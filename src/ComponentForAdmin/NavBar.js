@@ -3,11 +3,14 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useStudentContext } from "../StudentContext";
 import { useDoctorContext } from "../DoctorContext";
+import { useTrainingContext } from "../TrainingContext";
 
 function NavBar() {
   const [admininfo, setadmininfo] = useState([]);
   const [search_student_value, setsearch_student_value] = useState("");
   const [doctor_value, setdoctor_value] = useState("");
+  const [training_value, settraining_value] = useState("");
+  const { allTrainings, setAllTrainings } = useTrainingContext();
   const { allstudents, setallstudents } = useStudentContext();
   const { alldoctors, setalldoctors } = useDoctorContext();
   const accessToken = localStorage.getItem("accesstoken");
@@ -113,6 +116,47 @@ function NavBar() {
   }, [accessToken, refreshToken, doctor_value]);
 
   console.log(allstudents);
+
+  // search for training
+  useEffect(() => {
+    const fetchsearchfortraining = async () => {
+      try {
+        // if (searchvalue.trim() !== "") {
+        const response = await axios.get(
+          `https://university-lyart.vercel.app/Api/training/alltraining?select=training_name&page=1&size=9&search=${training_value}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+        console.log(response.data);
+        const data = response.data;
+        console.log(data);
+        setAllTrainings(data.training);
+        console.log(allTrainings);
+
+        // Here you can update the state related to the search or perform any other actions with the data
+      } catch (error) {
+        // }
+        console.error("Error fetching search results:", error);
+      }
+    };
+    fetchsearchfortraining();
+    const handleKeyPress = (e) => {
+      if (e.key === "Enter") {
+        fetchsearchfortraining();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [accessToken, refreshToken, training_value]);
+
   return (
     <>
       <div className="nav-bar">
@@ -124,6 +168,7 @@ function NavBar() {
             onChange={(e) => {
               setsearch_student_value(e.target.value);
               setdoctor_value(e.target.value);
+              settraining_value(e.target.value);
             }}
           />
         </div>

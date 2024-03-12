@@ -17,38 +17,10 @@ function AllDoctors() {
   const [department, setdepartment] = useState("");
   const [showform, setshowform] = useState("none");
   const [test, settest] = useState(false);
+  const [count, setcount] = useState(1);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
 
-  // get all doctors
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://university-lyart.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials,phone,department&size=10",
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "refresh-token": refreshToken,
-            },
-          }
-        );
-
-        const data = await response.json();
-        setalldoctors(data.Instructor);
-        console.log(data);
-      } catch (error) {
-        console.error("Fetch failed", error);
-      }
-    };
-
-    fetchData();
-  }, [accessToken, refreshToken]);
-
-  useEffect(() => {
-    console.log(alldoctors);
-  }, [alldoctors]);
   //  delete doctors
   const handleDelete = async (doctorId) => {
     try {
@@ -160,6 +132,10 @@ function AllDoctors() {
     } catch (error) {
       console.error("Update failed", error);
     }
+  };
+  const loadMore = () => {
+    // Increment the count when loading more
+    setcount((prevCount) => prevCount + 1);
   };
   return (
     <>
@@ -311,6 +287,25 @@ function AllDoctors() {
           </tbody>
         </table>
       </div>
+      <button
+        style={{
+          width: "320px",
+          height: "50px",
+          border: "none",
+          outline: "none",
+          background: "#996ae4",
+          borderRadius: "10px",
+          paddingLeft: "2rem",
+          paddingRight: "2rem",
+          color: "white",
+          marginLeft: "10px",
+          marginBottom: "20px",
+          fontSize: "22px",
+        }}
+        onClick={loadMore}
+      >
+        Loading More
+      </button>
     </>
   );
 }

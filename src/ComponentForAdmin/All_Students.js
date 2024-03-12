@@ -19,32 +19,7 @@ function All_Students() {
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
-  // get all students
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `https://university-lyart.vercel.app/Api/user/searchuser?select=Full_Name,Student_Code,semesterId,PhoneNumber&size=10&page=${count}`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "refresh-token": refreshToken,
-            },
-          }
-        );
 
-        const data = await response.json();
-        setallstudents((prevStudents) => [...prevStudents, ...data.students]);
-
-        console.log(data.students);
-      } catch (error) {
-        console.error("Fetch failed", error);
-      }
-    };
-
-    fetchData();
-  }, [accessToken, refreshToken, count]);
   // delete student
   const handleDelete = async (studentId) => {
     try {
@@ -304,14 +279,16 @@ function All_Students() {
       </div>
       <button
         style={{
-          width: "200px",
+          width: "320px",
           height: "50px",
           border: "none",
           outline: "none",
           background: "#996ae4",
           borderRadius: "10px",
+          paddingLeft: "2rem",
+          paddingRight: "2rem",
           color: "white",
-          marginLeft: "400px",
+          marginLeft: "10px",
           marginBottom: "20px",
           fontSize: "22px",
         }}

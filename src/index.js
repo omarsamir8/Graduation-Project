@@ -6,12 +6,15 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { RecoilRoot } from "recoil";
 import { DoctorProvider } from "./DoctorContext";
+import { TrainingProvider } from "./TrainingContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <RecoilRoot>
     <StudentProvider>
       <DoctorProvider>
-        <App />
+        <TrainingProvider>
+          <App />
+        </TrainingProvider>
       </DoctorProvider>
     </StudentProvider>
   </RecoilRoot>
