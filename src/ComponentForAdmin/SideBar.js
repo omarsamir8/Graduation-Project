@@ -9,7 +9,9 @@ function SideBar() {
     navigate("/");
     localStorage.clear();
   }
-  const [selectedComponent, setSelectedComponent] = useRecoilState($Dashboard_Components);
+  const [selectedComponent, setSelectedComponent] = useRecoilState(
+    $Dashboard_Components
+  );
 
   return (
     <>
@@ -20,43 +22,111 @@ function SideBar() {
         </div>
         <div className="item col-12">
           <i class=" sideIcon fa-solid fa-gauge"></i>
-          <NavLink onClick={()=>setSelectedComponent("DashBoard")} style={{textDecoration:"none"}} className="NavLink" >Dashboard</NavLink>
+          <NavLink
+            onClick={() => {
+              setSelectedComponent("DashBoard");
+              window.scrollTo(0, 750);
+            }}
+            style={{ textDecoration: "none" }}
+            className="NavLink"
+          >
+            Dashboard
+          </NavLink>
         </div>
         <div className="item col-12">
           <i class=" sideIcon fa-solid fa-registered"></i>
-          <NavLink onClick={()=>setSelectedComponent("CreateStudent")}  style={{textDecoration:"none"}} className="NavLink"  >
+          <NavLink
+            onClick={() => {
+              setSelectedComponent("CreateStudent");
+              window.scrollTo(0, 750);
+            }}
+            style={{ textDecoration: "none" }}
+            className="NavLink"
+          >
             {" "}
             Add Student
           </NavLink>
         </div>
         <div className="item col-12">
           <i class=" sideIcon fa-solid fa-registered"></i>
-          <NavLink onClick={()=>setSelectedComponent("All_Students")}  style={{textDecoration:"none"}} className="NavLink" > All Students</NavLink>
+          <NavLink
+            onClick={() => {
+              setSelectedComponent("All_Students");
+              window.scrollTo(0, 750);
+            }}
+            style={{ textDecoration: "none" }}
+            className="NavLink"
+          >
+            {" "}
+            All Students
+          </NavLink>
         </div>
         <div className="item col-12">
           <i class="sideIcon fa-solid fa-registered"></i>
-          <NavLink onClick={()=>setSelectedComponent("CreateDoctor")}  style={{textDecoration:"none"}} className="NavLink" > Add Doctor</NavLink>
+          <NavLink
+            onClick={() => {
+              setSelectedComponent("CreateDoctor");
+              window.scrollTo(0, 750);
+            }}
+            style={{ textDecoration: "none" }}
+            className="NavLink"
+          >
+            {" "}
+            Add Doctor
+          </NavLink>
         </div>
         <div className="item col-12">
           <i class="sideIcon fa-solid fa-registered"></i>
-          <NavLink onClick={()=>setSelectedComponent("AllDoctors")}  style={{textDecoration:"none"}} className="NavLink" > All Doctors</NavLink>
+          <NavLink
+            onClick={() => {
+              setSelectedComponent("AllDoctors");
+              window.scrollTo(0, 750);
+            }}
+            style={{ textDecoration: "none" }}
+            className="NavLink"
+          >
+            {" "}
+            All Doctors
+          </NavLink>
         </div>
         <div className="item col-12">
           <i class="sideIcon fa-solid fa-book-open"></i>
-          <NavLink onClick={()=>setSelectedComponent("CreateCourse")}  style={{textDecoration:"none"}} className="NavLink" >Add Course</NavLink>
+          <NavLink
+            onClick={() => {
+              setSelectedComponent("CreateCourse");
+              window.scrollTo(0, 750);
+            }}
+            style={{ textDecoration: "none" }}
+            className="NavLink"
+          >
+            Add Course
+          </NavLink>
         </div>
         <div className="item col-12">
           <i class="sideIcon fa-brands fa-stack-overflow"></i>
-          <NavLink onClick={()=>setSelectedComponent("CreateTraining")}  style={{textDecoration:"none"}} className="NavLink" >Add Training</NavLink>
+          <NavLink
+            onClick={() => {
+              setSelectedComponent("CreateTraining");
+              window.scrollTo(0, 700);
+            }}
+            style={{ textDecoration: "none" }}
+            className="NavLink"
+          >
+            Add Training
+          </NavLink>
         </div>
         <div className="item col-12">
           <i class="sideIcon fa-brands fa-stack-overflow"></i>
-          <NavLink  style={{textDecoration:"none"}} className="NavLink"  >Add Scheduale</NavLink>
+          <NavLink style={{ textDecoration: "none" }} className="NavLink">
+            Add Scheduale
+          </NavLink>
         </div>
 
         <div className="item col-12">
           <i class="sideIcon fa-solid fa-message"></i>
-          <NavLink  style={{textDecoration:"none"}} className="NavLink">Chat</NavLink>
+          <NavLink style={{ textDecoration: "none" }} className="NavLink">
+            Chat
+          </NavLink>
         </div>
         <div className="login col-12">
           <i class="sideIcon fa-solid fa-right-from-bracket"></i>
