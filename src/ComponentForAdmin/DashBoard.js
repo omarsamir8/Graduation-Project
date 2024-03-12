@@ -16,7 +16,7 @@ function DashBoard() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-lyart.vercel.app/Api/user/searchuser?select=Full_Name,Student_Code,semesterId,PhoneNumber&size=15",
+          "https://university-lyart.vercel.app/Api/user/searchuser?select=Full_Name,Student_Code,semesterId,PhoneNumber&size=20",
           {
             method: "GET",
             headers: {
@@ -42,7 +42,7 @@ function DashBoard() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-lyart.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials&size=15",
+          "https://university-lyart.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials&size=20",
           {
             method: "GET",
             headers: {
