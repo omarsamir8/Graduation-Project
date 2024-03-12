@@ -328,7 +328,7 @@ function CreateCourse() {
           background: "#996ae4",
           borderRadius: "10px",
           color: "white",
-          marginLeft: "400px",
+          marginLeft: "4rem",
           marginBottom: "20px",
           fontSize: "22px",
         }}

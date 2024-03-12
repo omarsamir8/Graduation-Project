@@ -133,7 +133,7 @@ function CreateTraining() {
     }
   };
 
-  // update course
+  // update Training
   const updateTraining = async (trainingId) => {
     try {
       const response = await fetch(
@@ -163,6 +163,7 @@ function CreateTraining() {
           showConfirmButton: false,
           timer: 3500,
         });
+
         // Update the state with the modified course
         setallTrainings((prevTrainings) =>
           prevTrainings.map((prevTraining) =>
@@ -314,6 +315,7 @@ function CreateTraining() {
         ))}
       </div>
       <button
+        className="loadmore"
         style={{
           width: "200px",
           height: "50px",
@@ -322,7 +324,7 @@ function CreateTraining() {
           background: "#996ae4",
           borderRadius: "10px",
           color: "white",
-          marginLeft: "400px",
+          marginLeft: "4rem",
           marginBottom: "20px",
           fontSize: "22px",
         }}

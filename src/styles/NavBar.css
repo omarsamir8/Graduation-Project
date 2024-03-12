@@ -55,7 +55,7 @@
   font-weight: bold;
   color: rgb(110, 110, 110);
 }
-@media (max-width: 410px) {
+@media (max-width: 500px) {
   .nav-bar {
     margin-left: 2rem;
     width: 20rem;

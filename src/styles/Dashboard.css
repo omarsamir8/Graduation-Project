@@ -102,7 +102,7 @@
   margin-top: 2rem;
   margin-left: 1.2rem;
 }
-@media (max-width: 410px) {
+@media (max-width: 500px) {
   .dashboard-container {
     flex-direction: column;
   }

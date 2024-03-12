@@ -35,7 +35,7 @@ body {
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
 }
-@media (max-width: 410px) {
+@media (max-width: 500px) {
   .mainpage .sidebar {
     position: relative;
     margin-left: 2rem;
