@@ -142,7 +142,7 @@ function CreateTraining() {
   const updateTraining = async (trainingId) => {
     try {
       const response = await fetch(
-        `https://university-lyart.vercel.app//Api/training/updatetraining?training_id=${trainingId}`,
+        `https://university-lyart.vercel.app/Api/training/updatetraining?training_id=${trainingId}`,
         {
           method: "PUT",
           headers: {
