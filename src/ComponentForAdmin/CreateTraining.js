@@ -215,6 +215,11 @@ function CreateTraining() {
     <>
       <div className="Create_Student">
         <h2 className="create_student">Add Training</h2>
+        <marquee className="marquee" scrollamount="10">
+          {" "}
+          It is not possible for more than one training to have the same name
+          ,training code{" "}
+        </marquee>
         <form class="row mt-4">
           <div class="col">
             <input

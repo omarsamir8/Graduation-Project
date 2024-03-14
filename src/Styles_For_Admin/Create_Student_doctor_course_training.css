@@ -119,6 +119,9 @@
   gap: 15px;
   margin-right: 7rem;
 }
+.marquee {
+  font-weight: bold;
+}
 @media (max-width: 500px) {
   .Create_Student {
     display: flex;
@@ -141,6 +144,9 @@
   }
   .loadmore {
     margin-left: 0;
+  }
+  .marquee {
+    width: 17rem;
   }
 }
 @media (min-width: 410px) {

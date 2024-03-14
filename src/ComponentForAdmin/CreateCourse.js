@@ -200,6 +200,11 @@ function CreateCourse() {
     <>
       <div className="Create_Student">
         <h2 className="create_student">Add Course</h2>
+        <marquee className="marquee" scrollamount="10">
+          {" "}
+          It is not possible for more than one course to have the same name
+          ,course code{" "}
+        </marquee>
         <form className="row mt-4">
           <div className="col">
             <input

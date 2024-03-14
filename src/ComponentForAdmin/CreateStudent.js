@@ -86,6 +86,11 @@ function CreateStudent() {
     <>
       <div className="Create_Student">
         <h2 className="create_student">Add Student</h2>
+        <marquee className="marquee" scrollamount="10">
+          {" "}
+          It is not possible for more than one student to have the same national
+          number, student code, phone number, or phone number{" "}
+        </marquee>
         <form class="row mt-4">
           <div class="col ">
             <input
