@@ -234,7 +234,7 @@ function All_Students() {
             Update
           </button>
         </div>
-        <h2 style={{ marginLeft: "2rem" }}>Get All Students </h2>
+        <h2>Get All Students </h2>
         <table className="table">
           <thead>
             <tr>
@@ -257,6 +257,10 @@ function All_Students() {
                 <td>
                   <div className="row">
                     <button
+                      style={{
+                        backgroundColor: "#996ae4",
+                        borderColor: "#996ae4",
+                      }}
                       type="button"
                       onClick={() => openUpdateModal(student)}
                       className="btn btn-primary"

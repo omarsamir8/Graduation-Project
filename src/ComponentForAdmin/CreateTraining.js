@@ -295,12 +295,15 @@ function CreateTraining() {
         {allTrainings &&
           allTrainings.map((training) => (
             <div className="course" key={training._id}>
-              <div className="info">
+              <div className="infooo">
                 <p>{training.training_name}</p>
-                <div className="img"></div>
                 <div className="up-del-btn">
                   <button
                     type="button"
+                    style={{
+                      backgroundColor: "#996ae4",
+                      borderColor: "#996ae4",
+                    }}
                     className="btn btn-primary"
                     onClick={() => {
                       setselectedTrainingId(training._id);
@@ -322,6 +325,7 @@ function CreateTraining() {
                   </button>
                 </div>
               </div>
+              <div className="img"></div>
             </div>
           ))}
       </div>

@@ -237,6 +237,10 @@ function AllDoctors() {
         </div>
         <button
           type="button"
+          style={{
+            backgroundColor: "#996ae4",
+            borderColor: "#996ae4",
+          }}
           className="btn btn-primary mt-3"
           onClick={updateDoctor}
         >
@@ -244,7 +248,9 @@ function AllDoctors() {
         </button>
       </div>
       <div className="get_all_student">
-        <h2 style={{ marginLeft: "2rem" }}>Get All Doctor </h2>
+        <h2 className="getallstudent" style={{ marginLeft: "0rem" }}>
+          Get All Doctor{" "}
+        </h2>
         <table className="table">
           <thead>
             <tr>
@@ -267,6 +273,10 @@ function AllDoctors() {
                 <td>
                   <div style={{ flexWrap: "nowrap" }} className="row">
                     <button
+                      style={{
+                        backgroundColor: "#996ae4",
+                        borderColor: "#996ae4",
+                      }}
                       type="button"
                       className="btn btn-primary"
                       onClick={() => openUpdateModal(doctor)}

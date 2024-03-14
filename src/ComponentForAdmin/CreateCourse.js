@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
+import "animate.css";
 import Swal from "sweetalert2";
 import { useCourseContext } from "../CourseContext";
 
@@ -199,7 +200,7 @@ function CreateCourse() {
   return (
     <>
       <div className="Create_Student">
-        <h2 className="create_student">Add Course</h2>
+        <h2 className="create_student animate__bounceInRight">Add Course</h2>
         <marquee className="marquee" scrollamount="10">
           {" "}
           It is not possible for more than one course to have the same name
@@ -298,9 +299,8 @@ function CreateCourse() {
       <div className="enrollcourse">
         {allcourses.map((course) => (
           <div className="course" key={course._id}>
-            <div className="info">
+            <div className="infooo">
               <p>{course.course_name}</p>
-              <div className="img"></div>
               <div className="up-del-btn">
                 <button
                   onClick={() => {
@@ -325,6 +325,7 @@ function CreateCourse() {
                 </button>
               </div>
             </div>
+            <div className="img"></div>
           </div>
         ))}
       </div>
