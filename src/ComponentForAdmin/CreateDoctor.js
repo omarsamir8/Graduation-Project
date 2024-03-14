@@ -75,7 +75,7 @@ function CreateDoctor() {
         <marquee className="marquee" scrollamount="10">
           {" "}
           It is not possible for more than one doctor to have the same national
-          number, email, phone number, or phone number{" "}
+          ID,Full Name, email, phone number{" "}
         </marquee>
         <div class="row mt-4">
           <div class="col">

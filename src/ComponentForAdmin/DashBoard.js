@@ -133,51 +133,51 @@ function DashBoard() {
           <div className="main-container">
             <div className="main">
               <i class="fa-solid fa-book-open"></i>
-              <h3>{allstudents.length}</h3>
-              <p>Total Students</p>
+              <h3 className="animate__animated animate__backInDown">{allstudents.length}</h3>
+              <p className="animate__animated animate__backInDown">Total Students</p>
             </div>
             <div className="main">
               <i class="fa-solid fa-check"></i>
-              <h3>{alldoctors.length}</h3>
-              <p>Total Doctor </p>
+              <h3 className="animate__animated animate__backInDown">{alldoctors.length}</h3>
+              <p className="animate__animated animate__backInDown">Total Doctor </p>
             </div>
             <div className="main">
               <i class="fa-solid fa-square-xmark"></i>
-              <h3>{allcourses.length}</h3>
-              <p> Total Courses </p>
+              <h3 className="animate__animated animate__backInDown">{allcourses.length}</h3>
+              <p className="animate__animated animate__backInDown"> Total Courses </p>
             </div>
           </div>
           <div className="main-container">
             <div className="main">
               <i class="fa-brands fa-stack-overflow"></i>
-              <h3>{alltraining.length}</h3>
-              <p>Total Training</p>
+              <h3 className="animate__animated animate__backInDown">{alltraining.length}</h3>
+              <p className="animate__animated animate__backInDown">Total Training</p>
             </div>
             <div className="main">
               <i class="fa-solid fa-check"></i>
-              <h3>Done</h3>
-              <p>State Of Schedule</p>
+              <h3 className="animate__animated animate__backInDown">Done</h3>
+              <p className="animate__animated animate__backInDown">State Of Schedule</p>
             </div>
             <div className="main">
               <i class="fa-solid fa-message"></i>
-              <h3>3</h3>
-              <p>unreaded messages</p>
+              <h3 className="animate__animated animate__backInDown">3</h3>
+              <p className="animate__animated animate__backInDown">unreaded messages</p>
             </div>
           </div>
         </div>
 
         <div className="instructor">
           <div className="title">
-            <p>Some Training </p>
+            <p className="animate__animated animate__backInRight">Some Training </p>
           </div>
           <div className="images">
-            <img src="./assets/images/flutter.png" alt="" />
-            <img src="./assets/images/web.avif" alt="" />
-            <img src="./assets/images/ma.jpg" alt="" />
+            <img src="./assets/images/flutter.png" alt="" className="animate__animated animate__backInRight" />
+            <img src="./assets/images/web.avif" alt="" className="animate__animated animate__backInRight" />
+            <img src="./assets/images/ma.jpg" alt="" className="animate__animated animate__backInRight"/>
           </div>
           <div className="notics">
-            <h3>Notics</h3>
-            <p>
+            <h3 className="animate__animated animate__backInRight">Notics</h3>
+            <p className="animate__animated animate__backInRight">
               Accuracy must be taken when recording the student’s doctoral data
               and registering the best active courses that provide the most
               beneficial value.

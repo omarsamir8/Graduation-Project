@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { $Dashboard_Components } from "../Atoms";
 function SideBar() {
+  const [className, setclassName] = useState("");
   const navigate = useNavigate();
   function logout() {
     navigate("/");

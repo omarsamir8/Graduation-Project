@@ -89,7 +89,7 @@ function CreateStudent() {
         <marquee className="marquee" scrollamount="10">
           {" "}
           It is not possible for more than one student to have the same national
-          number, student code, phone number, or phone number{" "}
+          ID,Full Name, student code, phone number{" "}
         </marquee>
         <form class="row mt-4">
           <div class="col ">

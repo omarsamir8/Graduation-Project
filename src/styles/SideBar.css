@@ -103,10 +103,13 @@
   transition: ease all 800ms;
 }
 
-.NavLink:focus {
+.NavLink:focus{
   color: black;
+  transform: scale(1.2);
+  transition: all ease 800ms;
 }
 .NavLink {
+  
   text-decoration: none;
 }
 @media (max-width: 500px) {

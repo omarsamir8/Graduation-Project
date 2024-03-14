@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
-import "animate.css";
+
 import Swal from "sweetalert2";
 import { useCourseContext } from "../CourseContext";
 
@@ -200,7 +200,7 @@ function CreateCourse() {
   return (
     <>
       <div className="Create_Student">
-        <h2 className="create_student animate__bounceInRight">Add Course</h2>
+        <h2 className="create_student">Add Course</h2>
         <marquee className="marquee" scrollamount="10">
           {" "}
           It is not possible for more than one course to have the same name
@@ -303,6 +303,10 @@ function CreateCourse() {
               <p>{course.course_name}</p>
               <div className="up-del-btn">
                 <button
+                   style={{
+                    backgroundColor: "#996ae4",
+                    borderColor: "#996ae4",
+                  }}
                   onClick={() => {
                     setSelectedCourseId(course._id);
                     // Set the values of the selected course to the input fields

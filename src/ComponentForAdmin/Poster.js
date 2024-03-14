@@ -1,6 +1,7 @@
 import "../styles/Poster.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import 'animate.css';
 function Poster(props) {
   const [admininfo, setadmininfo] = useState([]);
   const accessToken = localStorage.getItem("accesstoken");
@@ -32,13 +33,13 @@ function Poster(props) {
     <>
       <div className="poster">
         <div>
-          <p className="p1">September ,2024</p>
-          <h2>Welcom Back, {admininfo.FullName} !</h2>
-          <p className="p2">Alwayes Stay Updated In Your Student Portal</p>
+          <p className="p1 animate__animated animate__backInRight">September ,2024</p>
+          <h2 className=" animate__animated animate__backInRight">Welcom Back, {admininfo.FullName} !</h2>
+          <p className="p2  animate__animated animate__backInRight">Alwayes Stay Updated In Your Student Portal</p>
         </div>
         <img
           src="./assets/images/student.png"
-          className="studentt"
+          className="studentt  animate__animated animate__backInRight"
           alt=""
         ></img>
       </div>
