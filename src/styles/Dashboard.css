@@ -41,12 +41,16 @@
   -moz-transition: 0s;
   -ms-transition: 0s;
   -o-transition: 0s;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 .main:hover {
   border: 2px solid rgba(57, 2, 121, 0.753);
-  animation-name: rotate;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
+  transform: scale(1.05);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
+  transition-duration: 0.5s;
 }
 .main i {
   font-size: 45px;
@@ -118,14 +122,5 @@
   }
   .main {
     width: 17rem;
-  }
-}
-@keyframes rotate {
-  100% {
-    transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
   }
 }
