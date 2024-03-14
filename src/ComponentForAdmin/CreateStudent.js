@@ -108,16 +108,20 @@ function CreateStudent() {
                 setPhoneNumber(e.target.value);
               }}
             />
-            <input
-              type="text"
-              class="form-control mt-3"
-              placeholder="Enter Gender"
+            <select
+              className="form-control mt-3"
               aria-label="gender"
               name="gender"
               onChange={(e) => {
                 setgender(e.target.value);
               }}
-            />
+            >
+              <option value="" disabled selected hidden>
+                Select Gender
+              </option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
 
             <input
               type="text"
@@ -162,7 +166,6 @@ function CreateStudent() {
               }}
             />
           </div>
-          <p style={{ color: "red", fontSize: "13px" }}>{message}</p>
         </form>
 
         <button

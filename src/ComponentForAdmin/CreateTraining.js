@@ -139,10 +139,10 @@ function CreateTraining() {
   };
 
   // update Training
-  const updateTraining = async (trainingId) => {
+  const updateTraining = async () => {
     try {
       const response = await fetch(
-        `https://university-lyart.vercel.app/Api/training/updatetraining?training_id=${trainingId}`,
+        `https://university-lyart.vercel.app//Api/training/updatetraining?training_id=${trainingId}`,
         {
           method: "PUT",
           headers: {
@@ -320,7 +320,7 @@ function CreateTraining() {
             </div>
           ))}
       </div>
-      <button
+      {/* <button
         className="loadmore"
         style={{
           width: "320px",
@@ -339,7 +339,7 @@ function CreateTraining() {
         onClick={loadMore}
       >
         Loading More
-      </button>
+      </button> */}
     </>
   );
 }
