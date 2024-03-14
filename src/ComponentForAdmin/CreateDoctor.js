@@ -72,6 +72,11 @@ function CreateDoctor() {
     <>
       <div className="Create_Student">
         <h2 className="create_student">Add Doctor</h2>
+        <marquee className="marquee" scrollamount="10">
+          {" "}
+          It is not possible for more than one doctor to have the same national
+          number, email, phone number, or phone number{" "}
+        </marquee>
         <div class="row mt-4">
           <div class="col">
             <input

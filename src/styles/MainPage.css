@@ -23,6 +23,9 @@ body {
   margin-left: 17.5rem;
   margin-top: 20px;
   flex-wrap: wrap;
+  animation-name: load;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
 }
 .mainpage .poster {
   margin-top: 10px;
@@ -34,7 +37,11 @@ body {
   -moz-border-radius: 20px;
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
+  animation-name: posterload;
+  animation-duration: 0.8s;
+  animation-timing-function: linear;
 }
+
 @media (max-width: 500px) {
   .mainpage .sidebar {
     position: relative;
@@ -45,5 +52,33 @@ body {
   }
   .mainpage .container-page {
     margin-left: 0; /* Adjust the margin as needed for smaller screens */
+  }
+}
+
+@keyframes load {
+  /* 50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+  } */
+
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+  }
+}
+
+@keyframes posterload {
+  50% {
+    width: 50%;
+    margin: auto;
+  }
+  100% {
+    width: 100%;
   }
 }

@@ -94,7 +94,7 @@ function SideBar() {
           <NavLink
             onClick={() => {
               setSelectedComponent("CreateCourse");
-              window.scrollTo(0, 750);
+              window.scrollTo(0, 350);
             }}
             style={{ textDecoration: "none" }}
             className="NavLink"
@@ -107,7 +107,7 @@ function SideBar() {
           <NavLink
             onClick={() => {
               setSelectedComponent("CreateTraining");
-              window.scrollTo(0, 700);
+              window.scrollTo(0, 350);
             }}
             style={{ textDecoration: "none" }}
             className="NavLink"

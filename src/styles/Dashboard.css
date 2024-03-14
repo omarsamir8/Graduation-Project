@@ -44,6 +44,9 @@
 }
 .main:hover {
   border: 2px solid rgba(57, 2, 121, 0.753);
+  animation-name: rotate;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
 }
 .main i {
   font-size: 45px;
@@ -115,5 +118,14 @@
   }
   .main {
     width: 17rem;
+  }
+}
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
   }
 }

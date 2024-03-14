@@ -5,6 +5,7 @@ function DashBoard() {
   const [allstudents, setallstudents] = useState([]);
   const [alldoctors, setalldoctors] = useState([]);
   const [allcourses, setallcourses] = useState([]);
+  const [alltraining, setalltraining] = useState([]);
   const handleSidebarClick = (componentName) => {
     setSelectedComponent(componentName);
   };
@@ -95,6 +96,36 @@ function DashBoard() {
   useEffect(() => {
     console.log(allcourses);
   }, [allcourses]);
+  // get all training
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://university-lyart.vercel.app/Api/training/alltraining?select=training_name&page=1&size=9",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+
+        const data = await response.json();
+        setalltraining(data.training);
+        console.log(data);
+      } catch (error) {
+        console.error("Fetch failed", error);
+      }
+    };
+
+    fetchData();
+  }, [accessToken, refreshToken]);
+
+  useEffect(() => {
+    console.log(alltraining);
+  }, [alltraining]);
+
   return (
     <>
       <div className="dashboard-container">
@@ -119,7 +150,7 @@ function DashBoard() {
           <div className="main-container">
             <div className="main">
               <i class="fa-brands fa-stack-overflow"></i>
-              <h3>8</h3>
+              <h3>{alltraining.length}</h3>
               <p>Total Training</p>
             </div>
             <div className="main">
