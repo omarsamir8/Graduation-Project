@@ -242,7 +242,7 @@ function All_Students() {
               <th scope="col">FullName</th>
               <th scope="col">Student_code</th>
               <th scope="col">Phone</th>
-              <th scope="col">Level</th>
+              {/* <th scope="col">Level</th> */}
               <th scope="col">Operations</th>
             </tr>
           </thead>
@@ -253,7 +253,7 @@ function All_Students() {
                 <td>{student.Full_Name}</td>
                 <td>{student.Student_Code}</td>
                 <td>{student.PhoneNumber}</td>
-                <td>{student.semesterId.level}</td>
+                {/* <td>{student.semesterId.level}</td> */}
                 <td>
                   <div className="row">
                     <button
