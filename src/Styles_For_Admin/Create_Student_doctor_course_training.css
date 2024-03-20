@@ -134,7 +134,7 @@
     width: 17rem;
   }
   .enrollcourse .course {
-    margin-left: 0.5rem;
+    margin-left: 1rem;
   }
   .loadmore {
     margin-left: 0;
@@ -144,10 +144,5 @@
   }
   .get_all_student {
     margin-left: 2rem;
-  }
-}
-@media (min-width: 410px) {
-  .loadmore {
-    margin-left: 400px;
   }
 }

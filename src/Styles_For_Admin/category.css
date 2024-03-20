@@ -1,0 +1,17 @@
+@media (max-width: 500px) {
+  .CreateSemester {
+    margin-left: 20px;
+  }
+  .addcategory {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 150px;
+    width: 100%;
+  }
+  .addcategory input {
+    width: 280px !important;
+  }
+  .addcategory button {
+    margin-left: 10px;
+  }
+}

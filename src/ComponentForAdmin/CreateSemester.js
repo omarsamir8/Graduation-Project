@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
+import "../Styles_For_Admin/category.css";
 import Swal from "sweetalert2";
 function CreateSemester() {
   const [name, setname] = useState("");
@@ -254,7 +254,7 @@ function CreateSemester() {
           />
           <button
             style={{
-              width: "300px",
+              width: "280px",
               height: "40px",
               marginRight: "30px",
               backgroundColor: "#996ae4",
