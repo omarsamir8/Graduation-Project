@@ -24,7 +24,7 @@ function All_Students() {
   const handleDelete = async (studentId) => {
     try {
       const response = await fetch(
-        `https://university-lyart.vercel.app/Api/user/deleteStudent?userId=${studentId}`,
+        `https://university-mohamed.vercel.app/Api/user/deleteStudent?userId=${studentId}`,
         {
           method: "DELETE",
           headers: {
@@ -63,7 +63,7 @@ function All_Students() {
   const updateStudent = async () => {
     try {
       const response = await fetch(
-        `https://university-lyart.vercel.app/Api/user/updateStudent?userId=${selectedStudent._id}`,
+        `https://university-mohamed.vercel.app/Api/user/updateStudent?userId=${selectedStudent._id}`,
         {
           method: "PUT",
           headers: {

@@ -24,7 +24,7 @@ function NavBar() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://university-lyart.vercel.app/Api/admin/getinfo",
+          "https://university-mohamed.vercel.app/Api/admin/getinfo",
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -127,7 +127,7 @@ function NavBar() {
       try {
         // if (searchvalue.trim() !== "") {
         const response = await axios.get(
-          `https://university-lyart.vercel.app/Api/training/alltraining?select=training_name&page=${count}&size=9&search=${training_value}`,
+          `https://university-mohamed.vercel.app/Api/training/alltraining?select=training_name&page=${count}&size=9&search=${training_value}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -167,7 +167,7 @@ function NavBar() {
       try {
         // if (searchvalue.trim() !== "") {
         const response = await axios.get(
-          `https://university-lyart.vercel.app/Api/courses/searchcourse?page=${count}&size=9
+          `https://university-mohamed.vercel.app/Api/courses/searchcourse?page=${count}&size=9
           &search=${training_value}`,
           {
             headers: {

@@ -19,7 +19,7 @@ function CreateTraining() {
   const createTraining = async () => {
     try {
       const response = await fetch(
-        "https://university-lyart.vercel.app/Api/training/addtraining",
+        "https://university-mohamed.vercel.app/Api/training/addtraining",
         {
           method: "POST",
           headers: {
@@ -77,7 +77,7 @@ function CreateTraining() {
   //   const fetchData = async () => {
   //     try {
   //       const response = await fetch(
-  //         `https://university-lyart.vercel.app/Api/training/alltraining?select=training_name&page=${count}&size=9`,
+  //         `https://university-mohamed.vercel.app/Api/training/alltraining?select=training_name&page=${count}&size=9`,
   //         {
   //           method: "GET",
   //           headers: {
@@ -114,7 +114,7 @@ function CreateTraining() {
   const deleteTraining = async (trainingId) => {
     try {
       const response = await fetch(
-        `https://university-lyart.vercel.app/Api/training/deletetraining?training_id=${trainingId}`,
+        `https://university-mohamed.vercel.app/Api/training/deletetraining?training_id=${trainingId}`,
         {
           method: "DELETE",
           headers: {
@@ -142,7 +142,7 @@ function CreateTraining() {
   const updateTraining = async () => {
     try {
       const response = await fetch(
-        `https://university-lyart.vercel.app/Api/training/updatetraining?training_id=${selectedTrainingId}`,
+        `https://university-mohamed.vercel.app/Api/training/updatetraining?training_id=${selectedTrainingId}`,
         {
           method: "PUT",
           headers: {
