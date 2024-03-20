@@ -48,7 +48,7 @@ function Login() {
   const handleLoginForStudent = async () => {
     try {
       const response = await fetch(
-        "https://university-lyart.vercel.app/Api/user/login",
+        "https://university-mohamed.vercel.app/Api/user/login",
         {
           method: "POST",
           headers: {
@@ -77,7 +77,7 @@ function Login() {
   const handleLoginforDoctor = async () => {
     try {
       const response = await fetch(
-        "https://university-lyart.vercel.app/Api/Instructor/login",
+        "https://university-mohamed.vercel.app/Api/Instructor/login",
         {
           method: "POST",
           headers: {
@@ -106,7 +106,7 @@ function Login() {
   const handleLoginforadmin = async () => {
     try {
       const response = await fetch(
-        "https://university-lyart.vercel.app/Api/admin/login",
+        "https://university-mohamed.vercel.app/Api/admin/login",
         {
           method: "POST",
           headers: {

@@ -118,8 +118,15 @@ function SideBar() {
         </div>
         <div className="item col-12">
           <i class="sideIcon fa-brands fa-stack-overflow"></i>
-          <NavLink style={{ textDecoration: "none" }} className="NavLink">
-            Add Scheduale
+          <NavLink
+            onClick={() => {
+              setSelectedComponent("CreateSemester");
+              window.scrollTo(0, 350);
+            }}
+            style={{ textDecoration: "none" }}
+            className="NavLink"
+          >
+            Add Semester
           </NavLink>
         </div>
 

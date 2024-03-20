@@ -10,7 +10,7 @@ function CreateStudent() {
   const [PhoneNumber, setPhoneNumber] = useState("");
   const [Date_of_Birth, setDate_of_Birth] = useState("");
   const [gender, setgender] = useState("");
-  const [semesterId, setsemesterId] = useState("");
+  const [semsterId, setsemsterId] = useState("");
   const [message, setmessage] = useState("");
 
   const accessToken = localStorage.getItem("accesstoken");
@@ -19,7 +19,7 @@ function CreateStudent() {
   const createstudent = async () => {
     try {
       const response = await fetch(
-        "https://university-lyart.vercel.app/Api/user/addstudent",
+        "https://university-mohamed.vercel.app/Api/user/addstudent",
         {
           method: "POST",
           headers: {
@@ -34,7 +34,7 @@ function CreateStudent() {
             PhoneNumber,
             Date_of_Birth,
             gender,
-            semesterId,
+            semsterId,
           }),
         }
       );
@@ -135,7 +135,7 @@ function CreateStudent() {
               aria-label="semesterId"
               name="semesterId"
               onChange={(e) => {
-                setsemesterId(e.target.value);
+                setsemsterId(e.target.value);
               }}
             />
           </div>

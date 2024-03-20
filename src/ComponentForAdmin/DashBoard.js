@@ -17,7 +17,7 @@ function DashBoard() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-lyart.vercel.app/Api/user/searchuser?select=Full_Name,Student_Code,semesterId,PhoneNumber&size=20",
+          "https://university-mohamed.vercel.app/Api/user/searchuser?select=Full_Name,Student_Code,semesterId,PhoneNumber&size=20",
           {
             method: "GET",
             headers: {
@@ -43,7 +43,7 @@ function DashBoard() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-lyart.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials&size=20",
+          "https://university-mohamed.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials&size=20",
           {
             method: "GET",
             headers: {
@@ -72,7 +72,7 @@ function DashBoard() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-lyart.vercel.app/Api/courses/searchcourse?size=20",
+          "https://university-mohamed.vercel.app/Api/courses/searchcourse?size=20",
           {
             method: "GET",
             headers: {
@@ -101,7 +101,7 @@ function DashBoard() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-lyart.vercel.app/Api/training/alltraining?select=training_name&page=1&size=9",
+          "https://university-mohamed.vercel.app/Api/training/alltraining?select=training_name&page=1&size=9",
           {
             method: "GET",
             headers: {
@@ -133,47 +133,82 @@ function DashBoard() {
           <div className="main-container">
             <div className="main">
               <i class="fa-solid fa-book-open"></i>
-              <h3 className="animate__animated animate__backInDown">{allstudents.length}</h3>
-              <p className="animate__animated animate__backInDown">Total Students</p>
+              <h3 className="animate__animated animate__backInDown">
+                {allstudents.length}
+              </h3>
+              <p className="animate__animated animate__backInDown">
+                Total Students
+              </p>
             </div>
             <div className="main">
               <i class="fa-solid fa-check"></i>
-              <h3 className="animate__animated animate__backInDown">{alldoctors.length}</h3>
-              <p className="animate__animated animate__backInDown">Total Doctor </p>
+              <h3 className="animate__animated animate__backInDown">
+                {alldoctors.length}
+              </h3>
+              <p className="animate__animated animate__backInDown">
+                Total Doctor{" "}
+              </p>
             </div>
             <div className="main">
               <i class="fa-solid fa-square-xmark"></i>
-              <h3 className="animate__animated animate__backInDown">{allcourses.length}</h3>
-              <p className="animate__animated animate__backInDown"> Total Courses </p>
+              <h3 className="animate__animated animate__backInDown">
+                {allcourses.length}
+              </h3>
+              <p className="animate__animated animate__backInDown">
+                {" "}
+                Total Courses{" "}
+              </p>
             </div>
           </div>
           <div className="main-container">
             <div className="main">
               <i class="fa-brands fa-stack-overflow"></i>
-              <h3 className="animate__animated animate__backInDown">{alltraining.length}</h3>
-              <p className="animate__animated animate__backInDown">Total Training</p>
+              <h3 className="animate__animated animate__backInDown">
+                {alltraining.length}
+              </h3>
+              <p className="animate__animated animate__backInDown">
+                Total Training
+              </p>
             </div>
             <div className="main">
               <i class="fa-solid fa-check"></i>
               <h3 className="animate__animated animate__backInDown">Done</h3>
-              <p className="animate__animated animate__backInDown">State Of Schedule</p>
+              <p className="animate__animated animate__backInDown">
+                State Of Schedule
+              </p>
             </div>
             <div className="main">
               <i class="fa-solid fa-message"></i>
               <h3 className="animate__animated animate__backInDown">3</h3>
-              <p className="animate__animated animate__backInDown">unreaded messages</p>
+              <p className="animate__animated animate__backInDown">
+                unreaded messages
+              </p>
             </div>
           </div>
         </div>
 
         <div className="instructor">
           <div className="title">
-            <p className="animate__animated animate__backInRight">Some Training </p>
+            <p className="animate__animated animate__backInRight">
+              Some Training{" "}
+            </p>
           </div>
           <div className="images">
-            <img src="./assets/images/flutter.png" alt="" className="animate__animated animate__backInRight" />
-            <img src="./assets/images/web.avif" alt="" className="animate__animated animate__backInRight" />
-            <img src="./assets/images/ma.jpg" alt="" className="animate__animated animate__backInRight"/>
+            <img
+              src="./assets/images/flutter.png"
+              alt=""
+              className="animate__animated animate__backInRight"
+            />
+            <img
+              src="./assets/images/web.avif"
+              alt=""
+              className="animate__animated animate__backInRight"
+            />
+            <img
+              src="./assets/images/ma.jpg"
+              alt=""
+              className="animate__animated animate__backInRight"
+            />
           </div>
           <div className="notics">
             <h3 className="animate__animated animate__backInRight">Notics</h3>

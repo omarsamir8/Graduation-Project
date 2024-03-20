@@ -22,7 +22,7 @@ function CreateCourse() {
   const createcourse = async () => {
     try {
       const response = await fetch(
-        "https://university-lyart.vercel.app/Api/courses/addcourse",
+        "https://university-mohamed.vercel.app/Api/courses/addcourse",
         {
           method: "POST",
           headers: {
@@ -79,7 +79,7 @@ function CreateCourse() {
   //   const fetchData = async () => {
   //     try {
   //       const response = await fetch(
-  //         `https://university-lyart.vercel.app/Api/courses/searchcourse?page=${count}&size=3`,
+  //         `https://university-mohamed.vercel.app/Api/courses/searchcourse?page=${count}&size=3`,
   //         {
   //           method: "GET",
   //           headers: {
@@ -108,7 +108,7 @@ function CreateCourse() {
   const deleteCourse = async (courseId) => {
     try {
       const response = await fetch(
-        `https://university-lyart.vercel.app/Api/courses/deletecourse?courseId=${courseId}`,
+        `https://university-mohamed.vercel.app/Api/courses/deletecourse?courseId=${courseId}`,
         {
           method: "DELETE",
           headers: {
@@ -136,7 +136,7 @@ function CreateCourse() {
   const updateCourse = async () => {
     try {
       const response = await fetch(
-        `https://university-lyart.vercel.app/Api/courses/updatecourse?courseId=${selectedCourseId}`,
+        `https://university-mohamed.vercel.app/Api/courses/updatecourse?courseId=${selectedCourseId}`,
         {
           method: "PUT",
           headers: {
@@ -303,7 +303,7 @@ function CreateCourse() {
               <p>{course.course_name}</p>
               <div className="up-del-btn">
                 <button
-                   style={{
+                  style={{
                     backgroundColor: "#996ae4",
                     borderColor: "#996ae4",
                   }}
