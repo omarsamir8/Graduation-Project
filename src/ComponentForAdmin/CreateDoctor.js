@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
-import Select from 'react-select';
+import Select from "react-select";
 
 function CreateDoctor() {
   const [FullName, setFullName] = useState("");
@@ -17,11 +17,11 @@ function CreateDoctor() {
   const [allcourses, setallcourses] = useState([]);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
-  const Materiala_options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-  ]
+  // const Materiala_options = [
+  //   { value: "chocolate", label: "Chocolate" },
+  //   { value: "strawberry", label: "Strawberry" },
+  //   { value: "vanilla", label: "Vanilla" },
+  // ];
 
   // get all Courses
   useEffect(() => {
@@ -105,11 +105,11 @@ function CreateDoctor() {
     }
   };
 
-  const handleMaterialsChange = (e) => {
-    const inputValue = e.target.value;
-    const materialsArray = inputValue.split(" "); // يمكن استبدال الفاصلة بأي فاصل تفضله
-    setMaterials(materialsArray);
-  };
+  // const handleMaterialsChange = (e) => {
+  //   const inputValue = e.target.value;
+  //   const materialsArray = inputValue.split(" "); // يمكن استبدال الفاصلة بأي فاصل تفضله
+  //   setMaterials(materialsArray);
+  // };
   return (
     <>
       <div className="Create_Student">
@@ -213,17 +213,19 @@ function CreateDoctor() {
               name="Materials"
               onChange={handleMaterialsChange}
             /> */}
-      
-      <Select
-    
-    isMulti
-    name="colors"
-    options={Materiala_options}
-    className="Materials_select"
-    classNamePrefix="select"
-    
-  />
 
+            <Select
+              isMulti
+              name="colors"
+              options={allcourses.map((course) => {
+                return { value: course._id, label: course.course_name };
+              })}
+              onChange={(selectedOption) => {
+                setMaterials(selectedOption); // استخدم selectedOption بدلاً من e.target.value
+              }}
+              className="Materials_select"
+              classNamePrefix="select"
+            />
           </div>
         </div>
 
