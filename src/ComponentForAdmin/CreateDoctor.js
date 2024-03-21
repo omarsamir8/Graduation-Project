@@ -220,8 +220,11 @@ function CreateDoctor() {
               options={allcourses.map((course) => {
                 return { value: course._id, label: course.course_name };
               })}
-              onChange={(selectedOption) => {
-                setMaterials(selectedOption); // استخدم selectedOption بدلاً من e.target.value
+              onChange={(selectedOptions) => {
+                const selectedLabels = selectedOptions.map(
+                  (option) => option.value
+                );
+                setMaterials(selectedLabels);
               }}
               className="Materials_select"
               classNamePrefix="select"

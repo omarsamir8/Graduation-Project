@@ -201,6 +201,7 @@ function CreateCourse() {
     }
   };
 
+  console.log(Prerequisites);
   return (
     <>
       <div className="Create_Student">
@@ -223,19 +224,22 @@ function CreateCourse() {
                 setcourse_name(e.target.value);
               }}
             />
-
             <Select
               isMulti
               name="colors"
-              options={allcourses.map((course) => {
+              options={allcoursees.map((course) => {
                 return { value: course._id, label: course.course_name };
               })}
-              onChange={(selectedOption) => {
-                setPrerequisites(selectedOption); // استخدم selectedOption بدلاً من e.target.value
+              onChange={(selectedOptions) => {
+                const selectedValues = selectedOptions.map(
+                  (option) => option.value
+                );
+                setPrerequisites(selectedValues);
               }}
               className="Materials_select"
               classNamePrefix="select"
             />
+
             <input
               type="text"
               className="form-control mt-3"
