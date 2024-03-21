@@ -59,7 +59,7 @@ function CreateSemester() {
           Swal.fire({
             icon: "error",
             title: "Fail",
-            text: `other error`,
+            text: `Please enter data for all fields`,
             timer: 4500,
           });
         }
@@ -274,21 +274,21 @@ function CreateSemester() {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">#ID</th>
-              <th scope="col">Semester Name</th>
-              <th scope="col">Acadimic Year</th>
-              <th scope="col">Term</th>
+              <th className="doctorInfo" scope="col">#ID</th>
+              <th className="doctorInfo" scope="col">Semester Name</th>
+              <th className="doctorInfo" scope="col">Acadimic Year</th>
+              <th className="doctorInfo" scope="col">Term</th>
               {/* <th scope="col">Level</th> */}
-              <th scope="col">Operations</th>
+              <th className="doctorInfo" scope="col">Operations</th>
             </tr>
           </thead>
           <tbody>
             {AllSemesters.map((semester) => (
               <tr key={semester._id}>
-                <th scope="row">{semester._id}</th>
-                <td>{semester.name}</td>
-                <td>{semester.year}</td>
-                <td>{semester.term}</td>
+                <th className="doctorInfo" scope="row">{semester._id}</th>
+                <td className="doctorInfo">{semester.name}</td>
+                <td className="doctorInfo">{semester.year}</td>
+                <td className="doctorInfo">{semester.term}</td>
                 {/* <td>{student.semesterId.level}</td> */}
                 <td>
                   <div className="row">

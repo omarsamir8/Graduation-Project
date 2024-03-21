@@ -254,22 +254,22 @@ function AllDoctors() {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">#ID</th>
-              <th scope="col">FullName</th>
-              <th scope="col">Email</th>
-              <th scope="col">Phone</th>
-              <th scope="col">Department</th>
-              <th scope="col">Operations</th>
+              <th className="doctorInfo" scope="col">#ID</th>
+              <th className="doctorInfo" scope="col">FullName</th>
+              <th className="doctorInfo" scope="col">Email</th>
+              <th className="doctorInfo" scope="col">Phone</th>
+              <th className="doctorInfo" scope="col">Department</th>
+              <th className="doctorInfo" scope="col">Operations</th>
             </tr>
           </thead>
           <tbody>
             {alldoctors.map((doctor) => (
               <tr key={doctor._id}>
-                <th scope="row">{doctor._id}</th>
-                <td>{doctor.FullName}</td>
-                <td>{doctor.email}</td>
-                <td>{doctor.phone}</td>
-                <td>{doctor.department}</td>
+                <th className="doctorInfo" scope="row">{doctor._id}</th>
+                <td className="doctorInfo">{doctor.FullName}</td>
+                <td className="doctorInfo">{doctor.email}</td>
+                <td className="doctorInfo">{doctor.phone}</td>
+                <td className="doctorInfo">{doctor.department}</td>
                 <td>
                   <div style={{ flexWrap: "nowrap" }} className="row">
                     <button

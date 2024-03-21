@@ -238,21 +238,21 @@ function All_Students() {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">#ID</th>
-              <th scope="col">FullName</th>
-              <th scope="col">Student_code</th>
-              <th scope="col">Phone</th>
+              <th className="doctorInfo" scope="col">#ID</th>
+              <th className="doctorInfo" scope="col">FullName</th>
+              <th className="doctorInfo" scope="col">Student_code</th>
+              <th className="doctorInfo" scope="col">Phone</th>
               {/* <th scope="col">Level</th> */}
-              <th scope="col">Operations</th>
+              <th className="doctorInfo" scope="col">Operations</th>
             </tr>
           </thead>
           <tbody>
             {allstudents.map((student) => (
               <tr key={student._id}>
-                <th scope="row">{student._id}</th>
-                <td>{student.Full_Name}</td>
-                <td>{student.Student_Code}</td>
-                <td>{student.PhoneNumber}</td>
+                <th className="doctorInfo" scope="row">{student._id}</th>
+                <td className="doctorInfo">{student.Full_Name}</td>
+                <td className="doctorInfo">{student.Student_Code}</td>
+                <td className="doctorInfo">{student.PhoneNumber}</td>
                 {/* <td>{student.semesterId.level}</td> */}
                 <td>
                   <div className="row">
