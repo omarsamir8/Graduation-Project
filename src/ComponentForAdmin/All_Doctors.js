@@ -249,7 +249,7 @@ function AllDoctors() {
       </div>
       <div className="get_all_student">
         <h2 className="getallstudent" style={{ marginLeft: "0rem" }}>
-          Get All Doctor{" "}
+          All Doctors Available{" "}
         </h2>
         <table className="table">
           <thead>

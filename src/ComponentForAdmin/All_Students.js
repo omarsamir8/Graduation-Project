@@ -234,7 +234,7 @@ function All_Students() {
             Update
           </button>
         </div>
-        <h2>Get All Students </h2>
+        <h2>All Students Available </h2>
         <table className="table">
           <thead>
             <tr>
