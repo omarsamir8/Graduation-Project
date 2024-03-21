@@ -152,7 +152,7 @@ function CreateDoctor() {
             <input
               type="text"
               class="form-control mt-3"
-              placeholder="Enter Password "
+              placeholder=" Password must be start with upper char and nums "
               aria-label="password"
               name="password"
               onChange={(e) => {
