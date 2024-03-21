@@ -8,7 +8,6 @@ function CreateCourse() {
   const [course_name, setcourse_name] = useState("");
   const [Prerequisites, setPrerequisites] = useState("");
   const [credit_hour, setcredit_hour] = useState("");
-  const [instructorId, setinstructorId] = useState("");
   const [OpenForRegistration, setOpenForRegistration] = useState("");
   const [desc, setdesc] = useState("");
   const { allcourses, setallcourses } = useCourseContext();
@@ -259,17 +258,6 @@ function CreateCourse() {
               <option value="2">2 </option>
               <option value="3">3 </option>
             </select>
-            <input
-              type="text"
-              className="form-control mt-3"
-              placeholder="Enter instructorId "
-              aria-label="instructorId "
-              name="instructorId"
-              value={instructorId}
-              onChange={(e) => {
-                setinstructorId(e.target.value);
-              }}
-            />
             <select
               className="form-control mt-3"
               aria-label="OpenForRegistration"

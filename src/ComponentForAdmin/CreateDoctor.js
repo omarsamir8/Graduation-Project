@@ -11,6 +11,7 @@ function CreateDoctor() {
   const [Date_of_Birth, setDate_of_Birth] = useState("");
   const [gender, setgender] = useState("");
   const [department, setdepartment] = useState("");
+  const [Materials, setMaterials] = useState();
   const [message, setmessage] = useState("");
   // const [Materials, setMaterials] = useState([]);
   const accessToken = localStorage.getItem("accesstoken");
@@ -35,7 +36,7 @@ function CreateDoctor() {
             Date_of_Birth,
             gender,
             department,
-            // Materials, // Send the array directly
+            Materials,
           }),
         }
       );
@@ -68,6 +69,11 @@ function CreateDoctor() {
     }
   };
 
+  const handleMaterialsChange = (e) => {
+    const inputValue = e.target.value;
+    const materialsArray = inputValue.split(" "); // يمكن استبدال الفاصلة بأي فاصل تفضله
+    setMaterials(materialsArray);
+  };
   return (
     <>
       <div className="Create_Student">
@@ -162,6 +168,14 @@ function CreateDoctor() {
               onChange={(e) => {
                 setDate_of_Birth(e.target.value);
               }}
+            />
+            <input
+              type="text"
+              class="form-control mt-3"
+              placeholder="Enter Doctor Matarial"
+              aria-label="Materials"
+              name="Materials"
+              onChange={handleMaterialsChange}
             />
             {/* <input
               type="text"

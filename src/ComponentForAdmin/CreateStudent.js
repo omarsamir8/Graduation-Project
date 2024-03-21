@@ -10,7 +10,6 @@ function CreateStudent() {
   const [PhoneNumber, setPhoneNumber] = useState("");
   const [Date_of_Birth, setDate_of_Birth] = useState("");
   const [gender, setgender] = useState("");
-  const [semsterId, setsemsterId] = useState("");
   const [message, setmessage] = useState("");
 
   const accessToken = localStorage.getItem("accesstoken");
@@ -34,7 +33,6 @@ function CreateStudent() {
             PhoneNumber,
             Date_of_Birth,
             gender,
-            semsterId,
           }),
         }
       );
@@ -127,17 +125,6 @@ function CreateStudent() {
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
-
-            <input
-              type="text"
-              class="form-control mt-3"
-              placeholder="semesterId"
-              aria-label="semesterId"
-              name="semesterId"
-              onChange={(e) => {
-                setsemsterId(e.target.value);
-              }}
-            />
           </div>
           <div class="col part2">
             <input

@@ -177,18 +177,6 @@ function All_Students() {
                   setgender(e.target.value);
                 }}
               />
-
-              <input
-                type="text"
-                class="form-control mt-3"
-                placeholder="semesterId"
-                aria-label="semesterId"
-                name="semesterId"
-                value={semesterId}
-                onChange={(e) => {
-                  setsemesterId(e.target.value);
-                }}
-              />
             </div>
             <div class="col part2">
               <input
@@ -238,18 +226,30 @@ function All_Students() {
         <table className="table">
           <thead>
             <tr>
-              <th className="doctorInfo" scope="col">#ID</th>
-              <th className="doctorInfo" scope="col">FullName</th>
-              <th className="doctorInfo" scope="col">Student_code</th>
-              <th className="doctorInfo" scope="col">Phone</th>
+              <th className="doctorInfo" scope="col">
+                #ID
+              </th>
+              <th className="doctorInfo" scope="col">
+                FullName
+              </th>
+              <th className="doctorInfo" scope="col">
+                Student_code
+              </th>
+              <th className="doctorInfo" scope="col">
+                Phone
+              </th>
               {/* <th scope="col">Level</th> */}
-              <th className="doctorInfo" scope="col">Operations</th>
+              <th className="doctorInfo" scope="col">
+                Operations
+              </th>
             </tr>
           </thead>
           <tbody>
             {allstudents.map((student) => (
               <tr key={student._id}>
-                <th className="doctorInfo" scope="row">{student._id}</th>
+                <th className="doctorInfo" scope="row">
+                  {student._id}
+                </th>
                 <td className="doctorInfo">{student.Full_Name}</td>
                 <td className="doctorInfo">{student.Student_Code}</td>
                 <td className="doctorInfo">{student.PhoneNumber}</td>
