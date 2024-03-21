@@ -17,11 +17,10 @@ function CreateDoctor() {
   const [allcourses, setallcourses] = useState([]);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
-  const Materiala_options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-  ]
+  const Materiala_options = allcourses.map((material) => {
+    return { value: material._id, label: 'Chocolate' };
+  });
+
 
   // get all Courses
   useEffect(() => {
