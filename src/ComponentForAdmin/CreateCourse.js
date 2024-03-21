@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
+import Select from "react-select";
 
 import Swal from "sweetalert2";
 import { useCourseContext } from "../CourseContext";
 
 function CreateCourse() {
   const [course_name, setcourse_name] = useState("");
-  const [Prerequisites, setPrerequisites] = useState("");
+  const [Prerequisites, setPrerequisites] = useState([]);
   const [credit_hour, setcredit_hour] = useState("");
   const [OpenForRegistration, setOpenForRegistration] = useState("");
   const [desc, setdesc] = useState("");
   const { allcourses, setallcourses } = useCourseContext();
+  const [allcoursees, setallcoursees] = useState([]);
   const [selectedCourseId, setSelectedCourseId] = useState(null);
   const [message, setmessage] = useState("");
 
@@ -34,6 +36,7 @@ function CreateCourse() {
             credit_hour,
             OpenForRegistration,
             desc,
+            Prerequisites,
           }),
         }
       );
@@ -74,34 +77,34 @@ function CreateCourse() {
   };
 
   // get all Courses
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         `https://university-mohamed.vercel.app/Api/courses/searchcourse?page=${count}&size=3`,
-  //         {
-  //           method: "GET",
-  //           headers: {
-  //             Authorization: `Bearer ${accessToken}`,
-  //             "refresh-token": refreshToken,
-  //           },
-  //         }
-  //       );
-  //       const data = await response.json();
-  //       if (Array.isArray(data.course)) {
-  //         setallcourses((prevCourses) => [...prevCourses, ...data.course]);
-  //       }
-  //     } catch (error) {
-  //       console.error("Fetch failed", error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `https://university-mohamed.vercel.app/Api/courses/searchcourse?&size=3`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+        const data = await response.json();
+        if (Array.isArray(data.course)) {
+          setallcoursees((prevCourses) => [...prevCourses, ...data.course]);
+        }
+      } catch (error) {
+        console.error("Fetch failed", error);
+      }
+    };
 
-  //   fetchData();
-  // }, [accessToken, refreshToken, count]);
+    fetchData();
+  }, [accessToken, refreshToken]);
 
-  // useEffect(() => {
-  //   console.log(allcourses);
-  // }, [allcourses]);
+  useEffect(() => {
+    console.log(allcoursees);
+  }, [allcoursees]);
 
   // delete course
   const deleteCourse = async (courseId) => {
@@ -148,6 +151,7 @@ function CreateCourse() {
             credit_hour,
             OpenForRegistration,
             desc,
+            Prerequisites,
           }),
         }
       );
@@ -171,6 +175,7 @@ function CreateCourse() {
                   credit_hour,
                   OpenForRegistration,
                   desc,
+                  Prerequisites,
                 }
               : prevCourse
           )
@@ -219,16 +224,17 @@ function CreateCourse() {
               }}
             />
 
-            <input
-              type="text"
-              className="form-control mt-3"
-              placeholder="Enter Prerequisites"
-              aria-label="Prerequisites"
-              name="Prerequisites"
-              value={Prerequisites}
-              onChange={(e) => {
-                setPrerequisites(e.target.value);
+            <Select
+              isMulti
+              name="colors"
+              options={allcourses.map((course) => {
+                return { value: course._id, label: course.course_name };
+              })}
+              onChange={(selectedOption) => {
+                setPrerequisites(selectedOption); // استخدم selectedOption بدلاً من e.target.value
               }}
+              className="Materials_select"
+              classNamePrefix="select"
             />
             <input
               type="text"
