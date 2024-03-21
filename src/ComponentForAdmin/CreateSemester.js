@@ -249,7 +249,7 @@ function CreateSemester() {
             onChange={(e) => {
               setMax_Hours(e.target.value);
             }}
-            placeholder="MinAvailableHours"
+            placeholder="Max Hour"
             aria-label=".form-control-sm example"
           />
           <button
@@ -274,18 +274,30 @@ function CreateSemester() {
         <table className="table">
           <thead>
             <tr>
-              <th className="doctorInfo" scope="col">#ID</th>
-              <th className="doctorInfo" scope="col">Semester Name</th>
-              <th className="doctorInfo" scope="col">Acadimic Year</th>
-              <th className="doctorInfo" scope="col">Term</th>
+              <th className="doctorInfo" scope="col">
+                #ID
+              </th>
+              <th className="doctorInfo" scope="col">
+                Semester Name
+              </th>
+              <th className="doctorInfo" scope="col">
+                Acadimic Year
+              </th>
+              <th className="doctorInfo" scope="col">
+                Term
+              </th>
               {/* <th scope="col">Level</th> */}
-              <th className="doctorInfo" scope="col">Operations</th>
+              <th className="doctorInfo" scope="col">
+                Operations
+              </th>
             </tr>
           </thead>
           <tbody>
             {AllSemesters.map((semester) => (
               <tr key={semester._id}>
-                <th className="doctorInfo" scope="row">{semester._id}</th>
+                <th className="doctorInfo" scope="row">
+                  {semester._id}
+                </th>
                 <td className="doctorInfo">{semester.name}</td>
                 <td className="doctorInfo">{semester.year}</td>
                 <td className="doctorInfo">{semester.term}</td>
