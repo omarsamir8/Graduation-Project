@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 export default function RegisterForCourse() {
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
   const [allcoursesavailable, setallcoursesavailable] = useState([]);
-  //  get all Courses
+
+  // Fetch all Courses
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -19,7 +21,6 @@ export default function RegisterForCourse() {
           }
         );
         const data = await response.json();
-        console.log(data);
         setallcoursesavailable(data.validCourses);
       } catch (error) {
         console.error("Fetch failed", error);
@@ -29,28 +30,61 @@ export default function RegisterForCourse() {
     fetchData();
   }, [accessToken, refreshToken]);
 
-  useEffect(() => {
-    console.log(allcoursesavailable);
-  }, [allcoursesavailable]);
+  // Register for course
+  const RegisterForCourse = async (courseId) => {
+    try {
+      const response = await fetch(
+        `https://university-mohamed.vercel.app/Api/student/register/addCourse?courseId=${courseId}`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+        }
+      );
+
+      if (response.ok) {
+        Swal.fire({
+          icon: "success",
+          title: "Course registered successfully",
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Failed",
+          text: "Course register failed, please try again later",
+          timer: 4500,
+        });
+      }
+    } catch (error) {
+      console.error("Register Failed", error);
+    }
+  };
+
   return (
     <>
       <div className="Create_Student">
         <h2>All Courses Available</h2>
       </div>
       <div className="enrollcourse">
-        {allcoursesavailable.map((course) => {
-          return (
-            <div className="course">
-              <div className="info">
-                <p>{course.course_name}</p>
-                <button type="button" class="btn btn-primary">
-                  Register
-                </button>
-              </div>
-              <div className="img "></div>
+        {allcoursesavailable.map((course) => (
+          <div className="course" key={course._id}>
+            <div className="info">
+              <p>{course.course_name}</p>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => RegisterForCourse(course._id)}
+              >
+                Register
+              </button>
             </div>
-          );
-        })}
+            <div className="img "></div>
+          </div>
+        ))}
       </div>
     </>
   );

@@ -25,7 +25,7 @@ function SideBar() {
           <NavLink
             className="NavLink"
             onClick={() => setSelectedComponent("DashBoard")}
-            style={{ color: "green" }}
+            
           >
             Dashboard
           </NavLink>
