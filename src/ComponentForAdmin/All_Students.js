@@ -47,8 +47,9 @@ function All_Students() {
       console.error("Delete failed", error);
     }
   };
+  
   // return data into inputes
-  const openUpdateModal = (student) => {
+  function openUpdateModal(student) {
     test === false ? setshowform("block") : setshowform("none");
     setSelectedStudent(student);
     setFull_Name(student.Full_Name);
@@ -58,7 +59,7 @@ function All_Students() {
     setDate_of_Birth(student.Date_of_Birth);
     setgender(student.gender);
     setsemesterId(student.semesterId);
-  };
+  }
   // update students
   const updateStudent = async () => {
     try {
