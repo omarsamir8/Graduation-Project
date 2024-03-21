@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
+import Select from 'react-select';
 
 function CreateDoctor() {
   const [FullName, setFullName] = useState("");
@@ -13,9 +14,44 @@ function CreateDoctor() {
   const [department, setdepartment] = useState("");
   const [Materials, setMaterials] = useState();
   const [message, setmessage] = useState("");
-  // const [Materials, setMaterials] = useState([]);
+  const [allcourses, setallcourses] = useState([]);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
+  const Materiala_options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' }
+  ]
+
+  // get all Courses
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `https://university-mohamed.vercel.app/Api/courses/searchcourse?size=10`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+        const data = await response.json();
+        if (Array.isArray(data.course)) {
+          setallcourses((prevCourses) => [...prevCourses, ...data.course]);
+        }
+      } catch (error) {
+        console.error("Fetch failed", error);
+      }
+    };
+
+    fetchData();
+  }, [accessToken, refreshToken]);
+
+  useEffect(() => {
+    console.log(allcourses);
+  }, [allcourses]);
 
   const createdoctor = async () => {
     try {
@@ -169,24 +205,25 @@ function CreateDoctor() {
                 setDate_of_Birth(e.target.value);
               }}
             />
-            <input
+            {/* <input
               type="text"
               class="form-control mt-3"
               placeholder="Enter Doctor Matarial"
               aria-label="Materials"
               name="Materials"
               onChange={handleMaterialsChange}
-            />
-            {/* <input
-              type="text"
-              class="form-control mt-3"
-              placeholder="Enter Materials"
-              aria-label="Materials"
-              name="Materials"
-              onChange={(e) => {
-                setMaterials(e.target.value);
-              }}
             /> */}
+      
+      <Select
+    
+    isMulti
+    name="colors"
+    options={Materiala_options}
+    className="Materials_select"
+    classNamePrefix="select"
+    
+  />
+
           </div>
         </div>
 
