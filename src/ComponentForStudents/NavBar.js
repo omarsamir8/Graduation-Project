@@ -39,7 +39,7 @@ function NavBar() {
           <img src="./assets/images/20.jpg" alt=""></img>
           <div className="details">
             <h3>{studentinfo.Full_Name}</h3>
-            <p>{studentinfo.Level} years</p>
+            <p>{studentinfo.Level} Level</p>
           </div>
         </div>
       </div>
