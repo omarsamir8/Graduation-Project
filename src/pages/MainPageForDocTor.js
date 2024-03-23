@@ -7,9 +7,9 @@ import Dashboard from "../ComponentForDoctors/DashBoard";
 import { useRecoilState } from "recoil";
 import { $Dashboard2_Components } from "../Atoms";
 import Courses from "../ComponentForDoctors/Courses";
-import StudentRegCourse from "../ComponentForDoctors/StudentRegCourse";
+// import StudentRegCourse from "../ComponentForDoctors/StudentRegCourse";
 import Training from "../ComponentForDoctors/Training";
-import StudentRegTraining from "../ComponentForDoctors/StudentRegTraining";
+// import StudentRegTraining from "../ComponentForDoctors/StudentRegTraining";
 import Schedule from "../ComponentForDoctors/Schedule";
 
 function MainPageForDoctor() {
@@ -32,11 +32,11 @@ function MainPageForDoctor() {
           <div>
             {selectedComponent2 === "DashBoard" && <Dashboard />}
             {selectedComponent2 === "courses" && <Courses />}
-            {selectedComponent2 === "StudentRegCourse" && <StudentRegCourse />}
+            {/* {selectedComponent2 === "StudentRegCourse" && <StudentRegCourse />} */}
             {selectedComponent2 === "Training" && <Training />}
-            {selectedComponent2 === "StudentRegTraining" && (
+            {/* {selectedComponent2 === "StudentRegTraining" && (
               <StudentRegTraining />
-            )}
+            )} */}
             {selectedComponent2 === "Schedule" && <Schedule />}
           </div>
         </div>

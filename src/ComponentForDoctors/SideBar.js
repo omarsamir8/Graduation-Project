@@ -39,16 +39,6 @@ function SideBar() {
             Courses
           </NavLink>
         </div>
-        <div className="item col-12">
-          <i class="fa-solid fa-book-open"></i>
-          <NavLink
-            onClick={() => setSelectedComponent2("StudentRegCourse")}
-            style={{ textDecoration: "none" }}
-            className="NavLink"
-          >
-            StudentRegCourse
-          </NavLink>
-        </div>
 
         <div className="item col-12">
           <i class="fa-solid fa-book-open"></i>
@@ -60,16 +50,7 @@ function SideBar() {
             Training
           </NavLink>
         </div>
-        <div className="item col-12">
-          <i class="fa-solid fa-book-open"></i>
-          <NavLink
-            onClick={() => setSelectedComponent2("StudentRegTraining")}
-            style={{ textDecoration: "none" }}
-            className="NavLink"
-          >
-            StudentRegTraining
-          </NavLink>
-        </div>
+
         <div className="item col-12">
           <i class="fa-solid fa-registered"></i>
           <NavLink
