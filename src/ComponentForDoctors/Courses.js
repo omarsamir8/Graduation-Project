@@ -15,25 +15,27 @@ function Courses() {
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
 
-  // Function to get students registered in a course
-  const fetchRegisteredStudents = async (courseId) => {
-    try {
-      const response = await axios.get(
-        `https://university-mohamed.vercel.app/Api/student/register/searchRegister?=courseId=${courseId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "refresh-token": refreshToken,
-          },
-        }
-      );
-      console.log(response.data);
-      console.log(response.data.message);
-      setallstudentregistercourses(response.data);
-    } catch (error) {
-      console.error("Error fetching registered students:", error);
-    }
-  };
+// Function to get students registered in a course
+const fetchRegisteredStudents = async (courseId) => {
+  console.log(courseId);
+  try {
+    const response = await axios.get(
+      `https://university-mohamed.vercel.app/Api/student/register/searchRegister?select=studentId,coursesRegisterd&courseId=${courseId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "refresh-token": refreshToken,
+        },
+      }
+    );
+    console.log(courseId);
+    console.log(response.data);
+    setallstudentregistercourses(response.data.registers)
+  } catch (error) {
+    console.error("Error fetching registered students:", error);
+  }
+};
+console.log(allstudentregistercourses);
 
   // get doctor materials
   useEffect(() => {
@@ -63,18 +65,17 @@ function Courses() {
       <div className="enrollcourse">
         {doctorMatarials.map((material) => {
           return (
-            <div className="course" key={material.course_id}>
+            <div className="course" key={material._id}>
               <div className="info">
                 <p>{material.course_name}</p>
-                <NavLink
-                  onClick={() => fetchRegisteredStudents(material.course_id)}
-                  style={{ textDecoration: "none" }}
-                  className="NavLink"
+
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => fetchRegisteredStudents(material._id)}
                 >
-                  <button type="button" className="btn btn-primary">
-                    Students
-                  </button>
-                </NavLink>
+                  Students
+                </button>
               </div>
             </div>
           );
@@ -102,7 +103,7 @@ function Courses() {
               <td>2132515155</td>
               <td>01558849371</td>
               <td>Four</td>
-              <td>#xxc01230 </td>
+              <td>#xxc01230</td>
 
               <td>
                 {" "}
@@ -117,6 +118,7 @@ function Courses() {
                   placeholder="Student Grade"
                   aria-label="Student Grade"
                   name="Student_Grade"
+                  className="grade_input"
                 />
               </td>
               <td>
