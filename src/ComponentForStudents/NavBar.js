@@ -10,7 +10,7 @@ function NavBar() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://university-system-rosy.vercel.app/Api/user/getuser",
+          "https://university-mohamed.vercel.app/Api/user/getuser",
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -39,7 +39,7 @@ function NavBar() {
           <img src="./assets/images/20.jpg" alt=""></img>
           <div className="details">
             <h3>{studentinfo.Full_Name}</h3>
-            <p>{studentinfo.Level} Level</p>
+            <p> Level : {studentinfo.level}</p>
           </div>
         </div>
       </div>

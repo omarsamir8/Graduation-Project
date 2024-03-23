@@ -10,7 +10,7 @@ function Poster() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://university-system-rosy.vercel.app/Api/user/getuser",
+          "https://university-mohamed.vercel.app/Api/user/getuser",
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,

@@ -22,7 +22,7 @@ export default function Registered_Courses() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://university-system-rosy.vercel.app/Api/user/getuser",
+          "https://university-mohamed.vercel.app/Api/user/getuser",
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -79,12 +79,12 @@ export default function Registered_Courses() {
           <p className="col-12">Benha university</p>
           <p className="col-12">Student code :{studentinfo.Student_Code}</p>
           <p className="col-12">Student name :{studentinfo.Full_Name}</p>
-          <p className="col-12">Level :</p>
-          <p className="col-12">Semester :{studentinfo.semester}</p>
+          <p className="col-12">Level :{studentinfo.level}</p>
+          <p className="col-12">Semester :{studentinfo.semsterInfo.name}</p>
         </div>
         <img src="./assets/images/bfcai2.jpg" className="BFCAI_img" />
 
-        <div className="col-11 Table_courses">
+        <div style={{ marginTop: "120px" }} className="col-11 Table_courses">
           <div className="Line_div"></div>
           <Table striped bordered hover size="md" className="col-12">
             <thead>
