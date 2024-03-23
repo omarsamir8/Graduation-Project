@@ -20,7 +20,7 @@ function Courses() {
     console.log(courseId);
     try {
       const response = await axios.get(
-        `https://university-mohamed.vercel.app/Api/student/register/searchRegister?select=studentId,coursesRegisterd&courseId=${courseId}`,
+        `https://university-mohamed.vercel.app/Api/student/register/searchRegister?select=studentId,coursesRegisterd&size=10&courseId=${courseId}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -97,10 +97,10 @@ function Courses() {
             </tr>
           </thead>
           <tbody>
-            {allstudentregistercourses.map((student) => {
+            {allstudentregistercourses.map((student, index) => {
               return (
-                <tr key={student._id}>
-                  <th scope="row">{student.studentId._id}</th>
+                <tr key={index}>
+                  <th scope="row">{index + 1}</th>
                   <td>{student.studentId.Full_Name}</td>
                   <td>{student.studentId.Student_Code}</td>
                   <td>{student.studentId.National_Id}</td>
@@ -120,7 +120,6 @@ function Courses() {
                       placeholder="Student Grade"
                       aria-label="Student Grade"
                       name="Student_Grade"
-                      className="grade_input"
                     />
                   </td>
                   <td>
