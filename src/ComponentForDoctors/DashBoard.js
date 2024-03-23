@@ -1,10 +1,36 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import "../styles/Dashboard.css";
+import axios from "axios";
 function Dashboard() {
   const [selectedComponent2, setSelectedComponent2] = useState(null);
   const handleSidebarClick = (componentName) => {
     setSelectedComponent2(componentName);
   };
+  const [doctorMatarials, setdoctorMatarials] = useState([]);
+  const accessToken = localStorage.getItem("accesstoken");
+  const refreshToken = localStorage.getItem("refreshtoken");
+  // get doctor matarial
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://university-mohamed.vercel.app/Api/instructor/getinfo",
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+        console.log(response.data);
+        setdoctorMatarials(response.data.user.Materials);
+      } catch (error) {
+        console.error("Error fetching doctor info:", error);
+      }
+    };
+
+    fetchData();
+  }, [accessToken, refreshToken]);
   return (
     <>
       <div className="dashboard-container">
@@ -12,7 +38,7 @@ function Dashboard() {
           <div className="main-container">
             <div className="main">
               <i class="fa-solid fa-book-open"></i>
-              <h3>4</h3>
+              <h3>{doctorMatarials.length}</h3>
               <p>Number of Course</p>
             </div>
             <div className="main">
