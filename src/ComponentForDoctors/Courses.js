@@ -15,27 +15,27 @@ function Courses() {
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
 
-// Function to get students registered in a course
-const fetchRegisteredStudents = async (courseId) => {
-  console.log(courseId);
-  try {
-    const response = await axios.get(
-      `https://university-mohamed.vercel.app/Api/student/register/searchRegister?select=studentId,coursesRegisterd&courseId=${courseId}`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "refresh-token": refreshToken,
-        },
-      }
-    );
+  // Function to get students registered in a course
+  const fetchRegisteredStudents = async (courseId) => {
     console.log(courseId);
-    console.log(response.data);
-    setallstudentregistercourses(response.data.registers)
-  } catch (error) {
-    console.error("Error fetching registered students:", error);
-  }
-};
-console.log(allstudentregistercourses);
+    try {
+      const response = await axios.get(
+        `https://university-mohamed.vercel.app/Api/student/register/searchRegister?select=studentId,coursesRegisterd&courseId=${courseId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+        }
+      );
+      console.log(courseId);
+      console.log(response.data);
+      setallstudentregistercourses(response.data.registers);
+    } catch (error) {
+      console.error("Error fetching registered students:", error);
+    }
+  };
+  console.log(allstudentregistercourses);
 
   // get doctor materials
   useEffect(() => {
@@ -89,385 +89,56 @@ console.log(allstudentregistercourses);
               <th scope="col">#ID</th>
               <th scope="col">FullName</th>
               <th scope="col">Student_code</th>
-              <th scope="col">Phone</th>
-              <th scope="col">Level</th>
-              <th scope="col">Corse_Id</th>
-              <th scope="col">Corse_Grade</th>
+              <th scope="col">National_Id</th>
+              <th scope="col">Department</th>
+              <th scope="col">CourseName</th>
+              <th scope="col">Course_Grade</th>
               <th scope="col">Submit</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Ahmed Adel</td>
-              <td>2132515155</td>
-              <td>01558849371</td>
-              <td>Four</td>
-              <td>#xxc01230</td>
+            {allstudentregistercourses.map((student) => {
+              return (
+                <tr key={student._id}>
+                  <th scope="row">{student.studentId._id}</th>
+                  <td>{student.studentId.Full_Name}</td>
+                  <td>{student.studentId.Student_Code}</td>
+                  <td>{student.studentId.National_Id}</td>
+                  <td>{student.studentId.department}</td>
+                  <td>{student.coursesRegisterd[0].course_name}</td>
 
-              <td>
-                {" "}
-                <input
-                  style={{
-                    width: "150px",
-                    alignItems: "center",
-                    height: "25px",
-                  }}
-                  type="text"
-                  class="form-control"
-                  placeholder="Student Grade"
-                  aria-label="Student Grade"
-                  name="Student_Grade"
-                  className="grade_input"
-                />
-              </td>
-              <td>
-                <button
-                  type="submit"
-                  style={{
-                    height: "25px",
-                    border: "none",
-                    borderRadius: "5px",
-                    backgroundColor: "#996ae4",
-                  }}
-                >
-                  Upload
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Ahmed Adel</td>
-              <td>2132515155</td>
-              <td>01558849371</td>
-              <td>Four</td>
-              <td>#xxc01230 </td>
-
-              <td>
-                {" "}
-                <input
-                  style={{
-                    width: "150px",
-                    alignItems: "center",
-                    height: "25px",
-                  }}
-                  type="text"
-                  class="form-control"
-                  placeholder="Student Grade"
-                  aria-label="Student Grade"
-                  name="Student_Grade"
-                />
-              </td>
-              <td>
-                <button
-                  type="submit"
-                  style={{
-                    height: "25px",
-                    border: "none",
-                    borderRadius: "5px",
-                    backgroundColor: "#996ae4",
-                  }}
-                >
-                  Upload
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Ahmed Adel</td>
-              <td>2132515155</td>
-              <td>01558849371</td>
-              <td>Four</td>
-              <td>#xxc01230 </td>
-
-              <td>
-                {" "}
-                <input
-                  style={{
-                    width: "150px",
-                    alignItems: "center",
-                    height: "25px",
-                  }}
-                  type="text"
-                  class="form-control"
-                  placeholder="Student Grade"
-                  aria-label="Student Grade"
-                  name="Student_Grade"
-                />
-              </td>
-              <td>
-                <button
-                  type="submit"
-                  style={{
-                    height: "25px",
-                    border: "none",
-                    borderRadius: "5px",
-                    backgroundColor: "#996ae4",
-                  }}
-                >
-                  Upload
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">4</th>
-              <td>Ahmed Adel</td>
-              <td>2132515155</td>
-              <td>01558849371</td>
-              <td>Four</td>
-              <td>#xxc01230 </td>
-
-              <td>
-                {" "}
-                <input
-                  style={{
-                    width: "150px",
-                    alignItems: "center",
-                    height: "25px",
-                  }}
-                  type="text"
-                  class="form-control"
-                  placeholder="Student Grade"
-                  aria-label="Student Grade"
-                  name="Student_Grade"
-                />
-              </td>
-              <td>
-                <button
-                  type="submit"
-                  style={{
-                    height: "25px",
-                    border: "none",
-                    borderRadius: "5px",
-                    backgroundColor: "#996ae4",
-                  }}
-                >
-                  Upload
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">5</th>
-              <td>Ahmed Adel</td>
-              <td>2132515155</td>
-              <td>01558849371</td>
-              <td>Four</td>
-              <td>#xxc01230 </td>
-
-              <td>
-                {" "}
-                <input
-                  style={{
-                    width: "150px",
-                    alignItems: "center",
-                    height: "25px",
-                  }}
-                  type="text"
-                  class="form-control"
-                  placeholder="Student Grade"
-                  aria-label="Student Grade"
-                  name="Student_Grade"
-                />
-              </td>
-              <td>
-                <button
-                  type="submit"
-                  style={{
-                    height: "25px",
-                    border: "none",
-                    borderRadius: "5px",
-                    backgroundColor: "#996ae4",
-                  }}
-                >
-                  Upload
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">6</th>
-              <td>Ahmed Adel</td>
-              <td>2132515155</td>
-              <td>01558849371</td>
-              <td>Four</td>
-              <td>#xxc01230 </td>
-
-              <td>
-                {" "}
-                <input
-                  style={{
-                    width: "150px",
-                    alignItems: "center",
-                    height: "25px",
-                  }}
-                  type="text"
-                  class="form-control"
-                  placeholder="Student Grade"
-                  aria-label="Student Grade"
-                  name="Student_Grade"
-                />
-              </td>
-              <td>
-                <button
-                  type="submit"
-                  style={{
-                    height: "25px",
-                    border: "none",
-                    borderRadius: "5px",
-                    backgroundColor: "#996ae4",
-                  }}
-                >
-                  Upload
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7</th>
-              <td>Ahmed Adel</td>
-              <td>2132515155</td>
-              <td>01558849371</td>
-              <td>Four</td>
-              <td>#xxc01230 </td>
-
-              <td>
-                {" "}
-                <input
-                  style={{
-                    width: "150px",
-                    alignItems: "center",
-                    height: "25px",
-                  }}
-                  type="text"
-                  class="form-control"
-                  placeholder="Student Grade"
-                  aria-label="Student Grade"
-                  name="Student_Grade"
-                />
-              </td>
-              <td>
-                <button
-                  type="submit"
-                  style={{
-                    height: "25px",
-                    border: "none",
-                    borderRadius: "5px",
-                    backgroundColor: "#996ae4",
-                  }}
-                >
-                  Upload
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">8</th>
-              <td>Ahmed Adel</td>
-              <td>2132515155</td>
-              <td>01558849371</td>
-              <td>Four</td>
-              <td>#xxc01230 </td>
-
-              <td>
-                {" "}
-                <input
-                  style={{
-                    width: "150px",
-                    alignItems: "center",
-                    height: "25px",
-                  }}
-                  type="text"
-                  class="form-control"
-                  placeholder="Student Grade"
-                  aria-label="Student Grade"
-                  name="Student_Grade"
-                />
-              </td>
-              <td>
-                <button
-                  type="submit"
-                  style={{
-                    height: "25px",
-                    border: "none",
-                    borderRadius: "5px",
-                    backgroundColor: "#996ae4",
-                  }}
-                >
-                  Upload
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">9</th>
-              <td>Ahmed Adel</td>
-              <td>2132515155</td>
-              <td>01558849371</td>
-              <td>Four</td>
-              <td>#xxc01230 </td>
-
-              <td>
-                {" "}
-                <input
-                  style={{
-                    width: "150px",
-                    alignItems: "center",
-                    height: "25px",
-                  }}
-                  type="text"
-                  class="form-control"
-                  placeholder="Student Grade"
-                  aria-label="Student Grade"
-                  name="Student_Grade"
-                />
-              </td>
-              <td>
-                <button
-                  type="submit"
-                  style={{
-                    height: "25px",
-                    border: "none",
-                    borderRadius: "5px",
-                    backgroundColor: "#996ae4",
-                  }}
-                >
-                  Upload
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">10</th>
-              <td>Ahmed Adel</td>
-              <td>2132515155</td>
-              <td>01558849371</td>
-              <td>Four</td>
-              <td>#xxc01230 </td>
-
-              <td>
-                {" "}
-                <input
-                  style={{
-                    width: "150px",
-                    alignItems: "center",
-                    height: "25px",
-                  }}
-                  type="text"
-                  class="form-control"
-                  placeholder="Student Grade"
-                  aria-label="Student Grade"
-                  name="Student_Grade"
-                />
-              </td>
-              <td>
-                <button
-                  type="submit"
-                  style={{
-                    height: "25px",
-                    border: "none",
-                    borderRadius: "5px",
-                    backgroundColor: "#996ae4",
-                  }}
-                >
-                  Upload
-                </button>
-              </td>
-            </tr>
+                  <td>
+                    {" "}
+                    <input
+                      style={{
+                        width: "150px",
+                        alignItems: "center",
+                        height: "25px",
+                      }}
+                      type="text"
+                      class="form-control"
+                      placeholder="Student Grade"
+                      aria-label="Student Grade"
+                      name="Student_Grade"
+                      className="grade_input"
+                    />
+                  </td>
+                  <td>
+                    <button
+                      type="submit"
+                      style={{
+                        height: "25px",
+                        border: "none",
+                        borderRadius: "5px",
+                        backgroundColor: "#996ae4",
+                      }}
+                    >
+                      Upload
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
