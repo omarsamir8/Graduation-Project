@@ -20,7 +20,7 @@ function Courses() {
     console.log(courseId);
     try {
       const response = await axios.get(
-        `https://university-mohamed.vercel.app/Api/student/register/searchRegister?select=studentId,coursesRegisterd&size=10&courseId=${courseId}`,
+        `https://university-mohamed.vercel.app/Api/student/register/searchRegister?select=studentId,coursesRegisterd&size=20&courseId=${courseId}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
