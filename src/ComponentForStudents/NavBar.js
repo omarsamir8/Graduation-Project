@@ -36,7 +36,7 @@ function NavBar() {
           <input type="text" placeholder="Search"></input>
         </div>
         <div className="info">
-          <img src="./assets/images/20.jpg" alt=""></img>
+          <img src={studentinfo.url} alt=""></img>
           <div className="details">
             <h3>{studentinfo.Full_Name}</h3>
             <p> Level : {studentinfo.level}</p>

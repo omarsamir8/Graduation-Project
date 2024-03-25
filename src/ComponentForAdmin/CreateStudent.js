@@ -20,39 +20,38 @@ function CreateStudent() {
     try {
       const formData = new FormData();
       formData.append("studentImage", studentImage);
+      formData.append("Full_Name", Full_Name);
+      formData.append("National_Id", National_Id);
+      formData.append("Student_Code", Student_Code);
+      formData.append("PhoneNumber", PhoneNumber);
+      formData.append("Date_of_Birth", Date_of_Birth);
+      formData.append("gender", gender);
+  
       const response = await fetch(
         "https://university-mohamed.vercel.app/Api/user/addstudent",
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
             "refresh-token": refreshToken,
           },
-          body: JSON.stringify({
-            Full_Name,
-            National_Id,
-            Student_Code,
-            PhoneNumber,
-            Date_of_Birth,
-            gender,
-            formData,
-          }),
+          body: formData,
         }
       );
+  
       const data = await response.json();
       console.log(data);
       setmessage(data.message);
+  
       if (response.ok) {
         // Show SweetAlert on success
-
         Swal.fire({
           icon: "success",
           title: "Student added successfully",
           showConfirmButton: false,
           timer: 3500,
         });
-
+  
         // Reset the form or perform any other actions on success
         // setFull_Name("");
         // setNational_Id("");
@@ -69,7 +68,7 @@ function CreateStudent() {
           text: "Student created failed, please try again later",
           timer: 4500,
         });
-
+  
         // Reset the form or perform any other actions on error
         // setFull_Name("");
         // setNational_Id("");
@@ -80,9 +79,10 @@ function CreateStudent() {
         // setsemesterId("");
       }
     } catch (error) {
-      console.error("Login failed", error);
+      console.error("Adding student failed", error);
     }
   };
+  
 
   return (
     <>
@@ -118,11 +118,11 @@ function CreateStudent() {
             <input
               type="file"
               class="form-control mt-3"
-              placeholder="Enter Phone Number"
-              aria-label="PhoneNumber"
+              placeholder="Enter Student Image"
+              aria-label="studentImage"
               name="studentImage"
               onChange={(e) => {
-                setstudentImage(e.target.value);
+                setstudentImage(e.target.files[0]);
               }}
             />
             <select

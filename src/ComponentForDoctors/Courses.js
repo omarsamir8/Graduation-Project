@@ -279,7 +279,7 @@ function Courses() {
         </button>
       </div>
       <div style={{ marginTop: "5rem" }} className="get_all_student">
-        <h2 style={{ marginLeft: ".6rem" }}> All Students Reg Course </h2>
+        <h2 style={{ marginLeft: "6rem" }}> All Students Reg Course </h2>
         <table style={{ textAlign: "center" }} class="table">
           <thead>
             <tr>
