@@ -12,6 +12,14 @@ function Courses() {
     []
   );
   const [doctorMatarials, setdoctorMatarials] = useState([]);
+  const [Midterm, setMidterm] = useState("");
+  const [courseId, setcourseId] = useState("");
+  const [semsterId, setsemsterId] = useState("");
+  const [studentId, setstudentId] = useState("");
+  const [FinalExam, setFinalExam] = useState("");
+  const [Oral, setOral] = useState("");
+  const [Practical, setPractical] = useState("");
+  const [mainsemester, setmainsemester] = useState([]);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
 
@@ -59,7 +67,28 @@ function Courses() {
 
     fetchData();
   }, [accessToken, refreshToken]);
+  // get semster information
+  useEffect(() => {
+    const fetchDataa = async () => {
+      try {
+        const response = await axios.get(
+          "https://university-mohamed.vercel.app/Api/semster/MainSemsterInfo",
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+        console.log(response.data);
+        setmainsemester(response.data.semster);
+      } catch (error) {
+        console.error("Error fetching doctor info:", error);
+      }
+    };
 
+    fetchDataa();
+  }, [accessToken, refreshToken]);
   return (
     <>
       <div className="enrollcourse">
@@ -81,8 +110,123 @@ function Courses() {
           );
         })}
       </div>
-      <div className="get_all_student">
-        <h2> All Students Reg Course </h2>
+      <h4 style={{ marginLeft: "10px", marginTop: "10px", fontWeight: "bold" }}>
+        Upload Grade{" "}
+      </h4>
+      <div
+        style={{
+          marginTop: "20px",
+          height: "70px",
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "10px",
+        }}
+        className="addcategory category-search animate__animated animate__fadeInDown"
+      >
+        <input
+          style={{ width: "30%", marginLeft: "10px", height: "40px" }}
+          className="form-control form-control-sm"
+          type="text"
+          name="courseId"
+          value={courseId}
+          onChange={(e) => {
+            setcourseId(e.target.value);
+          }}
+          placeholder="Course ID"
+          aria-label=".form-control-sm example"
+        />
+        <input
+          style={{ width: "30%", marginLeft: "10px", height: "40px" }}
+          className="form-control form-control-sm"
+          type="text"
+          name="semsterId"
+          value={semsterId}
+          onChange={(e) => {
+            setsemsterId(e.target.value);
+          }}
+          placeholder="Semster ID"
+          aria-label=".form-control-sm example"
+        />
+        <input
+          style={{ width: "30%", marginLeft: "10px", height: "40px" }}
+          className="form-control form-control-sm"
+          type="text"
+          name="studentId"
+          value={studentId}
+          onChange={(e) => {
+            setstudentId(e.target.value);
+          }}
+          placeholder="Student ID"
+          aria-label=".form-control-sm example"
+        />
+        <input
+          style={{ width: "30%", marginLeft: "10px", height: "40px" }}
+          className="form-control form-control-sm"
+          type="number"
+          name="FinalExam"
+          value={FinalExam}
+          onChange={(e) => {
+            setFinalExam(e.target.value);
+          }}
+          placeholder="Final Exam "
+          aria-label=".form-control-sm example"
+        />
+
+        <input
+          style={{ width: "30%", marginLeft: ".6rem", height: "40px" }}
+          className="form-control form-control-sm"
+          type="number"
+          name="Oral"
+          value={Oral}
+          onChange={(e) => {
+            setOral(e.target.value);
+          }}
+          placeholder="Oral"
+          aria-label=".form-control-sm example"
+        />
+        <input
+          style={{ width: "30%", marginLeft: "10px", height: "40px" }}
+          className="form-control form-control-sm"
+          type="number"
+          name="Practical"
+          value={Practical}
+          onChange={(e) => {
+            setPractical(e.target.value);
+          }}
+          placeholder="Practical"
+          aria-label=".form-control-sm example"
+        />
+        <input
+          style={{ width: "30%", marginLeft: "10px", height: "40px" }}
+          className="form-control form-control-sm"
+          type="number"
+          name="Midterm"
+          value={Midterm}
+          onChange={(e) => {
+            setMidterm(e.target.value);
+          }}
+          placeholder="Midterm"
+          aria-label=".form-control-sm example"
+        />
+        <button
+          style={{
+            width: "280px",
+            height: "40px",
+            marginLeft: ".6rem",
+            backgroundColor: "#996ae4",
+            color: "white",
+          }}
+          // onClick={selectedSemesterId ? updateSemester : Createsemester}
+          // onClick={Createsemester}
+          type="button"
+          className="btn "
+        >
+          {/* {selectedSemesterId ? "Update Semseter" : "Add Semester"} */}{" "}
+          Upload Grade
+        </button>
+      </div>
+      <div style={{ marginTop: "5rem" }} className="get_all_student">
+        <h2 style={{ marginLeft: ".6rem" }}> All Students Reg Course </h2>
         <table style={{ textAlign: "center" }} class="table">
           <thead>
             <tr>
@@ -130,6 +274,11 @@ function Courses() {
                         border: "none",
                         borderRadius: "5px",
                         backgroundColor: "#996ae4",
+                      }}
+                      onClick={() => {
+                        setsemsterId(mainsemester._id); // Use setselectedSemesterId here
+                        setstudentId(student.studentId._id);
+                        setcourseId(student.coursesRegisterd[0]._id);
                       }}
                     >
                       Upload
