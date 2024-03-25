@@ -1,19 +1,20 @@
-import { Button } from "react-bootstrap"
-import Report from "../ComponentForStudents/Report"
+import { Button, Table } from "react-bootstrap";
+import Report from "../ComponentForStudents/Report";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 export default function Semester_grade() {
-    const accessToken = localStorage.getItem("accesstoken");
-    const refreshToken = localStorage.getItem("refreshtoken");
-    const[studentGrades,setstudentGrades]=useState([])
-    const usenavigate = useNavigate();
-    const NavigateToStudent = () => {
-      usenavigate("/student");
-    };
-  
-    const[studentinfo,setstudentinfo]=useState([])
-     // get user info
+  const accessToken = localStorage.getItem("accesstoken");
+  const refreshToken = localStorage.getItem("refreshtoken");
+  const [studentGrades, setstudentGrades] = useState([]);
+  const usenavigate = useNavigate();
+  const NavigateToStudent = () => {
+    usenavigate("/student");
+  };
+
+  const [studentinfo, setstudentinfo] = useState([]);
+  const [Semesterinfo, setSemesterinfo] = useState([]);
+  // get user info
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -28,6 +29,7 @@ export default function Semester_grade() {
         );
         console.log(response.data);
         setstudentinfo(response.data.result);
+        setSemesterinfo(response.data.result.semsterInfo);
 
         // Log the updated state
       } catch (error) {
@@ -39,7 +41,7 @@ export default function Semester_grade() {
   }, [accessToken, refreshToken]);
   console.log(studentinfo);
 
-//   Fetch Semester Grade
+  //   Fetch Semester Grade
   // get user info
   useEffect(() => {
     const fetchSemesterGrade = async () => {
@@ -54,8 +56,7 @@ export default function Semester_grade() {
           }
         );
         console.log(response.data);
-        setstudentGrades(response.data.result.courseGrates)
-     
+        setstudentGrades(response.data.result.courseGrates);
 
         // Log the updated state
       } catch (error) {
@@ -65,7 +66,7 @@ export default function Semester_grade() {
 
     fetchSemesterGrade();
   }, [accessToken, refreshToken]);
-console.log(studentGrades)
+  console.log(studentGrades);
   return (
     <div className=" col-12 Registered_Courses">
       <img src="./assets/images/benha.png" className="Benha_img" />
@@ -80,14 +81,64 @@ console.log(studentGrades)
         {/* <p className="col-12">Semester :{studentinfo.semsterInfo.name}</p> */}
       </div>
       <img src="./assets/images/bfcai2.jpg" className="BFCAI_img" />
-     
+
       <div className="col-11 Table_courses">
-     
         <div className="col-12">
-        <div className="Line_div_report"></div>
-         <Report number_semester="" level={studentinfo.level} year=""  totalHours=""
-/>
-       
+          <div className="Line_div_report"></div>
+          <div className="col-12">
+            <Table
+              striped
+              bordered
+              hover
+              size="md"
+              className=" Head_table col-12"
+            >
+              <th className="col-12 Title_table">
+                <p> Level: {studentinfo.level}</p>
+                <p>Academic year:{Semesterinfo.name} </p>
+                <p>Total level number of hours: </p>
+                <p>Total level gpa:</p>
+              </th>
+            </Table>
+            <Table
+              striped
+              bordered
+              hover
+              size="md"
+              className=" Head_table_2 col-12"
+            >
+              <th className="col-12 Title_table_2">
+                <p>Semester ID :{Semesterinfo.name} </p>
+              </th>
+            </Table>
+
+            <Table striped bordered hover size="md" className="col-12">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Course Name</th>
+                  <th>Number Of Hours</th>
+                  <th>Grade</th>
+                  <th>Course grade</th>
+                  <th>Points</th>
+                </tr>
+              </thead>
+              <tbody>
+                {studentGrades.map((studentgrade, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{studentGrades[index].courseId.course_name}</td>
+                      <td>{studentGrades[index].courseId.credit_hour}</td>
+                      <td>{studentGrades[index].TotalGrate}</td>
+                      <td>{studentGrades[index].Grade}</td>
+                      <td>{studentGrades[index].Points}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          </div>
         </div>
       </div>
 
@@ -100,5 +151,5 @@ console.log(studentGrades)
         </Button>
       </div>
     </div>
-  )
+  );
 }
