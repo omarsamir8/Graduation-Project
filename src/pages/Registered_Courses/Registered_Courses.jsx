@@ -80,7 +80,7 @@ export default function Registered_Courses() {
           <p className="col-12">Student code :{studentinfo.Student_Code}</p>
           <p className="col-12">Student name :{studentinfo.Full_Name}</p>
           <p className="col-12">Level :{studentinfo.level}</p>
-          <p className="col-12">Semester :{studentinfo.semsterInfo.name}</p>
+          {/* <p className="col-12">Semester :{studentinfo.semsterInfo.name}</p> */}
         </div>
         <img src="./assets/images/bfcai2.jpg" className="BFCAI_img" />
 

@@ -11,12 +11,15 @@ function CreateStudent() {
   const [Date_of_Birth, setDate_of_Birth] = useState("");
   const [gender, setgender] = useState("");
   const [message, setmessage] = useState("");
+  const [studentImage, setstudentImage] = useState("");
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
 
   const createstudent = async () => {
     try {
+      const formData = new FormData();
+      formData.append("studentImage", studentImage);
       const response = await fetch(
         "https://university-mohamed.vercel.app/Api/user/addstudent",
         {
@@ -33,6 +36,7 @@ function CreateStudent() {
             PhoneNumber,
             Date_of_Birth,
             gender,
+            formData,
           }),
         }
       );
@@ -109,6 +113,16 @@ function CreateStudent() {
               name="PhoneNumber"
               onChange={(e) => {
                 setPhoneNumber(e.target.value);
+              }}
+            />
+            <input
+              type="file"
+              class="form-control mt-3"
+              placeholder="Enter Phone Number"
+              aria-label="PhoneNumber"
+              name="studentImage"
+              onChange={(e) => {
+                setstudentImage(e.target.value);
               }}
             />
             <select
