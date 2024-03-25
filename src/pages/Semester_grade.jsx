@@ -1,0 +1,104 @@
+import { Button } from "react-bootstrap"
+import Report from "../ComponentForStudents/Report"
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+export default function Semester_grade() {
+    const accessToken = localStorage.getItem("accesstoken");
+    const refreshToken = localStorage.getItem("refreshtoken");
+    const[studentGrades,setstudentGrades]=useState([])
+    const usenavigate = useNavigate();
+    const NavigateToStudent = () => {
+      usenavigate("/student");
+    };
+  
+    const[studentinfo,setstudentinfo]=useState([])
+     // get user info
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://university-mohamed.vercel.app/Api/user/getuser",
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+        console.log(response.data);
+        setstudentinfo(response.data.result);
+
+        // Log the updated state
+      } catch (error) {
+        console.error("Error fetching student info:", error);
+      }
+    };
+
+    fetchData();
+  }, [accessToken, refreshToken]);
+  console.log(studentinfo);
+
+//   Fetch Semester Grade
+  // get user info
+  useEffect(() => {
+    const fetchSemesterGrade = async () => {
+      try {
+        const response = await axios.get(
+          "https://university-mohamed.vercel.app/Api/student/Grades/MainsemsterGrate",
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+        console.log(response.data);
+        setstudentGrades(response.data.result.courseGrates)
+     
+
+        // Log the updated state
+      } catch (error) {
+        console.error("Error fetching student info:", error);
+      }
+    };
+
+    fetchSemesterGrade();
+  }, [accessToken, refreshToken]);
+console.log(studentGrades)
+  return (
+    <div className=" col-12 Registered_Courses">
+      <img src="./assets/images/benha.png" className="Benha_img" />
+      <div className="Title_registered col-4">
+        <p className="col-12">
+          Faculty of computers and artificial intelligence
+        </p>
+        <p className="col-12">Benha university</p>
+        <p className="col-12">Student code :{studentinfo.Student_Code}</p>
+        <p className="col-12">Student name :{studentinfo.Full_Name}</p>
+        <p className="col-12">Level :{studentinfo.level}</p>
+        {/* <p className="col-12">Semester :{studentinfo.semsterInfo.name}</p> */}
+      </div>
+      <img src="./assets/images/bfcai2.jpg" className="BFCAI_img" />
+     
+      <div className="col-11 Table_courses">
+     
+        <div className="col-12">
+        <div className="Line_div_report"></div>
+         <Report number_semester="" level={studentinfo.level} year=""  totalHours=""
+/>
+       
+        </div>
+      </div>
+
+      <div className="col-12 BackToStu_report">
+        <Button className="BackToStuBtn" onClick={NavigateToStudent}>
+          Back
+        </Button>
+        <Button className="Print_semester" onClick={window.print}>
+          Print
+        </Button>
+      </div>
+    </div>
+  )
+}

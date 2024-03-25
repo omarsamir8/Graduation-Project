@@ -5,6 +5,7 @@ import MainPageForAdmin from "./pages/MainPageForAdmin";
 import Login from "./pages/Login";
 import Registered_Courses from "./pages/Registered_Courses/Registered_Courses";
 import Reports_student from "./pages/Reports_student/Reports_student";
+import Semester_grade from "./pages/Semester_grade";
 
 function App() {
   return (
@@ -23,6 +24,10 @@ function App() {
             <Route
               path="/Reports_student"
               element={<Reports_student />}
+            ></Route>
+                <Route
+              path="/Semester_grade"
+              element={<Semester_grade />}
             ></Route>
           </Routes>
         </BrowserRouter>

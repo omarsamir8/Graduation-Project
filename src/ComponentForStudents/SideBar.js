@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import "../styles/SideBar.css";
 import { useRecoilState } from "recoil";
 import { $Dashboard_Components } from "../Atoms";
+import Semester_grade from "../pages/Semester_grade";
 function SideBar() {
   const navigate = useNavigate();
 
@@ -65,9 +66,15 @@ function SideBar() {
           </NavLink>
         </div>
         <div className="item col-12">
+          <i class="fa-brands fa-stack-overflow"></i>
+          <NavLink to="/Semester_grade" className="NavLink">
+         Semester Grades
+          </NavLink>
+        </div>
+        <div className="item col-12">
           <i class="fa-solid fa-square-plus"></i>
           <NavLink to="/Reports_student" className="NavLink">
-            Semester
+            Newspaper
           </NavLink>
         </div>
         <div className="item col-12">

@@ -12,9 +12,9 @@ export default function Report(props) {
             className=" Head_table col-12"
           >
             <th className="col-12 Title_table">
-              <p>Level :1</p>
-              <p>Academic year:2023-2024</p>
-              <p>Total level number of hours: 34</p>
+              <p> Level: {props.level}</p>
+              <p>Academic year: {props.year}</p>
+              <p>Total level number of hours: {props.totalHours}</p>
               <p>Total level gpa:3.2</p>
             </th>
           </Table>
@@ -26,7 +26,7 @@ export default function Report(props) {
             className=" Head_table_2 col-12"
           >
             <th className="col-12 Title_table_2">
-              <p>Semester {props.number_semester}</p>
+              <p>Semester ID : {props.number_semester}</p>
             
             </th>
           </Table>

@@ -86,6 +86,7 @@ export default function Registered_Courses() {
 
         <div style={{ marginTop: "120px" }} className="col-11 Table_courses">
           <div className="Line_div"></div>
+       
           <Table striped bordered hover size="md" className="col-12">
             <thead>
               <tr>
