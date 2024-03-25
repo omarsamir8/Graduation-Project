@@ -3,6 +3,7 @@ import { $Dashboard2_Components } from "../Atoms";
 import { useRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function Courses() {
   const [selectedComponent2, setSelectedComponent2] = useRecoilState(
@@ -89,6 +90,59 @@ function Courses() {
 
     fetchDataa();
   }, [accessToken, refreshToken]);
+
+  // Upload grades for students
+  const Upload_grade = async () => {
+    try {
+      const response = await fetch(
+        "https://university-mohamed.vercel.app/Api/student/Grades/addgrate",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+          body: JSON.stringify({
+            courseId,
+            semsterId,
+            studentId,
+            Midterm,
+            Oral,
+            Practical,
+            FinalExam
+          }),
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      // setmessage(data.message);
+      if (response.ok) {
+        // Show SweetAlert on success
+
+        Swal.fire({
+          icon: "success",
+          title: "Upload grade successfully",
+          showConfirmButton: false,
+          timer: 3500,
+        });
+
+  ;
+      } else {
+        // Show an error message if needed
+        Swal.fire({
+          icon: "error",
+          title: "Fail",
+          text: "Upload grade failed please try again later",
+          timer: 4500,
+        });
+
+    
+      }
+    } catch (error) {
+      console.error("Upload grade failed", error);
+    }
+  };
   return (
     <>
       <div className="enrollcourse">
@@ -216,12 +270,11 @@ function Courses() {
             backgroundColor: "#996ae4",
             color: "white",
           }}
-          // onClick={selectedSemesterId ? updateSemester : Createsemester}
-          // onClick={Createsemester}
+         onClick={Upload_grade}
           type="button"
           className="btn "
         >
-          {/* {selectedSemesterId ? "Update Semseter" : "Add Semester"} */}{" "}
+      
           Upload Grade
         </button>
       </div>
