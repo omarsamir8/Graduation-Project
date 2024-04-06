@@ -87,12 +87,17 @@ export default function Reports_student() {
             >
               <th className="col-12 Title_table">
                 <p> Level: {level}</p>
-                <p>Academic year:</p>
                 <p>
-                  Total level number of hours:
+                  Academic Year:
+                  {studentnewspaper.length > 0
+                    ? studentnewspaper[0].semsterId.year
+                    : ""}
+                </p>
+                <p>
+                  Total Hours:
                   {totalhour}
                 </p>
-                <p>Total level gpa:{totalgpa}</p>
+                <p>Total GPA:{totalgpa}</p>
               </th>
             </Table>
           </div>
