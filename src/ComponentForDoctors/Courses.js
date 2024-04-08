@@ -110,7 +110,7 @@ function Courses() {
             Midterm,
             Oral,
             Practical,
-            FinalExam
+            FinalExam,
           }),
         }
       );
@@ -126,8 +126,6 @@ function Courses() {
           showConfirmButton: false,
           timer: 3500,
         });
-
-  ;
       } else {
         // Show an error message if needed
         Swal.fire({
@@ -136,8 +134,6 @@ function Courses() {
           text: "Upload grade failed please try again later",
           timer: 4500,
         });
-
-    
       }
     } catch (error) {
       console.error("Upload grade failed", error);
@@ -270,11 +266,10 @@ function Courses() {
             backgroundColor: "#996ae4",
             color: "white",
           }}
-         onClick={Upload_grade}
+          onClick={Upload_grade}
           type="button"
           className="btn "
         >
-      
           Upload Grade
         </button>
       </div>

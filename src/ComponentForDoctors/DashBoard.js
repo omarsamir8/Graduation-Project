@@ -38,7 +38,7 @@ function Dashboard() {
           <div className="main-container">
             <div className="main">
               <i class="fa-solid fa-book-open"></i>
-              <h3>{doctorMatarials.length}</h3>
+              <h3>2</h3>
               <p>Number of Course</p>
             </div>
             <div className="main">

@@ -15,6 +15,9 @@ function CreateDoctor() {
   const [Materials, setMaterials] = useState();
   const [message, setmessage] = useState("");
   const [allcourses, setallcourses] = useState([]);
+  const [Training, setTraining] = useState([]);
+  const [alltrainingsAvailable, setalltrainingsAvailable] = useState([]);
+
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
   // const Materiala_options = [
@@ -73,6 +76,7 @@ function CreateDoctor() {
             gender,
             department,
             Materials,
+            Training,
           }),
         }
       );
@@ -110,6 +114,33 @@ function CreateDoctor() {
   //   const materialsArray = inputValue.split(" "); // يمكن استبدال الفاصلة بأي فاصل تفضله
   //   setMaterials(materialsArray);
   // };
+
+  // Fetch all Trainings
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `https://university-mohamed.vercel.app/Api/training/alltraining?page=1&size=20`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+        const data = await response.json();
+        setalltrainingsAvailable(data.training);
+        console.log(data);
+      } catch (error) {
+        console.error("Fetch failed", error);
+      }
+    };
+
+    fetchData();
+  }, [accessToken, refreshToken]);
+
+  console.log(alltrainingsAvailable);
   return (
     <>
       <div className="Create_Student">
@@ -225,6 +256,21 @@ function CreateDoctor() {
                   (option) => option.value
                 );
                 setMaterials(selectedLabels);
+              }}
+              className="Materials_select"
+              classNamePrefix="select"
+            />
+            <Select
+              isMulti
+              name="Training"
+              options={alltrainingsAvailable.map((training) => {
+                return { value: training._id, label: training.training_name };
+              })}
+              onChange={(selectedOptions) => {
+                const selectedLabels = selectedOptions.map(
+                  (option) => option.value
+                );
+                setTraining(selectedLabels);
               }}
               className="Materials_select"
               classNamePrefix="select"
