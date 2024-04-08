@@ -113,25 +113,35 @@ function CreateTraining() {
   // delete course
   const deleteTraining = async (trainingId) => {
     try {
-      const response = await fetch(
-        `https://university-mohamed.vercel.app/Api/training/deletetraining?training_id=${trainingId}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "refresh-token": refreshToken,
-          },
-        }
-      );
-
-      if (response.ok) {
-        // On success, update the state to remove the deleted course
-        setAllTrainings((prevTrainings) =>
-          prevTrainings.filter((training) => training._id !== trainingId)
+      const confirmed = await Swal.fire({
+        title: "Are you sure?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!",
+      });
+      if (confirmed.isConfirmed) {
+        const response = await fetch(
+          `https://university-mohamed.vercel.app/Api/training/deletetraining?training_id=${trainingId}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
         );
-        console.log(`Training with ID ${trainingId} deleted successfully.`);
-      } else {
-        console.error(`Failed to delete training with ID ${trainingId}.`);
+
+        if (response.ok) {
+          // On success, update the state to remove the deleted course
+          setAllTrainings((prevTrainings) =>
+            prevTrainings.filter((training) => training._id !== trainingId)
+          );
+          console.log(`Training with ID ${trainingId} deleted successfully.`);
+        } else {
+          console.error(`Failed to delete training with ID ${trainingId}.`);
+        }
       }
     } catch (error) {
       console.error("Delete failed", error);

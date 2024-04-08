@@ -102,25 +102,35 @@ function CreateSemester() {
   // delete semester
   const deleteSemester = async (semsterId) => {
     try {
-      const response = await fetch(
-        `https://university-mohamed.vercel.app/Api/semster/deletesemster?semsterId=${semsterId}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "refresh-token": refreshToken,
-          },
-        }
-      );
-
-      if (response.ok) {
-        // On success, update the state to remove the deleted course
-        setAllSemesters((prevSemesters) =>
-          prevSemesters.filter((semester) => semester._id !== semsterId)
+      const confirmed = await Swal.fire({
+        title: "Are you sure?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!",
+      });
+      if (confirmed.isConfirmed) {
+        const response = await fetch(
+          `https://university-mohamed.vercel.app/Api/semster/deletesemster?semsterId=${semsterId}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
         );
-        console.log(`Course with ID ${semsterId} deleted successfully.`);
-      } else {
-        console.error(`Failed to delete course with ID ${semsterId}.`);
+
+        if (response.ok) {
+          // On success, update the state to remove the deleted course
+          setAllSemesters((prevSemesters) =>
+            prevSemesters.filter((semester) => semester._id !== semsterId)
+          );
+          console.log(`Course with ID ${semsterId} deleted successfully.`);
+        } else {
+          console.error(`Failed to delete course with ID ${semsterId}.`);
+        }
       }
     } catch (error) {
       console.error("Delete failed", error);

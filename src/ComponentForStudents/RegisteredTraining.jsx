@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
@@ -31,7 +29,7 @@ export default function RegisteredTraining() {
 
     fetchData();
   }, [accessToken, refreshToken]);
-
+  console.log(trainingsRegistered);
   // delete Training Register
   const deleteTraining = async (trainingId) => {
     try {
@@ -80,9 +78,9 @@ export default function RegisteredTraining() {
       </div>
       <div className="enrollcourse">
         {trainingsRegistered.map((registeredTraining) => (
-          <div className="course" key={registeredTraining._id}>
+          <div className="course">
             <div className="info">
-              <p>{registeredTraining.trainingId.training_name}</p>
+              {/* <p>{registeredTraining.trainingId.training_name}</p> */}
               <button
                 type="button"
                 className="btn btn-danger"
