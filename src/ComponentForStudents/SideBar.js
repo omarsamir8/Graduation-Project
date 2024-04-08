@@ -26,7 +26,6 @@ function SideBar() {
           <NavLink
             className="NavLink"
             onClick={() => setSelectedComponent("DashBoard")}
-            
           >
             Dashboard
           </NavLink>
@@ -68,7 +67,7 @@ function SideBar() {
         <div className="item col-12">
           <i class="fa-brands fa-stack-overflow"></i>
           <NavLink to="/Semester_grade" className="NavLink">
-         Semester Grades
+            Semester Grades
           </NavLink>
         </div>
         <div className="item col-12">
@@ -84,16 +83,6 @@ function SideBar() {
             onClick={() => setSelectedComponent("Department")}
           >
             Department
-          </NavLink>
-        </div>
-        <div className="item col-12">
-          <i class="fa-solid fa-registered"></i>
-          <NavLink
-            className="NavLink"
-            onClick={() => setSelectedComponent("Scheduale")}
-          >
-            {" "}
-            Scheduale
           </NavLink>
         </div>
 
