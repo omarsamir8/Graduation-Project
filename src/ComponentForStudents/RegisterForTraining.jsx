@@ -9,7 +9,7 @@ export default function RegisterForTraining() {
     const RegisterForTraining = async (tainingId) => {
       try {
         const response = await fetch(
-          `https://university-mohamed.vercel.app//Api/Register/Training/addTraining?trainingId=${tainingId}`,
+          `https://university-mohamed.vercel.app/Api/Register/Training/addTraining?trainingId=${tainingId}`,
           {
             method: "POST",
             headers: {
