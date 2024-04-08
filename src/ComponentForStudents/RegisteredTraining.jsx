@@ -1,10 +1,14 @@
+
+
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 export default function RegisteredTraining() {
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
-  const [trainingsregisterd, settrainingsregisterd] = useState([]);
-  // get registerd courses
+  const [trainingsRegistered, setTrainingsRegistered] = useState([]);
+
+  // get registered courses
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -19,8 +23,7 @@ export default function RegisteredTraining() {
           }
         );
         const data = await response.json();
-        console.log(data);
-        settrainingsregisterd(data.result.trainingRegisterd);
+        setTrainingsRegistered(data.result.trainingRegisterd);
       } catch (error) {
         console.error("Fetch failed", error);
       }
@@ -28,60 +31,71 @@ export default function RegisteredTraining() {
 
     fetchData();
   }, [accessToken, refreshToken]);
-  // console.log(trainingsregisterd);
 
   // delete Training Register
   const deleteTraining = async (trainingId) => {
     try {
-      const response = await fetch(
-        `https://university-mohamed.vercel.app/Api/Register/Training/deleteTraining?trainingId=${trainingId}`,
-        {
-          method: "PATCH",
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "refresh-token": refreshToken,
-          },
-        }
-      );
+      const confirmed = await Swal.fire({
+        title: "Are you sure?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!",
+      });
 
-      if (response.ok) {
-        // On success, update the state to remove the deleted course
-        settrainingsregisterd((prevTrainings) =>
-          prevTrainings.filter((training) => training._id !== trainingId)
+      if (confirmed.isConfirmed) {
+        const response = await fetch(
+          `https://university-mohamed.vercel.app/Api/Register/Training/deleteTraining?trainingId=${trainingId}`,
+          {
+            method: "PATCH",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
         );
-        console.log(`Training with ID ${trainingId} deleted successfully.`);
-      } else {
-        console.error(`Failed to delete training with ID ${trainingId}.`);
+
+        if (response.ok) {
+          // On success, update the state to remove the deleted course
+          setTrainingsRegistered((prevTrainings) =>
+            prevTrainings.filter((training) => training._id !== trainingId)
+          );
+          Swal.fire("Deleted!", "Your training has been deleted.", "success");
+          window.location.reload();
+        } else {
+          Swal.fire("Failed!", "Failed to delete training.", "error");
+        }
       }
     } catch (error) {
       console.error("Delete failed", error);
+      Swal.fire("Error!", "Failed to delete training.", "error");
     }
   };
+
   return (
     <>
       <div className="Create_Student">
         <h2>Training Registered</h2>
       </div>
       <div className="enrollcourse">
-        {trainingsregisterd.map((RegisteredTraining) => {
-          return (
-            <div className="course">
-              <div className="info">
-                <p>{RegisteredTraining.trainingId.training_name}</p>
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  onClick={() => {
-                    deleteTraining(RegisteredTraining.trainingId._id);
-                  }}
-                >
-                  Delete
-                </button>
-              </div>
-              <div className="img "></div>
+        {trainingsRegistered.map((registeredTraining) => (
+          <div className="course" key={registeredTraining._id}>
+            <div className="info">
+              <p>{registeredTraining.trainingId.training_name}</p>
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={() =>
+                  deleteTraining(registeredTraining.trainingId._id)
+                }
+              >
+                Delete
+              </button>
             </div>
-          );
-        })}
+            <div className="img"></div>
+          </div>
+        ))}
       </div>
     </>
   );

@@ -31,7 +31,7 @@ export default function RegisterForTraining() {
           Swal.fire({
             icon: "error",
             title: "Failed",
-            text: "Course register failed, please try again later",
+            text: "It is not allowed for you to register this training",
             timer: 4500,
           });
         }
@@ -77,7 +77,7 @@ export default function RegisterForTraining() {
             Register
           </button>
         </div>
-        <div className="img "></div>
+        <div className="img"></div>
       </div>
       })}
    

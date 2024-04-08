@@ -21,6 +21,8 @@ function Courses() {
   const [Oral, setOral] = useState("");
   const [Practical, setPractical] = useState("");
   const [mainsemester, setmainsemester] = useState([]);
+ 
+
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
 
@@ -61,6 +63,7 @@ function Courses() {
         );
         console.log(response.data);
         setdoctorMatarials(response.data.user.Materials);
+     
       } catch (error) {
         console.error("Error fetching doctor info:", error);
       }
@@ -69,6 +72,8 @@ function Courses() {
     fetchData();
   }, [accessToken, refreshToken]);
   // get semster information
+  console.log(doctorMatarials)
+
   useEffect(() => {
     const fetchDataa = async () => {
       try {
@@ -324,7 +329,7 @@ function Courses() {
                         backgroundColor: "#996ae4",
                       }}
                       onClick={() => {
-                        setsemsterId(mainsemester._id); // Use setselectedSemesterId here
+                        setsemsterId(mainsemester._id);
                         setstudentId(student.studentId._id);
                         setcourseId(student.coursesRegisterd[0]._id);
                       }}
