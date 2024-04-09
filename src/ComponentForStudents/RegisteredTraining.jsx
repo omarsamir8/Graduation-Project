@@ -80,13 +80,11 @@ export default function RegisteredTraining() {
         {trainingsRegistered.map((registeredTraining) => (
           <div className="course">
             <div className="info">
-              {/* <p>{registeredTraining.trainingId.training_name}</p> */}
+              <p>{registeredTraining.training_name}</p>
               <button
                 type="button"
                 className="btn btn-danger"
-                onClick={() =>
-                  deleteTraining(registeredTraining.trainingId._id)
-                }
+                onClick={() => deleteTraining(registeredTraining._id)}
               >
                 Delete
               </button>
