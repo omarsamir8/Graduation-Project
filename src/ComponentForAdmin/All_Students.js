@@ -39,6 +39,7 @@ function All_Students() {
         setallstudents((prevStudents) =>
           prevStudents.filter((student) => student._id !== studentId)
         );
+      
         console.log(`Student with ID ${studentId} deleted successfully.`);
       } else {
         console.error(`Failed to delete student with ID ${studentId}.`);
@@ -282,25 +283,7 @@ function All_Students() {
           </tbody>
         </table>
       </div>
-      {/* <button
-        style={{
-          width: "320px",
-          height: "50px",
-          border: "none",
-          outline: "none",
-          background: "#996ae4",
-          borderRadius: "10px",
-          paddingLeft: "2rem",
-          paddingRight: "2rem",
-          color: "white",
-          marginLeft: "10px",
-          marginBottom: "20px",
-          fontSize: "22px",
-        }}
-        onClick={loadMore}
-      >
-        Loading More
-      </button> */}
+     
     </>
   );
 }
