@@ -1,3 +1,4 @@
+import { Table } from "jspdf-autotable";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
@@ -5,6 +6,7 @@ export default function RegisteredTraining() {
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
   const [trainingsRegistered, setTrainingsRegistered] = useState([]);
+  const [trainingsResult, settrainingsResult] = useState([]);
 
   // get registered courses
   useEffect(() => {
@@ -71,6 +73,30 @@ export default function RegisteredTraining() {
     }
   };
 
+  // get training result
+  useEffect(() => {
+    const fetchResultData = async () => {
+      try {
+        const response = await fetch(
+          `https://university-mohamed.vercel.app/Api/Training/Result/SearchTrainingResult`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+        const data = await response.json();
+        settrainingsResult(data);
+      } catch (error) {
+        console.error("Fetch failed", error);
+      }
+    };
+
+    fetchResultData();
+  }, [accessToken, refreshToken]);
+  console.log(trainingsResult);
   return (
     <>
       <div className="Create_Student">
@@ -93,6 +119,9 @@ export default function RegisteredTraining() {
           </div>
         ))}
       </div>
+      <h3 style={{ fontSize: "24px", color: "black", fontWeight: "bold" }}>
+        Training Result
+      </h3>
     </>
   );
 }
