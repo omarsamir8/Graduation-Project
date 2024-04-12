@@ -81,7 +81,7 @@ function CreateCourse() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://university-mohamed.vercel.app/Api/courses/searchcourse?&size=3`,
+          `https://university-mohamed.vercel.app/Api/courses/searchcourse?&size=20`,
           {
             method: "GET",
             headers: {

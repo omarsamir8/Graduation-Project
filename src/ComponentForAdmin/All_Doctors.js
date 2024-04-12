@@ -3,6 +3,7 @@ import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Swal from "sweetalert2";
 import { useEffect } from "react";
 import { useDoctorContext } from "../DoctorContext";
+import Select from "react-select";
 
 function AllDoctors() {
   const { alldoctors, setalldoctors } = useDoctorContext();
@@ -18,6 +19,10 @@ function AllDoctors() {
   const [showform, setshowform] = useState("none");
   const [test, settest] = useState(false);
   const [count, setcount] = useState(1);
+  const [Materials, setMaterials] = useState();
+  const [allcourses, setallcourses] = useState([]);
+  const [alltrainingsAvailable, setalltrainingsAvailable] = useState([]);
+  const [Training, setTraining] = useState([]);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
 
@@ -90,6 +95,8 @@ function AllDoctors() {
             password,
             phone,
             department,
+            Materials,
+            Training,
           }),
         }
       );
@@ -147,6 +154,60 @@ function AllDoctors() {
     // Increment the count when loading more
     setcount((prevCount) => prevCount + 1);
   };
+
+  // /////////////////
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `https://university-mohamed.vercel.app/Api/courses/searchcourse?size=20`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+        const data = await response.json();
+        if (Array.isArray(data.course)) {
+          setallcourses((prevCourses) => [...prevCourses, ...data.course]);
+        }
+      } catch (error) {
+        console.error("Fetch failed", error);
+      }
+    };
+
+    fetchData();
+  }, [accessToken, refreshToken]);
+
+  useEffect(() => {
+    console.log(allcourses);
+  }, [allcourses]);
+  // ///////////////////////////
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `https://university-mohamed.vercel.app/Api/training/alltraining?page=1&size=20`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+        const data = await response.json();
+        setalltrainingsAvailable(data.training);
+        console.log(data);
+      } catch (error) {
+        console.error("Fetch failed", error);
+      }
+    };
+
+    fetchData();
+  }, [accessToken, refreshToken]);
   return (
     <>
       <div className="Create_Student" style={{ display: showform }}>
@@ -232,6 +293,36 @@ function AllDoctors() {
               onChange={(e) => {
                 setDate_of_Birth(e.target.value);
               }}
+            />
+            <Select
+              isMulti
+              name="colors"
+              options={allcourses.map((course) => {
+                return { value: course._id, label: course.course_name };
+              })}
+              onChange={(selectedOptions) => {
+                const selectedLabels = selectedOptions.map(
+                  (option) => option.value
+                );
+                setMaterials(selectedLabels);
+              }}
+              className="Materials_select"
+              classNamePrefix="select"
+            />
+            <Select
+              isMulti
+              name="Training"
+              options={alltrainingsAvailable.map((training) => {
+                return { value: training._id, label: training.training_name };
+              })}
+              onChange={(selectedOptions) => {
+                const selectedLabels = selectedOptions.map(
+                  (option) => option.value
+                );
+                setTraining(selectedLabels);
+              }}
+              className="Materials_select"
+              classNamePrefix="select"
             />
             {/* <input
               type="text"

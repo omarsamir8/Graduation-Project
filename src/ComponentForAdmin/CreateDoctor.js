@@ -31,7 +31,7 @@ function CreateDoctor() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://university-mohamed.vercel.app/Api/courses/searchcourse?size=10`,
+          `https://university-mohamed.vercel.app/Api/courses/searchcourse?size=20`,
           {
             method: "GET",
             headers: {

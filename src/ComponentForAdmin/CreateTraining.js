@@ -30,7 +30,7 @@ function CreateTraining() {
           body: JSON.stringify({
             training_name,
             desc,
-            instructor_id,
+            // instructor_id,
             start_date,
             end_date,
           }),
@@ -255,7 +255,7 @@ function CreateTraining() {
                 setdesc(e.target.value);
               }}
             />
-            <input
+            {/* <input
               type="text"
               class="form-control mt-3"
               placeholder="Enter Instructor Id"
@@ -265,7 +265,7 @@ function CreateTraining() {
               onChange={(e) => {
                 setinstructor_id(e.target.value);
               }}
-            />
+            /> */}
           </div>
           <div class="col part2">
             <input
