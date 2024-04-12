@@ -11,6 +11,8 @@ function CreateTraining() {
   const { allTrainings, setAllTrainings } = useTrainingContext();
   const [message, setmessage] = useState("");
   const [selectedTrainingId, setselectedTrainingId] = useState(null);
+  const [TrainingImage, setTrainingImage] = useState("");
+  const [OpenForRegister, setOpenForRegister] = useState("");
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
   const [count, setcount] = useState(1);
@@ -30,7 +32,7 @@ function CreateTraining() {
           body: JSON.stringify({
             training_name,
             desc,
-            // instructor_id,
+            OpenForRegister,
             start_date,
             end_date,
           }),
@@ -163,8 +165,8 @@ function CreateTraining() {
           body: JSON.stringify({
             training_name,
             desc,
-            instructor_id,
             start_date,
+            OpenForRegister,
             end_date,
           }),
         }
@@ -187,9 +189,9 @@ function CreateTraining() {
                   ...prevTraining,
                   training_name,
                   desc,
-                  instructor_id,
                   start_date,
                   end_date,
+                  OpenForRegister,
                 }
               : prevTraining
           )
@@ -199,7 +201,6 @@ function CreateTraining() {
         setselectedTrainingId(null);
         settraining_name("");
         setdesc("");
-        setinstructor_id("");
         setstart_date("");
         setend_date("");
       } else {
@@ -255,17 +256,16 @@ function CreateTraining() {
                 setdesc(e.target.value);
               }}
             />
-            {/* <input
-              type="text"
+            <input
+              type="file"
               class="form-control mt-3"
-              placeholder="Enter Instructor Id"
-              aria-label="training_Instructor_Id"
-              name="instructor_id"
-              value={instructor_id}
+              placeholder="Enter Student Image"
+              aria-label="studentImage"
+              name="studentImage"
               onChange={(e) => {
-                setinstructor_id(e.target.value);
+                setTrainingImage(e.target.files[0]);
               }}
-            /> */}
+            />
           </div>
           <div class="col part2">
             <input
@@ -290,6 +290,21 @@ function CreateTraining() {
                 setend_date(e.target.value);
               }}
             />
+            <select
+              className="form-control mt-3"
+              aria-label="OpenForRegistration"
+              name="OpenForRegistration"
+              value={OpenForRegister}
+              onChange={(e) => {
+                setOpenForRegister(e.target.value);
+              }}
+            >
+              <option value="" disabled>
+                OpenForRegistration
+              </option>
+              <option value="true">True </option>
+              <option value="false">False</option>
+            </select>
           </div>
         </form>
         <button

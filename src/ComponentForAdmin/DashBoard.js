@@ -134,7 +134,7 @@ function DashBoard() {
             <div className="main">
               <i class="fa-solid fa-book-open"></i>
               <h3 className="animate__animated animate__backInDown">
-                {allstudents.length}
+                {/* {allstudents.length} */}
               </h3>
               <p className="animate__animated animate__backInDown">
                 Total Students
@@ -143,7 +143,7 @@ function DashBoard() {
             <div className="main">
               <i class="fa-solid fa-check"></i>
               <h3 className="animate__animated animate__backInDown">
-                {alldoctors.length}
+                {/* {alldoctors.length} */}
               </h3>
               <p className="animate__animated animate__backInDown">
                 Total Doctor{" "}
@@ -152,7 +152,7 @@ function DashBoard() {
             <div className="main">
               <i class="fa-solid fa-square-xmark"></i>
               <h3 className="animate__animated animate__backInDown">
-                {allcourses.length}
+                {/* {allcourses.length} */}
               </h3>
               <p className="animate__animated animate__backInDown">
                 {" "}
@@ -164,7 +164,7 @@ function DashBoard() {
             <div className="main">
               <i class="fa-brands fa-stack-overflow"></i>
               <h3 className="animate__animated animate__backInDown">
-                {alltraining.length}
+                {/* {alltraining.length} */}
               </h3>
               <p className="animate__animated animate__backInDown">
                 Total Training

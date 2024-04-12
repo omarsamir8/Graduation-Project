@@ -179,7 +179,7 @@ function NavBar() {
         console.log(response.data);
         const data = response.data;
         console.log(data);
-        setallcourses(data.course);
+        setallcourses(data.courses);
         console.log(allcourses);
 
         // Here you can update the state related to the search or perform any other actions with the data

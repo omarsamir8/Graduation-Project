@@ -170,8 +170,8 @@ function AllDoctors() {
           }
         );
         const data = await response.json();
-        if (Array.isArray(data.course)) {
-          setallcourses((prevCourses) => [...prevCourses, ...data.course]);
+        if (Array.isArray(data.courses)) {
+          setallcourses((prevCourses) => [...prevCourses, ...data.courses]);
         }
       } catch (error) {
         console.error("Fetch failed", error);

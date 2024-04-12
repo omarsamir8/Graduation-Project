@@ -15,6 +15,7 @@ function CreateCourse() {
   const [allcoursees, setallcoursees] = useState([]);
   const [selectedCourseId, setSelectedCourseId] = useState(null);
   const [message, setmessage] = useState("");
+  const [courseImage, setcourseImage] = useState([]);
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
@@ -91,8 +92,8 @@ function CreateCourse() {
           }
         );
         const data = await response.json();
-        if (Array.isArray(data.course)) {
-          setallcoursees((prevCourses) => [...prevCourses, ...data.course]);
+        if (Array.isArray(data.courses)) {
+          setallcoursees((prevCourses) => [...prevCourses, ...data.courses]);
         }
       } catch (error) {
         console.error("Fetch failed", error);
@@ -293,6 +294,16 @@ function CreateCourse() {
               <option value="true">True </option>
               <option value="false">False</option>
             </select>
+            <input
+              type="file"
+              class="form-control mt-3"
+              placeholder="Enter Student Image"
+              aria-label="studentImage"
+              name="studentImage"
+              onChange={(e) => {
+                setcourseImage(e.target.files[0]);
+              }}
+            />
           </div>
         </form>
         <button

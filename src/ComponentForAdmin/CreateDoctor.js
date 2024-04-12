@@ -41,8 +41,9 @@ function CreateDoctor() {
           }
         );
         const data = await response.json();
-        if (Array.isArray(data.course)) {
-          setallcourses((prevCourses) => [...prevCourses, ...data.course]);
+        console.log(data);
+        if (Array.isArray(data.courses)) {
+          setallcourses((prevCourses) => [...prevCourses, ...data.courses]);
         }
       } catch (error) {
         console.error("Fetch failed", error);
@@ -55,7 +56,7 @@ function CreateDoctor() {
   useEffect(() => {
     console.log(allcourses);
   }, [allcourses]);
-
+  // create doctor
   const createdoctor = async () => {
     try {
       const response = await fetch(
@@ -236,14 +237,6 @@ function CreateDoctor() {
                 setDate_of_Birth(e.target.value);
               }}
             />
-            {/* <input
-              type="text"
-              class="form-control mt-3"
-              placeholder="Enter Doctor Matarial"
-              aria-label="Materials"
-              name="Materials"
-              onChange={handleMaterialsChange}
-            /> */}
 
             <Select
               isMulti
