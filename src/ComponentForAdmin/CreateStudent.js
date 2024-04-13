@@ -11,7 +11,8 @@ function CreateStudent() {
   const [Date_of_Birth, setDate_of_Birth] = useState("");
   const [gender, setgender] = useState("");
   const [message, setmessage] = useState("");
-  const [studentImage, setstudentImage] = useState("");
+  const [studentImage, setstudentImage] = useState([]);
+  const [studentId, setstudentId] = useState("");
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
@@ -57,15 +58,54 @@ function CreateStudent() {
           text: "Student creation failed, please try again later",
           timer: 4500,
         });
-
-        // Reset the form or perform any other actions on error
-        // Reset the Materials array
       }
     } catch (error) {
       console.error("Login failed", error);
     }
   };
 
+  // Upload Student Image
+  const uploadstudentimage = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("studentImage", studentImage);
+      formData.append("studentId", studentId);
+
+      const response = await fetch(
+        "https://university-mohamed.vercel.app/Api/user/Add/image",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+          body: formData,
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      setmessage(data.message);
+      if (response.ok) {
+        // Show SweetAlert on success
+        Swal.fire({
+          icon: "success",
+          title: "Student Image added successfully",
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      } else {
+        // Show an error message if needed
+        Swal.fire({
+          icon: "error",
+          title: "Fail",
+          text: "Student Image creation failed, please try again later",
+          timer: 4500,
+        });
+      }
+    } catch (error) {
+      console.error("Upload failed", error);
+    }
+  };
   return (
     <>
       <div className="Create_Student">
@@ -97,16 +137,7 @@ function CreateStudent() {
                 setPhoneNumber(e.target.value);
               }}
             />
-            <input
-              type="file"
-              class="form-control mt-3"
-              placeholder="Enter Student Image"
-              aria-label="studentImage"
-              name="studentImage"
-              onChange={(e) => {
-                setstudentImage(e.target.files[0]);
-              }}
-            />
+
             <select
               className="form-control mt-3"
               aria-label="gender"
@@ -121,6 +152,16 @@ function CreateStudent() {
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
+            <input
+              type="file"
+              class="form-control mt-3"
+              placeholder="Enter Student Image"
+              aria-label="studentImage"
+              name="studentImage"
+              onChange={(e) => {
+                setstudentImage(e.target.files[0]);
+              }}
+            />
           </div>
           <div class="col part2">
             <input
@@ -153,6 +194,16 @@ function CreateStudent() {
                 setDate_of_Birth(e.target.value);
               }}
             />
+            <input
+              type="text"
+              class="form-control mt-3"
+              placeholder="Enter Student ID"
+              aria-label="studentId"
+              name="studentId"
+              onChange={(e) => {
+                setstudentId(e.target.value);
+              }}
+            />
           </div>
         </form>
 
@@ -162,6 +213,14 @@ function CreateStudent() {
           onClick={createstudent}
         >
           Submit
+        </button>
+        <button
+          style={{ marginLeft: "10px", width: "150px" }}
+          type="button"
+          class="btn btn-primary mt-3"
+          onClick={uploadstudentimage}
+        >
+          Upload Photo
         </button>
       </div>
     </>

@@ -11,11 +11,13 @@ function CreateTraining() {
   const { allTrainings, setAllTrainings } = useTrainingContext();
   const [message, setmessage] = useState("");
   const [selectedTrainingId, setselectedTrainingId] = useState(null);
-  const [TrainingImage, setTrainingImage] = useState("");
+
   const [OpenForRegister, setOpenForRegister] = useState("");
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
   const [count, setcount] = useState(1);
+  const [TrainingImage, setTrainingImage] = useState([]);
+  const [trainingId, settrainingId] = useState("");
 
   // create Training
   const createTraining = async () => {
@@ -222,6 +224,50 @@ function CreateTraining() {
     setcount((prevCount) => prevCount + 1);
   };
 
+  // upload training photo
+  const uploadtrainingimage = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("TrainingImage", TrainingImage);
+      formData.append("trainingId", trainingId);
+
+      const response = await fetch(
+        "https://university-mohamed.vercel.app/Api/training/Add/images",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+            // No need to specify Content-Type header for FormData
+          },
+          body: formData,
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      setmessage(data.message);
+      if (response.ok) {
+        // Show SweetAlert on success
+        Swal.fire({
+          icon: "success",
+          title: "Training Image added successfully",
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      } else {
+        // Show an error message if needed
+        Swal.fire({
+          icon: "error",
+          title: "Fail",
+          text: "Training Image creation failed, please try again later",
+          timer: 4500,
+        });
+      }
+    } catch (error) {
+      console.error("Upload failed", error);
+    }
+  };
+
   return (
     <>
       <div className="Create_Student">
@@ -259,11 +305,21 @@ function CreateTraining() {
             <input
               type="file"
               class="form-control mt-3"
-              placeholder="Enter Student Image"
-              aria-label="studentImage"
-              name="studentImage"
+              placeholder="Enter Training Image"
+              aria-label="TrainingImage"
+              name="TrainingImage"
               onChange={(e) => {
                 setTrainingImage(e.target.files[0]);
+              }}
+            />
+            <input
+              type="text"
+              class="form-control mt-3"
+              placeholder="Enter Training ID"
+              aria-label="trainingId"
+              name="trainingId"
+              onChange={(e) => {
+                settrainingId(e.target.value);
               }}
             />
           </div>
@@ -314,6 +370,15 @@ function CreateTraining() {
         >
           {selectedTrainingId ? "Update" : "Submit"}
         </button>
+        <button
+          style={{ width: "150px", marginLeft: "10px" }}
+          type="button"
+          className="btn btn-primary mt-3"
+          onClick={uploadtrainingimage}
+        >
+          Upload Image
+        </button>
+
         <h2>All Trainings Added</h2>
       </div>
       <div className="enrollcourse">

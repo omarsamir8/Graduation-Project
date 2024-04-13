@@ -17,14 +17,11 @@ function CreateDoctor() {
   const [allcourses, setallcourses] = useState([]);
   const [Training, setTraining] = useState([]);
   const [alltrainingsAvailable, setalltrainingsAvailable] = useState([]);
+  const [InstructorId, setInstructorId] = useState("");
+  const [instructorImage, setinstructorImage] = useState([]);
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
-  // const Materiala_options = [
-  //   { value: "chocolate", label: "Chocolate" },
-  //   { value: "strawberry", label: "Strawberry" },
-  //   { value: "vanilla", label: "Vanilla" },
-  // ];
 
   // get all Courses
   useEffect(() => {
@@ -101,20 +98,11 @@ function CreateDoctor() {
           text: "Doctor creation failed, please try again later",
           timer: 4500,
         });
-
-        // Reset the form or perform any other actions on error
-        // Reset the Materials array
       }
     } catch (error) {
       console.error("Login failed", error);
     }
   };
-
-  // const handleMaterialsChange = (e) => {
-  //   const inputValue = e.target.value;
-  //   const materialsArray = inputValue.split(" "); // يمكن استبدال الفاصلة بأي فاصل تفضله
-  //   setMaterials(materialsArray);
-  // };
 
   // Fetch all Trainings
   useEffect(() => {
@@ -140,8 +128,51 @@ function CreateDoctor() {
 
     fetchData();
   }, [accessToken, refreshToken]);
-
   console.log(alltrainingsAvailable);
+
+  // upload Doctor Photo
+  const uploadDoctorimage = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("instructorImage", instructorImage);
+      formData.append("InstructorId", InstructorId);
+
+      const response = await fetch(
+        "https://university-mohamed.vercel.app/Api/instructor/Add/image",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+            // Remove "Content-Type" header since it's not needed for FormData
+          },
+          body: formData,
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      setmessage(data.message);
+      if (response.ok) {
+        // Show SweetAlert on success
+        Swal.fire({
+          icon: "success",
+          title: "Doctor Image added successfully",
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      } else {
+        // Show an error message if needed
+        Swal.fire({
+          icon: "error",
+          title: "Fail",
+          text: "Doctor Image creation failed, please try again later",
+          timer: 4500,
+        });
+      }
+    } catch (error) {
+      console.error("Upload failed", error);
+    }
+  };
   return (
     <>
       <div className="Create_Student">
@@ -205,6 +236,26 @@ function CreateDoctor() {
               <option value="sc">SC</option>
               {/* Add more options as needed */}
             </select>
+            <input
+              type="file"
+              class="form-control mt-3"
+              placeholder="Enter Doctor Image"
+              aria-label="instructorImage"
+              name="instructorImage"
+              onChange={(e) => {
+                setinstructorImage(e.target.files[0]);
+              }}
+            />
+            <input
+              type="text"
+              class="form-control mt-3"
+              placeholder="Enter Doctor ID"
+              aria-label="InstructorId"
+              name="InstructorId"
+              onChange={(e) => {
+                setInstructorId(e.target.value);
+              }}
+            />
           </div>
           <div class="col part2">
             <input
@@ -277,6 +328,14 @@ function CreateDoctor() {
           onClick={createdoctor}
         >
           Submit
+        </button>
+        <button
+          style={{ marginLeft: "10px", width: "150px" }}
+          type="button"
+          className="btn btn-primary mt-3"
+          onClick={uploadDoctorimage}
+        >
+          Upload Photo
         </button>
       </div>
     </>
