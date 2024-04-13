@@ -19,14 +19,14 @@ function CreateStudent() {
   const createstudent = async () => {
     try {
       const formData = new FormData();
-      formData.append("studentImage", studentImage);
+      // formData.append("studentImage", studentImage);
       formData.append("Full_Name", Full_Name);
       formData.append("National_Id", National_Id);
       formData.append("Student_Code", Student_Code);
       formData.append("PhoneNumber", PhoneNumber);
       formData.append("Date_of_Birth", Date_of_Birth);
       formData.append("gender", gender);
-  
+
       const response = await fetch(
         "https://university-mohamed.vercel.app/Api/user/addstudent",
         {
@@ -38,11 +38,11 @@ function CreateStudent() {
           body: formData,
         }
       );
-  
+
       const data = await response.json();
       console.log(data);
       setmessage(data.message);
-  
+
       if (response.ok) {
         // Show SweetAlert on success
         Swal.fire({
@@ -51,7 +51,7 @@ function CreateStudent() {
           showConfirmButton: false,
           timer: 3500,
         });
-  
+
         // Reset the form or perform any other actions on success
         // setFull_Name("");
         // setNational_Id("");
@@ -68,7 +68,7 @@ function CreateStudent() {
           text: "Student created failed, please try again later",
           timer: 4500,
         });
-  
+
         // Reset the form or perform any other actions on error
         // setFull_Name("");
         // setNational_Id("");
@@ -82,7 +82,6 @@ function CreateStudent() {
       console.error("Adding student failed", error);
     }
   };
-  
 
   return (
     <>
