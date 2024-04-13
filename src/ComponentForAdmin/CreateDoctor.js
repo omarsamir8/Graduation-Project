@@ -131,7 +131,7 @@ function CreateDoctor() {
           }
         );
         const data = await response.json();
-        setalltrainingsAvailable(data.training);
+        setalltrainingsAvailable(data.trainings);
         console.log(data);
       } catch (error) {
         console.error("Fetch failed", error);

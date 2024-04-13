@@ -54,7 +54,7 @@ function DashBoard() {
         );
 
         const data = await response.json();
-        setalldoctors(data.Instructor);
+        setalldoctors(data.Instructors);
         console.log(data);
       } catch (error) {
         console.error("Fetch failed", error);
@@ -112,7 +112,7 @@ function DashBoard() {
         );
 
         const data = await response.json();
-        setalltraining(data.training);
+        setalltraining(data.trainings);
         console.log(data);
       } catch (error) {
         console.error("Fetch failed", error);
@@ -164,7 +164,7 @@ function DashBoard() {
             <div className="main">
               <i class="fa-brands fa-stack-overflow"></i>
               <h3 className="animate__animated animate__backInDown">
-                {/* {alltraining.length} */}
+                {alltraining.length}
               </h3>
               <p className="animate__animated animate__backInDown">
                 Total Training

@@ -138,7 +138,7 @@ function NavBar() {
         console.log(response.data);
         const data = response.data;
         console.log(data);
-        setAllTrainings(data.training);
+        setAllTrainings(data.trainings);
         console.log(allTrainings);
 
         // Here you can update the state related to the search or perform any other actions with the data

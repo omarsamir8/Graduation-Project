@@ -88,7 +88,7 @@ export default function RegisteredTraining() {
           }
         );
         const data = await response.json();
-        settrainingsResult(data);
+        settrainingsResult(data.trainings);
       } catch (error) {
         console.error("Fetch failed", error);
       }
