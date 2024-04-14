@@ -90,6 +90,7 @@ function All_Students() {
             Date_of_Birth,
             gender,
             semesterId,
+            // studentImage,
           }),
         }
       );

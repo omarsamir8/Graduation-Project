@@ -11,24 +11,68 @@ function CreateStudent() {
   const [Date_of_Birth, setDate_of_Birth] = useState("");
   const [gender, setgender] = useState("");
   const [message, setmessage] = useState("");
-  const [studentImage, setstudentImage] = useState("");
+  const [studentImage, setstudentImage] = useState([]);
+  const [studentId, setstudentId] = useState("");
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
 
   const createstudent = async () => {
     try {
-      const formData = new FormData();
-      formData.append("studentImage", studentImage);
-      formData.append("Full_Name", Full_Name);
-      formData.append("National_Id", National_Id);
-      formData.append("Student_Code", Student_Code);
-      formData.append("PhoneNumber", PhoneNumber);
-      formData.append("Date_of_Birth", Date_of_Birth);
-      formData.append("gender", gender);
-  
       const response = await fetch(
         "https://university-mohamed.vercel.app/Api/user/addstudent",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+          body: JSON.stringify({
+            Full_Name,
+            PhoneNumber,
+            Student_Code,
+            National_Id,
+            Date_of_Birth,
+            gender,
+          }),
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      setmessage(data.message);
+      if (response.ok) {
+        // Show SweetAlert on success
+
+        Swal.fire({
+          icon: "success",
+          title: "Student added successfully",
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      } else {
+        // Show an error message if needed
+        Swal.fire({
+          icon: "error",
+          title: "Fail",
+          text: "Student creation failed, please try again later",
+          timer: 4500,
+        });
+      }
+    } catch (error) {
+      console.error("Login failed", error);
+    }
+  };
+
+  // Upload Student Image
+  const uploadstudentimage = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("studentImage", studentImage);
+      formData.append("studentId", studentId);
+
+      const response = await fetch(
+        "https://university-mohamed.vercel.app/Api/user/Add/image",
         {
           method: "POST",
           headers: {
@@ -38,52 +82,30 @@ function CreateStudent() {
           body: formData,
         }
       );
-  
       const data = await response.json();
       console.log(data);
       setmessage(data.message);
-  
       if (response.ok) {
         // Show SweetAlert on success
         Swal.fire({
           icon: "success",
-          title: "Student added successfully",
+          title: "Student Image added successfully",
           showConfirmButton: false,
           timer: 3500,
         });
-  
-        // Reset the form or perform any other actions on success
-        // setFull_Name("");
-        // setNational_Id("");
-        // setStudent_Code("");
-        // setPhoneNumber("");
-        // setDate_of_Birth("");
-        // setgender("");
-        // setsemesterId("");
       } else {
         // Show an error message if needed
         Swal.fire({
           icon: "error",
           title: "Fail",
-          text: "Student created failed, please try again later",
+          text: "Student Image creation failed, please try again later",
           timer: 4500,
         });
-  
-        // Reset the form or perform any other actions on error
-        // setFull_Name("");
-        // setNational_Id("");
-        // setStudent_Code("");
-        // setPhoneNumber("");
-        // setDate_of_Birth("");
-        // setgender("");
-        // setsemesterId("");
       }
     } catch (error) {
-      console.error("Adding student failed", error);
+      console.error("Upload failed", error);
     }
   };
-  
-
   return (
     <>
       <div className="Create_Student">
@@ -115,16 +137,7 @@ function CreateStudent() {
                 setPhoneNumber(e.target.value);
               }}
             />
-            <input
-              type="file"
-              class="form-control mt-3"
-              placeholder="Enter Student Image"
-              aria-label="studentImage"
-              name="studentImage"
-              onChange={(e) => {
-                setstudentImage(e.target.files[0]);
-              }}
-            />
+
             <select
               className="form-control mt-3"
               aria-label="gender"
@@ -139,6 +152,16 @@ function CreateStudent() {
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
+            <input
+              type="file"
+              class="form-control mt-3"
+              placeholder="Enter Student Image"
+              aria-label="studentImage"
+              name="studentImage"
+              onChange={(e) => {
+                setstudentImage(e.target.files[0]);
+              }}
+            />
           </div>
           <div class="col part2">
             <input
@@ -171,6 +194,16 @@ function CreateStudent() {
                 setDate_of_Birth(e.target.value);
               }}
             />
+            <input
+              type="text"
+              class="form-control mt-3"
+              placeholder="Enter Student ID"
+              aria-label="studentId"
+              name="studentId"
+              onChange={(e) => {
+                setstudentId(e.target.value);
+              }}
+            />
           </div>
         </form>
 
@@ -180,6 +213,14 @@ function CreateStudent() {
           onClick={createstudent}
         >
           Submit
+        </button>
+        <button
+          style={{ marginLeft: "10px", width: "150px" }}
+          type="button"
+          class="btn btn-primary mt-3"
+          onClick={uploadstudentimage}
+        >
+          Upload Photo
         </button>
       </div>
     </>

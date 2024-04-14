@@ -138,7 +138,7 @@ function NavBar() {
         console.log(response.data);
         const data = response.data;
         console.log(data);
-        setAllTrainings(data.training);
+        setAllTrainings(data.trainings);
         console.log(allTrainings);
 
         // Here you can update the state related to the search or perform any other actions with the data
@@ -167,7 +167,7 @@ function NavBar() {
       try {
         // if (searchvalue.trim() !== "") {
         const response = await axios.get(
-          `https://university-mohamed.vercel.app/Api/courses/searchcourse?page=${count}&size=9
+          `https://university-mohamed.vercel.app/Api/courses/searchcourse?page=${count}&size=18
           &search=${training_value}`,
           {
             headers: {
@@ -179,7 +179,7 @@ function NavBar() {
         console.log(response.data);
         const data = response.data;
         console.log(data);
-        setallcourses(data.course);
+        setallcourses(data.courses);
         console.log(allcourses);
 
         // Here you can update the state related to the search or perform any other actions with the data

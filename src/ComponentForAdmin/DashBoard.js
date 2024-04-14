@@ -54,7 +54,7 @@ function DashBoard() {
         );
 
         const data = await response.json();
-        setalldoctors(data.Instructor);
+        setalldoctors(data.Instructors);
         console.log(data);
       } catch (error) {
         console.error("Fetch failed", error);
@@ -83,7 +83,7 @@ function DashBoard() {
         );
 
         const data = await response.json();
-        setallcourses(data.course);
+        setallcourses(data.courses);
         console.log(data);
       } catch (error) {
         console.error("Fetch failed", error);
@@ -112,7 +112,7 @@ function DashBoard() {
         );
 
         const data = await response.json();
-        setalltraining(data.training);
+        setalltraining(data.trainings);
         console.log(data);
       } catch (error) {
         console.error("Fetch failed", error);

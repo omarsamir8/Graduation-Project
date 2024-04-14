@@ -21,7 +21,6 @@ function Courses() {
   const [Oral, setOral] = useState("");
   const [Practical, setPractical] = useState("");
   const [mainsemester, setmainsemester] = useState([]);
- 
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
@@ -63,7 +62,6 @@ function Courses() {
         );
         console.log(response.data);
         setdoctorMatarials(response.data.user.Materials);
-     
       } catch (error) {
         console.error("Error fetching doctor info:", error);
       }
@@ -72,7 +70,7 @@ function Courses() {
     fetchData();
   }, [accessToken, refreshToken]);
   // get semster information
-  console.log(doctorMatarials)
+  console.log(doctorMatarials);
 
   useEffect(() => {
     const fetchDataa = async () => {
@@ -144,6 +142,31 @@ function Courses() {
       console.error("Upload grade failed", error);
     }
   };
+
+  // students result
+  const [StudentResult, setStudentResult] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `https://university-mohamed.vercel.app/Api/student/Grades/studentsGratesSearch?courseId=${courseId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+        console.log(response.data);
+        setStudentResult(response.data.grades);
+      } catch (error) {
+        console.error("Error fetching doctor info:", error);
+      }
+    };
+
+    fetchData();
+  }, [accessToken, refreshToken]);
+  console.log(StudentResult);
   return (
     <>
       <div className="enrollcourse">
@@ -279,7 +302,7 @@ function Courses() {
         </button>
       </div>
       <div style={{ marginTop: "5rem" }} className="get_all_student">
-        <h2 style={{ marginLeft: "6rem" }}> All Students Reg Course </h2>
+        <h2 style={{ marginLeft: ".7rem" }}> All Students Reg Course </h2>
         <table style={{ textAlign: "center" }} class="table">
           <thead>
             <tr>
@@ -335,6 +358,52 @@ function Courses() {
                       }}
                     >
                       Upload
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      <div style={{ marginTop: "1rem" }} className="get_all_student">
+        <h2 style={{ marginLeft: ".7rem" }}> All Students Reg Course </h2>
+        <table style={{ textAlign: "center" }} class="table">
+          <thead>
+            <tr>
+              <th scope="col">#ID</th>
+              <th scope="col">StudentID</th>
+              <th scope="col">CourseID</th>
+              <th scope="col">YearWorks</th>
+              <th scope="col">Practical</th>
+              <th scope="col">FinalExam</th>
+              <th scope="col">TotalGrate</th>
+              <th scope="col">Update</th>
+            </tr>
+          </thead>
+          <tbody>
+            {StudentResult.map((reults, index) => {
+              return (
+                <tr>
+                  <th scope="row">{index}</th>
+                  <td>{reults.studentId}</td>
+                  <td>{reults.courseId}</td>
+                  <td>{reults.YearWorks}</td>
+                  <td>{reults.Practical}</td>
+                  <td>{reults.FinalExam}</td>
+                  <td>{reults.TotalGrate}</td>
+                  <td>
+                    <button
+                      type="submit"
+                      style={{
+                        height: "25px",
+                        border: "none",
+                        borderRadius: "5px",
+                        backgroundColor: "#996ae4",
+                      }}
+                      onClick={() => {}}
+                    >
+                      Update Grade
                     </button>
                   </td>
                 </tr>

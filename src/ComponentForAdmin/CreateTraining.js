@@ -11,9 +11,13 @@ function CreateTraining() {
   const { allTrainings, setAllTrainings } = useTrainingContext();
   const [message, setmessage] = useState("");
   const [selectedTrainingId, setselectedTrainingId] = useState(null);
+
+  const [OpenForRegister, setOpenForRegister] = useState("");
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
   const [count, setcount] = useState(1);
+  const [TrainingImage, setTrainingImage] = useState([]);
+  const [trainingId, settrainingId] = useState("");
 
   // create Training
   const createTraining = async () => {
@@ -30,7 +34,7 @@ function CreateTraining() {
           body: JSON.stringify({
             training_name,
             desc,
-            instructor_id,
+            OpenForRegister,
             start_date,
             end_date,
           }),
@@ -163,8 +167,8 @@ function CreateTraining() {
           body: JSON.stringify({
             training_name,
             desc,
-            instructor_id,
             start_date,
+            OpenForRegister,
             end_date,
           }),
         }
@@ -187,9 +191,9 @@ function CreateTraining() {
                   ...prevTraining,
                   training_name,
                   desc,
-                  instructor_id,
                   start_date,
                   end_date,
+                  OpenForRegister,
                 }
               : prevTraining
           )
@@ -199,7 +203,6 @@ function CreateTraining() {
         setselectedTrainingId(null);
         settraining_name("");
         setdesc("");
-        setinstructor_id("");
         setstart_date("");
         setend_date("");
       } else {
@@ -219,6 +222,50 @@ function CreateTraining() {
   const loadMore = () => {
     // Increment the count when loading more
     setcount((prevCount) => prevCount + 1);
+  };
+
+  // upload training photo
+  const uploadtrainingimage = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("TrainingImage", TrainingImage);
+      formData.append("trainingId", trainingId);
+
+      const response = await fetch(
+        "https://university-mohamed.vercel.app/Api/training/Add/images",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+            // No need to specify Content-Type header for FormData
+          },
+          body: formData,
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      setmessage(data.message);
+      if (response.ok) {
+        // Show SweetAlert on success
+        Swal.fire({
+          icon: "success",
+          title: "Training Image added successfully",
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      } else {
+        // Show an error message if needed
+        Swal.fire({
+          icon: "error",
+          title: "Fail",
+          text: "Training Image creation failed, please try again later",
+          timer: 4500,
+        });
+      }
+    } catch (error) {
+      console.error("Upload failed", error);
+    }
   };
 
   return (
@@ -256,14 +303,23 @@ function CreateTraining() {
               }}
             />
             <input
+              type="file"
+              class="form-control mt-3"
+              placeholder="Enter Training Image"
+              aria-label="TrainingImage"
+              name="TrainingImage"
+              onChange={(e) => {
+                setTrainingImage(e.target.files[0]);
+              }}
+            />
+            <input
               type="text"
               class="form-control mt-3"
-              placeholder="Enter Instructor Id"
-              aria-label="training_Instructor_Id"
-              name="instructor_id"
-              value={instructor_id}
+              placeholder="Enter Training ID"
+              aria-label="trainingId"
+              name="trainingId"
               onChange={(e) => {
-                setinstructor_id(e.target.value);
+                settrainingId(e.target.value);
               }}
             />
           </div>
@@ -290,6 +346,21 @@ function CreateTraining() {
                 setend_date(e.target.value);
               }}
             />
+            <select
+              className="form-control mt-3"
+              aria-label="OpenForRegistration"
+              name="OpenForRegistration"
+              value={OpenForRegister}
+              onChange={(e) => {
+                setOpenForRegister(e.target.value);
+              }}
+            >
+              <option value="" disabled>
+                OpenForRegistration
+              </option>
+              <option value="true">True </option>
+              <option value="false">False</option>
+            </select>
           </div>
         </form>
         <button
@@ -299,6 +370,15 @@ function CreateTraining() {
         >
           {selectedTrainingId ? "Update" : "Submit"}
         </button>
+        <button
+          style={{ width: "150px", marginLeft: "10px" }}
+          type="button"
+          className="btn btn-primary mt-3"
+          onClick={uploadtrainingimage}
+        >
+          Upload Image
+        </button>
+
         <h2>All Trainings Added</h2>
       </div>
       <div className="enrollcourse">

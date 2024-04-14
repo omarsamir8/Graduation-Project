@@ -15,6 +15,8 @@ function CreateCourse() {
   const [allcoursees, setallcoursees] = useState([]);
   const [selectedCourseId, setSelectedCourseId] = useState(null);
   const [message, setmessage] = useState("");
+  const [courseImage, setcourseImage] = useState([]);
+  const [courseId, setcourseId] = useState("");
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
@@ -81,7 +83,7 @@ function CreateCourse() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://university-mohamed.vercel.app/Api/courses/searchcourse?&size=3`,
+          `https://university-mohamed.vercel.app/Api/courses/searchcourse?&size=20`,
           {
             method: "GET",
             headers: {
@@ -91,8 +93,8 @@ function CreateCourse() {
           }
         );
         const data = await response.json();
-        if (Array.isArray(data.course)) {
-          setallcoursees((prevCourses) => [...prevCourses, ...data.course]);
+        if (Array.isArray(data.courses)) {
+          setallcoursees((prevCourses) => [...prevCourses, ...data.courses]);
         }
       } catch (error) {
         console.error("Fetch failed", error);
@@ -212,6 +214,49 @@ function CreateCourse() {
   };
 
   console.log(Prerequisites);
+
+  // uplode course photo
+  const uploadcourseimage = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("courseImage", courseImage);
+      formData.append("courseId", courseId);
+
+      const response = await fetch(
+        "https://university-mohamed.vercel.app/Api/courses/Add/images",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+          body: formData,
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      setmessage(data.message);
+      if (response.ok) {
+        // Show SweetAlert on success
+        Swal.fire({
+          icon: "success",
+          title: "Course Image added successfully",
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      } else {
+        // Show an error message if needed
+        Swal.fire({
+          icon: "error",
+          title: "Fail",
+          text: "Course Image creation failed, please try again later",
+          timer: 4500,
+        });
+      }
+    } catch (error) {
+      console.error("Upload failed", error);
+    }
+  };
   return (
     <>
       <div className="Create_Student">
@@ -261,6 +306,16 @@ function CreateCourse() {
                 setdesc(e.target.value);
               }}
             />
+            <input
+              type="file"
+              class="form-control mt-3"
+              placeholder="Enter Student Image"
+              aria-label="courseImage"
+              name="courseImage"
+              onChange={(e) => {
+                setcourseImage(e.target.files[0]);
+              }}
+            />
           </div>
           <div className="col part2">
             <select
@@ -293,6 +348,17 @@ function CreateCourse() {
               <option value="true">True </option>
               <option value="false">False</option>
             </select>
+
+            <input
+              type="text"
+              class="form-control mt-3"
+              placeholder="Enter Course ID"
+              aria-label="studentId"
+              name="studentId"
+              onChange={(e) => {
+                setcourseId(e.target.value);
+              }}
+            />
           </div>
         </form>
         <button
@@ -302,6 +368,15 @@ function CreateCourse() {
         >
           {selectedCourseId ? "Update" : "Submit"}
         </button>
+        <button
+          style={{ marginLeft: "10px", width: "150px" }}
+          type="button"
+          className="btn btn-primary mt-3"
+          onClick={uploadcourseimage}
+        >
+          Upload Image
+        </button>
+
         <h2 className="col-12">All Courses Added</h2>
       </div>
       <div className="enrollcourse">
