@@ -9,7 +9,7 @@ function StudentsResult() {
     const fetchData = async (CourseId) => {
       try {
         const response = await axios.get(
-          `https://university-mohamed.vercel.app/Api/student/Grades/studentsGratesSearch?courseId=${CourseId}`,
+          `https://university-mohamed.vercel.app/Api/student/Grades/studentsGratesSearch?courseId=66188a91d5b17e5f2fa2f491`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -18,7 +18,7 @@ function StudentsResult() {
           }
         );
         console.log(response.data);
-        setStudentResult(response.data);
+        setStudentResult(response.data.grades);
       } catch (error) {
         console.error("Error fetching doctor info:", error);
       }

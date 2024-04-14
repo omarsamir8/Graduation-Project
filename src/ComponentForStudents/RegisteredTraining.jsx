@@ -88,7 +88,7 @@ export default function RegisteredTraining() {
           }
         );
         const data = await response.json();
-        settrainingsResult(data.trainings);
+        settrainingsResult(data.training);
       } catch (error) {
         console.error("Fetch failed", error);
       }
@@ -122,6 +122,64 @@ export default function RegisteredTraining() {
       <h3 style={{ fontSize: "24px", color: "black", fontWeight: "bold" }}>
         Training Result
       </h3>
+      <table style={{ textAlign: "center" }} class="table">
+        <thead>
+          <tr>
+            <th scope="col">#ID</th>
+            <th scope="col">StudentID</th>
+            <th scope="col">TrainingId</th>
+            <th scope="col">Grade</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {" "}
+          {trainingsResult.map((training, index = 1) => {
+            return (
+              <tr>
+                <th scope="row">{index + 1}</th>
+                <td>{training.studentId}</td>
+                <td>{training.trainingId}</td>
+                <td>{training.grade}</td>
+
+                <td>
+                  <button
+                    type="submit"
+                    style={{
+                      width: "120px",
+                      height: "25px",
+                      border: "none",
+                      borderRadius: "5px",
+                      backgroundColor: "#996ae4",
+                      color: "white",
+                    }}
+                    onClick={() => {}}
+                  >
+                    Update
+                  </button>
+                </td>
+                <td>
+                  <button
+                    type="submit"
+                    style={{
+                      width: "120px",
+                      height: "25px",
+                      border: "none",
+                      borderRadius: "5px",
+                      backgroundColor: "brown",
+                      color: "white",
+                    }}
+                    onClick={() => {}}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </>
   );
 }

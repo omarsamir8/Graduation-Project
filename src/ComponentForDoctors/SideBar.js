@@ -50,7 +50,7 @@ function SideBar() {
           </NavLink>
         </div>
 
-        <div className="item col-12">
+        {/* <div className="item col-12">
           <i class="fa-solid fa-registered"></i>
           <NavLink
             onClick={() => setSelectedComponent2("StudentsResult")}
@@ -59,7 +59,7 @@ function SideBar() {
           >
             Student Result
           </NavLink>
-        </div>
+        </div> */}
 
         <div
           style={{ marginLeft: "15px", marginBottom: "10px" }}
