@@ -23,32 +23,41 @@ function All_Students() {
   // delete student
   const handleDelete = async (studentId) => {
     try {
-      const response = await fetch(
-        `https://university-mohamed.vercel.app/Api/user/deleteStudent?userId=${studentId}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "refresh-token": refreshToken,
-          },
-        }
-      );
-
-      if (response.ok) {
-        // Remove the deleted student from the state
-        setallstudents((prevStudents) =>
-          prevStudents.filter((student) => student._id !== studentId)
+      const confirmed = await Swal.fire({
+        title: "Are you sure?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!",
+      });
+      if (confirmed.isConfirmed) {
+        const response = await fetch(
+          `https://university-mohamed.vercel.app/Api/user/deleteStudent?userId=${studentId}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
         );
-      
-        console.log(`Student with ID ${studentId} deleted successfully.`);
-      } else {
-        console.error(`Failed to delete student with ID ${studentId}.`);
+
+        if (!response.ok) {
+          // Remove the deleted doctor from the state
+          setallstudents((prevDoctors) =>
+            prevDoctors.filter((student) => student._id !== studentId)
+          );
+          console.log(`Doctor with ID ${studentId} deleted successfully.`);
+        } else {
+          console.error(`Failed to delete doctor with ID ${studentId}.`);
+        }
       }
     } catch (error) {
       console.error("Delete failed", error);
     }
   };
-  
+
   // return data into inputes
   function openUpdateModal(student) {
     test === false ? setshowform("block") : setshowform("none");

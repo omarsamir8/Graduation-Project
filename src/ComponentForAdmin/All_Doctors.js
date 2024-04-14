@@ -24,25 +24,35 @@ function AllDoctors() {
   //  delete doctors
   const handleDelete = async (doctorId) => {
     try {
-      const response = await fetch(
-        `https://university-mohamed.vercel.app/Api/instructor/delete?userId=${doctorId}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "refresh-token": refreshToken,
-          },
-        }
-      );
-
-      if (response.ok) {
-        // Remove the deleted doctor from the state
-        setalldoctors((prevDoctors) =>
-          prevDoctors.filter((doctor) => doctor._id !== doctorId)
+      const confirmed = await Swal.fire({
+        title: "Are you sure?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!",
+      });
+      if (confirmed.isConfirmed) {
+        const response = await fetch(
+          `https://university-mohamed.vercel.app/Api/instructor/delete?userId=${doctorId}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
         );
-        console.log(`Doctor with ID ${doctorId} deleted successfully.`);
-      } else {
-        console.error(`Failed to delete doctor with ID ${doctorId}.`);
+
+        if (response.ok) {
+          // Remove the deleted doctor from the state
+          setalldoctors((prevDoctors) =>
+            prevDoctors.filter((doctor) => doctor._id !== doctorId)
+          );
+          console.log(`Doctor with ID ${doctorId} deleted successfully.`);
+        } else {
+          console.error(`Failed to delete doctor with ID ${doctorId}.`);
+        }
       }
     } catch (error) {
       console.error("Delete failed", error);
@@ -254,18 +264,32 @@ function AllDoctors() {
         <table className="table">
           <thead>
             <tr>
-              <th className="doctorInfo" scope="col">#ID</th>
-              <th className="doctorInfo" scope="col">FullName</th>
-              <th className="doctorInfo" scope="col">Email</th>
-              <th className="doctorInfo" scope="col">Phone</th>
-              <th className="doctorInfo" scope="col">Department</th>
-              <th className="doctorInfo" scope="col">Operations</th>
+              <th className="doctorInfo" scope="col">
+                #ID
+              </th>
+              <th className="doctorInfo" scope="col">
+                FullName
+              </th>
+              <th className="doctorInfo" scope="col">
+                Email
+              </th>
+              <th className="doctorInfo" scope="col">
+                Phone
+              </th>
+              <th className="doctorInfo" scope="col">
+                Department
+              </th>
+              <th className="doctorInfo" scope="col">
+                Operations
+              </th>
             </tr>
           </thead>
           <tbody>
             {alldoctors.map((doctor) => (
               <tr key={doctor._id}>
-                <th className="doctorInfo" scope="row">{doctor._id}</th>
+                <th className="doctorInfo" scope="row">
+                  {doctor._id}
+                </th>
                 <td className="doctorInfo">{doctor.FullName}</td>
                 <td className="doctorInfo">{doctor.email}</td>
                 <td className="doctorInfo">{doctor.phone}</td>
