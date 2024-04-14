@@ -1,5 +1,6 @@
 import { React, useEffect, useState } from "react";
 import "../styles/Dashboard.css";
+import AdminTidioChat from "./AdminChat";
 function DashBoard() {
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [allstudents, setallstudents] = useState([]);
@@ -12,6 +13,7 @@ function DashBoard() {
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
+
   // get all students
   useEffect(() => {
     const fetchData = async () => {
@@ -220,6 +222,7 @@ function DashBoard() {
           </div>
         </div>
       </div>
+<AdminTidioChat/>
     </>
   );
 }

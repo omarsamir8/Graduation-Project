@@ -1,6 +1,9 @@
 import { React, useEffect, useState } from "react";
 import "../styles/Dashboard.css";
 import axios from "axios";
+
+
+import TidioChat from "./TidioChat";
 function Dashboard() {
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
@@ -10,6 +13,10 @@ function Dashboard() {
   const [level, setlevel] = useState("");
   const [trainingsRegistered, setTrainingsRegistered] = useState([]);
   const [coursesregisterd, setcoursesregisterd] = useState([]);
+  const initialMessages = [
+    { role: "user", text: "Hey, how are you today?" },
+    { role: "ai", text: "I am doing very well!" },
+  ];
   useEffect(() => {
     const fetchSemesterGrade = async () => {
       try {
@@ -147,6 +154,9 @@ function Dashboard() {
           </div>
         </div>
       </div>
+      <TidioChat/>
+    
+
     </>
   );
 }
