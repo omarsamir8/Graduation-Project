@@ -21,7 +21,6 @@ function Courses() {
   const [Oral, setOral] = useState("");
   const [Practical, setPractical] = useState("");
   const [mainsemester, setmainsemester] = useState([]);
- 
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
@@ -63,7 +62,6 @@ function Courses() {
         );
         console.log(response.data);
         setdoctorMatarials(response.data.user.Materials);
-     
       } catch (error) {
         console.error("Error fetching doctor info:", error);
       }
@@ -72,7 +70,7 @@ function Courses() {
     fetchData();
   }, [accessToken, refreshToken]);
   // get semster information
-  console.log(doctorMatarials)
+  console.log(doctorMatarials);
 
   useEffect(() => {
     const fetchDataa = async () => {
@@ -279,7 +277,7 @@ function Courses() {
         </button>
       </div>
       <div style={{ marginTop: "5rem" }} className="get_all_student">
-        <h2 style={{ marginLeft: "6rem" }}> All Students Reg Course </h2>
+        <h2 style={{ marginLeft: ".7rem" }}> All Students Reg Course </h2>
         <table style={{ textAlign: "center" }} class="table">
           <thead>
             <tr>

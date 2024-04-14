@@ -7,6 +7,7 @@ function Dashboard() {
     setSelectedComponent2(componentName);
   };
   const [doctorMatarials, setdoctorMatarials] = useState([]);
+  const [doctorTrainings, setdoctorTrainings] = useState([]);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
   // get doctor matarial
@@ -31,6 +32,30 @@ function Dashboard() {
 
     fetchData();
   }, [accessToken, refreshToken]);
+
+  // doctor training
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://university-mohamed.vercel.app/Api/instructor/getinfo",
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+        console.log(response.data);
+
+        setdoctorTrainings(response.data.user.Training);
+      } catch (error) {
+        console.error("Error fetching doctor info:", error);
+      }
+    };
+
+    fetchData();
+  }, [accessToken, refreshToken, setSelectedComponent2]);
   return (
     <>
       <div className="dashboard-container">
@@ -38,7 +63,7 @@ function Dashboard() {
           <div className="main-container">
             <div className="main">
               <i class="fa-solid fa-book-open"></i>
-              <h3>2</h3>
+              <h3>{doctorMatarials.length}</h3>
               <p>Number of Course</p>
             </div>
             <div className="main">
@@ -55,7 +80,7 @@ function Dashboard() {
           <div className="main-container">
             <div className="main">
               <i class="fa-brands fa-stack-overflow"></i>
-              <h3>1</h3>
+              <h3>{doctorTrainings.length}</h3>
               <p>Number Of Training</p>
             </div>
             <div className="main">

@@ -15,7 +15,6 @@ function SideBar() {
     <>
       <div className="sidebar-container">
         <div className="icon-container">
-          {/* <i class="fa-solid fa-graduation-cap"></i> */}
           <img src="./assets/images/art.jpeg" alt=""></img>
         </div>
         <div className="item col-12">
@@ -54,15 +53,18 @@ function SideBar() {
         <div className="item col-12">
           <i class="fa-solid fa-registered"></i>
           <NavLink
-            onClick={() => setSelectedComponent2("Schedule")}
+            onClick={() => setSelectedComponent2("StudentsResult")}
             style={{ textDecoration: "none" }}
             className="NavLink"
           >
-            Schedule
+            Student Result
           </NavLink>
         </div>
 
-        <div className="login col-12">
+        <div
+          style={{ marginLeft: "15px", marginBottom: "10px" }}
+          className="login col-12"
+        >
           <i class="fa-solid fa-right-from-bracket"></i>
           <p onClick={logout}>Logout</p>
         </div>
