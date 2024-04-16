@@ -31,7 +31,7 @@ function Courses() {
     console.log(courseId);
     try {
       const response = await axios.get(
-        `https://university-mohamed.vercel.app${routes.courseRegister._id}${routes.courseRegister.searchRegisterByInstructor}?courseId=${courseId}`,
+        `https://university-mohamed.vercel.app${routes.courseRegister._id}${routes.courseRegister.searchRegisterByInstructor}?courseId=${courseId}&select=studentId,coursesRegisterd`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -109,7 +109,7 @@ function Courses() {
           },
           body: JSON.stringify({
             courseId,
-            semsterId,
+           
             studentId,
             Midterm,
             Oral,
@@ -214,7 +214,7 @@ function Courses() {
           placeholder="Course ID"
           aria-label=".form-control-sm example"
         />
-        <input
+        {/* <input
           style={{ width: "30%", marginLeft: "10px", height: "40px" }}
           className="form-control form-control-sm"
           type="text"
@@ -225,7 +225,7 @@ function Courses() {
           }}
           placeholder="Semster ID"
           aria-label=".form-control-sm example"
-        />
+        /> */}
         <input
           style={{ width: "30%", marginLeft: "10px", height: "40px" }}
           className="form-control form-control-sm"
@@ -322,11 +322,11 @@ function Courses() {
               return (
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
-                  <td>{student.studentId.Full_Name}</td>
-                  <td>{student.studentId.Student_Code}</td>
-                  <td>{student.studentId.National_Id}</td>
-                  <td>{student.studentId.department}</td>
-                  <td>{student.coursesRegisterd[0].course_name}</td>
+                  <td>{student.studentId?.Full_Name}</td>
+                  <td>{student.studentId?.Student_Code}</td>
+                  <td>{student.studentId?.National_Id}</td>
+                  <td>{student.studentId?.department||"No Department"}</td>
+                  <td>{student.coursesRegisterd[0]?.course_name}</td>
 
                   <td>
                     {" "}
