@@ -49,7 +49,7 @@ function NavBar() {
       try {
         // if (searchvalue.trim() !== "") {
         const response = await axios.get(
-          `https://university-system-rosy.vercel.app${routes.student._id}${routes.student.searchstudent}&page=${count}&size=20&search=${search_student_value}`,
+          `https://university-system-rosy.vercel.app${routes.student._id}${routes.student.searchstudent}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -57,8 +57,9 @@ function NavBar() {
             },
           }
         );
-        console.log(response.result);
+        
         const data = response.result;
+        
         setallstudents(data.students);
 
         // Here you can update the state related to the search or perform any other actions with the data
