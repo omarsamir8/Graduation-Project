@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Swal from "sweetalert2";
 import { useTrainingContext } from "../TrainingContext";
+import { routes } from "../routes";
 function CreateTraining() {
   const [training_name, settraining_name] = useState("");
   const [desc, setdesc] = useState("");
@@ -23,7 +24,7 @@ function CreateTraining() {
   const createTraining = async () => {
     try {
       const response = await fetch(
-        "https://university-mohamed.vercel.app/Api/training/addtraining",
+        `https://university-mohamed.vercel.app${routes.Training._id}${routes.Training.AddTraining}`,
         {
           method: "POST",
           headers: {
@@ -76,44 +77,6 @@ function CreateTraining() {
     }
   };
 
-  // get all Trainings
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         `https://university-mohamed.vercel.app/Api/training/alltraining?select=training_name&page=${count}&size=9`,
-  //         {
-  //           method: "GET",
-  //           headers: {
-  //             Authorization: `Bearer ${accessToken}`,
-  //             "refresh-token": refreshToken,
-  //           },
-  //         }
-  //       );
-
-  //       const data = await response.json();
-
-  //       // Ensure data.training is an array before updating state
-  //       if (Array.isArray(data.training)) {
-  //         setAllTrainings((prevTrainings) => [
-  //           ...prevTrainings,
-  //           ...data.training,
-  //         ]);
-  //       } else {
-  //         console.error("Invalid data format received from the server.");
-  //       }
-  //     } catch (error) {
-  //       console.error("Fetch failed", error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [accessToken, refreshToken, count]);
-
-  // useEffect(() => {
-  //   console.log(allTrainings);
-  // }, [allTrainings]);
-
   // delete course
   const deleteTraining = async (trainingId) => {
     try {
@@ -127,7 +90,7 @@ function CreateTraining() {
       });
       if (confirmed.isConfirmed) {
         const response = await fetch(
-          `https://university-mohamed.vercel.app/Api/training/deletetraining?training_id=${trainingId}`,
+          `https://university-mohamed.vercel.app${routes.Training._id}${routes.Training.deleteTraining}?training_id=${trainingId}`,
           {
             method: "DELETE",
             headers: {
@@ -156,7 +119,7 @@ function CreateTraining() {
   const updateTraining = async () => {
     try {
       const response = await fetch(
-        `https://university-mohamed.vercel.app/Api/training/updatetraining?training_id=${selectedTrainingId}`,
+        `https://university-mohamed.vercel.app${routes.Training._id}${routes.Training.updateTraining}?training_id=${selectedTrainingId}`,
         {
           method: "PUT",
           headers: {
@@ -232,7 +195,7 @@ function CreateTraining() {
       formData.append("trainingId", trainingId);
 
       const response = await fetch(
-        "https://university-mohamed.vercel.app/Api/training/Add/images",
+        `https://university-mohamed.vercel.app${routes.Training._id}${routes.Training.AddImages}`,
         {
           method: "POST",
           headers: {

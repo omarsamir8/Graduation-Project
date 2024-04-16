@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import "../styles/Dashboard.css";
-import AdminTidioChat from "./AdminChat";
+
 import { routes } from "../routes";
 function DashBoard() {
   const [selectedComponent, setSelectedComponent] = useState(null);
@@ -133,7 +133,6 @@ function DashBoard() {
           </div>
         </div>
       </div>
-      <AdminTidioChat />
     </>
   );
 }

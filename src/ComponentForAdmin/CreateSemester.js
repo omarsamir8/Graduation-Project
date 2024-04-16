@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../Styles_For_Admin/category.css";
 import Swal from "sweetalert2";
+import { routes } from "../routes";
 function CreateSemester() {
   const [name, setname] = useState("");
   // const [level, setlevel] = useState("");
@@ -17,7 +18,7 @@ function CreateSemester() {
   const Createsemester = async () => {
     try {
       const response = await fetch(
-        "https://university-mohamed.vercel.app/Api/semster/addsemster",
+        `https://university-mohamed.vercel.app${routes.semster._id}${routes.semster.addsemster}`,
         {
           method: "POST",
           headers: {
@@ -74,7 +75,7 @@ function CreateSemester() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://university-mohamed.vercel.app/Api/semster/searchsemster?page=1&size=20`,
+          `https://university-mohamed.vercel.app${routes.semster._id}${routes.semster.searchsemster}?page=1&size=20`,
           {
             method: "GET",
             headers: {
@@ -112,7 +113,7 @@ function CreateSemester() {
       });
       if (confirmed.isConfirmed) {
         const response = await fetch(
-          `https://university-mohamed.vercel.app/Api/semster/deletesemster?semsterId=${semsterId}`,
+          `https://university-mohamed.vercel.app${routes.semster._id}${routes.semster.deletesemster}?semsterId=${semsterId}`,
           {
             method: "DELETE",
             headers: {
@@ -140,7 +141,7 @@ function CreateSemester() {
   const updateSemester = async () => {
     try {
       const response = await fetch(
-        `https://university-mohamed.vercel.app/Api/semster/updatesemster?semsterId=${selectedSemesterId}`,
+        `https://university-mohamed.vercel.app${routes.semster._id}${routes.semster.updatesemster}?semsterId=${selectedSemesterId}`,
         {
           method: "PUT",
           headers: {

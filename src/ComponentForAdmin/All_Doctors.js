@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { useEffect } from "react";
 import { useDoctorContext } from "../DoctorContext";
 import Select from "react-select";
+import { routes } from "../routes";
 
 function AllDoctors() {
   const { alldoctors, setalldoctors } = useDoctorContext();
@@ -39,7 +40,7 @@ function AllDoctors() {
       });
       if (confirmed.isConfirmed) {
         const response = await fetch(
-          `https://university-mohamed.vercel.app/Api/instructor/delete?userId=${doctorId}`,
+          `https://university-mohamed.vercel.app${routes.instructor._id}${routes.instructor.deleteInstructor}?userId=${doctorId}`,
           {
             method: "DELETE",
             headers: {
@@ -79,7 +80,7 @@ function AllDoctors() {
   const updateDoctor = async () => {
     try {
       const response = await fetch(
-        `https://university-mohamed.vercel.app/Api/instructor/update?userId=${selecteddoctor._id}`,
+        `https://university-mohamed.vercel.app${routes.instructor._id}${routes.instructor.updateInstructor}?userId=${selecteddoctor._id}`,
         {
           method: "PUT",
           headers: {
