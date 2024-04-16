@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
+import { routes } from "../routes";
 
 function Login() {
   const navigate = useNavigate();
@@ -106,7 +107,7 @@ function Login() {
   const handleLoginforadmin = async () => {
     try {
       const response = await fetch(
-        "https://university-mohamed.vercel.app/Api/admin/login",
+        `https://university-mohamed.vercel.app${routes.Admin._id}${routes.Admin.login}`,
         {
           method: "POST",
           headers: {
