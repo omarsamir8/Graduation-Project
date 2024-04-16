@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Select from "react-select";
+import { routes } from "../routes";
 
 function CreateDoctor() {
   const [FullName, setFullName] = useState("");
@@ -28,7 +29,7 @@ function CreateDoctor() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://university-mohamed.vercel.app/Api/courses/searchcourse?size=20`,
+          `https://university-mohamed.vercel.app${routes.course._id}${routes.course.searchCourseByAdmin}?size=20`,
           {
             method: "GET",
             headers: {
@@ -57,7 +58,7 @@ function CreateDoctor() {
   const createdoctor = async () => {
     try {
       const response = await fetch(
-        "https://university-mohamed.vercel.app/Api/Instructor/create",
+        `https://university-mohamed.vercel.app${routes.instructor._id}${routes.instructor.createInstructor}`,
         {
           method: "POST",
           headers: {
@@ -109,7 +110,7 @@ function CreateDoctor() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://university-mohamed.vercel.app/Api/training/alltraining?page=1&size=20`,
+          `https://university-mohamed.vercel.app${routes.Training._id}${routes.Training.allTrainingByAdmin}?page=1&size=20`,
           {
             method: "GET",
             headers: {
@@ -138,7 +139,7 @@ function CreateDoctor() {
       formData.append("InstructorId", InstructorId);
 
       const response = await fetch(
-        "https://university-mohamed.vercel.app/Api/instructor/Add/image",
+        `https://university-mohamed.vercel.app${routes.instructor._id}${routes.instructor.AddImgByAdmin}`,
         {
           method: "POST",
           headers: {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Select from "react-select";
-
+import { routes } from "../routes";
 import Swal from "sweetalert2";
 import { useCourseContext } from "../CourseContext";
 
@@ -25,7 +25,7 @@ function CreateCourse() {
   const createcourse = async () => {
     try {
       const response = await fetch(
-        "https://university-mohamed.vercel.app/Api/courses/addcourse",
+        `https://university-mohamed.vercel.app${routes.course._id}${routes.course.AddCourse}`,
         {
           method: "POST",
           headers: {
@@ -83,7 +83,7 @@ function CreateCourse() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://university-mohamed.vercel.app/Api/courses/searchcourse?&size=20`,
+          `https://university-mohamed.vercel.app${routes.course._id}${routes.course.searchCourseByAdmin}?&size=20`,
           {
             method: "GET",
             headers: {
@@ -121,7 +121,7 @@ function CreateCourse() {
       });
       if (confirmed.isConfirmed) {
         const response = await fetch(
-          `https://university-mohamed.vercel.app/Api/courses/deletecourse?courseId=${courseId}`,
+          `https://university-mohamed.vercel.app${routes.course._id}${routes.course.deleteCourse}?courseId=${courseId}`,
           {
             method: "DELETE",
             headers: {
@@ -150,7 +150,7 @@ function CreateCourse() {
   const updateCourse = async () => {
     try {
       const response = await fetch(
-        `https://university-mohamed.vercel.app/Api/courses/updatecourse?courseId=${selectedCourseId}`,
+        `https://university-mohamed.vercel.app${routes.course._id}${routes.course.updateCourse}?courseId=${selectedCourseId}`,
         {
           method: "PUT",
           headers: {
@@ -223,7 +223,7 @@ function CreateCourse() {
       formData.append("courseId", courseId);
 
       const response = await fetch(
-        "https://university-mohamed.vercel.app/Api/courses/Add/images",
+        `https://university-mohamed.vercel.app${routes.course._id}${routes.course.AddCourseImg}`,
         {
           method: "POST",
           headers: {
