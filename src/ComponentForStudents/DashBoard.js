@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from "react";
 import "../styles/Dashboard.css";
 import axios from "axios";
-
+import { routes } from "../routes";
 
 import TidioChat from "./TidioChat";
 function Dashboard() {
@@ -21,7 +21,7 @@ function Dashboard() {
     const fetchSemesterGrade = async () => {
       try {
         const response = await axios.get(
-          "https://university-mohamed.vercel.app/Api/student/Grades/stugrades",
+          `https://university-mohamed.vercel.app${routes.studentGrades._id}${routes.studentGrades.NewspaperBystudent}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -75,7 +75,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://university-mohamed.vercel.app/Api/student/register/getRegister`,
+          `https://university-mohamed.vercel.app${routes.courseRegister._id}${routes.courseRegister.GetRegisterInfoByStudent}`,
           {
             method: "GET",
             headers: {
@@ -154,9 +154,7 @@ function Dashboard() {
           </div>
         </div>
       </div>
-      <TidioChat/>
-    
-
+      <TidioChat />
     </>
   );
 }

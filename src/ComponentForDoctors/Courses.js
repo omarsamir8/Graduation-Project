@@ -22,7 +22,7 @@ function Courses() {
   const [Oral, setOral] = useState("");
   const [Practical, setPractical] = useState("");
   const [mainsemester, setmainsemester] = useState([]);
-
+  const [StudentResultReport, setStudentResultReport] = useState([]);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
 
@@ -31,7 +31,7 @@ function Courses() {
     console.log(courseId);
     try {
       const response = await axios.get(
-        `https://university-mohamed.vercel.app${routes.courseRegister._id}${routes.courseRegister.searchRegisterByInstructor}?courseId=${courseId}&select=studentId,coursesRegisterd`,
+        `https://university-mohamed.vercel.app${routes.courseRegister._id}${routes.courseRegister.searchRegisterByInstructor}?courseId=${courseId}&page=1&size=10&select=studentId,coursesRegisterd`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -109,7 +109,7 @@ function Courses() {
           },
           body: JSON.stringify({
             courseId,
-           
+            // semsterId,
             studentId,
             Midterm,
             Oral,
@@ -145,29 +145,27 @@ function Courses() {
   };
 
   // students result
-  const [StudentResult, setStudentResult] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `https://university-mohamed.vercel.app${routes.studentGrades._id}${routes.studentGrades.GetSingleGradeAboutUserByInstructor}?courseId=${courseId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "refresh-token": refreshToken,
-            },
-          }
-        );
-        console.log(response.data);
-        setStudentResult(response.data.grades);
-      } catch (error) {
-        console.error("Error fetching doctor info:", error);
-      }
-    };
 
-    fetchData();
-  }, [accessToken, refreshToken]);
-  console.log(StudentResult);
+  const fetchResultData = async (courseId) => {
+    try {
+      const response = await axios.get(
+        `https://university-mohamed.vercel.app/Api/students/Grades/search/by/instructor?courseId=${courseId}&size=10&page=1`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+        }
+      );
+      console.log(response.data);
+
+      setStudentResultReport(response.data.grades);
+      // setStudentResult(response.data.grades);
+    } catch (error) {
+      console.error("Error fetching doctor info:", error);
+    }
+  };
+
   return (
     <>
       <div className="enrollcourse">
@@ -180,9 +178,20 @@ function Courses() {
                 <button
                   type="button"
                   className="btn btn-primary"
-                  onClick={() => fetchRegisteredStudents(material._id)}
+                  onClick={() => {
+                    fetchRegisteredStudents(material._id);
+                  }}
                 >
                   Students
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => {
+                    fetchResultData(material._id);
+                  }}
+                >
+                  Results
                 </button>
               </div>
             </div>
@@ -320,12 +329,12 @@ function Courses() {
           <tbody>
             {allstudentregistercourses.map((student, index) => {
               return (
-                <tr key={index}>
+                <tr key={index + 1}>
                   <th scope="row">{index + 1}</th>
                   <td>{student.studentId?.Full_Name}</td>
                   <td>{student.studentId?.Student_Code}</td>
                   <td>{student.studentId?.National_Id}</td>
-                  <td>{student.studentId?.department||"No Department"}</td>
+                  <td>{student.studentId?.department || "No Department"}</td>
                   <td>{student.coursesRegisterd[0]?.course_name}</td>
 
                   <td>
@@ -386,10 +395,10 @@ function Courses() {
             </tr>
           </thead>
           <tbody>
-            {StudentResult.map((reults, index) => {
+            {StudentResultReport.map((reults, index) => {
               return (
                 <tr>
-                  <th scope="row">{index}</th>
+                  <th scope="row">{index + 1}</th>
                   <td>{reults.studentId}</td>
                   <td>{reults.courseId}</td>
                   <td>{reults.YearWorks}</td>

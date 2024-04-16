@@ -82,9 +82,9 @@ export const routes = {
     GetSingleGradeAboutUserByAdmin: "/Get/Single/grade/about/student/by/admin",
     GetSingleGradeAboutUserByInstructor:
       "/Get/Single/grade/about/student/by/instructor",
-    NewspaperBystudent: "Get/Newspaper/By/student",
-    NewspaperByAdmin: "Get/Newspaper/By/Admin",
-    GetMainsemsterGrade: "Get/Main/semster/Grade/for/student",
+    NewspaperBystudent: "/Get/Newspaper/By/student",
+    NewspaperByAdmin: "/Get/Newspaper/By/Admin",
+    GetMainsemsterGrade: "/Get/Main/semster/Grade/for/student",
   },
   semster: {
     _id: "/Api/semsters",
@@ -111,9 +111,8 @@ export const routes = {
     AddImages: "/Add/images/to/training",
     deleteImages: "/delete/images/from/training",
     singleTraininginfoByAdmin: "/get/single/training/info/by/admin",
-    singleTraininginfoByinstructor:
-      "/get/single/training/info/info/by/instructor",
-    singleTraininginfoBystudent: "/get/single/training/info/info/by/student",
+    singleTraininginfoByinstructor: "/get/single/training/info/by/instructor",
+    singleTraininginfoBystudent: "/get/single/training/info/by/student",
     allTrainingByAdmin: "/get/all/trainings/info/by/admin",
     allTrainingBystudent: "/get/all/trainings/info/by/student",
     allTrainingByinstructor: "/get/all/trainings/info/by/instructor",

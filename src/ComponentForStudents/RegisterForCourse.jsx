@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { routes } from "../routes";
 
 export default function RegisterForCourse() {
   const accessToken = localStorage.getItem("accesstoken");
@@ -11,7 +12,7 @@ export default function RegisterForCourse() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://university-mohamed.vercel.app/Api/student/Availablecourses`,
+          `https://university-mohamed.vercel.app${routes.student._id}${routes.student.Availablecourses}&page=1&size=10`,
           {
             method: "POST",
             headers: {
