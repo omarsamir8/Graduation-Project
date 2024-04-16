@@ -45,11 +45,10 @@ function NavBar() {
   }, [accessToken, refreshToken]);
 
   useEffect(() => {
-    const fetchsearch = async () => {
+    const fetchData = async () => {
       try {
-        // if (searchvalue.trim() !== "") {
         const response = await axios.get(
-          `https://university-system-rosy.vercel.app${routes.student._id}${routes.student.searchstudent}`,
+          `https://university-mohamed.vercel.app${routes.student._id}${routes.student.searchstudent}?page=1&size=20&search=${search_student_value}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -57,31 +56,16 @@ function NavBar() {
             },
           }
         );
-        
-        const data = response.result;
-        
-        setallstudents(data.students);
 
-        // Here you can update the state related to the search or perform any other actions with the data
+        console.log(response.data);
+        setallstudents(response.data.students);
       } catch (error) {
-        // }
-        console.error("Error fetching search results:", error);
-      }
-    };
-    fetchsearch();
-    const handleKeyPress = (e) => {
-      if (e.key === "Enter") {
-        fetchsearch();
+        console.error("Error fetching admin info:", error);
       }
     };
 
-    document.addEventListener("keydown", handleKeyPress);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
+    fetchData();
   }, [accessToken, refreshToken, search_student_value]);
-
   console.log(allstudents);
   // search for doctor
   // useEffect(() => {
