@@ -1,25 +1,22 @@
 import { React, useEffect, useState } from "react";
 import "../styles/Dashboard.css";
 import AdminTidioChat from "./AdminChat";
+import { routes } from "../routes";
 function DashBoard() {
   const [selectedComponent, setSelectedComponent] = useState(null);
-  const [allstudents, setallstudents] = useState([]);
-  const [alldoctors, setalldoctors] = useState([]);
-  const [allcourses, setallcourses] = useState([]);
-  const [alltraining, setalltraining] = useState([]);
+  const [dashboardinfo, setdashboardinfo] = useState([]);
   const handleSidebarClick = (componentName) => {
     setSelectedComponent(componentName);
   };
-
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
 
-  // get all students
+  // get Dashboard Info
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-mohamed.vercel.app/Api/user/searchuser?select=Full_Name,Student_Code,semesterId,PhoneNumber&size=20",
+          `https://university-mohamed.vercel.app${routes.Admin._id}${routes.Admin.dashboardAdmin}`,
           {
             method: "GET",
             headers: {
@@ -30,8 +27,8 @@ function DashBoard() {
         );
 
         const data = await response.json();
-        setallstudents(data.students);
-        console.log(data.students);
+        setdashboardinfo(data.info);
+        console.log(data.info);
       } catch (error) {
         console.error("Fetch failed", error);
       }
@@ -39,94 +36,6 @@ function DashBoard() {
 
     fetchData();
   }, [accessToken, refreshToken]);
-
-  // get all doctors
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://university-mohamed.vercel.app/Api/instructor/search?sort=1&select=email,FullName,Materials&size=20",
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "refresh-token": refreshToken,
-            },
-          }
-        );
-
-        const data = await response.json();
-        setalldoctors(data.Instructors);
-        console.log(data);
-      } catch (error) {
-        console.error("Fetch failed", error);
-      }
-    };
-
-    fetchData();
-  }, [accessToken, refreshToken]);
-
-  useEffect(() => {
-    console.log(alldoctors);
-  }, [alldoctors]);
-  // get all courses
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://university-mohamed.vercel.app/Api/courses/searchcourse?size=20",
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "refresh-token": refreshToken,
-            },
-          }
-        );
-
-        const data = await response.json();
-        setallcourses(data.courses);
-        console.log(data);
-      } catch (error) {
-        console.error("Fetch failed", error);
-      }
-    };
-
-    fetchData();
-  }, [accessToken, refreshToken]);
-
-  useEffect(() => {
-    console.log(allcourses);
-  }, [allcourses]);
-  // get all training
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://university-mohamed.vercel.app/Api/training/alltraining?select=training_name&page=1&size=9",
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "refresh-token": refreshToken,
-            },
-          }
-        );
-
-        const data = await response.json();
-        setalltraining(data.trainings);
-        console.log(data);
-      } catch (error) {
-        console.error("Fetch failed", error);
-      }
-    };
-
-    fetchData();
-  }, [accessToken, refreshToken]);
-
-  useEffect(() => {
-    console.log(alltraining);
-  }, [alltraining]);
 
   return (
     <>
@@ -136,7 +45,7 @@ function DashBoard() {
             <div className="main">
               <i class="fa-solid fa-book-open"></i>
               <h3 className="animate__animated animate__backInDown">
-                {allstudents.length}
+                {dashboardinfo.students}
               </h3>
               <p className="animate__animated animate__backInDown">
                 Total Students
@@ -145,7 +54,7 @@ function DashBoard() {
             <div className="main">
               <i class="fa-solid fa-check"></i>
               <h3 className="animate__animated animate__backInDown">
-                {alldoctors.length}
+                {dashboardinfo.instructors}
               </h3>
               <p className="animate__animated animate__backInDown">
                 Total Doctor{" "}
@@ -154,7 +63,7 @@ function DashBoard() {
             <div className="main">
               <i class="fa-solid fa-square-xmark"></i>
               <h3 className="animate__animated animate__backInDown">
-                {allcourses.length}
+                {dashboardinfo.courses}
               </h3>
               <p className="animate__animated animate__backInDown">
                 {" "}
@@ -166,7 +75,7 @@ function DashBoard() {
             <div className="main">
               <i class="fa-brands fa-stack-overflow"></i>
               <h3 className="animate__animated animate__backInDown">
-                {alltraining.length}
+                {dashboardinfo.training}
               </h3>
               <p className="animate__animated animate__backInDown">
                 Total Training
@@ -174,9 +83,11 @@ function DashBoard() {
             </div>
             <div className="main">
               <i class="fa-solid fa-check"></i>
-              <h3 className="animate__animated animate__backInDown">Done</h3>
+              <h3 className="animate__animated animate__backInDown">
+                {dashboardinfo.semsters}
+              </h3>
               <p className="animate__animated animate__backInDown">
-                State Of Schedule
+                Total Semester
               </p>
             </div>
             <div className="main">
@@ -222,7 +133,7 @@ function DashBoard() {
           </div>
         </div>
       </div>
-<AdminTidioChat/>
+      <AdminTidioChat />
     </>
   );
 }

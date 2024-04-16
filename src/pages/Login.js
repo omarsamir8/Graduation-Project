@@ -49,7 +49,7 @@ function Login() {
   const handleLoginForStudent = async () => {
     try {
       const response = await fetch(
-        `https://university-mohamed.vercel.app/Api/user/login`,
+        `https://university-mohamed.vercel.app${routes.student._id}${routes.student.login}`,
         {
           method: "POST",
           headers: {
@@ -78,7 +78,7 @@ function Login() {
   const handleLoginforDoctor = async () => {
     try {
       const response = await fetch(
-        "https://university-mohamed.vercel.app/Api/Instructor/login",
+        `https://university-mohamed.vercel.app${routes.instructor._id}${routes.instructor.login}`,
         {
           method: "POST",
           headers: {

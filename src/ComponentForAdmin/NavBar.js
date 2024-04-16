@@ -5,6 +5,7 @@ import { useStudentContext } from "../StudentContext";
 import { useDoctorContext } from "../DoctorContext";
 import { useTrainingContext } from "../TrainingContext";
 import { useCourseContext } from "../CourseContext";
+import { routes } from "../routes";
 
 function NavBar() {
   const [admininfo, setadmininfo] = useState([]);
@@ -24,7 +25,7 @@ function NavBar() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://university-mohamed.vercel.app/Api/admin/getinfo",
+          `https://university-mohamed.vercel.app${routes.Admin._id}${routes.Admin.getinfoAdmin}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -48,7 +49,7 @@ function NavBar() {
       try {
         // if (searchvalue.trim() !== "") {
         const response = await axios.get(
-          `https://university-system-rosy.vercel.app/Api/user/searchuser?page=${count}&size=20&search=${search_student_value}`,
+          `https://university-system-rosy.vercel.app${routes.student._id}${routes.student.searchstudent}&page=${count}&size=20&search=${search_student_value}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -56,8 +57,8 @@ function NavBar() {
             },
           }
         );
-        console.log(response.data);
-        const data = response.data;
+        console.log(response.result);
+        const data = response.result;
         setallstudents(data.students);
 
         // Here you can update the state related to the search or perform any other actions with the data
@@ -82,125 +83,125 @@ function NavBar() {
 
   console.log(allstudents);
   // search for doctor
-  useEffect(() => {
-    const fetchsearchfordoctor = async () => {
-      try {
-        // if (searchvalue.trim() !== "") {
-        const response = await axios.get(
-          `https://university-system-rosy.vercel.app/Api/instructor/search?sort=1&page=${count}&size=20&search=${doctor_value}`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "refresh-token": refreshToken,
-            },
-          }
-        );
-        console.log(response.data);
-        const data = response.data;
-        setalldoctors(data.Instructor);
+  // useEffect(() => {
+  //   const fetchsearchfordoctor = async () => {
+  //     try {
+  //       // if (searchvalue.trim() !== "") {
+  //       const response = await axios.get(
+  //         `https://university-system-rosy.vercel.app/Api/instructor/search?sort=1&page=${count}&size=20&search=${doctor_value}`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${accessToken}`,
+  //             "refresh-token": refreshToken,
+  //           },
+  //         }
+  //       );
+  //       console.log(response.data);
+  //       const data = response.data;
+  //       setalldoctors(data.Instructor);
 
-        // Here you can update the state related to the search or perform any other actions with the data
-      } catch (error) {
-        // }
-        console.error("Error fetching search results:", error);
-      }
-    };
-    fetchsearchfordoctor();
-    const handleKeyPress = (e) => {
-      if (e.key === "Enter") {
-        fetchsearchfordoctor();
-      }
-    };
+  //       // Here you can update the state related to the search or perform any other actions with the data
+  //     } catch (error) {
+  //       // }
+  //       console.error("Error fetching search results:", error);
+  //     }
+  //   };
+  //   fetchsearchfordoctor();
+  //   const handleKeyPress = (e) => {
+  //     if (e.key === "Enter") {
+  //       fetchsearchfordoctor();
+  //     }
+  //   };
 
-    document.addEventListener("keydown", handleKeyPress);
+  //   document.addEventListener("keydown", handleKeyPress);
 
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
-  }, [accessToken, refreshToken, doctor_value]);
+  //   return () => {
+  //     document.removeEventListener("keydown", handleKeyPress);
+  //   };
+  // }, [accessToken, refreshToken, doctor_value]);
 
-  console.log(allstudents);
+  // console.log(allstudents);
 
   // search for training
-  useEffect(() => {
-    const fetchsearchfortraining = async () => {
-      try {
-        // if (searchvalue.trim() !== "") {
-        const response = await axios.get(
-          `https://university-mohamed.vercel.app/Api/training/alltraining?select=training_name&page=${count}&size=9&search=${training_value}`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "refresh-token": refreshToken,
-            },
-          }
-        );
-        console.log(response.data);
-        const data = response.data;
-        console.log(data);
-        setAllTrainings(data.trainings);
-        console.log(allTrainings);
+  // useEffect(() => {
+  //   const fetchsearchfortraining = async () => {
+  //     try {
+  //       // if (searchvalue.trim() !== "") {
+  //       const response = await axios.get(
+  //         `https://university-mohamed.vercel.app/Api/training/alltraining?select=training_name&page=${count}&size=9&search=${training_value}`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${accessToken}`,
+  //             "refresh-token": refreshToken,
+  //           },
+  //         }
+  //       );
+  //       console.log(response.data);
+  //       const data = response.data;
+  //       console.log(data);
+  //       setAllTrainings(data.trainings);
+  //       console.log(allTrainings);
 
-        // Here you can update the state related to the search or perform any other actions with the data
-      } catch (error) {
-        // }
-        console.error("Error fetching search results:", error);
-      }
-    };
-    fetchsearchfortraining();
-    const handleKeyPress = (e) => {
-      if (e.key === "Enter") {
-        fetchsearchfortraining();
-      }
-    };
+  //       // Here you can update the state related to the search or perform any other actions with the data
+  //     } catch (error) {
+  //       // }
+  //       console.error("Error fetching search results:", error);
+  //     }
+  //   };
+  //   fetchsearchfortraining();
+  //   const handleKeyPress = (e) => {
+  //     if (e.key === "Enter") {
+  //       fetchsearchfortraining();
+  //     }
+  //   };
 
-    document.addEventListener("keydown", handleKeyPress);
+  //   document.addEventListener("keydown", handleKeyPress);
 
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
-  }, [accessToken, refreshToken, training_value]);
+  //   return () => {
+  //     document.removeEventListener("keydown", handleKeyPress);
+  //   };
+  // }, [accessToken, refreshToken, training_value]);
 
   // serach for course
-  useEffect(() => {
-    const fetchsearchforcourse = async () => {
-      try {
-        // if (searchvalue.trim() !== "") {
-        const response = await axios.get(
-          `https://university-mohamed.vercel.app/Api/courses/searchcourse?page=${count}&size=18
-          &search=${training_value}`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "refresh-token": refreshToken,
-            },
-          }
-        );
-        console.log(response.data);
-        const data = response.data;
-        console.log(data);
-        setallcourses(data.courses);
-        console.log(allcourses);
+  // useEffect(() => {
+  //   const fetchsearchforcourse = async () => {
+  //     try {
+  //       // if (searchvalue.trim() !== "") {
+  //       const response = await axios.get(
+  //         `https://university-mohamed.vercel.app/Api/courses/searchcourse?page=${count}&size=18
+  //         &search=${training_value}`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${accessToken}`,
+  //             "refresh-token": refreshToken,
+  //           },
+  //         }
+  //       );
+  //       console.log(response.data);
+  //       const data = response.data;
+  //       console.log(data);
+  //       setallcourses(data.courses);
+  //       console.log(allcourses);
 
-        // Here you can update the state related to the search or perform any other actions with the data
-      } catch (error) {
-        // }
-        console.error("Error fetching search results:", error);
-      }
-    };
-    fetchsearchforcourse();
-    const handleKeyPress = (e) => {
-      if (e.key === "Enter") {
-        fetchsearchforcourse();
-      }
-    };
+  //       // Here you can update the state related to the search or perform any other actions with the data
+  //     } catch (error) {
+  //       // }
+  //       console.error("Error fetching search results:", error);
+  //     }
+  //   };
+  //   fetchsearchforcourse();
+  //   const handleKeyPress = (e) => {
+  //     if (e.key === "Enter") {
+  //       fetchsearchforcourse();
+  //     }
+  //   };
 
-    document.addEventListener("keydown", handleKeyPress);
+  //   document.addEventListener("keydown", handleKeyPress);
 
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
-  }, [accessToken, refreshToken, course_value]);
+  //   return () => {
+  //     document.removeEventListener("keydown", handleKeyPress);
+  //   };
+  // }, [accessToken, refreshToken, course_value]);
 
   // loading more
   const loadMore = () => {

@@ -3,6 +3,7 @@ import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Swal from "sweetalert2";
 import { red } from "@mui/material/colors";
 // import { Form } from "react-router-dom";
+import { routes } from "../routes";
 function CreateStudent() {
   const [Full_Name, setFull_Name] = useState("");
   const [National_Id, setNational_Id] = useState("");
@@ -20,7 +21,7 @@ function CreateStudent() {
   const createstudent = async () => {
     try {
       const response = await fetch(
-        "https://university-mohamed.vercel.app/Api/user/addstudent",
+        `https://university-mohamed.vercel.app${routes.student._id}${routes.student.createStudent}`,
         {
           method: "POST",
           headers: {
@@ -72,7 +73,7 @@ function CreateStudent() {
       formData.append("studentId", studentId);
 
       const response = await fetch(
-        "https://university-mohamed.vercel.app/Api/user/Add/image",
+        `https://university-mohamed.vercel.app${routes.student._id}${routes.student.AddImgByAdmin}`,
         {
           method: "POST",
           headers: {
