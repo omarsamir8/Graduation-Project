@@ -4,6 +4,7 @@ import { useRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { routes } from "../routes";
 
 function Training() {
   const [selectedComponent2, setSelectedComponent2] = useRecoilState(
@@ -23,7 +24,7 @@ function Training() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://university-mohamed.vercel.app/Api/instructor/getinfo",
+          `https://university-mohamed.vercel.app${routes.instructor._id}${routes.instructor.InstructorInfo}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -69,7 +70,7 @@ function Training() {
     console.log(trainingId);
     try {
       const response = await axios.get(
-        `https://university-mohamed.vercel.app/Api/Register/Training/searchTraining?select=studentId,trainingRegisterd&trainingId=${trainingId}`,
+        `https://university-mohamed.vercel.app${routes.RegisterTraining._id}${routes.RegisterTraining.searchTrainingsRegisterdByInstructor}?select=studentId,trainingRegisterd&trainingId=${trainingId}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -90,7 +91,7 @@ function Training() {
   const Upload_grade = async (studentId, trainingId) => {
     try {
       const response = await fetch(
-        "https://university-mohamed.vercel.app/Api/Training/Result/upload",
+        `https://university-mohamed.vercel.app${routes.TrainingResult._id}${routes.TrainingResult.uploadByInstructor}`,
         {
           method: "POST",
           headers: {
@@ -172,7 +173,7 @@ function Training() {
             {allstudentregistertraining.map((student, index = 1) => {
               return (
                 <tr>
-                  <th scope="row">{index}</th>
+                  <th scope="row">{index + 1}</th>
                   <td>{student.studentId.Full_Name}</td>
                   <td>{student.studentId.Student_Code}</td>
                   <td>{student.studentId.PhoneNumber}</td>

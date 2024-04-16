@@ -31,7 +31,7 @@ function Courses() {
     console.log(courseId);
     try {
       const response = await axios.get(
-        `https://university-mohamed.vercel.app${routes.courseRegister._id}${routes.courseRegister.searchRegisterByInstructor}`,
+        `https://university-mohamed.vercel.app${routes.courseRegister._id}${routes.courseRegister.searchRegisterByInstructor}?courseId=${courseId}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -303,7 +303,7 @@ function Courses() {
         </button>
       </div>
       <div style={{ marginTop: "5rem" }} className="get_all_student">
-        <h2 style={{ marginLeft: ".7rem" }}> All Students Reg Course </h2>
+        <h2 style={{ marginLeft: ".7rem" }}>All Students Reg Course </h2>
         <table style={{ textAlign: "center" }} class="table">
           <thead>
             <tr>
@@ -368,7 +368,10 @@ function Courses() {
         </table>
       </div>
       <div style={{ marginTop: "1rem" }} className="get_all_student">
-        <h2 style={{ marginLeft: ".7rem" }}> All Students Reg Course </h2>
+        <h2 style={{ marginLeft: ".7rem" }}>
+          {" "}
+          Result Of All Students Reg Course{" "}
+        </h2>
         <table style={{ textAlign: "center" }} class="table">
           <thead>
             <tr>
