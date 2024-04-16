@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from "react";
 import "../styles/Dashboard.css";
 import axios from "axios";
+import { routes } from "../routes";
 function Dashboard() {
   const [selectedComponent2, setSelectedComponent2] = useState(null);
   const handleSidebarClick = (componentName) => {
@@ -15,7 +16,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://university-mohamed.vercel.app/Api/instructor/getinfo",
+          `https://university-mohamed.vercel.app${routes.instructor._id}${routes.instructor.InstructorInfo}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -25,6 +26,7 @@ function Dashboard() {
         );
         console.log(response.data);
         setdoctorMatarials(response.data.user.Materials);
+        setdoctorTrainings(response.data.user.Training);
       } catch (error) {
         console.error("Error fetching doctor info:", error);
       }
@@ -33,29 +35,6 @@ function Dashboard() {
     fetchData();
   }, [accessToken, refreshToken]);
 
-  // doctor training
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://university-mohamed.vercel.app/Api/instructor/getinfo",
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "refresh-token": refreshToken,
-            },
-          }
-        );
-        console.log(response.data);
-
-        setdoctorTrainings(response.data.user.Training);
-      } catch (error) {
-        console.error("Error fetching doctor info:", error);
-      }
-    };
-
-    fetchData();
-  }, [accessToken, refreshToken, setSelectedComponent2]);
   return (
     <>
       <div className="dashboard-container">

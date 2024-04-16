@@ -1,7 +1,7 @@
 import "../styles/Poster.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
-
+import { routes } from "../routes";
 function Poster() {
   const [doctorinfo, setDoctorInfo] = useState([]);
   const accessToken = localStorage.getItem("accesstoken");
@@ -11,7 +11,7 @@ function Poster() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://university-mohamed.vercel.app/Api/instructor/getinfo",
+          `https://university-mohamed.vercel.app${routes.instructor._id}${routes.instructor.InstructorInfo}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,

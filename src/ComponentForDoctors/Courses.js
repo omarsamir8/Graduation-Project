@@ -4,6 +4,7 @@ import { useRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { routes } from "../routes";
 
 function Courses() {
   const [selectedComponent2, setSelectedComponent2] = useRecoilState(
@@ -30,7 +31,7 @@ function Courses() {
     console.log(courseId);
     try {
       const response = await axios.get(
-        `https://university-mohamed.vercel.app/Api/student/register/searchRegister?select=studentId,coursesRegisterd&size=20&courseId=${courseId}`,
+        `https://university-mohamed.vercel.app${routes.courseRegister._id}${routes.courseRegister.searchRegisterByInstructor}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -52,7 +53,7 @@ function Courses() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://university-mohamed.vercel.app/Api/instructor/getinfo",
+          `https://university-mohamed.vercel.app${routes.instructor._id}${routes.instructor.InstructorInfo}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -69,14 +70,14 @@ function Courses() {
 
     fetchData();
   }, [accessToken, refreshToken]);
-  // get semster information
   console.log(doctorMatarials);
+  // get semster information
 
   useEffect(() => {
     const fetchDataa = async () => {
       try {
         const response = await axios.get(
-          "https://university-mohamed.vercel.app/Api/semster/MainSemsterInfo",
+          `https://university-mohamed.vercel.app${routes.semster._id}${routes.semster.MainSemsterInfoByInstructor}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -98,7 +99,7 @@ function Courses() {
   const Upload_grade = async () => {
     try {
       const response = await fetch(
-        "https://university-mohamed.vercel.app/Api/student/Grades/addgrate",
+        `https://university-mohamed.vercel.app${routes.studentGrades._id}${routes.studentGrades.AddGradeByInstructor}`,
         {
           method: "POST",
           headers: {
@@ -149,7 +150,7 @@ function Courses() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://university-mohamed.vercel.app/Api/student/Grades/studentsGratesSearch?courseId=${courseId}`,
+          `https://university-mohamed.vercel.app${routes.studentGrades._id}${routes.studentGrades.GetSingleGradeAboutUserByInstructor}?courseId=${courseId}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,

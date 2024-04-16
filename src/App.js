@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Registered_Courses from "./pages/Registered_Courses/Registered_Courses";
 import Reports_student from "./pages/Reports_student/Reports_student";
 import Semester_grade from "./pages/Semester_grade";
+import { routes } from "./routes";
 
 function App() {
   return (

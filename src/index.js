@@ -8,6 +8,7 @@ import { RecoilRoot } from "recoil";
 import { DoctorProvider } from "./DoctorContext";
 import { TrainingProvider } from "./TrainingContext";
 import { CourseProvider } from "./CourseContext";
+import { routes } from "./routes";
 
 ReactDOM.render(
   <React.StrictMode>
