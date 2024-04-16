@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Swal from "sweetalert2";
 import { useStudentContext } from "../StudentContext";
+import { routes } from "../routes";
 
 function All_Students() {
   const { allstudents, setallstudents } = useStudentContext();
@@ -33,7 +34,7 @@ function All_Students() {
       });
       if (confirmed.isConfirmed) {
         const response = await fetch(
-          `https://university-mohamed.vercel.app/Api/user/deleteStudent?userId=${studentId}`,
+          `https://university-mohamed.vercel.app${routes.student._id}${routes.student.deleteStudent}?userId=${studentId}`,
           {
             method: "DELETE",
             headers: {
@@ -74,7 +75,7 @@ function All_Students() {
   const updateStudent = async () => {
     try {
       const response = await fetch(
-        `https://university-mohamed.vercel.app/Api/user/updateStudent?userId=${selectedStudent._id}`,
+        `https://university-mohamed.vercel.app${routes.student._id}${routes.student.updateStudent}?userId=${selectedStudent._id}`,
         {
           method: "PUT",
           headers: {
@@ -293,7 +294,6 @@ function All_Students() {
           </tbody>
         </table>
       </div>
-     
     </>
   );
 }
