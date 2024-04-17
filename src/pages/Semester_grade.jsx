@@ -3,6 +3,7 @@ import Report from "../ComponentForStudents/Report";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { routes } from "../routes";
 export default function Semester_grade() {
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
@@ -19,7 +20,7 @@ export default function Semester_grade() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://university-mohamed.vercel.app/Api/user/getuser",
+          `https://university-mohamed.vercel.app${routes.student._id}${routes.student.getInfo}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -29,7 +30,6 @@ export default function Semester_grade() {
         );
         console.log(response.data);
         setstudentinfo(response.data.result);
-        setSemesterinfo(response.data.result.semsterInfo);
 
         // Log the updated state
       } catch (error) {
@@ -47,7 +47,7 @@ export default function Semester_grade() {
     const fetchSemesterGrade = async () => {
       try {
         const response = await axios.get(
-          "https://university-mohamed.vercel.app/Api/student/Grades/MainsemsterGrate",
+          "https://university-mohamed.vercel.app/Api/students/Grades/Get/Main/semster/Grade/for/student",
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,

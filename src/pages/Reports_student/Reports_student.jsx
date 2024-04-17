@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./Reports_student.scss";
 import Report from "../../ComponentForStudents/Report";
 import axios from "axios";
+import { routes } from "../../routes";
 
 export default function Reports_student() {
   const usenavigate = useNavigate();
@@ -21,7 +22,7 @@ export default function Reports_student() {
     const fetchSemesterGrade = async () => {
       try {
         const response = await axios.get(
-          "https://university-mohamed.vercel.app/Api/student/Grades/stugrades",
+          `https://university-mohamed.vercel.app${routes.studentGrades._id}${routes.studentGrades.NewspaperBystudent}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import jsPDF from "jspdf";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { routes } from "../../routes";
 
 export default function Registered_Courses() {
   const usenavigate = useNavigate();
@@ -22,7 +23,7 @@ export default function Registered_Courses() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://university-mohamed.vercel.app/Api/user/getuser",
+          `https://university-mohamed.vercel.app${routes.student._id}${routes.student.getInfo}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -47,7 +48,7 @@ export default function Registered_Courses() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://university-mohamed.vercel.app/Api/student/register/getRegister`,
+          `https://university-mohamed.vercel.app${routes.courseRegister._id}${routes.courseRegister.GetRegisterInfoByStudent}`,
           {
             method: "GET",
             headers: {
@@ -86,7 +87,7 @@ export default function Registered_Courses() {
 
         <div style={{ marginTop: "120px" }} className="col-11 Table_courses">
           <div className="Line_div"></div>
-       
+
           <Table striped bordered hover size="md" className="col-12">
             <thead>
               <tr>

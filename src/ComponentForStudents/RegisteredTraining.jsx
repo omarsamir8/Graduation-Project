@@ -1,6 +1,7 @@
 import { Table } from "jspdf-autotable";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { routes } from "../routes";
 
 export default function RegisteredTraining() {
   const accessToken = localStorage.getItem("accesstoken");
@@ -13,7 +14,7 @@ export default function RegisteredTraining() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://university-mohamed.vercel.app/Api/Register/Training/getTrainingInfo`,
+          `https://university-mohamed.vercel.app${routes.RegisterTraining._id}${routes.RegisterTraining.getTrainingRegisterdInfoTostu}`,
           {
             method: "GET",
             headers: {
@@ -46,7 +47,7 @@ export default function RegisteredTraining() {
 
       if (confirmed.isConfirmed) {
         const response = await fetch(
-          `https://university-mohamed.vercel.app/Api/Register/Training/deleteTraining?trainingId=${trainingId}`,
+          `https://university-mohamed.vercel.app${routes.RegisterTraining._id}${routes.RegisterTraining.deleteTraining}?trainingId=${trainingId}`,
           {
             method: "PATCH",
             headers: {
@@ -78,7 +79,7 @@ export default function RegisteredTraining() {
     const fetchResultData = async () => {
       try {
         const response = await fetch(
-          `https://university-mohamed.vercel.app/Api/Training/Result/SearchTrainingResult`,
+          `https://university-mohamed.vercel.app${routes.TrainingResult._id}${routes.TrainingResult.SearchTrainingResultByStudent}`,
           {
             method: "GET",
             headers: {

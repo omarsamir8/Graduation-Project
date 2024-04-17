@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { routes } from "../routes";
 
 export default function RegisterForTraining() {
   const [alltrainingsAvailable, setalltrainingsAvailable] = useState([]);
@@ -9,7 +10,7 @@ export default function RegisterForTraining() {
   const RegisterForTraining = async (tainingId) => {
     try {
       const response = await fetch(
-        `https://university-mohamed.vercel.app/Api/Register/Training/addTraining?trainingId=${tainingId}`,
+        `https://university-mohamed.vercel.app${routes.RegisterTraining._id}${routes.RegisterTraining.addTraining}?trainingId=${tainingId}`,
         {
           method: "POST",
           headers: {
@@ -43,7 +44,7 @@ export default function RegisterForTraining() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://university-mohamed.vercel.app/Api/training/alltraining?page=1&size=20`,
+          `https://university-mohamed.vercel.app${routes.Training._id}${routes.Training.allTrainingBystudent}?page=1&size=20`,
           {
             method: "GET",
             headers: {

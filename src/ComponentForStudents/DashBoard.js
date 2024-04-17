@@ -50,7 +50,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://university-mohamed.vercel.app/Api/Register/Training/getTrainingInfo`,
+          `https://university-mohamed.vercel.app${routes.RegisterTraining._id}${routes.RegisterTraining.getTrainingRegisterdInfoTostu}`,
           {
             method: "GET",
             headers: {

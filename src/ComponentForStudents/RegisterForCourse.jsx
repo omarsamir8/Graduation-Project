@@ -12,7 +12,7 @@ export default function RegisterForCourse() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://university-mohamed.vercel.app${routes.student._id}${routes.student.Availablecourses}&page=1&size=10`,
+          `https://university-mohamed.vercel.app${routes.student._id}${routes.student.Availablecourses}`,
           {
             method: "POST",
             headers: {
@@ -35,7 +35,7 @@ export default function RegisterForCourse() {
   const RegisterForCourse = async (courseId) => {
     try {
       const response = await fetch(
-        `https://university-mohamed.vercel.app/Api/student/register/addCourse?courseId=${courseId}`,
+        `https://university-mohamed.vercel.app${routes.courseRegister._id}${routes.courseRegister.addCourse}?courseId=${courseId}`,
         {
           method: "POST",
           headers: {
