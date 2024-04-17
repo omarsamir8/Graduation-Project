@@ -218,7 +218,7 @@ function CreateStudent() {
         <button
           style={{ marginLeft: "10px", width: "150px" }}
           type="button"
-          class="btn btn-primary mt-3"
+        class="btn btn-primary mt-3"
           onClick={uploadstudentimage}
         >
           Upload Photo

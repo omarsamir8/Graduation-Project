@@ -56,7 +56,7 @@ function SideBar() {
           </NavLink>
         </div>
         <div className="item col-12">
-          <i class="fa-solid fa-layer-group"></i>
+        <i class="fa-brands fa-stack-overflow"></i>
           <NavLink
             className="NavLink"
             onClick={() => setSelectedComponent("RegisteredTraining")}

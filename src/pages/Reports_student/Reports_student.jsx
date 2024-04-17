@@ -115,12 +115,14 @@ export default function Reports_student() {
                   <thead>
                     <tr>
                       <th className="col-12 Title_table_2">
-                        <p>Semester ID: {sem.semsterId._id}</p>
+                        <p>
+                          Semester Name: {sem.semsterId.term}{" "}
+                          {sem.semsterId.year}
+                        </p>
                       </th>
                     </tr>
                   </thead>
                 </Table>
-
                 <Table striped bordered hover size="md" className="col-12">
                   <thead>
                     <tr>
