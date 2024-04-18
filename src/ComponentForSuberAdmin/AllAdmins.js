@@ -20,7 +20,7 @@ function AllAdmins() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://university-mohamed.vercel.app/Api/admins/search/admin?page=1&size=5`,
+          `https://university-mohamed.vercel.app/Api/admins/search/admin?page=1&size=20`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,

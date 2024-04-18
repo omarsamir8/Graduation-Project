@@ -36,7 +36,7 @@ function SideBar() {
             className="NavLink"
             onClick={() => setSelectedComponent("getalladmin")}
           >
-            ALL Admins
+            All Admins
           </NavLink>
         </div>
 

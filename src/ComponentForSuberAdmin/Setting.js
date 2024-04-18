@@ -36,7 +36,21 @@ function Setting() {
   }, [accessToken, refreshToken]);
   return (
     <>
-      <h3>Setting</h3>
+      <div className="setting-page">
+        <div className="single-setting">
+          <div class="form-check form-switch">
+            <label class="form-check-label" for="flexSwitchCheckDefault">
+              AllowTrainingRegister
+            </label>
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckDefault"
+            />
+          </div>
+        </div>
+      </div>
     </>
   );
 }
