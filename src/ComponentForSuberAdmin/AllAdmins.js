@@ -20,7 +20,7 @@ function AllAdmins() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://university-mohamed.vercel.app/Api/admins/search/admin?page=1&size=5`,
+          `https://university-mohamed.vercel.app/Api/admins/search/admin?page=1&size=10`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -260,6 +260,7 @@ function AllAdmins() {
               <th className="doctorInfo" scope="col">
                 Phone
               </th>
+
               {/* <th scope="col">Level</th> */}
               <th className="doctorInfo" scope="col">
                 Operations
@@ -275,7 +276,7 @@ function AllAdmins() {
                 <td className="doctorInfo">{admin.FullName}</td>
                 <td className="doctorInfo">{admin.email}</td>
                 <td className="doctorInfo">{admin.phone}</td>
-                {/* <td>{student.semesterId.level}</td> */}
+
                 <td>
                   <div style={{ gap: "10px" }} className="row">
                     <button
