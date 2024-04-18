@@ -36,7 +36,47 @@ function Setting() {
   }, [accessToken, refreshToken]);
   return (
     <>
-      <h3>Setting</h3>
+      <div className="setting-page">
+        <div className="single-setting">
+          {/* <div class="form-check form-switch">
+            <label class="form-check-label" for="flexSwitchCheckDefault">
+              AllowTrainingRegister
+            </label>
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckDefault"
+            />
+          </div> */}
+          <table class="table" style={{width:"80%"}}>
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Rule</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </>
   );
 }
