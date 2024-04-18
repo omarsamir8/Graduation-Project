@@ -24,7 +24,7 @@ function NavBar() {
         console.log(SuperAdminInfo);
         // Log the updated state
       } catch (error) {
-        console.error("Error fetching student info:", error);
+        console.error("Error fetching Super Admin info:", error);
       }
     };
 

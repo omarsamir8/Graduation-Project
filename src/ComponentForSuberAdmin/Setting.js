@@ -2,14 +2,13 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { routes } from "../routes";
+import Swal from "sweetalert2";
 
 function Setting() {
   const [Setting, setSetting] = useState([]);
-  const [AllowTrainingRegister, setAllowTrainingRegister] = useState(true);
-  const [MaxAllowTrainingToRegister, setMaxAllowTrainingToRegister] =
-    useState();
-  const [updateStudentLevel, setupdateStudentLevel] = useState(true);
-  const [MainSemsterId, setMainSemsterId] = useState("");
+  const [Allow, setAllow] = useState("No");
+  const [ApiUrl, setApiUrl] = useState();
+  const [selectedSetting, setselectedSetting] = useState(null);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
   useEffect(() => {
@@ -26,7 +25,7 @@ function Setting() {
         );
 
         console.log(response.data);
-        setSetting(response.data);
+        setSetting(response.data.routesDescriptions);
       } catch (error) {
         console.error("Error fetching admin info:", error);
       }
@@ -34,47 +33,118 @@ function Setting() {
 
     fetchData();
   }, [accessToken, refreshToken]);
+
+  // Update Settings
+  const UpdateSettings = async () => {
+    try {
+      const response = await fetch(
+        `https://university-mohamed.vercel.app/Api/admin/setting/update`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+          body: JSON.stringify({
+            Allow,
+            ApiUrl,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        // Show SweetAlert on success
+        Swal.fire({
+          icon: "success",
+          title: "Setting updated successfully",
+          showConfirmButton: false,
+          timer: 3500,
+        });
+
+        // Update the state with the modified student
+        setSetting((prevSettings) =>
+          prevSettings.map((prevSetting) =>
+            prevSetting._id === selectedSetting._id
+              ? {
+                  ...prevSetting,
+                  Allow,
+                  ApiUrl,
+                }
+              : prevSetting
+          )
+        );
+      } else {
+        // Show an error message if needed
+        Swal.fire({
+          icon: "error",
+          title: "Fail",
+          text: "Setting update failed, please try again later",
+          timer: 4500,
+        });
+      }
+    } catch (error) {
+      console.error("Update failed", error);
+    }
+  };
+  console.log(Allow);
+  console.log(ApiUrl);
   return (
     <>
       <div className="setting-page">
         <div className="single-setting">
-          {/* <div class="form-check form-switch">
-            <label class="form-check-label" for="flexSwitchCheckDefault">
-              AllowTrainingRegister
-            </label>
-            <input
-              class="form-check-input"
-              type="checkbox"
-              role="switch"
-              id="flexSwitchCheckDefault"
-            />
-          </div> */}
-          <table class="table" style={{width:"80%"}}>
+          <table class="table" style={{}}>
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Rule</th>
+                <th style={{ textAlign: "center" }} scope="col">
+                  Rule
+                </th>
+                <th style={{ textAlign: "center" }} scope="col">
+                  Value
+                </th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-              </tr>
+              {Setting.map((setting, index) => {
+                return (
+                  <tr key={setting._id}>
+                    <th scope="row">{index + 1}</th>
+                    <td style={{ textAlign: "center" }}>{setting.name}</td>
+                    <td style={{ textAlign: "center" }}>{setting.desc}</td>
+                    <td>
+                      <div style={{}} class="form-check form-switch">
+                        <input
+                          style={{ width: "70px", height: "20px" }}
+                          class="form-check-input"
+                          type="checkbox"
+                          role="switch"
+                          id="flexSwitchCheckDefault"
+                          onChange={(e) => {
+                            if (e.target.checked === true) {
+                              setAllow("Yes");
+                            } else {
+                              setAllow("No");
+                            }
+                            setApiUrl(setting.url);
+                          }}
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
+          <button
+            style={{ marginBottom: "10px" }}
+            type="button"
+            class="btn btn-primary mt-3"
+            onClick={UpdateSettings}
+          >
+            Save Changes
+          </button>
         </div>
       </div>
     </>
