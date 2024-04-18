@@ -40,7 +40,7 @@ function Login() {
       console.log("this login for doctors");
     } else if (type === "admin") {
       handleLoginforadmin();
-      console.log("this login for admin");
+      console.log("this login for admins and superadmins");
     } else {
       console.log("you must select typee ");
     }
@@ -122,9 +122,11 @@ function Login() {
       localStorage.setItem("accesstoken", data.accessToken);
       localStorage.setItem("refreshtoken", data.refreshToken);
 
-      if (response.ok) {
+      if (response.ok && data.role === "admin") {
         // If login is successful, navigate to the "/admin" page
         navigate("/admin");
+      } else if (response.ok && data.role === "superAdmin") {
+        navigate("/superadmin");
       } else {
         setmessage(data.message);
       }
@@ -212,7 +214,7 @@ function Login() {
             </p>
             <a href="#forgetpassword">Forget Password?</a>
             {/* </div> */}
-            <button to="/student" className="button" onClick={check}>
+            <button className="button" onClick={check}>
               Login
             </button>
           </div>
