@@ -47,7 +47,7 @@ function AllAdmins() {
     setemail(Admin.email);
     setgender(Admin.gender);
     setpassword(Admin.password);
-    setphone(Admin.phone)
+    setphone(Admin.phone);
   }
   // update Admins
   const updateAdmin = async () => {
@@ -119,6 +119,44 @@ function AllAdmins() {
       console.error("Update failed", error);
     }
   };
+
+  // delete admin
+  const handleDelete = async (adminId) => {
+    try {
+      const confirmed = await Swal.fire({
+        title: "Are you sure?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!",
+      });
+      if (confirmed.isConfirmed) {
+        const response = await fetch(
+          `https://university-mohamed.vercel.app${routes.Admin._id}${routes.Admin.deleteAdmin}?userId=${adminId}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          // Remove the deleted doctor from the state
+          setalladmins((prevAdmins) =>
+            prevAdmins.filter((admin) => admin._id !== adminId)
+          );
+          console.log(`Doctor with ID ${adminId} deleted successfully.`);
+        } else {
+          console.error(`Failed to delete doctor with ID ${adminId}.`);
+        }
+      }
+    } catch (error) {
+      console.error("Delete failed", error);
+    }
+  };
   return (
     <>
       <div className="All_Admins">
@@ -148,17 +186,20 @@ function AllAdmins() {
                   setphone(e.target.value);
                 }}
               />
-              <input
-                type="text"
-                class="form-control mt-3"
-                placeholder="Enter Gender"
+              <select
+                className="form-control mt-3"
                 aria-label="gender"
                 name="gender"
-                value={gender}
                 onChange={(e) => {
                   setgender(e.target.value);
                 }}
-              />
+              >
+                <option value="" disabled selected hidden>
+                  Select Gender
+                </option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
             </div>
             <div class="col part2">
               <input
@@ -253,7 +294,7 @@ function AllAdmins() {
                       style={{ width: "45%" }}
                       type="button"
                       className="btn btn-danger"
-                      // onClick={() => handleDelete(student._id)}
+                      onClick={() => handleDelete(admin._id)}
                     >
                       Delete
                     </button>

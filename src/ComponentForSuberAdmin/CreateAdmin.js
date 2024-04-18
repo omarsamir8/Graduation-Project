@@ -65,8 +65,8 @@ function CreateAdmin() {
       <div style={{ marginTop: "10px" }} className="Create_Student">
         <marquee className="marquee" scrollamount="10">
           {" "}
-          It is not possible for more than one student to have the same national
-          ID,Full Name, student code, phone number{" "}
+          It is not possible for more than one admin to have the same Full Name,
+          Email, phone number{" "}
         </marquee>
         <form class="row mt-4">
           <div class="col ">
