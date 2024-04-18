@@ -6,9 +6,12 @@ import { useDoctorContext } from "../DoctorContext";
 import { useTrainingContext } from "../TrainingContext";
 import { useCourseContext } from "../CourseContext";
 import { routes } from "../routes";
+import Swal from "sweetalert2";
 
 function NavBar() {
   const [admininfo, setadmininfo] = useState([]);
+  const [messgae, setmessage] = useState("");
+  const [adminImage, setadminImage] = useState([]);
   const [search_student_value, setsearch_student_value] = useState("");
   const [doctor_value, setdoctor_value] = useState("");
   const [training_value, settraining_value] = useState("");
@@ -177,6 +180,47 @@ function NavBar() {
     setcount((prevCount) => prevCount + 1);
   };
 
+  // Upload Doctor Photo
+  const uploadAdminimage = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("adminImage", adminImage);
+
+      const response = await fetch(
+        `https://university-mohamed.vercel.app${routes.Admin._id}${routes.Admin.AddImgByAdmin}`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+          body: formData,
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      setmessage(data.message);
+      if (response.ok) {
+        // Show SweetAlert on success
+        Swal.fire({
+          icon: "success",
+          title: "Admin Image added successfully",
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      } else {
+        // Show an error message if needed
+        Swal.fire({
+          icon: "error",
+          title: "Fail",
+          text: "Admin Image creation failed, please try again later",
+          timer: 4500,
+        });
+      }
+    } catch (error) {
+      console.error("Upload failed", error);
+    }
+  };
   return (
     <>
       <div className="nav-bar">
@@ -194,7 +238,69 @@ function NavBar() {
           />
         </div>
         <div className="info">
-          <img src="./assets/images/2.png" alt="" />
+          <img
+            type="button"
+            class=""
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            src={admininfo.urlImg}
+            alt=""
+          ></img>
+
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    Upload Photo
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <input
+                    type="file"
+                    class="form-control mt-3"
+                    placeholder="Enter Doctor Image"
+                    aria-label="adminImage"
+                    name="adminImage"
+                    onChange={(e) => {
+                      setadminImage(e.target.files[0]);
+                    }}
+                  />
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    onClick={() => {
+                      uploadAdminimage();
+                    }}
+                    type="button"
+                    class="btn btn-primary"
+                  >
+                    Save changes
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="details">
             <h3>{admininfo.FullName}</h3>
             <p>{admininfo.role}</p>

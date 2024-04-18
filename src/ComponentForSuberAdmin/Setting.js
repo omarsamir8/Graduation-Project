@@ -25,7 +25,7 @@ function Setting() {
         );
 
         console.log(response.data);
-        setSetting(response.data.routesDescriptions);
+        setSetting(response.data.routedescription);
       } catch (error) {
         console.error("Error fetching admin info:", error);
       }
@@ -63,17 +63,17 @@ function Setting() {
         });
 
         // Update the state with the modified student
-        setSetting((prevSettings) =>
-          prevSettings.map((prevSetting) =>
-            prevSetting._id === selectedSetting._id
-              ? {
-                  ...prevSetting,
-                  Allow,
-                  ApiUrl,
-                }
-              : prevSetting
-          )
-        );
+        // setSetting((prevSettings) =>
+        //   prevSettings.map((prevSetting) =>
+        //     prevSetting._id === selectedSetting._id
+        //       ? {
+        //           ...prevSetting,
+        //           Allow,
+        //           ApiUrl,
+        //         }
+        //       : prevSetting
+        //   )
+        // );
       } else {
         // Show an error message if needed
         Swal.fire({
@@ -89,6 +89,7 @@ function Setting() {
   };
   console.log(Allow);
   console.log(ApiUrl);
+  console.log(Setting);
   return (
     <>
       <div className="setting-page">
@@ -128,6 +129,7 @@ function Setting() {
                               setAllow("No");
                             }
                             setApiUrl(setting.url);
+                            setselectedSetting(setting._id);
                           }}
                         />
                       </div>
@@ -141,7 +143,9 @@ function Setting() {
             style={{ marginBottom: "10px" }}
             type="button"
             class="btn btn-primary mt-3"
-            onClick={UpdateSettings}
+            onClick={() => {
+              UpdateSettings();
+            }}
           >
             Save Changes
           </button>
