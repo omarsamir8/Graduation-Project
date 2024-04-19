@@ -22,7 +22,7 @@ function MainPageForAdmin() {
 
   return (
     <>
-      <div className="mainpage">
+      <div className="mainpage" style={{minHeight:"100vh"}}>
         <div className="sidebar ">
           <SideBar />
         </div>

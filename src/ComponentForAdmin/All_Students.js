@@ -235,7 +235,11 @@ function All_Students() {
             Update
           </button>
         </div>
-        <h2>All Students Available </h2>
+        <marquee className="marquee" scrollamount="10">
+          {" "}
+This section is related to all students exissting in BFCAI 
+        {" "}
+        </marquee>
         <table className="table">
           <thead>
             <tr>

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { routes } from "../routes";
 import Swal from "sweetalert2";
-
+import Table from 'react-bootstrap/Table';
 function Setting() {
   const [Setting, setSetting] = useState([]);
   const [Allow, setAllow] = useState("No");
@@ -121,8 +121,11 @@ function Setting() {
             </tbody>
           </table>
         </div>
+        {/* Table example */}
+        
       </div>
     </>
   );
 }
 export default Setting;
+// #282a36
