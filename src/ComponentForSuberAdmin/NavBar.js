@@ -1,11 +1,11 @@
-import "../styles/NavBar.css";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { routes } from "../routes";
-function NavBar() {
-  const [SuperAdminInfo, setSuperAdminInfo] = useState([]);
-  const accessToken = localStorage.getItem("accesstoken");
-  const refreshToken = localStorage.getItem("refreshtoken");
+import '../styles/NavBar.css'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import { routes } from '../routes'
+function NavBar () {
+  const [SuperAdminInfo, setSuperAdminInfo] = useState([])
+  const accessToken = localStorage.getItem('accesstoken')
+  const refreshToken = localStorage.getItem('refreshtoken')
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,37 +15,37 @@ function NavBar() {
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
-              "refresh-token": refreshToken,
-            },
+              'refresh-token': refreshToken
+            }
           }
-        );
-        console.log(response.data);
-        setSuperAdminInfo(response.data.user);
-        console.log(SuperAdminInfo);
+        )
+        console.log(response.data)
+        setSuperAdminInfo(response.data.user)
+        console.log(SuperAdminInfo)
         // Log the updated state
       } catch (error) {
-        console.error("Error fetching Super Admin info:", error);
+        console.error('Error fetching Super Admin info:', error)
       }
-    };
+    }
 
-    fetchData();
-  }, [accessToken, refreshToken]);
-  console.log(SuperAdminInfo);
+    fetchData()
+  }, [accessToken, refreshToken])
+  console.log(SuperAdminInfo)
   return (
     <>
-      <div className="nav-bar">
-        <div className="search">
-          <input type="text" placeholder="Search"></input>
+      <div className='nav-bar'>
+        <div className='search'>
+          <input type='text' placeholder='Search' />
         </div>
-        <div className="info">
-          <img src={SuperAdminInfo.urlImg} alt=""></img>
-          <div className="details">
+        <div className='info'>
+          <img src={SuperAdminInfo.urlImg} alt='' />
+          <div className='details'>
             <h3>{SuperAdminInfo.FullName}</h3>
             <p> {SuperAdminInfo.role}</p>
           </div>
         </div>
       </div>
     </>
-  );
+  )
 }
-export default NavBar;
+export default NavBar

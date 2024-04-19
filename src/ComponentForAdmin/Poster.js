@@ -1,12 +1,12 @@
-import "../styles/Poster.css";
-import axios from "axios";
-import { useState, useEffect } from "react";
-import "animate.css";
-import { routes } from "../routes";
-function Poster(props) {
-  const [admininfo, setadmininfo] = useState([]);
-  const accessToken = localStorage.getItem("accesstoken");
-  const refreshToken = localStorage.getItem("refreshtoken");
+import '../styles/Poster.css'
+import axios from 'axios'
+import { useState, useEffect } from 'react'
+import 'animate.css'
+import { routes } from '../routes'
+function Poster (props) {
+  const [admininfo, setadmininfo] = useState([])
+  const accessToken = localStorage.getItem('accesstoken')
+  const refreshToken = localStorage.getItem('refreshtoken')
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,41 +16,41 @@ function Poster(props) {
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
-              "refresh-token": refreshToken,
-            },
+              'refresh-token': refreshToken
+            }
           }
-        );
-        console.log(response.data);
-        setadmininfo(response.data.user);
+        )
+        console.log(response.data)
+        setadmininfo(response.data.user)
       } catch (error) {
-        console.error("Error fetching doctor info:", error);
+        console.error('Error fetching doctor info:', error)
       }
-    };
+    }
 
-    fetchData();
-  }, [accessToken, refreshToken]);
+    fetchData()
+  }, [accessToken, refreshToken])
 
   return (
     <>
-      <div className="poster">
+      <div className='poster'>
         <div>
-          <p className="p1 animate__animated animate__backInRight">
+          <p className='p1 animate__animated animate__backInRight'>
             September ,2024
           </p>
-          <h2 className=" animate__animated animate__backInRight">
+          <h2 className=' animate__animated animate__backInRight'>
             Welcom Back, {admininfo.FullName} !
           </h2>
-          <p className="p2  animate__animated animate__backInRight">
+          <p className='p2  animate__animated animate__backInRight'>
             Alwayes Stay Updated In Your Student Portal
           </p>
         </div>
         <img
-          src="./assets/images/student.png"
-          className="studentt  animate__animated animate__backInRight"
-          alt=""
-        ></img>
+          src='./assets/images/student.png'
+          className='studentt  animate__animated animate__backInRight'
+          alt=''
+        />
       </div>
     </>
-  );
+  )
 }
-export default Poster;
+export default Poster
