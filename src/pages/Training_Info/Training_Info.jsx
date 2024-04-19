@@ -1,70 +1,19 @@
-// import React, { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
-// import { routes } from "../../routes";
-// const TrainingDetails = () => {
-//   const { trainingId } = useParams(); // Get training ID from URL parameter
-//   const [trainingData, setTrainingData] = useState([]); // Initialize trainingData state with null
-//   const accessToken = localStorage.getItem("accesstoken");
-//   const refreshToken = localStorage.getItem("refreshtoken");
-
-//   // Fetch training Info
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await fetch(
-//           `https://university-mohamed.vercel.app${routes.Training._id}${routes.Training.singleTraininginfoBystudent}?trainingId=661892da363994b24ccab824`,
-//           {
-//             method: "GET",
-//             headers: {
-//               Authorization: `Bearer ${accessToken}`,
-//               "refresh-token": refreshToken,
-//             },
-//           }
-//         );
-
-//         const data = await response.json();
-//         console.log(data);
-//         setTrainingData(data.training);
-//       } catch (error) {
-//         console.error("Fetch failed", error);
-//       }
-//     };
-
-//     fetchData();
-//   }, [accessToken, refreshToken]);
-
-//   return (
-//     <div className="enrollcourse">
-//     {trainingData.map((training) => (
-//       <div className="course" key={training._id}>
-//         <div className="info">
-//           <p>{training.training_name}</p>
-//         </div>
-//       </div>
-//     ))}
-//   </div>
-//   )
-//     }
-
-// export default TrainingDetails;
-
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { routes } from "../../routes";
 
 const TrainingDetails = () => {
   const { trainingId } = useParams(); // Get training ID from URL parameter
-  const [trainingData, setTrainingData] = useState({}); // Initialize trainingData state with null
+  const [trainingData, settrainingData] = useState({}); // Initialize trainingData state with null
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
 
   // Fetch training Info
-  useEffect(
-    (trainingId) => {
+  useEffect(() => {
       const fetchData = async () => {
         try {
           const response = await fetch(
-            `https://university-mohamed.vercel.app${routes.Training._id}${routes.Training.singleTraininginfoBystudent}?trainingId=661892da363994b24ccab824`,
+            `https://university-mohamed.vercel.app${routes.Training._id}${routes.Training.singleTraininginfoBystudent}?trainingId=${trainingId}`,
             {
               method: "GET",
               headers: {
@@ -76,7 +25,7 @@ const TrainingDetails = () => {
 
           const data = await response.json();
           console.log(data);
-          setTrainingData(data);
+          settrainingData(data);
         } catch (error) {
           console.error("Fetch failed", error);
         }
@@ -84,7 +33,7 @@ const TrainingDetails = () => {
 
       fetchData();
     },
-    [accessToken, refreshToken]
+    [trainingId,accessToken, refreshToken]
   );
 
   return (
@@ -92,6 +41,7 @@ const TrainingDetails = () => {
       <div className="course">
         <div className="info">
           <h1>Hello</h1>
+      <p>{trainingData.training.training_name}</p>
         </div>
       </div>
     </div>
@@ -99,3 +49,4 @@ const TrainingDetails = () => {
 };
 
 export default TrainingDetails;
+

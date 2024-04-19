@@ -187,7 +187,7 @@ const RegisterForTraining = () => {
                 Register
               </button>
               <Link
-                to={`/training/${training._id}`}
+                to={`/trainingInfo`}
                 className='btn btn-primary'
               >
                 Details

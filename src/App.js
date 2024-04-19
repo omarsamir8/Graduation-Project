@@ -32,7 +32,7 @@ function App () {
               path='/Reports_student'
               element={<Reports_student />}
             />
-            <Route path='/training/:id' element={<Training_Info />} />
+            <Route path='/trainingInfo' element={<Training_Info />} />
             <Route path='/Semester_grade' element={<Semester_grade />} />
           </Routes>
         </BrowserRouter>
