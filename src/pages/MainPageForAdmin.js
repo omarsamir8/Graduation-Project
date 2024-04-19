@@ -13,6 +13,7 @@ import { $Dashboard_Components } from "../Atoms";
 import All_Students from "../ComponentForAdmin/All_Students";
 import AllDoctors from "../ComponentForAdmin/All_Doctors";
 import CreateSemester from "../ComponentForAdmin/CreateSemester";
+import Setting from "../ComponentForAdmin/Setting";
 
 function MainPageForAdmin() {
   const [selectedComponent, setSelectedComponent] = useRecoilState(
@@ -41,6 +42,7 @@ function MainPageForAdmin() {
             {selectedComponent === "CreateCourse" && <CreateCourse />}
             {selectedComponent === "CreateTraining" && <CreateTraining />}
             {selectedComponent === "CreateSemester" && <CreateSemester />}
+            {selectedComponent === "setting" && <Setting />}
           </div>
         </div>
       </div>

@@ -129,6 +129,19 @@ function SideBar() {
             Add Semester
           </NavLink>
         </div>
+        <div className="item col-12">
+          <i class="sideIcon fa-brands fa-stack-overflow"></i>
+          <NavLink
+            onClick={() => {
+              setSelectedComponent("setting");
+              window.scrollTo(0, 350);
+            }}
+            style={{ textDecoration: "none" }}
+            className="NavLink"
+          >
+            Setting
+          </NavLink>
+        </div>
 
         <div className="item col-12">
           <i class="sideIcon fa-solid fa-message"></i>

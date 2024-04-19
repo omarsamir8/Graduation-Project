@@ -79,6 +79,7 @@
   justify-content: flex-start;
   align-items: baseline;
   cursor: pointer;
+  margin-left: 15px;
 }
 .sidebar-container .login p {
   margin-left: 0.3rem;
