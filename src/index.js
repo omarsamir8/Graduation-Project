@@ -13,6 +13,7 @@ import { routes } from "./routes";
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
+   
       <StudentProvider>
         <DoctorProvider>
           <TrainingProvider>

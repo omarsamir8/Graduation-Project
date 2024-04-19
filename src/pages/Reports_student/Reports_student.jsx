@@ -48,6 +48,7 @@ export default function Reports_student() {
   return (
     <div className=" col-12 Registered_Courses">
       <img src="./assets/images/benha.png" className="Benha_img" />
+
       <div className="Title_registered col-4">
         <p className="col-12">
           Faculty of computers and artificial intelligence

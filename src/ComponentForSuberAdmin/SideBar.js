@@ -3,8 +3,16 @@ import "../styles/SideBar.css";
 import { useRecoilState } from "recoil";
 import { $Dashboard_Components } from "../Atoms";
 import Semester_grade from "../pages/Semester_grade";
+import { useState } from "react";
 function SideBar() {
   const navigate = useNavigate();
+  const [isClicked, setIsClicked] = useState(false);
+  const [Color, setColor] = useState("");
+  const [SelectedComponent, SetSelectedComponent] = useState(null);
+  const handleClick = (componentName) => {
+    setSelectedComponent(componentName);
+    window.scrollTo(0, 750);
+  };
 
   function logout() {
     navigate("/");
@@ -23,31 +31,52 @@ function SideBar() {
         </div>
         <div className="item col-12">
           <i class="fa-solid fa-gauge"></i>
-          <NavLink
-            className="NavLink"
-            onClick={() => setSelectedComponent("addAdmin")}
+          <li
+            onClick={() => handleClick("addAdmin")}
+            style={{
+              textDecoration: "none",
+              color: selectedComponent === "addAdmin" ? "black" : "inherit",
+              transform:
+                selectedComponent === "addAdmin" ? "scale(1.1)" : "scale(1)",
+              transition: "transform 0.3s ease",
+            }}
+            className="Side_li"
           >
             Add Admin
-          </NavLink>
+          </li>
         </div>
         <div className="item col-12">
           <i class="fa-solid fa-gauge"></i>
-          <NavLink
-            className="NavLink"
-            onClick={() => setSelectedComponent("getalladmin")}
+          <li
+            onClick={() => handleClick("getalladmin")}
+            style={{
+              textDecoration: "none",
+              color: selectedComponent === "getalladmin" ? "black" : "inherit",
+              transform:
+                selectedComponent === "getalladmin" ? "scale(1.1)" : "scale(1)",
+              transition: "transform 0.3s ease",
+            }}
+            className="Side_li"
           >
-            All Admins
-          </NavLink>
+          All Admins
+          </li>
         </div>
 
         <div className="item col-12">
           <i class="fa-solid fa-book-open"></i>
-          <NavLink
-            className="NavLink"
-            onClick={() => setSelectedComponent("setting")}
+          <li
+            onClick={() => handleClick("setting")}
+            style={{
+              textDecoration: "none",
+              color: selectedComponent === "setting" ? "black" : "inherit",
+              transform:
+                selectedComponent === "setting" ? "scale(1.1)" : "scale(1)",
+              transition: "transform 0.3s ease",
+            }}
+            className="Side_li"
           >
-            Setting
-          </NavLink>
+          Settings
+          </li>
         </div>
         <div className="login col-12">
           <i class="fa-solid fa-right-from-bracket"></i>

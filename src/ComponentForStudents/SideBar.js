@@ -3,8 +3,16 @@ import "../styles/SideBar.css";
 import { useRecoilState } from "recoil";
 import { $Dashboard_Components } from "../Atoms";
 import Semester_grade from "../pages/Semester_grade";
+import { useState } from "react";
 function SideBar() {
   const navigate = useNavigate();
+  const [isClicked, setIsClicked] = useState(false);
+  const [Color, setColor] = useState("");
+  const [SelectedComponent, SetSelectedComponent] = useState(null);
+  const handleClick = (componentName) => {
+    setSelectedComponent(componentName);
+    window.scrollTo(0, 750);
+  };
 
   function logout() {
     navigate("/");
@@ -21,51 +29,95 @@ function SideBar() {
           {/* <i class="fa-solid fa-graduation-cap"></i> */}
           <img src="./assets/images/art.jpeg" alt=""></img>
         </div>
+        {/* Dashboard Item */}
         <div className="item col-12">
-          <i class="fa-solid fa-gauge"></i>
-          <NavLink
-            className="NavLink"
-            onClick={() => setSelectedComponent("DashBoard")}
+          <i class="fa-solid fa-gauge"    onClick={() => handleClick("DashBoard")}
+            style={{
+              textDecoration: "none",
+              color: selectedComponent === "DashBoard" ? "black" : "inherit",
+              transform:
+                selectedComponent === "DashBoard" ? "scale(1.1)" : "scale(1)",
+              transition: "transform 0.3s ease",
+            }}></i>
+          <li
+            onClick={() => handleClick("DashBoard")}
+            style={{
+              textDecoration: "none",
+              color: selectedComponent === "DashBoard" ? "black" : "inherit",
+              transform:
+                selectedComponent === "DashBoard" ? "scale(1.1)" : "scale(1)",
+              transition: "transform 0.3s ease",
+            }}
+            className="Side_li"
           >
             Dashboard
-          </NavLink>
+          </li>
         </div>
+{/* Dashboard Item End  */}
 
         <div className="item col-12">
-          <i class="fa-solid fa-book-open"></i>
-          <NavLink
-            className="NavLink"
-            onClick={() => setSelectedComponent("RegisterForCourse")}
+          <i class="fa-solid fa-book-open"   onClick={() => handleClick("RegisterForCourse")}
+            style={{
+              textDecoration: "none",
+              color: selectedComponent === "RegisterForCourse" ? "black" : "inherit",
+              transform:
+                selectedComponent === "RegisterForCourse" ? "scale(1.1)" : "scale(1)",
+              transition: "transform 0.3s ease",
+            }} ></i>
+          <li
+            onClick={() => handleClick("RegisterForCourse")}
+            style={{
+              textDecoration: "none",
+              color: selectedComponent === "RegisterForCourse" ? "black" : "inherit",
+              transform:
+                selectedComponent === "RegisterForCourse" ? "scale(1.1)" : "scale(1)",
+              transition: "transform 0.3s ease",
+            }}
+            className="Side_li"
           >
             Register For Course
-          </NavLink>
+          </li>
         </div>
         <div className="item col-12">
-          <i class="fa-brands fa-stack-overflow"></i>
-          <NavLink to="/Registered_Courses" className="NavLink">
+          <i class="fa-brands fa-stack-overflow" ></i>
+          <NavLink to="/Registered_Courses"  className="NavLink">
             Registered Courses
           </NavLink>
         </div>
         <div className="item col-12">
           <i class="fa-solid fa-layer-group"></i>
-          <NavLink
-            className="NavLink"
-            onClick={() => setSelectedComponent("RegisterForTraining")}
+          <li
+            onClick={() => handleClick("RegisterForTraining")}
+            style={{
+              textDecoration: "none",
+              color: selectedComponent === "RegisterForTraining" ? "black" : "inherit",
+              transform:
+                selectedComponent === "RegisterForTraining" ? "scale(1.1)" : "scale(1)",
+              transition: "transform 0.3s ease",
+            }}
+            className="Side_li"
           >
             Register For Training
-          </NavLink>
+          </li>
         </div>
         <div className="item col-12">
         <i class="fa-brands fa-stack-overflow"></i>
-          <NavLink
-            className="NavLink"
-            onClick={() => setSelectedComponent("RegisteredTraining")}
+        <li
+            onClick={() => handleClick("RegisteredTraining")}
+            style={{
+              textDecoration: "none",
+              color: selectedComponent === "RegisteredTraining" ? "black" : "inherit",
+              transform:
+                selectedComponent === "RegisteredTraining" ? "scale(1.1)" : "scale(1)",
+              transition: "transform 0.3s ease",
+            }}
+            className="Side_li"
           >
             Registered Training
-          </NavLink>
+          </li>
         </div>
         <div className="item col-12">
-          <i class="fa-brands fa-stack-overflow"></i>
+        <i class="fa-solid fa-square-poll-vertical"></i>
           <NavLink to="/Semester_grade" className="NavLink">
             Semester Grades
           </NavLink>

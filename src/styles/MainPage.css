@@ -55,3 +55,10 @@ body {
     margin-left: 0; /* Adjust the margin as needed for smaller screens */
   }
 }
+.link{
+  text-decoration: none;
+  color: white;
+}
+.link:hover{
+  color: white;
+}

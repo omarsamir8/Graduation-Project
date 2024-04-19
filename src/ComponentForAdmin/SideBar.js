@@ -1,10 +1,17 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../styles/SideBar.css";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { $Dashboard_Components } from "../Atoms";
 function SideBar() {
   const [className, setclassName] = useState("");
+  const [isClicked, setIsClicked] = useState(false);
+  const [Color, setColor] = useState("");
+  const [SelectedComponent, SetSelectedComponent] = useState(null);
+  const handleClick = (componentName) => {
+    setSelectedComponent(componentName);
+    window.scrollTo(0, 750);
+  };
   const navigate = useNavigate();
   function logout() {
     navigate("/");
@@ -23,131 +30,155 @@ function SideBar() {
         </div>
         <div className="item col-12">
           <i class=" sideIcon fa-solid fa-gauge"></i>
-          <NavLink
-            onClick={() => {
-              setSelectedComponent("DashBoard");
-              window.scrollTo(0, 750);
+
+          <li
+            onClick={() => handleClick("DashBoard")}
+            style={{
+              textDecoration: "none",
+              color: selectedComponent === "DashBoard" ? "black" : "inherit",
+              transform:
+                selectedComponent === "DashBoard" ? "scale(1.1)" : "scale(1)",
+              transition: "transform 0.3s ease",
             }}
-            style={{ textDecoration: "none" }}
-            className="NavLink"
+            className="Side_li"
           >
             Dashboard
-          </NavLink>
+          </li>
         </div>
         <div className="item col-12">
-          <i class=" sideIcon fa-solid fa-registered"></i>
-          <NavLink
-            onClick={() => {
-              setSelectedComponent("CreateStudent");
-              window.scrollTo(0, 750);
+        <i class="fa-solid fa-person-circle-plus"></i>
+          <li
+            onClick={() => handleClick("CreateStudent")}
+            style={{
+              textDecoration: "none",
+              color: selectedComponent === "CreateStudent" ? "black" : "inherit",
+              transform:
+                selectedComponent === "CreateStudent" ? "scale(1.1)" : "scale(1)",
+              transition: "transform 0.3s ease",
             }}
-            style={{ textDecoration: "none" }}
-            className="NavLink"
+            className="Side_li"
           >
-            {" "}
             Add Student
-          </NavLink>
+          </li>
         </div>
         <div className="item col-12">
-          <i class=" sideIcon fa-solid fa-registered"></i>
-          <NavLink
-            onClick={() => {
-              setSelectedComponent("All_Students");
-              window.scrollTo(0, 750);
+        <i class="fa-solid fa-people-group"></i>
+          <li
+            onClick={() => handleClick("All_Students")}
+            style={{
+              textDecoration: "none",
+              color: selectedComponent === "All_Students" ? "black" : "inherit",
+              transform:
+                selectedComponent === "All_Students" ? "scale(1.1)" : "scale(1)",
+              transition: "transform 0.3s ease",
             }}
-            style={{ textDecoration: "none" }}
-            className="NavLink"
+            className="Side_li"
           >
-            {" "}
             All Students
-          </NavLink>
+          </li>
         </div>
         <div className="item col-12">
-          <i class="sideIcon fa-solid fa-registered"></i>
-          <NavLink
-            onClick={() => {
-              setSelectedComponent("CreateDoctor");
-              window.scrollTo(0, 750);
+        <i class="fa-solid fa-person-circle-plus"></i>
+          <li
+            onClick={() => handleClick("CreateDoctor")}
+            style={{
+              textDecoration: "none",
+              color: selectedComponent === "CreateDoctor" ? "black" : "inherit",
+              transform:
+                selectedComponent === "CreateDoctor" ? "scale(1.1)" : "scale(1)",
+              transition: "transform 0.3s ease",
             }}
-            style={{ textDecoration: "none" }}
-            className="NavLink"
+            className="Side_li"
           >
-            {" "}
-            Add Doctor
-          </NavLink>
+          Add Doctor
+          </li>
         </div>
         <div className="item col-12">
-          <i class="sideIcon fa-solid fa-registered"></i>
-          <NavLink
-            onClick={() => {
-              setSelectedComponent("AllDoctors");
-              window.scrollTo(0, 750);
+        <i class="fa-solid fa-people-group"></i>
+          <li
+            onClick={() => handleClick("AllDoctors")}
+            style={{
+              textDecoration: "none",
+              color: selectedComponent === "AllDoctors" ? "black" : "inherit",
+              transform:
+                selectedComponent === "AllDoctors" ? "scale(1.1)" : "scale(1)",
+              transition: "transform 0.3s ease",
             }}
-            style={{ textDecoration: "none" }}
-            className="NavLink"
+            className="Side_li"
           >
-            {" "}
-            All Doctors
-          </NavLink>
+        All Doctors
+          </li>
         </div>
         <div className="item col-12">
-          <i class="sideIcon fa-solid fa-book-open"></i>
-          <NavLink
-            onClick={() => {
-              setSelectedComponent("CreateCourse");
-              window.scrollTo(0, 350);
+        <i class="fa-solid fa-plus"></i>
+          <li
+            onClick={() => handleClick("CreateCourse")}
+            style={{
+              textDecoration: "none",
+              color: selectedComponent === "CreateCourse" ? "black" : "inherit",
+              transform:
+                selectedComponent === "CreateCourse" ? "scale(1.1)" : "scale(1)",
+              transition: "transform 0.3s ease",
             }}
-            style={{ textDecoration: "none" }}
-            className="NavLink"
+            className="Side_li"
           >
-            Add Course
-          </NavLink>
+       Add Course
+          </li>
         </div>
         <div className="item col-12">
-          <i class="sideIcon fa-brands fa-stack-overflow"></i>
-          <NavLink
-            onClick={() => {
-              setSelectedComponent("CreateTraining");
-              window.scrollTo(0, 350);
+        <i class="fa-solid fa-plus"></i>
+          <li
+            onClick={() => handleClick("CreateTraining")}
+            style={{
+              textDecoration: "none",
+              color: selectedComponent === "CreateTraining" ? "black" : "inherit",
+              transform:
+                selectedComponent === "CreateTraining" ? "scale(1.1)" : "scale(1)",
+              transition: "transform 0.3s ease",
             }}
-            style={{ textDecoration: "none" }}
-            className="NavLink"
+            className="Side_li"
           >
-            Add Training
-          </NavLink>
+       Add Training
+          </li>
         </div>
         <div className="item col-12">
-          <i class="sideIcon fa-brands fa-stack-overflow"></i>
-          <NavLink
-            onClick={() => {
-              setSelectedComponent("CreateSemester");
-              window.scrollTo(0, 350);
+        <i class="fa-solid fa-plus"></i>
+          <li
+            onClick={() => handleClick("CreateSemester")}
+            style={{
+              textDecoration: "none",
+              color: selectedComponent === "CraeteSemester" ? "black" : "inherit",
+              transform:
+                selectedComponent === "CraeteSemester" ? "scale(1.1)" : "scale(1)",
+              transition: "transform 0.3s ease",
             }}
-            style={{ textDecoration: "none" }}
-            className="NavLink"
+            className="Side_li"
           >
-            Add Semester
-          </NavLink>
+       Add Semester
+          </li>
         </div>
         <div className="item col-12">
-          <i class="sideIcon fa-brands fa-stack-overflow"></i>
-          <NavLink
-            onClick={() => {
-              setSelectedComponent("setting");
-              window.scrollTo(0, 350);
+        <i class="fa-solid fa-gear"></i>
+          <li
+            onClick={() => handleClick("setting")}
+            style={{
+              textDecoration: "none",
+              color: selectedComponent === "setting" ? "black" : "inherit",
+              transform:
+                selectedComponent === "setting" ? "scale(1.1)" : "scale(1)",
+              transition: "transform 0.3s ease",
             }}
-            style={{ textDecoration: "none" }}
-            className="NavLink"
+            className="Side_li"
           >
-            Setting
-          </NavLink>
+      Setting
+          </li>
         </div>
 
         <div className="item col-12">
           <i class="sideIcon fa-solid fa-message"></i>
-          <NavLink style={{ textDecoration: "none" }} className="NavLink">
+          <li style={{ textDecoration: "none" }} className="Side_li">
             Chat
-          </NavLink>
+          </li>
         </div>
         <div className="login col-12">
           <i class="sideIcon fa-solid fa-right-from-bracket"></i>
