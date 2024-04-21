@@ -36,11 +36,11 @@
   flex-direction: row;
   align-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 5px;
 }
 .enrollcourse .course {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   width: 320px;
   height: auto;
@@ -146,9 +146,9 @@
     margin-left: 2rem;
   }
 }
-.doctorInfo{
+.doctorInfo {
   text-align: center;
 }
-.Materials_select{
+.Materials_select {
   margin-top: 15px;
 }

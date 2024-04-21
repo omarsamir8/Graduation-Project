@@ -76,7 +76,7 @@ const TrainingInfo = () => {
             })}
 
             {trainingimages.length > 1 && (
-              <img src={trainingimages[1].url} alt="" />
+              <img src={trainingimages[0].url} alt="" />
             )}
           </div>
           <div className="productdisplay-img">
