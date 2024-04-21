@@ -80,7 +80,7 @@ export default function RegisteredTraining() {
     const fetchResultData = async () => {
       try {
         const response = await fetch(
-          `https://university-mohamed.vercel.app${routes.TrainingResult._id}${routes.TrainingResult.SearchTrainingResultByStudent}`,
+          `https://university-mohamed.vercel.app/Api/Trainings/Results/search/trainings/result/by/student?select=trainingId,studentId,grade`,
           {
             method: "GET",
             headers: {
@@ -142,8 +142,8 @@ export default function RegisteredTraining() {
             <thead>
               <tr>
                 <th scope="col">#ID</th>
-                <th scope="col">StudentID</th>
-                <th scope="col">TrainingId</th>
+                <th scope="col">Student Name</th>
+                <th scope="col">Training Name</th>
                 <th scope="col">Grade</th>
               </tr>
             </thead>
@@ -151,8 +151,8 @@ export default function RegisteredTraining() {
               {trainingsResult.map((training, index) => (
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
-                  <td>{training.studentId}</td>
-                  <td>{training.trainingId}</td>
+                  <td>{training.studentId.Full_Name}</td>
+                  <td>{training.trainingId.training_name}</td>
                   <td>{training.grade}</td>
                 </tr>
               ))}

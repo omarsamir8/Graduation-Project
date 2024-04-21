@@ -92,7 +92,7 @@ export default function RegisterForTraining() {
               {training && training.images && training.images.length > 0 ? (
                 <img
                   style={{ width: "100px", height: "100px" }}
-                  src={training.images[0]}
+                  src={training.images[0].url}
                   alt=""
                 />
               ) : (
