@@ -96,7 +96,7 @@ function CreateDoctor () {
         Swal.fire({
           icon: 'error',
           title: 'Fail',
-          text: 'Doctor creation failed, please try again later',
+          text: data.error_Message[0].message,
           timer: 4500
         })
       }

@@ -60,7 +60,7 @@ function CreateSemester () {
           Swal.fire({
             icon: 'error',
             title: 'Fail',
-            text: 'Please enter data for all fields',
+            text: data.error_Message[0].message,
             timer: 4500
           })
         }

@@ -101,7 +101,7 @@ function AllDoctors () {
           })
         }
       )
-
+      const data = await response.json();
       if (response.ok) {
         // Show SweetAlert on success
         Swal.fire({
@@ -143,7 +143,7 @@ function AllDoctors () {
         Swal.fire({
           icon: 'error',
           title: 'Fail',
-          text: 'Doctor update failed, please try again later',
+          text: data.error_Message[0].message,
           timer: 4500
         })
       }

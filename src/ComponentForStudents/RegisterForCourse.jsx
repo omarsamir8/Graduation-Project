@@ -45,7 +45,7 @@ export default function RegisterForCourse() {
           },
         }
       );
-
+      const data = await response.json();
       if (response.ok) {
         Swal.fire({
           icon: "success",
@@ -53,17 +53,19 @@ export default function RegisterForCourse() {
           showConfirmButton: false,
           timer: 3500,
         });
+        
       } else {
         Swal.fire({
           icon: "error",
           title: "Failed",
-          text: "Course registered before, please try again later",
+          text: data.error_Message[0].message,
           timer: 4500,
         });
       }
     } catch (error) {
       console.error("Register Failed", error);
     }
+  
   };
 
   return (

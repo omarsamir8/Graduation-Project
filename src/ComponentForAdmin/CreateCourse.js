@@ -68,7 +68,7 @@ function CreateCourse() {
           Swal.fire({
             icon: "error",
             title: "Fail",
-            text: "other error",
+            text: data.error_Message[0].message,
             timer: 4500,
           });
         }
@@ -167,7 +167,7 @@ function CreateCourse() {
           }),
         }
       );
-
+      const data = await response.json();
       if (response.ok) {
         // Show SweetAlert on success
         Swal.fire({
@@ -204,7 +204,7 @@ function CreateCourse() {
         Swal.fire({
           icon: "error",
           title: "Fail",
-          text: "Course update failed, please try again later",
+          text: data.error_Message[0].message,
           timer: 4500,
         });
       }

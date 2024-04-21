@@ -3,6 +3,7 @@ import '../styles/Login.css'
 import { useNavigate } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import { routes } from '../routes'
+import Swal from 'sweetalert2'
 
 function Login () {
   const navigate = useNavigate()
@@ -12,6 +13,7 @@ function Login () {
   const [message, setmessage] = useState('')
   const [type, settype] = useState('')
   const [name, setname] = useState('')
+ 
 
   useEffect(() => {
     // تحديث قيمة name عندما يتغير نوع المستخدم
@@ -68,7 +70,13 @@ function Login () {
         // If login is successful, navigate to the "/student" page
         navigate('/student')
       } else {
-        setmessage(data.message)
+        // Show an error message if needed
+        Swal.fire({
+          icon: "error",
+          title: "Fail",
+          text: data.error_Message[0].message,
+          timer: 4500,
+        });
       }
     } catch (error) {
       console.error('Login failed', error)
@@ -97,7 +105,13 @@ function Login () {
         // If login is successful, navigate to the "/doctor" page
         navigate('/doctor')
       } else {
-        setmessage(data.message)
+        // Show an error message if needed
+        Swal.fire({
+          icon: "error",
+          title: "Fail",
+          text: data.error_Message[0].message,
+          timer: 4500,
+        });
       }
     } catch (error) {
       console.error('Login failed', error)
@@ -128,7 +142,13 @@ function Login () {
       } else if (response.ok && data.role === 'superAdmin') {
         navigate('/superadmin')
       } else {
-        setmessage(data.message)
+        // Show an error message if needed
+        Swal.fire({
+          icon: "error",
+          title: "Fail",
+          text: data.error_Message[0].message,
+          timer: 4500,
+        });
       }
     } catch (error) {
       console.error('Login failed', error)
