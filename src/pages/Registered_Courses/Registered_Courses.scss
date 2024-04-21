@@ -47,10 +47,10 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-gap: 10px;
+  gap: 10px;
   position: absolute;
-  bottom: 1rem;
-  left: 1rem;
+  bottom: 0.2rem;
+  left: 3.5rem;
   z-index: 1000;
 
   .BackToStuBtn {
@@ -64,18 +64,18 @@ gap: 10px;
     border: 0 !important;
   }
 }
-.Line_div{
+.Line_div {
   height: 2px;
   width: 95%;
   background-color: gray;
   display: flex;
   justify-content: center;
   align-items: center;
- margin-bottom: 3rem;
+  margin-bottom: 3rem;
 }
-.DeleteRegisteredCourse{
+.DeleteRegisteredCourse {
   text-align: center;
 }
-.DeleteAction{
+.DeleteAction {
   text-align: center !important;
 }

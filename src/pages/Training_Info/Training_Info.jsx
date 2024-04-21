@@ -114,10 +114,12 @@ const TrainingInfo = () => {
             <span>Open For Register :</span> {trainingData.OpenForRegister} True
           </p>
           <p className="productdisplay-right-category">
-            <span>Start Date :</span> {trainingData.start_date}
+            <span>Start Date :</span>{" "}
+            {new Date(trainingData.start_date).toLocaleDateString()}
           </p>
           <p className="productdisplay-right-category">
-            <span>End Date:</span> {trainingData.end_date}
+            <span>End Date:</span>{" "}
+            {new Date(trainingData.end_date).toLocaleDateString()}
           </p>
           <p className="productdisplay-right-category">
             <Link to="/student" style={{ cursor: "pointer", color: "#b893dd" }}>

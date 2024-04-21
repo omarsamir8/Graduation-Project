@@ -18,10 +18,18 @@ h2 {
   margin-top: 2.3rem;
 }
 .poster h2 {
-  margin-top: 9rem;
+  margin-top: 7rem;
 }
 .poster .p2 {
-  margin-top: 11.5rem;
+  margin-top: 9.5rem;
+}
+.poster .p3 {
+  margin-top: 11rem;
+  color: rgb(43, 42, 42);
+}
+.poster .p4 {
+  margin-top: 12.5rem;
+  color: rgb(43, 42, 42);
 }
 .icon {
   position: relative;

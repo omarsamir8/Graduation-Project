@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { routes } from "../routes";
 import { Link } from "react-router-dom";
+import defulatimg from "../assets/oop.png";
 
 export default function RegisterForTraining() {
   const [alltrainingsAvailable, setalltrainingsAvailable] = useState([]);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
   const [training, setTraining] = useState(null);
+  const [startdate, setstartdate] = useState("");
+  const [enddate, setenddate] = useState("");
   // Register for training
   const RegisterForTraining = async (tainingId) => {
     try {
@@ -62,7 +65,7 @@ export default function RegisterForTraining() {
         console.error("Fetch failed", error);
       }
     };
-
+    console.log("startdate :", startdate);
     fetchData();
   }, [accessToken, refreshToken]);
   return (
@@ -76,6 +79,14 @@ export default function RegisterForTraining() {
             <div className="course" key={training._id}>
               <div className="info">
                 <p>{training.training_name}</p>
+                <p style={{ marginTop: "-20px", color: "gray" }}>
+                  Start Date:{" "}
+                  {new Date(training.start_date).toLocaleDateString()}
+                </p>
+                <p style={{ marginTop: "-20px", color: "gray" }}>
+                  End Date: {new Date(training.end_date).toLocaleDateString()}
+                </p>
+
                 <button
                   type="button"
                   class="btn btn-primary"
@@ -96,7 +107,11 @@ export default function RegisterForTraining() {
                   alt=""
                 />
               ) : (
-                "loading"
+                <img
+                  style={{ width: "100px", height: "100px" }}
+                  src={defulatimg}
+                  alt=""
+                />
               )}
             </div>
           );

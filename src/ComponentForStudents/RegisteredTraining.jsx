@@ -101,9 +101,15 @@ export default function RegisteredTraining() {
   console.log(trainingsResult);
   return (
     <>
-      <div className="Create_Student">
-        <h2>Training Registered</h2>
-      </div>
+      {" "}
+      {trainingsRegistered.length > 0 && (
+        <>
+          {" "}
+          <div className="Create_Student">
+            <h2>Training Registered</h2>{" "}
+          </div>
+        </>
+      )}
       <div className="enrollcourse">
         {trainingsRegistered.map((registeredTraining) => (
           <div className="course">
@@ -135,7 +141,14 @@ export default function RegisteredTraining() {
       </div>
       {trainingsResult.length > 0 && (
         <>
-          <h3 style={{ fontSize: "24px", color: "black", fontWeight: "bold" }}>
+          <h3
+            style={{
+              fontSize: "24px",
+              color: "black",
+              fontWeight: "bold",
+              marginTop: "5px",
+            }}
+          >
             Training Result
           </h3>
           <table style={{ textAlign: "center" }} className="table">

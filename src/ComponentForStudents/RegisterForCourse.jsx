@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import Swal from 'sweetalert2'
-import { routes } from '../routes'
+import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import { routes } from "../routes";
+import defulatimg from "../assets/oop.png";
 
-export default function RegisterForCourse () {
-  const accessToken = localStorage.getItem('accesstoken')
-  const refreshToken = localStorage.getItem('refreshtoken')
-  const [allcoursesavailable, setallcoursesavailable] = useState([])
+export default function RegisterForCourse() {
+  const accessToken = localStorage.getItem("accesstoken");
+  const refreshToken = localStorage.getItem("refreshtoken");
+  const [allcoursesavailable, setallcoursesavailable] = useState([]);
 
   // Fetch all Courses
   useEffect(() => {
@@ -14,22 +15,22 @@ export default function RegisterForCourse () {
         const response = await fetch(
           `https://university-mohamed.vercel.app${routes.student._id}${routes.student.Availablecourses}`,
           {
-            method: 'POST',
+            method: "POST",
             headers: {
               Authorization: `Bearer ${accessToken}`,
-              'refresh-token': refreshToken
-            }
+              "refresh-token": refreshToken,
+            },
           }
-        )
-        const data = await response.json()
-        setallcoursesavailable(data.validCourses)
+        );
+        const data = await response.json();
+        setallcoursesavailable(data.validCourses);
       } catch (error) {
-        console.error('Fetch failed', error)
+        console.error("Fetch failed", error);
       }
-    }
+    };
 
-    fetchData()
-  }, [accessToken, refreshToken])
+    fetchData();
+  }, [accessToken, refreshToken]);
 
   // Register for course
   const RegisterForCourse = async (courseId) => {
@@ -37,56 +38,68 @@ export default function RegisterForCourse () {
       const response = await fetch(
         `https://university-mohamed.vercel.app${routes.courseRegister._id}${routes.courseRegister.addCourse}?courseId=${courseId}`,
         {
-          method: 'POST',
+          method: "POST",
           headers: {
             Authorization: `Bearer ${accessToken}`,
-            'refresh-token': refreshToken
-          }
+            "refresh-token": refreshToken,
+          },
         }
-      )
+      );
 
       if (response.ok) {
         Swal.fire({
-          icon: 'success',
-          title: 'Course registered successfully',
+          icon: "success",
+          title: "Course registered successfully",
           showConfirmButton: false,
-          timer: 3500
-        })
+          timer: 3500,
+        });
       } else {
         Swal.fire({
-          icon: 'error',
-          title: 'Failed',
-          text: 'Course registered before, please try again later',
-          timer: 4500
-        })
+          icon: "error",
+          title: "Failed",
+          text: "Course registered before, please try again later",
+          timer: 4500,
+        });
       }
     } catch (error) {
-      console.error('Register Failed', error)
+      console.error("Register Failed", error);
     }
-  }
+  };
 
   return (
     <>
-      <div className='Create_Student'>
+      <div className="Create_Student">
         <h2>All Courses Available</h2>
       </div>
-      <div className='enrollcourse'>
+      <div className="enrollcourse">
         {allcoursesavailable.map((course) => (
-          <div className='course' key={course._id}>
-            <div className='info'>
+          <div className="course2" key={course._id}>
+            <div className="info">
               <p>{course.course_name}</p>
               <button
-                type='button'
-                className='btn btn-primary'
+                type="button"
+                className="btn btn-primary"
                 onClick={() => RegisterForCourse(course._id)}
               >
                 Register
               </button>
             </div>
-            <div className='img ' />
+            {course && course.images && course.images.length > 0 ? (
+              <img
+                style={{ width: "100px", height: "100px" }}
+                src={course.images[0].url}
+                alt=""
+              />
+            ) : (
+              <img
+                style={{ width: "100px", height: "100px" }}
+                src={defulatimg}
+                alt=""
+              />
+            )}
           </div>
         ))}
       </div>
     </>
-  )
+  );
 }
