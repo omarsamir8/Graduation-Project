@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { routes } from "../../routes";
 export default function TrainingResyltReport() {
-  const { TrainingResultId } = useParams();
+  const { TrainingId } = useParams();
   const [studentResultReport, setStudentResultReport] = useState([]);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
@@ -18,7 +18,7 @@ export default function TrainingResyltReport() {
     const fetchResultData = async () => {
       try {
         const response = await axios.get(
-          `https://university-mohamed.vercel.app/Api/Trainings/Results/get/single/training/result/by/instructor?TrainingResultId=${TrainingResultId}`,
+          `https://university-mohamed.vercel.app/Api/Trainings/Results/search/trainings/result/by/instructor?select=trainingId,studentId,grade&trainingId=${TrainingId}&page=1&size=10`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -28,13 +28,13 @@ export default function TrainingResyltReport() {
         );
         console.log(response.data);
 
-        setStudentResultReport(response.data || []);
+        setStudentResultReport(response.data.training || []);
       } catch (error) {
         console.error("Error fetching student result:", error);
       }
     };
     fetchResultData();
-  }, [TrainingResultId, accessToken, refreshToken]);
+  }, [TrainingId, accessToken, refreshToken]);
   return (
     <>
       <div
@@ -49,7 +49,7 @@ export default function TrainingResyltReport() {
         <img src={banhaimg2} alt="" className="BFCAI_img" />
       </div>
 
-      {/* <div style={{ marginTop: "4rem" }} className="get_all_student">
+      <div style={{ marginTop: "4rem" }} className="get_all_student">
         <h2
           style={{ marginLeft: ".7rem", textAlign: "center", color: "brown" }}
         >
@@ -69,10 +69,7 @@ export default function TrainingResyltReport() {
               <th scope="col">#ID</th>
               <th scope="col">Student Name</th>
               <th scope="col">Course Name</th>
-              <th scope="col">YearWorks</th>
-              <th scope="col">Practical</th>
-              <th scope="col">FinalExam</th>
-              <th scope="col">TotalGrate</th>
+              <th scope="col">Grade</th>
             </tr>
           </thead>
           <tbody>
@@ -81,11 +78,8 @@ export default function TrainingResyltReport() {
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>{results.studentId.Full_Name}</td>
-                  <td>{results.courseId.course_name}</td>
-                  <td>{results.YearWorks}</td>
-                  <td>{results.Practical}</td>
-                  <td>{results.FinalExam}</td>
-                  <td>{results.TotalGrate}</td>
+                  <td>{results.trainingId.training_name}</td>
+                  <td>{results.grade}</td>
                 </tr>
               );
             })}
@@ -99,7 +93,7 @@ export default function TrainingResyltReport() {
             Print
           </Button>
         </div>
-      </div> */}
+      </div>
     </>
   );
 }

@@ -53,7 +53,6 @@ export default function RegisterForCourse() {
           showConfirmButton: false,
           timer: 3500,
         });
-        
       } else {
         Swal.fire({
           icon: "error",
@@ -65,7 +64,6 @@ export default function RegisterForCourse() {
     } catch (error) {
       console.error("Register Failed", error);
     }
-  
   };
 
   return (
