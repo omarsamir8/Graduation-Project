@@ -10,6 +10,8 @@ import { routes } from "./routes";
 import MainPageForSuberAdmin from "./pages/MainPageForSuberAdmin";
 import Training_Info from "./pages/Training_Info/Training_Info";
 import ScrollToTopButton from "./ScroollButton/ScrollToTopButton ";
+import StudentResultReport from "./pages/StudentGradeReoprt/StudentGradeReoprt";
+import TrainingResyltReport from "./pages/TrainingResyltReport/TrainingResyltReport";
 function App() {
   return (
     <>
@@ -27,6 +29,14 @@ function App() {
             />
             <Route path="/Reports_student" element={<Reports_student />} />
             <Route path="/training/:trainingId" element={<Training_Info />} />
+            <Route
+              path="/traiingres/:trainingId"
+              element={<TrainingResyltReport />}
+            />
+            <Route
+              path="/material/:courseId"
+              element={<StudentResultReport />}
+            />
             <Route path="/Semester_grade" element={<Semester_grade />} />
           </Routes>
         </BrowserRouter>
