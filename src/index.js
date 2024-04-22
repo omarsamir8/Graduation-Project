@@ -8,7 +8,7 @@ import { RecoilRoot } from 'recoil'
 import { DoctorProvider } from './DoctorContext'
 import { TrainingProvider } from './TrainingContext'
 import { CourseProvider } from './CourseContext'
-import { routes } from './routes'
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -30,8 +30,4 @@ ReactDOM.render(
 
 reportWebVitals()
 
-// Admins:
-// Admin     Ahmed-Adel@gmail.com    MH2020salah
-// Admin     omar@gmail.com      MH2020salah
-// Student:30207271400258
-// semester id    65d0a80a76670f142a67dde2
+

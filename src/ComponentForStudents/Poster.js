@@ -37,8 +37,8 @@ function Poster() {
           <p className="p1">September ,2024</p>
           <h2>Welcome Back,{studentinfo.Full_Name}!</h2>
           <p className="p2">Alwayes Stay Updated In Your Student Portal</p>
-          <p className="p3">Student Code : {studentinfo.Student_Code}</p>
-          <p className="p4">National Id : {studentinfo.National_Id}</p>
+          <p className="p3" style={{color:"whitesmoke"}}>Student Code : {studentinfo.Student_Code}</p>
+          <p className="p4" style={{color:"whitesmoke"}}>National Id : {studentinfo.National_Id}</p>
         </div>
 
         <img src="./assets/images/student.png" className="studentt" alt="" />
