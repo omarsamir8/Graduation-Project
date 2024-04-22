@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { routes } from "../../routes";
 export default function TrainingResyltReport() {
-  const [trainingId, settrainingId] = useParams();
+  const { trainingId } = useParams();
   const [studentResultReport, setStudentResultReport] = useState([]);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
@@ -18,7 +18,7 @@ export default function TrainingResyltReport() {
     const fetchResultData = async () => {
       try {
         const response = await axios.get(
-          `https://university-mohamed.vercel.app${routes.TrainingResult._id}${routes.TrainingResult.SearchTrainingResultByInstructor}?trainingId=${trainingId}`,
+          `https://university-mohamed.vercel.app/Api/Trainings/Results/get/single/training/result/by/instructor?TrainingResultId=66147a61605a1d8e907b3aab`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -26,7 +26,7 @@ export default function TrainingResyltReport() {
             },
           }
         );
-        console.log("Response data type:", typeof response.data);
+        console.log(response.data);
 
         setStudentResultReport(response.data || []);
       } catch (error) {
@@ -34,7 +34,7 @@ export default function TrainingResyltReport() {
       }
     };
     fetchResultData();
-  }, [accessToken, refreshToken]);
+  }, [trainingId,accessToken, refreshToken]);
   return (
     <>
       <div
