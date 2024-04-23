@@ -225,7 +225,7 @@ function Courses() {
           placeholder="Course ID"
           aria-label=".form-control-sm example"
         />
-
+      
         <input
           style={{ width: "30%", marginLeft: "10px", height: "40px" }}
           className="form-control form-control-sm"
