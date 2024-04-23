@@ -5,11 +5,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { routes } from "../routes";
+import { Table } from "react-bootstrap";
 
 function Training() {
   const [selectedComponent2, setSelectedComponent2] = useRecoilState(
     $Dashboard2_Components
   );
+  const [selectedTrainingResultId, setselectedTrainingResultId] = useState("");
+  const [TrainingId, setTrainingId] = useState("");
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
   const [doctorTrainings, setdoctorTrainings] = useState([]);
@@ -17,8 +20,9 @@ function Training() {
     []
   );
   const [studentId, setstudentId] = useState("");
-  const [trainingId, settrainingId] = useState("");
+
   const [grade, setgrade] = useState("");
+  const [studentResultReport, setStudentResultReport] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -129,6 +133,89 @@ function Training() {
       console.error("Upload grade failed", error);
     }
   };
+
+  // update grade
+  const updateGrade = async () => {
+    try {
+      const response = await fetch(
+        `https://university-mohamed.vercel.app/Api/Trainings/Results/update/result/by/instructor?TrainingResultId=${selectedTrainingResultId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+          body: JSON.stringify({
+            studentId,
+            // selectedTrainingResultId,
+            grade,
+          }),
+        }
+      );
+      const data = await response.json();
+      if (response.ok) {
+        // Show SweetAlert on success
+        Swal.fire({
+          icon: "success",
+          title: "Grade updated successfully",
+          showConfirmButton: false,
+          timer: 3500,
+        });
+
+        // Update the state with the modified course
+        setStudentResultReport((prevGrades) =>
+          prevGrades.map((prevGrade) =>
+            prevGrade._id === selectedTrainingResultId
+              ? {
+                  ...prevGrade,
+
+                  studentId,
+                  grade,
+                  TrainingId,
+                }
+              : prevGrade
+          )
+        );
+
+        // Clear the selected course and reset input fields
+        setgrade(null);
+        // setselectedTrainingResultId(null);
+      } else {
+        // Show an error message if needed
+        Swal.fire({
+          icon: "error",
+          title: "Fail",
+          text: data.error_Message[0].message,
+          timer: 4500,
+        });
+      }
+    } catch (error) {
+      console.error("Update failed", error);
+    }
+  };
+  // Get result of training for student
+
+  const fetchResultData = async (trainingId) => {
+    try {
+      const response = await axios.get(
+        `https://university-mohamed.vercel.app/Api/Trainings/Results/search/trainings/result/by/instructor?select=trainingId,studentId,grade&trainingId=${trainingId}&page=1&size=10`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+        }
+      );
+      console.log(response.data);
+
+      setStudentResultReport(response.data.training || []);
+    } catch (error) {
+      console.error("Error fetching student result:", error);
+    }
+  };
+  fetchResultData();
+
   return (
     <>
       <div className="enrollcourse">
@@ -157,11 +244,88 @@ function Training() {
                     </Link>
                   </button>
                 </NavLink>
+                <button
+                  style={{ marginLeft: "10px" }}
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => {
+                    fetchResultData(training._id);
+                  }}
+                >
+                  Update Grade
+                </button>
               </div>
               <div className="img " />
             </div>
           );
         })}
+      </div>
+      <h4 style={{ marginLeft: "10px", marginTop: "10px", fontWeight: "bold" }}>
+        Update Grade
+      </h4>
+
+      <div
+        style={{
+          marginTop: "20px",
+          height: "70px",
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "10px",
+        }}
+        className="addcategory category-search animate__animated animate__fadeInDown"
+      >
+        <input
+          style={{ width: "30%", marginLeft: "10px", height: "40px" }}
+          className="form-control form-control-sm"
+          type="text"
+          name="Grade"
+          value={studentId}
+          onChange={(e) => {
+            setstudentId(e.target.value);
+          }}
+          placeholder="Student Id"
+          aria-label=".form-control-sm example"
+        />
+        {/* <input
+          style={{ width: "30%", marginLeft: "10px", height: "40px" }}
+          className="form-control form-control-sm"
+          type="text"
+          name="Training Id"
+          value={selectedTrainingResultId}
+          onChange={(e) => {
+            setselectedTrainingResultId(e.target.value);
+          }}
+          placeholder="Training Result Id"
+          aria-label=".form-control-sm example"
+        /> */}
+
+        <input
+          style={{ width: "30%", marginLeft: "10px", height: "40px" }}
+          className="form-control form-control-sm"
+          type="text"
+          name="Grade"
+          value={grade}
+          onChange={(e) => {
+            setgrade(e.target.value);
+          }}
+          placeholder="State"
+          aria-label=".form-control-sm example"
+        />
+
+        <button
+          style={{
+            width: "280px",
+            height: "40px",
+            marginLeft: ".6rem",
+            backgroundColor: "#996ae4",
+            color: "white",
+          }}
+          onClick={updateGrade}
+          type="button"
+          className="btn "
+        >
+         Update Grade
+        </button>
       </div>
       <div className="get_all_student">
         {allstudentregistertraining.length > 0 && (
@@ -220,8 +384,6 @@ function Training() {
                             backgroundColor: "#996ae4",
                           }}
                           onClick={() => {
-                            // setstudentId();
-                            // settrainingId();
                             Upload_grade(
                               student.studentId._id,
                               student.trainingRegisterd[0]._id
@@ -239,6 +401,60 @@ function Training() {
           </>
         )}
       </div>
+
+      <Table
+        style={{ marginTop: "5rem", textAlign: "center" }}
+        striped
+        bordered
+        hover
+        size="md"
+        className="col-12"
+      >
+        <thead>
+          <tr>
+            <th scope="col">#ID</th>
+            <th scope="col">Student Name</th>
+            <th scope="col">Training Name</th>
+            <th scope="col">Grade</th>
+            <th scope="col">Update</th>
+          </tr>
+        </thead>
+        <tbody>
+          {studentResultReport.map((results, index) => {
+            return (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>{results.studentId.Full_Name}</td>
+                <td>{results.trainingId.training_name}</td>
+                <td>{results.grade}</td>
+                <td>
+                  <button
+                    style={{
+                      width: "80px",
+                      height: "40px",
+                      marginLeft: ".6rem",
+                      backgroundColor: "#996ae4",
+                      color: "white",
+                    }}
+                  onClick={() => {
+                      setgrade(results.grade);
+                      // setselectedTrainingResultId(
+                      //   results._id
+                      // );
+                      setstudentId(results.studentId._id);
+                      // setTrainingId(results.trainingId._id);
+                    }}
+                    type="button"
+                    className="btn "
+                  >
+                    Update
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>
     </>
   );
 }

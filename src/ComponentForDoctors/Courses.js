@@ -274,7 +274,7 @@ function Courses() {
         })}
       </div>
       <h4 style={{ marginLeft: "10px", marginTop: "10px", fontWeight: "bold" }}>
-        Upload Grade{" "}
+      {selectedGradeId ? "Update Grade" : "Upload Grade"}
       </h4>
       <div
         style={{
