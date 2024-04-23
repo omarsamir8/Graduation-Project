@@ -4,6 +4,7 @@ import Select from "react-select";
 import { routes } from "../routes";
 import Swal from "sweetalert2";
 import { useCourseContext } from "../CourseContext";
+import testImg from "../assets/oop.png";
 
 function CreateCourse() {
   const [course_name, setcourse_name] = useState("");
@@ -377,64 +378,48 @@ function CreateCourse() {
           Upload Image
         </button>
 
-        <h2 className="col-12">All Courses Added</h2>
+        <h2 style={{ marginBottom: "20px" }} className="col-12">
+          All Courses Added
+        </h2>
       </div>
       <div className="enrollcourse">
         {allcourses.map((course) => (
           <div className="course" key={course._id}>
+            <p className="open-now">Open Now</p> <img src={testImg} alt="" />
             <div className="infooo">
-              <h5>{course.course_name}</h5>
-              <div className="up-del-btn">
-                <button
-                  style={{
-                    backgroundColor: "#996ae4",
-                    borderColor: "#996ae4",
-                  }}
-                  onClick={() => {
-                    setSelectedCourseId(course._id);
-                    // Set the values of the selected course to the input fields
-                    setcourse_name(course.course_name);
-                    setcredit_hour(course.credit_hour);
-                    setOpenForRegistration(course.OpenForRegistration);
-                    setdesc(course.desc);
-                  }}
-                  type="button"
-                  className="btn btn-primary"
-                >
-                  Update
-                </button>
-                <button
-                  onClick={() => deleteCourse(course._id)}
-                  type="button"
-                  className="btn btn-danger delete_btn"
-                >
-                  Delete
-                </button>
-              </div>
+              <h3>{course.course_name}</h3>
+              <p>4 Months</p>
             </div>
-            <div className="img" />
+            <div className="up-del-btn">
+              <button
+                style={{
+                  backgroundColor: "#996ae4",
+                  borderColor: "#996ae4",
+                }}
+                onClick={() => {
+                  setSelectedCourseId(course._id);
+                  // Set the values of the selected course to the input fields
+                  setcourse_name(course.course_name);
+                  setcredit_hour(course.credit_hour);
+                  setOpenForRegistration(course.OpenForRegistration);
+                  setdesc(course.desc);
+                }}
+                type="button"
+                className="btn btn-primary"
+              >
+                Update
+              </button>
+              <button
+                onClick={() => deleteCourse(course._id)}
+                type="button"
+                className="btn btn-danger delete_btn"
+              >
+                Delete
+              </button>
+            </div>
           </div>
         ))}
       </div>
-      {/* <button
-        style={{
-          width: "320px",
-          height: "50px",
-          border: "none",
-          outline: "none",
-          background: "#996ae4",
-          borderRadius: "10px",
-          paddingLeft: "2rem",
-          paddingRight: "2rem",
-          color: "white",
-          marginLeft: "0rem",
-          marginBottom: "20px",
-          fontSize: "22px",
-          marginLeft: "10px",
-        }}
-      >
-        Loading More
-      </button> */}
     </>
   );
 }

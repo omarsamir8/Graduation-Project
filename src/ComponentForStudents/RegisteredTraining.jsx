@@ -106,9 +106,26 @@ export default function RegisteredTraining() {
       )}
       <div className="enrollcourse">
         {trainingsRegistered.map((registeredTraining) => (
-          <div className="course" key={registeredTraining._id}>
+          <div
+            style={{ height: "420px" }}
+            className="course"
+            key={registeredTraining._id}
+          >
+            <p className="open-now">Open Now</p>
+            <img src={registeredTraining.images[0].url} alt="" />{" "}
             <div className="info">
-              <p>{registeredTraining.training_name}</p>
+              <h3>{registeredTraining.training_name}</h3>
+              <p style={{ marginTop: "-20px", color: "gray" }}>
+                Start Date:{" "}
+                {new Date(registeredTraining.start_date).toLocaleDateString()}
+              </p>
+              <p style={{ marginTop: "-20px", color: "gray" }}>
+                End Date:{" "}
+                {new Date(registeredTraining.end_date).toLocaleDateString()}
+              </p>
+            </div>
+            <div className="up-del-btn">
+              {" "}
               <button
                 type="button"
                 className="btn btn-danger"
@@ -116,7 +133,14 @@ export default function RegisteredTraining() {
               >
                 Delete
               </button>
-              <button type="button" className="btn btn-secondary">
+              <button
+                style={{
+                  backgroundColor: "#996ae4",
+                  borderColor: "#996ae4",
+                }}
+                type="button"
+                className="btn btn-secondary"
+              >
                 <Link
                   to={`/training/${registeredTraining._id}`}
                   className="link"
@@ -125,11 +149,6 @@ export default function RegisteredTraining() {
                 </Link>
               </button>
             </div>
-            <img
-              style={{ width: "100px", height: "100px" }}
-              src={registeredTraining.images[0].url}
-              alt=""
-            />
           </div>
         ))}
       </div>

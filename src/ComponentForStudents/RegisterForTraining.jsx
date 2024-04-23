@@ -76,9 +76,19 @@ export default function RegisterForTraining() {
       <div className="enrollcourse">
         {alltrainingsAvailable.map((training) => {
           return (
-            <div className="course" key={training._id}>
+            <div
+              style={{ height: "420px" }}
+              className="course"
+              key={training._id}
+            >
+              <p className="open-now">Open Now</p>{" "}
+              {training && training.images && training.images.length > 0 ? (
+                <img src={training.images[0].url} alt="" />
+              ) : (
+                <img src={defulatimg} alt="" />
+              )}
               <div className="info">
-                <p>{training.training_name}</p>
+                <h3>{training.training_name}</h3>
                 <p style={{ marginTop: "-20px", color: "gray" }}>
                   Start Date:{" "}
                   {new Date(training.start_date).toLocaleDateString()}
@@ -86,7 +96,8 @@ export default function RegisterForTraining() {
                 <p style={{ marginTop: "-20px", color: "gray" }}>
                   End Date: {new Date(training.end_date).toLocaleDateString()}
                 </p>
-
+              </div>
+              <div className="up-del-btn">
                 <button
                   type="button"
                   class="btn btn-primary"
@@ -100,19 +111,6 @@ export default function RegisterForTraining() {
                   </Link>
                 </button>
               </div>
-              {training && training.images && training.images.length > 0 ? (
-                <img
-                  style={{ width: "100px", height: "100px" }}
-                  src={training.images[0].url}
-                  alt=""
-                />
-              ) : (
-                <img
-                  style={{ width: "100px", height: "100px" }}
-                  src={defulatimg}
-                  alt=""
-                />
-              )}
             </div>
           );
         })}

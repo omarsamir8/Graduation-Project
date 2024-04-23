@@ -6,6 +6,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { routes } from "../routes";
 import { Table } from "react-bootstrap";
+import defulatimg from "../assets/oop.png";
 
 function Training() {
   const [selectedComponent2, setSelectedComponent2] = useRecoilState(
@@ -148,7 +149,7 @@ function Training() {
           },
           body: JSON.stringify({
             studentId,
-            // selectedTrainingResultId,
+            // TrainingId,
             grade,
           }),
         }
@@ -214,36 +215,46 @@ function Training() {
       console.error("Error fetching student result:", error);
     }
   };
-  fetchResultData();
 
   return (
     <>
       <div className="enrollcourse">
         {doctorTrainings.map((training) => {
           return (
-            <div className="course" key={training._id}>
+            <div
+              style={{ height: "400px" }}
+              className="course"
+              key={training._id}
+            >
+              <p className="open-now">Open Now</p>{" "}
+              {training && training.images && training.images.length > 0 ? (
+                <img src={training.images[0].url} alt="" />
+              ) : (
+                <img src={defulatimg} alt="" />
+              )}
               <div className="info">
-                <p>{training.training_name}</p>
-                <NavLink style={{ textDecoration: "none" }} className="NavLink">
-                  <button
-                    onClick={() => {
-                      fetchRegisteredStudents(training._id);
-                    }}
-                    type="button"
-                    className="btn btn-primary"
-                  >
-                    Students
-                  </button>
-                  <button
-                    style={{ marginLeft: "10px" }}
-                    type="button"
-                    className="btn btn-primary"
-                  >
-                    <Link to={`/traiingres/${training._id}`} className="link">
-                      Result
-                    </Link>
-                  </button>
-                </NavLink>
+                <h3>{training.training_name}</h3>
+              </div>
+              <div className="up-del-btn">
+                <button
+                  onClick={() => {
+                    fetchRegisteredStudents(training._id);
+                  }}
+                  type="button"
+                  className="btn btn-primary"
+                >
+                  Students Register Training
+                </button>
+                <button
+                  style={{ marginLeft: "10px" }}
+                  type="button"
+                  className="btn btn-primary"
+                >
+                  <Link to={`/traiingres/${training._id}`} className="link">
+                    Report For Student Result
+                  </Link>
+                </button>
+
                 <button
                   style={{ marginLeft: "10px" }}
                   type="button"
@@ -252,10 +263,9 @@ function Training() {
                     fetchResultData(training._id);
                   }}
                 >
-                  Update Grade
+                  Update Student Grade
                 </button>
               </div>
-              <div className="img " />
             </div>
           );
         })}
@@ -324,7 +334,7 @@ function Training() {
           type="button"
           className="btn "
         >
-         Update Grade
+          Update Grade
         </button>
       </div>
       <div className="get_all_student">
@@ -436,11 +446,9 @@ function Training() {
                       backgroundColor: "#996ae4",
                       color: "white",
                     }}
-                  onClick={() => {
+                    onClick={() => {
                       setgrade(results.grade);
-                      // setselectedTrainingResultId(
-                      //   results._id
-                      // );
+                      setselectedTrainingResultId(results._id);
                       setstudentId(results.studentId._id);
                       // setTrainingId(results.trainingId._id);
                     }}

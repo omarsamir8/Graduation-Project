@@ -6,6 +6,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { routes } from "../routes";
 import { Table } from "react-bootstrap";
+import defulatimg from "../assets/oop.png";
 
 function Courses() {
   const [selectedComponent2, setSelectedComponent2] = useRecoilState(
@@ -241,10 +242,21 @@ function Courses() {
       <div className="enrollcourse">
         {doctorMatarials.map((material) => {
           return (
-            <div className="course" key={material._id}>
+            <div
+              style={{ height: "400px" }}
+              className="course"
+              key={material._id}
+            >
+              <p className="open-now">Open Now</p>{" "}
+              {material && material.images && material.images.length > 0 ? (
+                <img src={material.images[0].url} alt="" />
+              ) : (
+                <img src={defulatimg} alt="" />
+              )}
               <div className="info">
-                <p>{material.course_name}</p>
-
+                <h3>{material.course_name}</h3>
+              </div>
+              <div className="up-del-btn">
                 <button
                   type="button"
                   className="btn btn-primary"
@@ -252,11 +264,11 @@ function Courses() {
                     fetchRegisteredStudents(material._id);
                   }}
                 >
-                  Students
+                  Students Register Course
                 </button>
                 <button type="button" className="btn btn-primary">
                   <Link to={`/material/${material._id}`} className="link">
-                    Result
+                    Report For Student Result
                   </Link>
                 </button>
                 <button
@@ -266,7 +278,7 @@ function Courses() {
                   type="button"
                   className="btn btn-primary"
                 >
-                  Update Grade
+                  Update Student Grade
                 </button>
               </div>
             </div>
@@ -274,7 +286,7 @@ function Courses() {
         })}
       </div>
       <h4 style={{ marginLeft: "10px", marginTop: "10px", fontWeight: "bold" }}>
-      {selectedGradeId ? "Update Grade" : "Upload Grade"}
+        {selectedGradeId ? "Update Grade" : "Upload Grade"}
       </h4>
       <div
         style={{
@@ -298,7 +310,7 @@ function Courses() {
           placeholder="Course ID"
           aria-label=".form-control-sm example"
         />
-      
+
         <input
           style={{ width: "30%", marginLeft: "10px", height: "40px" }}
           className="form-control form-control-sm"

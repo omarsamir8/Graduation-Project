@@ -3,6 +3,7 @@ import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Swal from "sweetalert2";
 import { useTrainingContext } from "../TrainingContext";
 import { routes } from "../routes";
+import testImg from "../assets/oop.png";
 function CreateTraining() {
   const [training_name, settraining_name] = useState("");
   const [desc, setdesc] = useState("");
@@ -364,38 +365,38 @@ function CreateTraining() {
         {allTrainings &&
           allTrainings.map((training) => (
             <div className="course" key={training._id}>
+              <p className="open-now">Open Now</p> <img src={testImg} alt="" />
               <div className="infooo">
-                <h5>{training.training_name}</h5>
-
-                <div className="up-del-btn">
-                  <button
-                    type="button"
-                    style={{
-                      backgroundColor: "#996ae4",
-                      borderColor: "#996ae4",
-                    }}
-                    className="btn btn-primary"
-                    onClick={() => {
-                      setselectedTrainingId(training._id);
-                      settraining_name(training.training_name);
-                      setdesc(training.desc);
-                      setinstructor_id(training.instructor_id);
-                      setstart_date(training.start_date);
-                      setend_date(training.end_date);
-                    }}
-                  >
-                    Update
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-danger delete_btn"
-                    onClick={() => deleteTraining(training._id)}
-                  >
-                    Delete
-                  </button>
-                </div>
+                <h3>{training.training_name}</h3>
+                <p>4 Months</p>
               </div>
-              <div className="img" />
+              <div className="up-del-btn">
+                <button
+                  type="button"
+                  style={{
+                    backgroundColor: "#996ae4",
+                    borderColor: "#996ae4",
+                  }}
+                  className="btn btn-primary"
+                  onClick={() => {
+                    setselectedTrainingId(training._id);
+                    settraining_name(training.training_name);
+                    setdesc(training.desc);
+                    setinstructor_id(training.instructor_id);
+                    setstart_date(training.start_date);
+                    setend_date(training.end_date);
+                  }}
+                >
+                  Update
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-danger delete_btn"
+                  onClick={() => deleteTraining(training._id)}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
       </div>

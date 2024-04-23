@@ -31,7 +31,7 @@ export default function RegisterForCourse() {
 
     fetchData();
   }, [accessToken, refreshToken]);
-
+  console.log(allcoursesavailable);
   // Register for course
   const RegisterForCourse = async (courseId) => {
     try {
@@ -73,30 +73,31 @@ export default function RegisterForCourse() {
       </div>
       <div className="enrollcourse">
         {allcoursesavailable.map((course) => (
-          <div className="course2" key={course._id}>
+          <div className="course" key={course._id}>
+            <p className="open-now">Open Now</p>{" "}
+            {course && course.images && course.images.length > 0 ? (
+              <img src={course.images[0].url} alt="" />
+            ) : (
+              <img src={defulatimg} alt="" />
+            )}
             <div className="info">
-              <p>{course.course_name}</p>
+              <h3>{course.course_name}</h3>
+              <p>{course.desc}</p>
+              <p style={{ marginTop: "-25px", fontSize: "16px" }}>4 Months</p>
+            </div>
+            <div className="up-del-btn">
               <button
                 type="button"
+                style={{
+                  backgroundColor: "#996ae4",
+                  borderColor: "#996ae4",
+                }}
                 className="btn btn-primary"
                 onClick={() => RegisterForCourse(course._id)}
               >
-                Register
+                Register Now
               </button>
             </div>
-            {course && course.images && course.images.length > 0 ? (
-              <img
-                style={{ width: "100px", height: "100px" }}
-                src={course.images[0].url}
-                alt=""
-              />
-            ) : (
-              <img
-                style={{ width: "100px", height: "100px" }}
-                src={defulatimg}
-                alt=""
-              />
-            )}
           </div>
         ))}
       </div>
