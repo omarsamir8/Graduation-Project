@@ -25,7 +25,7 @@ function Courses() {
   const [Practical, setPractical] = useState("");
   const [mainsemester, setmainsemester] = useState([]);
   const [courseGradesInstruc, setcourseGradesInstruc] = useState([]);
-
+  const [selectedGradeId, setselectedGradeId] = useState("");
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
 
@@ -146,29 +146,96 @@ function Courses() {
       console.error("Upload grade failed", error);
     }
   };
-  // Update Grade For Student
+  // get result For Student
 
-  useEffect(() => {
-    const fetchResultData = async (ID) => {
-      try {
-        const response = await axios.get(
-          `https://university-mohamed.vercel.app/Api/students/Grades/search/by/instructor?courseId=${ID}&size=7&page=1&select=studentId,courseId,Points,Grade,FinalExam,Oral,Practical,Midterm,YearWorks,semsterId,TotalGrate`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "refresh-token": refreshToken,
-            },
-          }
+  const fetchDataaa = async (courseId) => {
+    try {
+      const response = await axios.get(
+        `https://university-mohamed.vercel.app/Api/students/Grades/search/by/instructor?courseId=${courseId}&size=7&page=1&select=studentId,courseId,Points,Grade,FinalExam,Oral,Practical,Midterm,YearWorks,semsterId,TotalGrate`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+        }
+      );
+      console.log(response.data);
+      setcourseGradesInstruc(response.data.grades);
+    } catch (error) {
+      console.error("Error fetching doctor info:", error);
+    }
+  };
+
+  // update grade
+  const updateGrade = async () => {
+    try {
+      const response = await fetch(
+        `https://university-mohamed.vercel.app/Api/students/Grades/update/grade/by/instructor?GradeId=${selectedGradeId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+          body: JSON.stringify({
+            // studentId,
+            // courseId,
+            Oral,
+            Practical,
+            Midterm,
+            FinalExam,
+          }),
+        }
+      );
+      const data = await response.json();
+      if (response.ok) {
+        // Show SweetAlert on success
+        Swal.fire({
+          icon: "success",
+          title: "Grade updated successfully",
+          showConfirmButton: false,
+          timer: 3500,
+        });
+
+        // Update the state with the modified course
+        setcourseGradesInstruc((prevGrades) =>
+          prevGrades.map((prevGrade) =>
+            prevGrade._id === selectedGradeId
+              ? {
+                  ...prevGrade,
+                  // studentId,
+                  // courseId,
+                  Midterm,
+                  Oral,
+                  Practical,
+                  FinalExam,
+                }
+              : prevGrade
+          )
         );
-        console.log(response.data);
-        setcourseGradesInstruc(response.data.grades);
-      } catch (error) {
-        console.error("Error fetching student result:", error);
-      }
-      fetchResultData();
-    };
-  }, [accessToken, refreshToken]); // Add courseId to dependency array
 
+        // Clear the selected course and reset input fields
+        setselectedGradeId(null);
+        setstudentId("");
+        setcourseId("");
+        setOral("");
+        setMidterm("");
+        setPractical("");
+        setFinalExam("");
+      } else {
+        // Show an error message if needed
+        Swal.fire({
+          icon: "error",
+          title: "Fail",
+          text: data.error_Message[0].message,
+          timer: 4500,
+        });
+      }
+    } catch (error) {
+      console.error("Update failed", error);
+    }
+  };
   return (
     <>
       <div className="enrollcourse">
@@ -192,7 +259,13 @@ function Courses() {
                     Result
                   </Link>
                 </button>
-                <button type="button" className="btn btn-primary">
+                <button
+                  onClick={() => {
+                    fetchDataaa(material._id);
+                  }}
+                  type="button"
+                  className="btn btn-primary"
+                >
                   Update Grade
                 </button>
               </div>
@@ -295,11 +368,11 @@ function Courses() {
             backgroundColor: "#996ae4",
             color: "white",
           }}
-          onClick={Upload_grade}
+          onClick={selectedGradeId ? updateGrade : Upload_grade}
           type="button"
           className="btn "
         >
-          Upload Grade
+          {selectedGradeId ? "Update Grade" : "Upload Grade"}
         </button>
       </div>
       <div style={{ marginTop: "5rem" }} className="get_all_student">
@@ -374,7 +447,7 @@ function Courses() {
       </div>
 
       <Table
-        style={{ marginTop: "5rem" }}
+        style={{ marginTop: "5rem", textAlign: "center" }}
         striped
         bordered
         hover
@@ -390,6 +463,7 @@ function Courses() {
             <th scope="col">Practical</th>
             <th scope="col">FinalExam</th>
             <th scope="col">TotalGrate</th>
+            <th scope="col">Update</th>
           </tr>
         </thead>
         <tbody>
@@ -403,6 +477,30 @@ function Courses() {
                 <td>{results.Practical}</td>
                 <td>{results.FinalExam}</td>
                 <td>{results.TotalGrate}</td>
+                <td>
+                  <button
+                    style={{
+                      width: "80px",
+                      height: "40px",
+                      marginLeft: ".6rem",
+                      backgroundColor: "#996ae4",
+                      color: "white",
+                    }}
+                    onClick={() => {
+                      setcourseId(results.courseId._id);
+                      setstudentId(results.studentId._id);
+                      setMidterm(results.Midterm);
+                      setOral(results.Oral);
+                      setPractical(results.Practical);
+                      setFinalExam(results.FinalExam);
+                      setselectedGradeId(results._id);
+                    }}
+                    type="button"
+                    className="btn "
+                  >
+                    Update
+                  </button>
+                </td>
               </tr>
             );
           })}
