@@ -1,10 +1,11 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 import { $Dashboard2_Components } from "../Atoms";
 import { useRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { routes } from "../routes";
+import { Table } from "react-bootstrap";
 
 function Courses() {
   const [selectedComponent2, setSelectedComponent2] = useRecoilState(
@@ -13,6 +14,7 @@ function Courses() {
   const [allstudentregistercourses, setallstudentregistercourses] = useState(
     []
   );
+
   const [doctorMatarials, setdoctorMatarials] = useState([]);
   const [Midterm, setMidterm] = useState("");
   const [courseId, setcourseId] = useState("");
@@ -22,7 +24,8 @@ function Courses() {
   const [Oral, setOral] = useState("");
   const [Practical, setPractical] = useState("");
   const [mainsemester, setmainsemester] = useState([]);
-  const [StudentResultReport, setStudentResultReport] = useState([]);
+  const [courseGradesInstruc, setcourseGradesInstruc] = useState([]);
+
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
 
@@ -143,6 +146,28 @@ function Courses() {
       console.error("Upload grade failed", error);
     }
   };
+  // Update Grade For Student
+
+  useEffect(() => {
+    const fetchResultData = async (ID) => {
+      try {
+        const response = await axios.get(
+          `https://university-mohamed.vercel.app/Api/students/Grades/search/by/instructor?courseId=${ID}&size=7&page=1&select=studentId,courseId,Points,Grade,FinalExam,Oral,Practical,Midterm,YearWorks,semsterId,TotalGrate`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+        console.log(response.data);
+        setcourseGradesInstruc(response.data.grades);
+      } catch (error) {
+        console.error("Error fetching student result:", error);
+      }
+      fetchResultData();
+    };
+  }, [accessToken, refreshToken]); // Add courseId to dependency array
 
   return (
     <>
@@ -166,6 +191,9 @@ function Courses() {
                   <Link to={`/material/${material._id}`} className="link">
                     Result
                   </Link>
+                </button>
+                <button type="button" className="btn btn-primary">
+                  Update Grade
                 </button>
               </div>
             </div>
@@ -197,18 +225,7 @@ function Courses() {
           placeholder="Course ID"
           aria-label=".form-control-sm example"
         />
-        {/* <input
-          style={{ width: "30%", marginLeft: "10px", height: "40px" }}
-          className="form-control form-control-sm"
-          type="text"
-          name="semsterId"
-          value={semsterId}
-          onChange={(e) => {
-            setsemsterId(e.target.value);
-          }}
-          placeholder="Semster ID"
-          aria-label=".form-control-sm example"
-        /> */}
+
         <input
           style={{ width: "30%", marginLeft: "10px", height: "40px" }}
           className="form-control form-control-sm"
@@ -288,7 +305,6 @@ function Courses() {
       <div style={{ marginTop: "5rem" }} className="get_all_student">
         {allstudentregistercourses.length > 0 && (
           <>
-            <h2 style={{ marginLeft: ".7rem" }}>All Students Reg Course </h2>
             <table style={{ textAlign: "center" }} class="table">
               <thead>
                 <tr>
@@ -356,6 +372,42 @@ function Courses() {
           </>
         )}
       </div>
+
+      <Table
+        style={{ marginTop: "5rem" }}
+        striped
+        bordered
+        hover
+        size="md"
+        className="col-12"
+      >
+        <thead>
+          <tr>
+            <th scope="col">#ID</th>
+            <th scope="col">Student Name</th>
+            <th scope="col">Course Name</th>
+            <th scope="col">YearWorks</th>
+            <th scope="col">Practical</th>
+            <th scope="col">FinalExam</th>
+            <th scope="col">TotalGrate</th>
+          </tr>
+        </thead>
+        <tbody>
+          {courseGradesInstruc.map((results, index) => {
+            return (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>{results.studentId.Full_Name}</td>
+                <td>{results.courseId.course_name}</td>
+                <td>{results.YearWorks}</td>
+                <td>{results.Practical}</td>
+                <td>{results.FinalExam}</td>
+                <td>{results.TotalGrate}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>
     </>
   );
 }
