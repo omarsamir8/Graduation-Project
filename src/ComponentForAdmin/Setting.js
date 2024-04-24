@@ -1,16 +1,16 @@
-import axios from 'axios'
-import { useState, useEffect } from 'react'
+import axios from "axios";
+import { useState, useEffect } from "react";
 
-import { routes } from '../routes'
-import Swal from 'sweetalert2'
-import Table from 'react-bootstrap/Table'
-function Setting () {
-  const [Setting, setSetting] = useState([])
-  const [Allow, setAllow] = useState('No')
-  const [ApiUrl, setApiUrl] = useState()
-  const [selectedSetting, setselectedSetting] = useState(null)
-  const accessToken = localStorage.getItem('accesstoken')
-  const refreshToken = localStorage.getItem('refreshtoken')
+import { routes } from "../routes";
+import Swal from "sweetalert2";
+import Table from "react-bootstrap/Table";
+function Setting() {
+  const [Setting, setSetting] = useState([]);
+  const [Allow, setAllow] = useState("No");
+  const [ApiUrl, setApiUrl] = useState();
+  const [selectedSetting, setselectedSetting] = useState(null);
+  const accessToken = localStorage.getItem("accesstoken");
+  const refreshToken = localStorage.getItem("refreshtoken");
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -19,48 +19,48 @@ function Setting () {
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
-              'refresh-token': refreshToken
-            }
+              "refresh-token": refreshToken,
+            },
           }
-        )
+        );
 
-        console.log(response.data)
-        setSetting(response.data.routedescription)
+        console.log(response.data);
+        setSetting(response.data.routedescription);
       } catch (error) {
-        console.error('Error fetching admin info:', error)
+        console.error("Error fetching admin info:", error);
       }
-    }
+    };
 
-    fetchData()
-  }, [accessToken, refreshToken])
+    fetchData();
+  }, [accessToken, refreshToken]);
 
   // Update Settings
   const UpdateSettings = async () => {
     try {
       const response = await fetch(
-        'https://university-mohamed.vercel.app/Api/admin/setting/update',
+        "https://university-mohamed.vercel.app/Api/admin/setting/update",
         {
-          method: 'PUT',
+          method: "PUT",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
-            'refresh-token': refreshToken
+            "refresh-token": refreshToken,
           },
           body: JSON.stringify({
             Allow,
-            ApiUrl
-          })
+            ApiUrl,
+          }),
         }
-      )
+      );
 
       if (response.ok) {
         // Show SweetAlert on success
         Swal.fire({
-          icon: 'success',
-          title: 'Setting updated successfully',
+          icon: "success",
+          title: "Setting updated successfully",
           showConfirmButton: false,
-          timer: 3500
-        })
+          timer: 3500,
+        });
 
         // Update the state with the modified student
         // setSetting((prevSettings) =>
@@ -77,55 +77,65 @@ function Setting () {
       } else {
         // Show an error message if needed
         Swal.fire({
-          icon: 'error',
-          title: 'Fail',
-          text: 'Setting update failed, please try again later',
-          timer: 4500
-        })
+          icon: "error",
+          title: "Fail",
+          text: "Setting update failed, please try again later",
+          timer: 4500,
+        });
       }
     } catch (error) {
-      console.error('Update failed', error)
+      console.error("Update failed", error);
     }
-  }
-  console.log(Allow)
-  console.log(ApiUrl)
-  console.log(Setting)
+  };
+  console.log(Allow);
+  console.log(ApiUrl);
+  console.log(Setting);
   return (
     <>
-      <div className='setting-page'>
-        <div className='single-setting'>
-          <table class='table' style={{}}>
-            <thead class='thead-dark'>
+      <div className="setting-page">
+        <div className="single-setting">
+          <Table striped bordered hover class="table" style={{}}>
+            <thead class="thead-dark">
               <tr>
-                <th scope='col'>#</th>
-                <th style={{ textAlign: 'center' }} scope='col'>
+                <th scope="col">#</th>
+                <th style={{ textAlign: "center" }} scope="col">
                   Rule
                 </th>
-                <th style={{ textAlign: 'center' }} scope='col'>
+                <th style={{ textAlign: "center" }} scope="col">
                   Value
                 </th>
-                <th scope='col'>Allow</th>
+                <th scope="col">Allow</th>
               </tr>
             </thead>
             <tbody>
               {Setting.map((setting, index) => {
                 return (
                   <tr key={setting._id}>
-                    <th scope='row'>{index + 1}</th>
-                    <td style={{ textAlign: 'center' }}>{setting.name}</td>
-                    <td style={{ textAlign: 'center' }}>{setting.desc}</td>
+                    <th scope="row">{index + 1}</th>
+                    <td style={{ textAlign: "center" }}>{setting.name}</td>
+                    <td style={{ textAlign: "center" }}>{setting.desc}</td>
                     <td>True</td>
                   </tr>
-                )
+                );
               })}
             </tbody>
-          </table>
+          </Table>
         </div>
-        {/* Table example */}
-
+        <div style={{ width: "100%" }}>
+          <i
+            style={{
+              width: "100%",
+              textAlign: "center",
+              marginTop: "20px",
+              fontSize: "40px",
+              cursor: "pointer",
+            }}
+            class="fa-solid fa-spinner"
+          ></i>
+        </div>
       </div>
     </>
-  )
+  );
 }
-export default Setting
+export default Setting;
 // #282a36

@@ -4,8 +4,7 @@ import Select from "react-select";
 import { routes } from "../routes";
 import Swal from "sweetalert2";
 import { useCourseContext } from "../CourseContext";
-import testImg from "../assets/oop.png";
-
+import testImg from "../assets/traing2jpeg.jpeg";
 function CreateCourse() {
   const [course_name, setcourse_name] = useState("");
   const [Prerequisites, setPrerequisites] = useState([]);
@@ -84,7 +83,7 @@ function CreateCourse() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://university-mohamed.vercel.app${routes.course._id}${routes.course.searchCourseByAdmin}?&size=20`,
+          `https://university-mohamed.vercel.app${routes.course._id}${routes.course.searchCourseByAdmin}?&size=20&page=1`,
           {
             method: "GET",
             headers: {
@@ -419,6 +418,18 @@ function CreateCourse() {
             </div>
           </div>
         ))}
+      </div>
+      <div style={{ width: "100%" }}>
+        <i
+          style={{
+            width: "100%",
+            textAlign: "center",
+            marginTop: "20px",
+            fontSize: "40px",
+            cursor: "pointer",
+          }}
+          class="fa-solid fa-spinner"
+        ></i>
       </div>
     </>
   );

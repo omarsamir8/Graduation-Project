@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { routes } from "../routes";
 import { Link } from "react-router-dom";
-import defulatimg from "../assets/oop.png";
+import defulatimg from "../assets/traing2jpeg.jpeg";
 
 export default function RegisterForTraining() {
   const [alltrainingsAvailable, setalltrainingsAvailable] = useState([]);
