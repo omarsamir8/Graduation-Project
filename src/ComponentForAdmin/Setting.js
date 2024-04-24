@@ -94,7 +94,13 @@ function Setting() {
     <>
       <div className="setting-page">
         <div className="single-setting">
-          <Table striped bordered hover class="table" style={{}}>
+          <Table
+            striped
+            bordered
+            hover
+            class="table"
+            style={{ marginTop: "20px" }}
+          >
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
@@ -114,7 +120,7 @@ function Setting() {
                     <th scope="row">{index + 1}</th>
                     <td style={{ textAlign: "center" }}>{setting.name}</td>
                     <td style={{ textAlign: "center" }}>{setting.desc}</td>
-                    <td>True</td>
+                    <td>{setting.allow}</td>
                   </tr>
                 );
               })}

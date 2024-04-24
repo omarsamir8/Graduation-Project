@@ -73,7 +73,11 @@ export default function RegisterForCourse() {
       </div>
       <div className="enrollcourse">
         {allcoursesavailable.map((course) => (
-          <div style={{ height: "400px" }} className="course" key={course._id}>
+          <div
+            style={{ height: "auto", paddingBottom: "10px" }}
+            className="course"
+            key={course._id}
+          >
             <p className="open-now">Open Now</p>{" "}
             {course && course.images && course.images.length > 0 ? (
               <img src={course.images[0].url} alt="" />
