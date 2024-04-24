@@ -21,7 +21,7 @@ function NavBar() {
   const { allcourses, setallcourses } = useCourseContext();
   const { allTrainings, setAllTrainings } = useTrainingContext();
   const { allstudents, setallstudents } = useStudentContext();
-  const [Page, setPage] = usePageContext(1);
+  let [Page, setPage] = usePageContext(1);
   const { alldoctors, setalldoctors } = useDoctorContext();
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");

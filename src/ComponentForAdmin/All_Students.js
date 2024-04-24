@@ -8,7 +8,7 @@ import { usePageContext } from "../PageContext";
 
 function All_Students() {
   const { allstudents, setallstudents } = useStudentContext();
-  const { Page, setPage } = usePageContext(1);
+  let { Page, setPage } = usePageContext(1);
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [showform, setshowform] = useState("none");
   const [test, settest] = useState(false);
