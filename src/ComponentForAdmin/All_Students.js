@@ -4,9 +4,11 @@ import Swal from "sweetalert2";
 import { useStudentContext } from "../StudentContext";
 import { routes } from "../routes";
 import { Table } from "react-bootstrap";
+import { usePageContext } from "../PageContext";
 
 function All_Students() {
   const { allstudents, setallstudents } = useStudentContext();
+  const { Page, setPage } = usePageContext(1);
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [showform, setshowform] = useState("none");
   const [test, settest] = useState(false);
@@ -147,10 +149,11 @@ function All_Students() {
     }
   };
 
-  const loadMore = () => {
-    // Increment the count when loading more
-    setcount((prevCount) => prevCount + 1);
+  const increment = () => {
+    setPage((prevPage) => prevPage + 1);
+    // Increment count by 1
   };
+  console.log(Page);
   return (
     <>
       <div className="get_all_student">
@@ -299,7 +302,7 @@ function All_Students() {
         </Table>
       </div>
       <div style={{ width: "100%" }}>
-        <i
+        <i onClick={increment}
           style={{
             width: "100%",
             textAlign: "center",

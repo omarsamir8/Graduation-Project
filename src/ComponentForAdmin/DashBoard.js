@@ -43,7 +43,7 @@ function DashBoard() {
         <div className="coulmns">
           <div className="main-container">
             <div className="main">
-              {/* <i class="fa-solid fa-book-open" /> */}
+              <i class="fa-solid fa-book-open" />
               <h3 className="animate__animated animate__backInDown">
                 {dashboardinfo.students}
               </h3>
@@ -52,7 +52,7 @@ function DashBoard() {
               </p>
             </div>
             <div className="main">
-              {/* <i class="fa-solid fa-check" /> */}
+              <i class="fa-solid fa-check" />
               <h3 className="animate__animated animate__backInDown">
                 {dashboardinfo.instructors}
               </h3>
@@ -61,7 +61,7 @@ function DashBoard() {
               </p>
             </div>
             <div className="main">
-              {/* <i class="fa-solid fa-square-xmark" /> */}
+              <i class="fa-solid fa-square-xmark" />
               <h3 className="animate__animated animate__backInDown">
                 {dashboardinfo.courses}
               </h3>
@@ -73,7 +73,7 @@ function DashBoard() {
           </div>
           <div className="main-container">
             <div className="main">
-              {/* <i class="fa-brands fa-stack-overflow" /> */}
+              <i class="fa-brands fa-stack-overflow" />
               <h3 className="animate__animated animate__backInDown">
                 {dashboardinfo.training}
               </h3>
@@ -82,7 +82,7 @@ function DashBoard() {
               </p>
             </div>
             <div className="main">
-              {/* <i class="fa-solid fa-check" /> */}
+              <i class="fa-solid fa-check" />
               <h3 className="animate__animated animate__backInDown">
                 {dashboardinfo.semsters}
               </h3>
@@ -91,7 +91,7 @@ function DashBoard() {
               </p>
             </div>
             <div className="main">
-              {/* <i class="fa-solid fa-message" /> */}
+              <i class="fa-solid fa-message" />
               <h3 className="animate__animated animate__backInDown">3</h3>
               <p className="animate__animated animate__backInDown">
                 unreaded messages

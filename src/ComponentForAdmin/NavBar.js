@@ -1,12 +1,13 @@
 import "../styles/NavBar.css";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useStudentContext } from "../StudentContext";
 import { useDoctorContext } from "../DoctorContext";
 import { useTrainingContext } from "../TrainingContext";
 import { useCourseContext } from "../CourseContext";
 import { routes } from "../routes";
 import Swal from "sweetalert2";
+import { usePageContext } from "../PageContext";
 
 function NavBar() {
   const [admininfo, setadmininfo] = useState([]);
@@ -20,6 +21,7 @@ function NavBar() {
   const { allcourses, setallcourses } = useCourseContext();
   const { allTrainings, setAllTrainings } = useTrainingContext();
   const { allstudents, setallstudents } = useStudentContext();
+  const [Page, setPage] = usePageContext(1);
   const { alldoctors, setalldoctors } = useDoctorContext();
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
@@ -47,28 +49,27 @@ function NavBar() {
     fetchData();
   }, [accessToken, refreshToken]);
   // search for students
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `https://university-mohamed.vercel.app${routes.student._id}${routes.student.searchstudent}?page=${Page}&size=20&search=${search_student_value}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+        }
+      );
+
+      console.log(response.data);
+      setallstudents(response.data.students);
+    } catch (error) {
+      console.error("Error fetching admin info:", error);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `https://university-mohamed.vercel.app${routes.student._id}${routes.student.searchstudent}?page=1&size=20&search=${search_student_value}`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "refresh-token": refreshToken,
-            },
-          }
-        );
-
-        console.log(response.data);
-        setallstudents(response.data.students);
-      } catch (error) {
-        console.error("Error fetching admin info:", error);
-      }
-    };
-
     fetchData();
-  }, [accessToken, refreshToken, search_student_value]);
+  }, [Page, accessToken, refreshToken, search_student_value]);
   console.log(allstudents);
   // search for doctor
   useEffect(() => {
