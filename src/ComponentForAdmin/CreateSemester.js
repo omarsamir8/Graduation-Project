@@ -354,7 +354,14 @@ function CreateSemester() {
             ))}
           </tbody>
         </Table>
-        <div style={{ width: "100%" }}>
+        <div
+          style={{
+            width: "100%",
+            textAlign: "center",
+            cursor: "pointer",
+          }}
+          onClick={increment}
+        >
           <i
             style={{
               width: "100%",
@@ -363,9 +370,17 @@ function CreateSemester() {
               fontSize: "40px",
               cursor: "pointer",
             }}
-            onClick={increment} // Call the increment function when the icon is clicked
-            className="fa-solid fa-spinner"
+            class="fa-solid fa-spinner"
           ></i>
+          <span
+            style={{
+              fontFamily: "cursive",
+              fontSize: "20px",
+              fontWeight: "bold",
+            }}
+          >
+            Load More
+          </span>
         </div>
       </div>
     </>

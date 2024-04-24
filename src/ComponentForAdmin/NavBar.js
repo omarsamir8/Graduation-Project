@@ -21,7 +21,7 @@ function NavBar() {
   const { allcourses, setallcourses } = useCourseContext();
   const { allTrainings, setAllTrainings } = useTrainingContext();
   const { allstudents, setallstudents } = useStudentContext();
-  let [Page, setPage] = usePageContext(1);
+  let { Page, setPage } = usePageContext();
   const { alldoctors, setalldoctors } = useDoctorContext();
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
@@ -72,54 +72,53 @@ function NavBar() {
   }, [Page, accessToken, refreshToken, search_student_value]);
   console.log(allstudents);
   // search for doctor
+  const fetchDataa = async () => {
+    try {
+      const response = await axios.get(
+        `https://university-mohamed.vercel.app${routes.instructor._id}${routes.instructor.searchInstructor}?page=${Page}&size=20&search=${doctor_value}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+        }
+      );
+
+      console.log(response.data);
+      setalldoctors(response.data.Instructors);
+    } catch (error) {
+      console.error("Error fetching admin info:", error);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `https://university-mohamed.vercel.app${routes.instructor._id}${routes.instructor.searchInstructor}?page=1&size=20&search=${doctor_value}`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "refresh-token": refreshToken,
-            },
-          }
-        );
-
-        console.log(response.data);
-        setalldoctors(response.data.Instructors);
-      } catch (error) {
-        console.error("Error fetching admin info:", error);
-      }
-    };
-
-    fetchData();
-  }, [accessToken, refreshToken, search_student_value]);
+    fetchDataa();
+  }, [Page, accessToken, refreshToken, search_student_value]);
   console.log(alldoctors);
   // search for training
-  useEffect(() => {
-    const fetchsearchfortraining = async () => {
-      try {
-        // if (searchvalue.trim() !== "") {
-        const response = await axios.get(
-          `https://university-mohamed.vercel.app${routes.Training._id}${routes.Training.allTrainingByAdmin}?select=training_name,start_date,OpenForRegister,Training&page=${count}&size=9&search=${training_value}`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "refresh-token": refreshToken,
-            },
-          }
-        );
-        console.log(response.data);
-        const data = response.data;
-        console.log(data);
-        setAllTrainings(data.trainings);
+  const fetchsearchfortraining = async () => {
+    try {
+      // if (searchvalue.trim() !== "") {
+      const response = await axios.get(
+        `https://university-mohamed.vercel.app${routes.Training._id}${routes.Training.allTrainingByAdmin}?select=training_name,start_date,OpenForRegister,Training&page=${Page}&size=9&search=${training_value}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+        }
+      );
+      console.log(response.data);
+      const data = response.data;
+      console.log(data);
+      setAllTrainings(data.trainings);
 
-        // Here you can update the state related to the search or perform any other actions with the data
-      } catch (error) {
-        // }
-        console.error("Error fetching search results:", error);
-      }
-    };
+      // Here you can update the state related to the search or perform any other actions with the data
+    } catch (error) {
+      // }
+      console.error("Error fetching search results:", error);
+    }
+  };
+  useEffect(() => {
     fetchsearchfortraining();
     const handleKeyPress = (e) => {
       if (e.key === "Enter") {
@@ -132,35 +131,35 @@ function NavBar() {
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
-  }, [accessToken, refreshToken, training_value, count]);
+  }, [accessToken, refreshToken, training_value, Page]);
   console.log(allTrainings);
   // serach for course
-  useEffect(() => {
-    const fetchsearchforcourse = async () => {
-      try {
-        // if (searchvalue.trim() !== "") {
-        const response = await axios.get(
-          `https://university-mohamed.vercel.app${routes.course._id}${routes.course.searchCourseByAdmin}?page=${count}&size=20
+  const fetchsearchforcourse = async () => {
+    try {
+      // if (searchvalue.trim() !== "") {
+      const response = await axios.get(
+        `https://university-mohamed.vercel.app${routes.course._id}${routes.course.searchCourseByAdmin}?page=${Page}&size=20
           &search=${training_value}`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "refresh-token": refreshToken,
-            },
-          }
-        );
-        console.log(response.data);
-        const data = response.data;
-        console.log(data);
-        setallcourses(data.courses);
-        console.log(allcourses);
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+        }
+      );
+      console.log(response.data);
+      const data = response.data;
+      console.log(data);
+      setallcourses(data.courses);
+      console.log(allcourses);
 
-        // Here you can update the state related to the search or perform any other actions with the data
-      } catch (error) {
-        // }
-        console.error("Error fetching search results:", error);
-      }
-    };
+      // Here you can update the state related to the search or perform any other actions with the data
+    } catch (error) {
+      // }
+      console.error("Error fetching search results:", error);
+    }
+  };
+  useEffect(() => {
     fetchsearchforcourse();
     const handleKeyPress = (e) => {
       if (e.key === "Enter") {
@@ -173,7 +172,7 @@ function NavBar() {
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
-  }, [accessToken, refreshToken, course_value]);
+  }, [Page, accessToken, refreshToken, course_value]);
 
   // loading more
   const loadMore = () => {

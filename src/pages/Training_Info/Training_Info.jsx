@@ -75,12 +75,15 @@ const TrainingInfo = () => {
               }
             })}
 
-            {trainingimages.length > 1 && (
+            {trainingimages.length > 0 && (
+              <img src={trainingimages[0].url} alt="" />
+            )}
+            {trainingimages.length > 0 && (
               <img src={trainingimages[0].url} alt="" />
             )}
           </div>
           <div className="productdisplay-img">
-            {trainingimages.length > 1 && (
+            {trainingimages.length > 0 && (
               <img
                 style={{ height: "460px" }}
                 className="productdisplay-main-img"

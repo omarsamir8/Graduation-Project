@@ -301,8 +301,15 @@ function All_Students() {
           </tbody>
         </Table>
       </div>
-      <div style={{ width: "100%" }}>
-        <i onClick={increment}
+      <div
+        style={{
+          width: "100%",
+          textAlign: "center",
+          cursor: "pointer",
+        }}
+        onClick={increment}
+      >
+        <i
           style={{
             width: "100%",
             textAlign: "center",
@@ -312,6 +319,15 @@ function All_Students() {
           }}
           class="fa-solid fa-spinner"
         ></i>
+        <span
+          style={{
+            fontFamily: "cursive",
+            fontSize: "20px",
+            fontWeight: "bold",
+          }}
+        >
+          Load More
+        </span>
       </div>
     </>
   );

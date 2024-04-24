@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { useTrainingContext } from "../TrainingContext";
 import { routes } from "../routes";
 import testImg from "../assets/traing2jpeg.jpeg";
+import { usePageContext } from "../PageContext";
 
 function CreateTraining() {
   const [training_name, settraining_name] = useState("");
@@ -11,6 +12,7 @@ function CreateTraining() {
   const [instructor_id, setinstructor_id] = useState("");
   const [start_date, setstart_date] = useState("");
   const [end_date, setend_date] = useState("");
+  let { Page, setPage } = usePageContext(1);
   const { allTrainings, setAllTrainings } = useTrainingContext();
   const [message, setmessage] = useState("");
   const [selectedTrainingId, setselectedTrainingId] = useState(null);
@@ -236,7 +238,10 @@ function CreateTraining() {
       console.error("Upload failed", error);
     }
   };
-
+  const increment = () => {
+    setPage((prevPage) => prevPage + 1);
+    // Increment count by 1
+  };
   return (
     <>
       <div className="Create_Student">
@@ -401,7 +406,14 @@ function CreateTraining() {
             </div>
           ))}
       </div>
-      <div style={{ width: "100%" }}>
+      <div
+        style={{
+          width: "100%",
+          textAlign: "center",
+          cursor: "pointer",
+        }}
+        onClick={increment}
+      >
         <i
           style={{
             width: "100%",
@@ -412,6 +424,15 @@ function CreateTraining() {
           }}
           class="fa-solid fa-spinner"
         ></i>
+        <span
+          style={{
+            fontFamily: "cursive",
+            fontSize: "20px",
+            fontWeight: "bold",
+          }}
+        >
+          Load More
+        </span>
       </div>
     </>
   );

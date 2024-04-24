@@ -73,7 +73,7 @@ export default function RegisterForCourse() {
       </div>
       <div className="enrollcourse">
         {allcoursesavailable.map((course) => (
-          <div className="course" key={course._id}>
+          <div style={{ height: "400px" }} className="course" key={course._id}>
             <p className="open-now">Open Now</p>{" "}
             {course && course.images && course.images.length > 0 ? (
               <img src={course.images[0].url} alt="" />
@@ -82,7 +82,9 @@ export default function RegisterForCourse() {
             )}
             <div className="info">
               <h3>{course.course_name}</h3>
-              <p>{course.desc}</p>
+              <p style={{ maxHeight: "80px", overflow: "hidden" }}>
+                {course.desc}
+              </p>
               <p style={{ marginTop: "-25px", fontSize: "16px" }}>4 Months</p>
             </div>
             <div className="up-del-btn">

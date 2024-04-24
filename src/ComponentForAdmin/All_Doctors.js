@@ -6,10 +6,11 @@ import { useDoctorContext } from "../DoctorContext";
 import Select from "react-select";
 import { routes } from "../routes";
 import { Table } from "react-bootstrap";
+import { usePageContext } from "../PageContext";
 
 function AllDoctors() {
   const { alldoctors, setalldoctors } = useDoctorContext();
-
+  let { Page, setPage } = usePageContext(1);
   const [selecteddoctor, setSelecteddoctor] = useState(null);
   const [FullName, setFullName] = useState("");
   const [email, setemail] = useState("");
@@ -210,6 +211,10 @@ function AllDoctors() {
 
     fetchData();
   }, [accessToken, refreshToken]);
+  const increment = () => {
+    setPage((prevPage) => prevPage + 1);
+    // Increment count by 1
+  };
   return (
     <>
       <div className="Create_Student" style={{ display: showform }}>
@@ -414,7 +419,14 @@ function AllDoctors() {
           </tbody>
         </Table>
       </div>
-      <div style={{ width: "100%" }}>
+      <div
+        style={{
+          width: "100%",
+          textAlign: "center",
+          cursor: "pointer",
+        }}
+        onClick={increment}
+      >
         <i
           style={{
             width: "100%",
@@ -425,6 +437,15 @@ function AllDoctors() {
           }}
           class="fa-solid fa-spinner"
         ></i>
+        <span
+          style={{
+            fontFamily: "cursive",
+            fontSize: "20px",
+            fontWeight: "bold",
+          }}
+        >
+          Load More
+        </span>
       </div>
     </>
   );
