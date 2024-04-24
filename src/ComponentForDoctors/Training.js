@@ -6,7 +6,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { routes } from "../routes";
 import { Table } from "react-bootstrap";
-import defulatimg from "../assets/oop.png";
+import defulatimg from "../assets/traing2jpeg.jpeg";
 
 function Training() {
   const [selectedComponent2, setSelectedComponent2] = useRecoilState(
@@ -246,7 +246,7 @@ function Training() {
                   Students Register Training
                 </button>
                 <button
-                  style={{ marginLeft: "10px" }}
+                  style={{ backgroundColor: "gray", borderColor: "gray" }}
                   type="button"
                   className="btn btn-primary"
                 >
@@ -256,7 +256,10 @@ function Training() {
                 </button>
 
                 <button
-                  style={{ marginLeft: "10px" }}
+                  style={{
+                    backgroundColor: "#996ae4",
+                    borderColor: "#996ae4",
+                  }}
                   type="button"
                   className="btn btn-primary"
                   onClick={() => {

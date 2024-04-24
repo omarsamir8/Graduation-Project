@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { routes } from "../routes";
-import defulatimg from "../assets/oop.png";
+import defulatimg from "../assets/traing2jpeg.jpeg";
 
 export default function RegisterForCourse() {
   const accessToken = localStorage.getItem("accesstoken");

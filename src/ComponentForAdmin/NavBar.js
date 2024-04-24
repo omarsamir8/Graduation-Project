@@ -1,28 +1,28 @@
-import '../styles/NavBar.css'
-import axios from 'axios'
-import { useState, useEffect } from 'react'
-import { useStudentContext } from '../StudentContext'
-import { useDoctorContext } from '../DoctorContext'
-import { useTrainingContext } from '../TrainingContext'
-import { useCourseContext } from '../CourseContext'
-import { routes } from '../routes'
-import Swal from 'sweetalert2'
+import "../styles/NavBar.css";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { useStudentContext } from "../StudentContext";
+import { useDoctorContext } from "../DoctorContext";
+import { useTrainingContext } from "../TrainingContext";
+import { useCourseContext } from "../CourseContext";
+import { routes } from "../routes";
+import Swal from "sweetalert2";
 
-function NavBar () {
-  const [admininfo, setadmininfo] = useState([])
-  const [messgae, setmessage] = useState('')
-  const [adminImage, setadminImage] = useState([])
-  const [search_student_value, setsearch_student_value] = useState('')
-  const [doctor_value, setdoctor_value] = useState('')
-  const [training_value, settraining_value] = useState('')
-  const [course_value, setcourse_value] = useState('')
-  const [count, setcount] = useState(1)
-  const { allcourses, setallcourses } = useCourseContext()
-  const { allTrainings, setAllTrainings } = useTrainingContext()
-  const { allstudents, setallstudents } = useStudentContext()
-  const { alldoctors, setalldoctors } = useDoctorContext()
-  const accessToken = localStorage.getItem('accesstoken')
-  const refreshToken = localStorage.getItem('refreshtoken')
+function NavBar() {
+  const [admininfo, setadmininfo] = useState([]);
+  const [messgae, setmessage] = useState("");
+  const [adminImage, setadminImage] = useState([]);
+  const [search_student_value, setsearch_student_value] = useState("");
+  const [doctor_value, setdoctor_value] = useState("");
+  const [training_value, settraining_value] = useState("");
+  const [course_value, setcourse_value] = useState("");
+  const [count, setcount] = useState(1);
+  const { allcourses, setallcourses } = useCourseContext();
+  const { allTrainings, setAllTrainings } = useTrainingContext();
+  const { allstudents, setallstudents } = useStudentContext();
+  const { alldoctors, setalldoctors } = useDoctorContext();
+  const accessToken = localStorage.getItem("accesstoken");
+  const refreshToken = localStorage.getItem("refreshtoken");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,20 +32,20 @@ function NavBar () {
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
-              'refresh-token': refreshToken
-            }
+              "refresh-token": refreshToken,
+            },
           }
-        )
+        );
 
-        console.log(response.data)
-        setadmininfo(response.data.user)
+        console.log(response.data);
+        setadmininfo(response.data.user);
       } catch (error) {
-        console.error('Error fetching admin info:', error)
+        console.error("Error fetching admin info:", error);
       }
-    }
+    };
 
-    fetchData()
-  }, [accessToken, refreshToken])
+    fetchData();
+  }, [accessToken, refreshToken]);
   // search for students
   useEffect(() => {
     const fetchData = async () => {
@@ -55,21 +55,21 @@ function NavBar () {
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
-              'refresh-token': refreshToken
-            }
+              "refresh-token": refreshToken,
+            },
           }
-        )
+        );
 
-        console.log(response.data)
-        setallstudents(response.data.students)
+        console.log(response.data);
+        setallstudents(response.data.students);
       } catch (error) {
-        console.error('Error fetching admin info:', error)
+        console.error("Error fetching admin info:", error);
       }
-    }
+    };
 
-    fetchData()
-  }, [accessToken, refreshToken, search_student_value])
-  console.log(allstudents)
+    fetchData();
+  }, [accessToken, refreshToken, search_student_value]);
+  console.log(allstudents);
   // search for doctor
   useEffect(() => {
     const fetchData = async () => {
@@ -79,220 +79,220 @@ function NavBar () {
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
-              'refresh-token': refreshToken
-            }
+              "refresh-token": refreshToken,
+            },
           }
-        )
+        );
 
-        console.log(response.data)
-        setalldoctors(response.data.Instructors)
+        console.log(response.data);
+        setalldoctors(response.data.Instructors);
       } catch (error) {
-        console.error('Error fetching admin info:', error)
+        console.error("Error fetching admin info:", error);
       }
-    }
+    };
 
-    fetchData()
-  }, [accessToken, refreshToken, search_student_value])
-  console.log(alldoctors)
+    fetchData();
+  }, [accessToken, refreshToken, search_student_value]);
+  console.log(alldoctors);
   // search for training
   useEffect(() => {
     const fetchsearchfortraining = async () => {
       try {
         // if (searchvalue.trim() !== "") {
         const response = await axios.get(
-          `https://university-mohamed.vercel.app${routes.Training._id}${routes.Training.allTrainingByAdmin}?select=training_name&page=${count}&size=9&search=${training_value}`,
+          `https://university-mohamed.vercel.app${routes.Training._id}${routes.Training.allTrainingByAdmin}?select=training_name,start_date,OpenForRegister,Training&page=${count}&size=9&search=${training_value}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
-              'refresh-token': refreshToken
-            }
+              "refresh-token": refreshToken,
+            },
           }
-        )
-        console.log(response.data)
-        const data = response.data
-        console.log(data)
-        setAllTrainings(data.trainings)
+        );
+        console.log(response.data);
+        const data = response.data;
+        console.log(data);
+        setAllTrainings(data.trainings);
 
         // Here you can update the state related to the search or perform any other actions with the data
       } catch (error) {
         // }
-        console.error('Error fetching search results:', error)
+        console.error("Error fetching search results:", error);
       }
-    }
-    fetchsearchfortraining()
+    };
+    fetchsearchfortraining();
     const handleKeyPress = (e) => {
-      if (e.key === 'Enter') {
-        fetchsearchfortraining()
+      if (e.key === "Enter") {
+        fetchsearchfortraining();
       }
-    }
+    };
 
-    document.addEventListener('keydown', handleKeyPress)
+    document.addEventListener("keydown", handleKeyPress);
 
     return () => {
-      document.removeEventListener('keydown', handleKeyPress)
-    }
-  }, [accessToken, refreshToken, training_value])
-  console.log(allTrainings)
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [accessToken, refreshToken, training_value, count]);
+  console.log(allTrainings);
   // serach for course
   useEffect(() => {
     const fetchsearchforcourse = async () => {
       try {
         // if (searchvalue.trim() !== "") {
         const response = await axios.get(
-          `https://university-mohamed.vercel.app${routes.course._id}${routes.course.searchCourseByAdmin}?page=${count}&size=18
+          `https://university-mohamed.vercel.app${routes.course._id}${routes.course.searchCourseByAdmin}?page=${count}&size=20
           &search=${training_value}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
-              'refresh-token': refreshToken
-            }
+              "refresh-token": refreshToken,
+            },
           }
-        )
-        console.log(response.data)
-        const data = response.data
-        console.log(data)
-        setallcourses(data.courses)
-        console.log(allcourses)
+        );
+        console.log(response.data);
+        const data = response.data;
+        console.log(data);
+        setallcourses(data.courses);
+        console.log(allcourses);
 
         // Here you can update the state related to the search or perform any other actions with the data
       } catch (error) {
         // }
-        console.error('Error fetching search results:', error)
+        console.error("Error fetching search results:", error);
       }
-    }
-    fetchsearchforcourse()
+    };
+    fetchsearchforcourse();
     const handleKeyPress = (e) => {
-      if (e.key === 'Enter') {
-        fetchsearchforcourse()
+      if (e.key === "Enter") {
+        fetchsearchforcourse();
       }
-    }
+    };
 
-    document.addEventListener('keydown', handleKeyPress)
+    document.addEventListener("keydown", handleKeyPress);
 
     return () => {
-      document.removeEventListener('keydown', handleKeyPress)
-    }
-  }, [accessToken, refreshToken, course_value])
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [accessToken, refreshToken, course_value]);
 
   // loading more
   const loadMore = () => {
     // Increment the count when loading more
-    setcount((prevCount) => prevCount + 1)
-  }
+    setcount((prevCount) => prevCount + 1);
+  };
 
   // Upload Doctor Photo
   const uploadAdminimage = async () => {
     try {
-      const formData = new FormData()
-      formData.append('adminImage', adminImage)
+      const formData = new FormData();
+      formData.append("adminImage", adminImage);
 
       const response = await fetch(
         `https://university-mohamed.vercel.app${routes.Admin._id}${routes.Admin.AddImgByAdmin}`,
         {
-          method: 'POST',
+          method: "POST",
           headers: {
             Authorization: `Bearer ${accessToken}`,
-            'refresh-token': refreshToken
+            "refresh-token": refreshToken,
           },
-          body: formData
+          body: formData,
         }
-      )
-      const data = await response.json()
-      console.log(data)
-      setmessage(data.message)
+      );
+      const data = await response.json();
+      console.log(data);
+      setmessage(data.message);
       if (response.ok) {
         // Show SweetAlert on success
         Swal.fire({
-          icon: 'success',
-          title: 'Admin Image added successfully',
+          icon: "success",
+          title: "Admin Image added successfully",
           showConfirmButton: false,
-          timer: 3500
-        })
+          timer: 3500,
+        });
       } else {
         // Show an error message if needed
         Swal.fire({
-          icon: 'error',
-          title: 'Fail',
-          text: 'Admin Image creation failed, please try again later',
-          timer: 4500
-        })
+          icon: "error",
+          title: "Fail",
+          text: "Admin Image creation failed, please try again later",
+          timer: 4500,
+        });
       }
     } catch (error) {
-      console.error('Upload failed', error)
+      console.error("Upload failed", error);
     }
-  }
+  };
   return (
     <>
-      <div className='nav-bar'>
-        <div className='search'>
+      <div className="nav-bar">
+        <div className="search">
           <input
-            type='search'
-            placeholder='Search'
-            aria-label='Search'
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
             onChange={(e) => {
-              setsearch_student_value(e.target.value)
-              setdoctor_value(e.target.value)
-              settraining_value(e.target.value)
-              setcourse_value(e.target.value)
+              setsearch_student_value(e.target.value);
+              setdoctor_value(e.target.value);
+              settraining_value(e.target.value);
+              setcourse_value(e.target.value);
             }}
           />
         </div>
-        <div className='info'>
+        <div className="info">
           <img
-            type='button'
-            class=''
-            data-bs-toggle='modal'
-            data-bs-target='#exampleModal'
+            type="button"
+            class=""
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
             src={admininfo.urlImg}
-            alt=''
+            alt=""
           />
 
           <div
-            class='modal fade'
-            id='exampleModal'
-            tabindex='-1'
-            aria-labelledby='exampleModalLabel'
-            aria-hidden='true'
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
           >
-            <div class='modal-dialog'>
-              <div class='modal-content'>
-                <div class='modal-header'>
-                  <h5 class='modal-title' id='exampleModalLabel'>
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
                     Upload Photo
                   </h5>
                   <button
-                    type='button'
-                    class='btn-close'
-                    data-bs-dismiss='modal'
-                    aria-label='Close'
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
                   />
                 </div>
-                <div class='modal-body'>
+                <div class="modal-body">
                   <input
-                    type='file'
-                    class='form-control mt-3'
-                    placeholder='Enter Doctor Image'
-                    aria-label='adminImage'
-                    name='adminImage'
+                    type="file"
+                    class="form-control mt-3"
+                    placeholder="Enter Doctor Image"
+                    aria-label="adminImage"
+                    name="adminImage"
                     onChange={(e) => {
-                      setadminImage(e.target.files[0])
+                      setadminImage(e.target.files[0]);
                     }}
                   />
                 </div>
-                <div class='modal-footer'>
+                <div class="modal-footer">
                   <button
-                    type='button'
-                    class='btn btn-secondary'
-                    data-bs-dismiss='modal'
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
                   >
                     Close
                   </button>
                   <button
                     onClick={() => {
-                      uploadAdminimage()
+                      uploadAdminimage();
                     }}
-                    type='button'
-                    class='btn btn-primary'
+                    type="button"
+                    class="btn btn-primary"
                   >
                     Save changes
                   </button>
@@ -301,14 +301,14 @@ function NavBar () {
             </div>
           </div>
 
-          <div className='details'>
+          <div className="details">
             <h3>{admininfo.FullName}</h3>
             <p>{admininfo.role}</p>
           </div>
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default NavBar
+export default NavBar;

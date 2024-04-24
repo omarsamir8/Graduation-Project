@@ -3,7 +3,8 @@ import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Swal from "sweetalert2";
 import { useTrainingContext } from "../TrainingContext";
 import { routes } from "../routes";
-import testImg from "../assets/oop.png";
+import testImg from "../assets/traing2jpeg.jpeg";
+
 function CreateTraining() {
   const [training_name, settraining_name] = useState("");
   const [desc, setdesc] = useState("");
@@ -400,26 +401,18 @@ function CreateTraining() {
             </div>
           ))}
       </div>
-      {/* <button
-        className="loadmore"
-        style={{
-          width: "320px",
-          height: "50px",
-          border: "none",
-          outline: "none",
-          background: "#996ae4",
-          borderRadius: "10px",
-          paddingLeft: "2rem",
-          paddingRight: "2rem",
-          color: "white",
-          marginLeft: "10px",
-          marginBottom: "20px",
-          fontSize: "22px",
-        }}
-        onClick={loadMore}
-      >
-        Loading More
-      </button> */}
+      <div style={{ width: "100%" }}>
+        <i
+          style={{
+            width: "100%",
+            textAlign: "center",
+            marginTop: "20px",
+            fontSize: "40px",
+            cursor: "pointer",
+          }}
+          class="fa-solid fa-spinner"
+        ></i>
+      </div>
     </>
   );
 }

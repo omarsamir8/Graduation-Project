@@ -70,6 +70,8 @@
   margin-left: 0px;
   background-color: red;
   color: white;
+  font-size: 16px;
+  text-align: center;
 }
 .enrollcourse .course img {
   width: 210px;

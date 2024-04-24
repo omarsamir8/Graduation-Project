@@ -6,7 +6,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { routes } from "../routes";
 import { Table } from "react-bootstrap";
-import defulatimg from "../assets/oop.png";
+import defulatimg from "../assets/traing2jpeg.jpeg";
 
 function Courses() {
   const [selectedComponent2, setSelectedComponent2] = useRecoilState(
@@ -266,12 +266,20 @@ function Courses() {
                 >
                   Students Register Course
                 </button>
-                <button type="button" className="btn btn-primary">
+                <button
+                  style={{ backgroundColor: "gray", borderColor: "gray" }}
+                  type="button"
+                  className="btn btn-primary"
+                >
                   <Link to={`/material/${material._id}`} className="link">
                     Report For Student Result
                   </Link>
                 </button>
                 <button
+                  style={{
+                    backgroundColor: "#996ae4",
+                    borderColor: "#996ae4",
+                  }}
                   onClick={() => {
                     fetchDataaa(material._id);
                   }}
