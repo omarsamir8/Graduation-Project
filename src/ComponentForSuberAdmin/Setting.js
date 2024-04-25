@@ -15,7 +15,7 @@ function Setting() {
     useState("1");
   const [selectedSetting, setselectedSetting] = useState(null);
   const [AllSemesters, setAllSemesters] = useState([]);
-  const [checked, setChecked] = useState();
+  const [checked, setChecked] = useState(false);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
   useEffect(() => {
@@ -183,14 +183,8 @@ function Setting() {
                           type="checkbox"
                           role="switch"
                           id="flexSwitchCheckDefault"
-                          onChange={(e) => {
-                            handleCheckboxChange(checked);
-                          }}
-                          checked={
-                            setting.allow === "yes"
-                              ? setChecked(true)
-                              : setChecked(false)
-                          }
+                          onChange={handleCheckboxChange} // Just pass the function reference
+                          checked={checked}
                         />
                       </div>
                     </td>
@@ -256,3 +250,5 @@ function Setting() {
   );
 }
 export default Setting;
+
+
