@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Swal from "sweetalert2";
 import { useStudentContext } from "../StudentContext";
@@ -153,6 +155,10 @@ function All_Students() {
     setPage((prevPage) => prevPage + 1);
     // Increment count by 1
   };
+  const decrement = () => {
+    setPage((prevPage) => prevPage - 1);
+    // Increment count by 1
+  };
   console.log(Page);
   return (
     <>
@@ -301,7 +307,7 @@ function All_Students() {
           </tbody>
         </Table>
       </div>
-      <div
+      {/* <div
         style={{
           width: "100%",
           textAlign: "center",
@@ -328,6 +334,69 @@ function All_Students() {
         >
           Load More
         </span>
+      </div> */}
+      <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li
+              onClick={() => {
+                decrement();
+              }}
+              class="page-item"
+            >
+              <a class="page-link" href="#previous" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li
+              onClick={() => {
+                setPage(1);
+              }}
+              class="page-item"
+            >
+              <a class="page-link" href="#1">
+                1
+              </a>
+            </li>
+            <li
+              onClick={() => {
+                setPage(2);
+              }}
+              class="page-item"
+            >
+              <a class="page-link" href="#2">
+                2
+              </a>
+            </li>
+            <li
+              onClick={() => {
+                setPage(3);
+              }}
+              class="page-item"
+            >
+              <a class="page-link" href="#3">
+                3
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#3">
+                ......
+              </a>
+            </li>
+            <li class="page-item">
+              <a
+                onClick={() => {
+                  increment();
+                }}
+                class="page-link"
+                href="#next"
+                aria-label="Next"
+              >
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </>
   );
