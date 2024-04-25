@@ -12,6 +12,7 @@ function Setting() {
   const [MaxAllowTrainingToRegister, setMaxAllowTrainingToRegister] =
     useState("1");
   const [AllSemesters, setAllSemesters] = useState([]);
+  const [ApiUrls, setApiUrls] = useState([]);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
   useEffect(() => {
@@ -48,9 +49,8 @@ function Setting() {
             Authorization: `Bearer ${accessToken}`,
             "refresh-token": refreshToken,
           },
-          body: JSON.stringify({
-            deniedRoutes,
-            allow,
+          body:({
+            ApiUrls,
           }),
         }
       );
@@ -77,6 +77,7 @@ function Setting() {
     }
   };
   console.log(Setting);
+  console.log(ApiUrls);
   // get all semetser
   const fetchData = async () => {
     try {
@@ -142,7 +143,7 @@ function Setting() {
     }
   };
   // handle checked
-  console.log(deniedRoutes);
+
   console.log(allow);
   return (
     <>
@@ -178,7 +179,9 @@ function Setting() {
                           id={`flexSwitchCheck`}
                           onChange={(e) => {
                             setallow(e.target.checked === true ? "yes" : "no");
-                            setdeniedRoutes(setting);
+                            setApiUrls([{"url":setting.url,
+                            "allow":{allow}
+                          }]);
                           }}
                         />
                       </div>
@@ -245,5 +248,3 @@ function Setting() {
   );
 }
 export default Setting;
-
-
