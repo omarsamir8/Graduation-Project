@@ -52,7 +52,7 @@ function NavBar() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://university-mohamed.vercel.app${routes.student._id}${routes.student.searchstudent}?page=${Page}&size=10&search=${search_student_value}`,
+        `https://university-mohamed.vercel.app${routes.student._id}${routes.student.searchstudent}?page=${Page}&size=12&search=${search_student_value}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -75,7 +75,7 @@ function NavBar() {
   const fetchDataa = async () => {
     try {
       const response = await axios.get(
-        `https://university-mohamed.vercel.app${routes.instructor._id}${routes.instructor.searchInstructor}?page=${Page}&size=20&search=${doctor_value}`,
+        `https://university-mohamed.vercel.app${routes.instructor._id}${routes.instructor.searchInstructor}?page=${Page}&size=12&search=${doctor_value}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -99,7 +99,7 @@ function NavBar() {
     try {
       // if (searchvalue.trim() !== "") {
       const response = await axios.get(
-        `https://university-mohamed.vercel.app${routes.Training._id}${routes.Training.allTrainingByAdmin}?select=training_name,start_date,OpenForRegister,Training&page=${Page}&size=9&search=${training_value}`,
+        `https://university-mohamed.vercel.app${routes.Training._id}${routes.Training.allTrainingByAdmin}?select=training_name,start_date,OpenForRegister,Training&page=${Page}&size=8&search=${training_value}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -138,7 +138,7 @@ function NavBar() {
     try {
       // if (searchvalue.trim() !== "") {
       const response = await axios.get(
-        `https://university-mohamed.vercel.app${routes.course._id}${routes.course.searchCourseByAdmin}?page=${Page}&size=20
+        `https://university-mohamed.vercel.app${routes.course._id}${routes.course.searchCourseByAdmin}?page=${Page}&size=12
           &search=${training_value}`,
         {
           headers: {

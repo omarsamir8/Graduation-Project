@@ -7,7 +7,7 @@ import { Table } from "react-bootstrap";
 function Setting() {
   const [Setting, setSetting] = useState([]);
   const [deniedRoutes, setdeniedRoutes] = useState([]);
-  // const [checked, setchecked] = useState("");
+  const [allow, setallow] = useState("yes");
   const [MainSemsterId, setMainSemsterId] = useState("");
   const [MaxAllowTrainingToRegister, setMaxAllowTrainingToRegister] =
     useState("1");
@@ -50,6 +50,7 @@ function Setting() {
           },
           body: JSON.stringify({
             deniedRoutes,
+            allow,
           }),
         }
       );
@@ -142,6 +143,7 @@ function Setting() {
   };
   // handle checked
   console.log(deniedRoutes);
+  console.log(allow);
   return (
     <>
       <div className="setting-page">
@@ -174,21 +176,9 @@ function Setting() {
                           type="checkbox"
                           role="switch"
                           id={`flexSwitchCheck`}
-                          checked={setting.allow === "yes"}
-                          onClick={() => {
-                            // Check if setting is currently allowed
-                            if (setting.allow === "yes") {
-                              // If allowed, add its _id to deniedRoutes
-                              setdeniedRoutes((prevState) => [
-                                ...prevState,
-                                setting._id,
-                              ]);
-                            } else {
-                              // If not allowed, remove its _id from deniedRoutes
-                              setdeniedRoutes((prevState) =>
-                                prevState.filter((id) => id !== setting._id)
-                              );
-                            }
+                          onChange={(e) => {
+                            setallow(e.target.checked === true ? "yes" : "no");
+                            setdeniedRoutes(setting);
                           }}
                         />
                       </div>

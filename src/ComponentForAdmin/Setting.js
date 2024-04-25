@@ -6,9 +6,6 @@ import Swal from "sweetalert2";
 import Table from "react-bootstrap/Table";
 function Setting() {
   const [Setting, setSetting] = useState([]);
-  const [Allow, setAllow] = useState("No");
-  const [ApiUrl, setApiUrl] = useState();
-  const [selectedSetting, setselectedSetting] = useState(null);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
   useEffect(() => {
@@ -34,61 +31,6 @@ function Setting() {
     fetchData();
   }, [accessToken, refreshToken]);
 
-  // Update Settings
-  const UpdateSettings = async () => {
-    try {
-      const response = await fetch(
-        "https://university-mohamed.vercel.app/Api/admin/setting/update",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-            "refresh-token": refreshToken,
-          },
-          body: JSON.stringify({
-            Allow,
-            ApiUrl,
-          }),
-        }
-      );
-
-      if (response.ok) {
-        // Show SweetAlert on success
-        Swal.fire({
-          icon: "success",
-          title: "Setting updated successfully",
-          showConfirmButton: false,
-          timer: 3500,
-        });
-
-        // Update the state with the modified student
-        // setSetting((prevSettings) =>
-        //   prevSettings.map((prevSetting) =>
-        //     prevSetting._id === selectedSetting._id
-        //       ? {
-        //           ...prevSetting,
-        //           Allow,
-        //           ApiUrl,
-        //         }
-        //       : prevSetting
-        //   )
-        // );
-      } else {
-        // Show an error message if needed
-        Swal.fire({
-          icon: "error",
-          title: "Fail",
-          text: "Setting update failed, please try again later",
-          timer: 4500,
-        });
-      }
-    } catch (error) {
-      console.error("Update failed", error);
-    }
-  };
-  console.log(Allow);
-  console.log(ApiUrl);
   console.log(Setting);
   return (
     <>
@@ -126,18 +68,6 @@ function Setting() {
               })}
             </tbody>
           </Table>
-        </div>
-        <div style={{ width: "100%" }}>
-          <i
-            style={{
-              width: "100%",
-              textAlign: "center",
-              marginTop: "20px",
-              fontSize: "40px",
-              cursor: "pointer",
-            }}
-            class="fa-solid fa-spinner"
-          ></i>
         </div>
       </div>
     </>
