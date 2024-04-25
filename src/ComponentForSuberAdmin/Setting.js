@@ -49,9 +49,9 @@ function Setting() {
             Authorization: `Bearer ${accessToken}`,
             "refresh-token": refreshToken,
           },
-          body:({
+          body: {
             ApiUrls,
-          }),
+          },
         }
       );
 
@@ -179,9 +179,9 @@ function Setting() {
                           id={`flexSwitchCheck`}
                           onChange={(e) => {
                             setallow(e.target.checked === true ? "yes" : "no");
-                            setApiUrls([{"url":setting.url,
-                            "allow":{allow}
-                          }]);
+                            setApiUrls([
+                              { url: setting.url, allow: { allow } },
+                            ]);
                           }}
                         />
                       </div>
