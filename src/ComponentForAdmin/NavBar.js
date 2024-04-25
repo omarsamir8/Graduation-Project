@@ -52,7 +52,7 @@ function NavBar() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://university-mohamed.vercel.app${routes.student._id}${routes.student.searchstudent}?page=${Page}&size=20&search=${search_student_value}`,
+        `https://university-mohamed.vercel.app${routes.student._id}${routes.student.searchstudent}?page=${Page}&size=10&search=${search_student_value}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -173,12 +173,6 @@ function NavBar() {
       document.removeEventListener("keydown", handleKeyPress);
     };
   }, [Page, accessToken, refreshToken, course_value]);
-
-  // loading more
-  const loadMore = () => {
-    // Increment the count when loading more
-    setcount((prevCount) => prevCount + 1);
-  };
 
   // Upload Doctor Photo
   const uploadAdminimage = async () => {

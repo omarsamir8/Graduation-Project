@@ -11,6 +11,7 @@ function CreateStudent() {
   const [PhoneNumber, setPhoneNumber] = useState("");
   const [Date_of_Birth, setDate_of_Birth] = useState("");
   const [gender, setgender] = useState("");
+  const [department, setdepartment] = useState("");
   const [message, setmessage] = useState("");
   const [studentImage, setstudentImage] = useState([]);
   const [studentId, setstudentId] = useState("");
@@ -36,6 +37,7 @@ function CreateStudent() {
             National_Id,
             Date_of_Birth,
             gender,
+            department,
           }),
         }
       );
@@ -94,10 +96,7 @@ function CreateStudent() {
           showConfirmButton: false,
           timer: 3500,
         });
-        
-      } 
-     
-      else {
+      } else {
         // Show an error message if needed
         Swal.fire({
           icon: "error",
@@ -156,6 +155,22 @@ function CreateStudent() {
               </option>
               <option value="male">Male</option>
               <option value="female">Female</option>
+            </select>
+            <select
+              className="form-control mt-3"
+              aria-label="department"
+              name="department"
+              onChange={(e) => {
+                setdepartment(e.target.value);
+              }}
+            >
+              <option value="" disabled selected hidden>
+                Select Department
+              </option>
+              <option value="is">IS</option>
+              <option value="cs">CS</option>
+              <option value="ai">AI</option>
+              <option value="sc">SC</option>
             </select>
             <input
               type="file"
