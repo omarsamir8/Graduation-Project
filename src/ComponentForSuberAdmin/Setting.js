@@ -1,21 +1,17 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-
 import { routes } from "../routes";
 import Swal from "sweetalert2";
 import { Table } from "react-bootstrap";
-import { Select } from "@mui/material";
 
 function Setting() {
   const [Setting, setSetting] = useState([]);
   const [deniedRoutes, setdeniedRoutes] = useState([]);
-  const [ApiUrl, setApiUrl] = useState();
+  // const [checked, setchecked] = useState("");
   const [MainSemsterId, setMainSemsterId] = useState("");
   const [MaxAllowTrainingToRegister, setMaxAllowTrainingToRegister] =
     useState("1");
-  const [selectedSetting, setselectedSetting] = useState(null);
   const [AllSemesters, setAllSemesters] = useState([]);
-  const [checked, setChecked] = useState(false);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
   useEffect(() => {
@@ -37,7 +33,6 @@ function Setting() {
         console.error("Error fetching admin info:", error);
       }
     };
-
     fetchData();
   }, [accessToken, refreshToken]);
 
@@ -80,10 +75,8 @@ function Setting() {
       console.error("Update failed", error);
     }
   };
-
-  console.log(ApiUrl);
   console.log(Setting);
-
+  // get all semetser
   const fetchData = async () => {
     try {
       const response = await fetch(
@@ -148,9 +141,7 @@ function Setting() {
     }
   };
   // handle checked
-  const handleCheckboxChange = (checked) => {
-    setChecked(!checked);
-  };
+  console.log(deniedRoutes);
   return (
     <>
       <div className="setting-page">
@@ -179,12 +170,26 @@ function Setting() {
                       <div style={{}} class="form-check form-switch">
                         <input
                           style={{ width: "70px", height: "20px" }}
-                          class="form-check-input"
+                          className="form-check-input"
                           type="checkbox"
                           role="switch"
-                          id="flexSwitchCheckDefault"
-                          onChange={handleCheckboxChange} // Just pass the function reference
-                          checked={checked}
+                          id={`flexSwitchCheck`}
+                          checked={setting.allow === "yes"}
+                          onClick={() => {
+                            // Check if setting is currently allowed
+                            if (setting.allow === "yes") {
+                              // If allowed, add its _id to deniedRoutes
+                              setdeniedRoutes((prevState) => [
+                                ...prevState,
+                                setting._id,
+                              ]);
+                            } else {
+                              // If not allowed, remove its _id from deniedRoutes
+                              setdeniedRoutes((prevState) =>
+                                prevState.filter((id) => id !== setting._id)
+                              );
+                            }
+                          }}
                         />
                       </div>
                     </td>
@@ -250,5 +255,3 @@ function Setting() {
   );
 }
 export default Setting;
-
-
