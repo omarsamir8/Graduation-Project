@@ -230,7 +230,9 @@ function CreateTraining() {
         Swal.fire({
           icon: "error",
           title: "Fail",
-          text: "Training Image creation failed, please try again later",
+          text: data.error_Message
+            ? data.error_Message[0].message
+            : data.message,
           timer: 4500,
         });
       }

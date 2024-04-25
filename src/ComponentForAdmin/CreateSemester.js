@@ -157,7 +157,7 @@ function CreateSemester() {
           }),
         }
       );
-
+      const data = response.json();
       if (response.ok) {
         // Show SweetAlert on success
         Swal.fire({
@@ -193,7 +193,9 @@ function CreateSemester() {
         Swal.fire({
           icon: "error",
           title: "Fail",
-          text: "Semetser update failed, please try again later",
+          text: data.error_Message
+            ? data.error_Message[0].message
+            : data.message,
           timer: 4500,
         });
       }

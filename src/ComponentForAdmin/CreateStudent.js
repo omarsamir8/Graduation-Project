@@ -58,7 +58,9 @@ function CreateStudent() {
         Swal.fire({
           icon: "error",
           title: "Fail",
-          text: data.error_Message[0].message,
+          text: data.error_Message
+            ? data.error_Message[0].message
+            : data.message,
           timer: 4500,
         });
       }
