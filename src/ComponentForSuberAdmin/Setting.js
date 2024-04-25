@@ -8,13 +8,14 @@ import { Select } from "@mui/material";
 
 function Setting() {
   const [Setting, setSetting] = useState([]);
-  const [Allow, setAllow] = useState("yes");
+  const [deniedRoutes, setdeniedRoutes] = useState([]);
   const [ApiUrl, setApiUrl] = useState();
   const [MainSemsterId, setMainSemsterId] = useState("");
   const [MaxAllowTrainingToRegister, setMaxAllowTrainingToRegister] =
     useState("1");
   const [selectedSetting, setselectedSetting] = useState(null);
   const [AllSemesters, setAllSemesters] = useState([]);
+  const [checked, setChecked] = useState();
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
   useEffect(() => {
@@ -53,8 +54,7 @@ function Setting() {
             "refresh-token": refreshToken,
           },
           body: JSON.stringify({
-            Allow,
-            ApiUrl,
+            deniedRoutes,
           }),
         }
       );
@@ -67,19 +67,6 @@ function Setting() {
           showConfirmButton: false,
           timer: 3500,
         });
-
-        // Update the state with the modified student
-        // setSetting((prevSettings) =>
-        //   prevSettings.map((prevSetting) =>
-        //     prevSetting._id === selectedSetting._id
-        //       ? {
-        //           ...prevSetting,
-        //           Allow,
-        //           ApiUrl,
-        //         }
-        //       : prevSetting
-        //   )
-        // );
       } else {
         // Show an error message if needed
         Swal.fire({
@@ -93,7 +80,7 @@ function Setting() {
       console.error("Update failed", error);
     }
   };
-  console.log(Allow);
+
   console.log(ApiUrl);
   console.log(Setting);
 
@@ -134,9 +121,7 @@ function Setting() {
           },
           body: JSON.stringify({
             MainSemsterId,
-            Allow,
             MaxAllowTrainingToRegister,
-            ApiUrl,
           }),
         }
       );
@@ -161,6 +146,10 @@ function Setting() {
     } catch (error) {
       console.error("Update failed", error);
     }
+  };
+  // handle checked
+  const handleCheckboxChange = (checked) => {
+    setChecked(!checked);
   };
   return (
     <>
@@ -195,14 +184,13 @@ function Setting() {
                           role="switch"
                           id="flexSwitchCheckDefault"
                           onChange={(e) => {
-                            if (e.target.checked === true) {
-                              setAllow("Yes");
-                            } else {
-                              setAllow("No");
-                            }
-                            setApiUrl(setting.url);
-                            setselectedSetting(setting._id);
+                            handleCheckboxChange(checked);
                           }}
+                          checked={
+                            setting.allow === "yes"
+                              ? setChecked(true)
+                              : setChecked(false)
+                          }
                         />
                       </div>
                     </td>
@@ -211,57 +199,57 @@ function Setting() {
               })}
             </tbody>
           </Table>
-          <button
-            style={{ marginBottom: "10px" }}
-            type="button"
-            class="btn btn-primary mt-3"
-            onClick={() => {
-              UpdateSettings();
-            }}
+          <div
+            style={{ display: "flex", gap: "10px" }}
+            className="Change-Main-semester"
           >
-            Save Changes
-          </button>
-        </div>
-        <div
-          style={{ display: "flex", gap: "30px" }}
-          className="Change-Main-semester"
-        >
-          <select
-            class="form-select form-select-md mb-3"
-            aria-label=".form-select-lg example"
-            style={{ width: "250px" }}
-            onChange={(e) => {
-              setMainSemsterId(e.target.value);
-            }}
-          >
-            <option selected>Select Main Semester</option>
-            {AllSemesters.map((Sem) => {
-              return <option value={Sem._id}>{Sem.name}</option>;
-            })}
-          </select>
-          <select
-            class="form-select form-select-md mb-3"
-            aria-label=".form-select-lg example"
-            style={{ width: "250px" }}
-            onChange={(e) => {
-              setMaxAllowTrainingToRegister(e.target.value);
-            }}
-          >
-            <option selected>Open Number Of Training </option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-          <button
-            style={{ height: "37px" }}
-            type="button"
-            class="btn btn-primary "
-            onClick={() => {
-              ChangeMainSemester();
-            }}
-          >
-            Save Changes
-          </button>
+            <select
+              class="form-select form-select-md mb-3"
+              aria-label=".form-select-lg example"
+              style={{ width: "300px" }}
+              onChange={(e) => {
+                setMainSemsterId(e.target.value);
+              }}
+            >
+              <option selected>Select Main Semester</option>
+              {AllSemesters.map((Sem) => {
+                return <option value={Sem._id}>{Sem.name}</option>;
+              })}
+            </select>
+            <select
+              class="form-select form-select-md mb-3"
+              aria-label=".form-select-lg example"
+              style={{ width: "300px" }}
+              onChange={(e) => {
+                setMaxAllowTrainingToRegister(e.target.value);
+              }}
+            >
+              <option selected>Open Number Of Training </option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+            <button
+              style={{ height: "37px" }}
+              type="button"
+              class="btn btn-primary "
+              onClick={() => {
+                ChangeMainSemester();
+              }}
+            >
+              Change Main Semester
+            </button>
+            <button
+              style={{ height: "37px" }}
+              type="button"
+              class="btn btn-primary "
+              onClick={() => {
+                UpdateSettings();
+              }}
+            >
+              Save Changes
+            </button>
+          </div>
         </div>
       </div>
     </>
