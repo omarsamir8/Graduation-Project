@@ -2,18 +2,18 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { routes } from "../routes";
 import Swal from "sweetalert2";
-import { Table, Form } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 
 function Setting() {
-  const [Setting, setSetting] = useState([]);
-  const [ApiUrls, setApiUrls] = useState([]);
-  const [MainSemsterId, setMainSemsterId] = useState("");
-  const [MaxAllowTrainingToRegister, setMaxAllowTrainingToRegister] =
+  const [setting, setSetting] = useState([]);
+  const [apiUrls, setApiUrls] = useState([]);
+  const [mainSemesterId, setMainSemesterId] = useState("");
+  const [maxAllowTrainingToRegister, setMaxAllowTrainingToRegister] =
     useState("1");
-  const [AllSemesters, setAllSemesters] = useState([]);
+  const [allSemesters, setAllSemesters] = useState([]);
 
-  const accessToken = localStorage.getItem("accesstoken");
-  const refreshToken = localStorage.getItem("refreshtoken");
+  const accessToken = localStorage.getItem("accessToken");
+  const refreshToken = localStorage.getItem("refreshToken");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,17 +38,17 @@ function Setting() {
   }, [accessToken, refreshToken]);
 
   useEffect(() => {
-    const storedApiUrls = JSON.parse(localStorage.getItem("ApiUrls"));
+    const storedApiUrls = JSON.parse(localStorage.getItem("apiUrls"));
     if (storedApiUrls) {
       setApiUrls(storedApiUrls);
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("ApiUrls", JSON.stringify(ApiUrls));
-  }, [ApiUrls]);
+    localStorage.setItem("apiUrls", JSON.stringify(apiUrls));
+  }, [apiUrls]);
 
-  const UpdateSettings = async () => {
+  const updateSettings = async () => {
     try {
       const response = await fetch(
         "https://university-mohamed.vercel.app/Api/admin/setting/update",
@@ -59,9 +59,9 @@ function Setting() {
             Authorization: `Bearer ${accessToken}`,
             "refresh-token": refreshToken,
           },
-          body:({
-            ApiUrls,
-          },
+          body: JSON.stringify({
+            apiUrls,
+          }),
         }
       );
       const data = await response.json();
@@ -113,11 +113,11 @@ function Setting() {
   }, [accessToken, refreshToken]);
 
   const handleAllowToggleChange = (url, checked) => {
-    const existingApiUrlIndex = ApiUrls.findIndex(
+    const existingApiUrlIndex = apiUrls.findIndex(
       (apiUrl) => apiUrl.url === url
     );
     if (existingApiUrlIndex !== -1) {
-      const updatedApiUrls = [...ApiUrls];
+      const updatedApiUrls = [...apiUrls];
       updatedApiUrls[existingApiUrlIndex] = {
         ...updatedApiUrls[existingApiUrlIndex],
         allow: checked ? "yes" : "no",
@@ -149,32 +149,37 @@ function Setting() {
               </tr>
             </thead>
             <tbody>
-              {Setting.map((setting, index) => {
-                return (
-                  <tr key={setting._id}>
-                    <th scope="row">{index + 1}</th>
-                    <td style={{ textAlign: "center" }}>{setting.name}</td>
-                    <td style={{ textAlign: "center" }}>{setting.desc}</td>
-                    <td>
-                      <div style={{}} class="form-check form-switch">
-                        <input
-                          style={{ width: "70px", height: "20px" }}
-                          className="form-check-input"
-                          type="checkbox"
-                          role="switch"
-                          id={`flexSwitchCheck`}
-                          onChange={(e) => {
-                            setallow(e.target.checked === true ? "yes" : "no");
-                            setApiUrls([{"url":setting.url,
-                            "allow":{allow}
-                          }]);
-                          }}
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
+              {setting.map((setting, index) => (
+                <tr key={setting._id}>
+                  <th scope="row">{index + 1}</th>
+                  <td style={{ textAlign: "center" }}>{setting.name}</td>
+                  <td style={{ textAlign: "center" }}>{setting.desc}</td>
+                  <td>
+                    <div className="form-check form-switch">
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "25px",
+                          backgroundColor:
+                            apiUrls.find((apiUrl) => apiUrl.url === setting.url)
+                              ?.allow === "yes"
+                              ? "green"
+                              : "red",
+                          borderRadius: "12.5px",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => {
+                          handleAllowToggleChange(
+                            setting.url,
+                            apiUrls.find((apiUrl) => apiUrl.url === setting.url)
+                              ?.allow !== "yes"
+                          );
+                        }}
+                      ></div>
+                    </div>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </Table>
 
@@ -183,22 +188,22 @@ function Setting() {
             className="Change-Main-semester"
           >
             <select
-              class="form-select form-select-md mb-3"
+              className="form-select form-select-md mb-3"
               aria-label=".form-select-lg example"
               style={{ width: "300px" }}
               onChange={(e) => {
-                setMainSemsterId(e.target.value);
+                setMainSemesterId(e.target.value);
               }}
             >
               <option selected>Select Main Semester</option>
-              {AllSemesters.map((Sem) => (
+              {allSemesters.map((Sem) => (
                 <option key={Sem._id} value={Sem._id}>
                   {Sem.name}
                 </option>
               ))}
             </select>
             <select
-              class="form-select form-select-md mb-3"
+              className="form-select form-select-md mb-3"
               aria-label=".form-select-lg example"
               style={{ width: "300px" }}
               onChange={(e) => {
@@ -213,9 +218,9 @@ function Setting() {
             <button
               style={{ height: "37px" }}
               type="button"
-              class="btn btn-primary "
+              className="btn btn-primary"
               onClick={() => {
-                UpdateSettings();
+                updateSettings();
               }}
             >
               Save Changes
@@ -228,4 +233,3 @@ function Setting() {
 }
 
 export default Setting;
-
