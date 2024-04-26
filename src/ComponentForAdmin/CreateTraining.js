@@ -5,6 +5,7 @@ import { useTrainingContext } from "../TrainingContext";
 import { routes } from "../routes";
 import testImg from "../assets/traing2jpeg.jpeg";
 import { usePageContext } from "../PageContext";
+import Select from "react-select";
 
 function CreateTraining() {
   const [training_name, settraining_name] = useState("");
@@ -23,6 +24,7 @@ function CreateTraining() {
   const [count, setcount] = useState(1);
   const [TrainingImage, setTrainingImage] = useState([]);
   const [trainingId, settrainingId] = useState("");
+  const [alltrainingsAvailable, setalltrainingsAvailable] = useState([]);
 
   // create Training
   const createTraining = async () => {
@@ -248,6 +250,32 @@ function CreateTraining() {
     setPage((prevPage) => prevPage - 1);
     // Increment count by 1
   };
+
+  // Fetch all Trainings
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `https://university-mohamed.vercel.app${routes.Training._id}${routes.Training.allTrainingByAdmin}?page=1&size=20&sort=training_name`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+        const data = await response.json();
+        setalltrainingsAvailable(data.trainings);
+        console.log(data);
+      } catch (error) {
+        console.error("Fetch failed", error);
+      }
+    };
+
+    fetchData();
+  }, [accessToken, refreshToken]);
+  console.log(alltrainingsAvailable);
   return (
     <>
       <div className="Create_Student">
@@ -294,15 +322,21 @@ function CreateTraining() {
               }}
             />
 
-            <input
-              type="text"
-              class="form-control mt-3"
-              placeholder="Enter Training ID"
-              aria-label="trainingId"
-              name="trainingId"
-              onChange={(e) => {
-                settrainingId(e.target.value);
+            <Select
+              isMulti
+              name="Training"
+              options={alltrainingsAvailable.map((training) => {
+                return { value: training._id, label: training.training_name };
+              })}
+              onChange={(selectedOptions, e) => {
+                const selectedLabels = selectedOptions.map(
+                  (option) => option.value
+                );
+                settrainingId(selectedLabels);
               }}
+              className="Materials_select"
+              classNamePrefix="select"
+              placeholder="Select Training ID"
             />
           </div>
           <div class="col part2">

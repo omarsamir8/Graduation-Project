@@ -19,6 +19,7 @@ function CreateCourse() {
   let { Page, setPage } = usePageContext(1);
   const [courseImage, setcourseImage] = useState([]);
   const [courseId, setcourseId] = useState("");
+  const [courses, setcourses] = useState([]);
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
@@ -271,6 +272,7 @@ function CreateCourse() {
     setPage((prevPage) => prevPage - 1);
     // Increment count by 1
   };
+
   return (
     <>
       <div className="Create_Student">
@@ -307,6 +309,7 @@ function CreateCourse() {
               }}
               className="Materials_select"
               classNamePrefix="select"
+              placeholder=" Select Prerequisites"
             />
 
             <input
@@ -363,15 +366,21 @@ function CreateCourse() {
               <option value="false">False</option>
             </select>
 
-            <input
-              type="text"
-              class="form-control mt-3"
-              placeholder="Enter Course ID"
-              aria-label="studentId"
-              name="studentId"
-              onChange={(e) => {
-                setcourseId(e.target.value);
+            <Select
+              isMulti
+              name="colors"
+              options={allcourses.map((course) => {
+                return { value: course._id, label: course.course_name };
+              })}
+              onChange={(selectedOptions) => {
+                const selectedLabels = selectedOptions.map(
+                  (option) => option.value
+                );
+                setcourseId(selectedLabels);
               }}
+              className="Materials_select"
+              classNamePrefix="select"
+              placeholder="Select Course ID"
             />
           </div>
         </form>

@@ -4,6 +4,8 @@ import "sweetalert2/dist/sweetalert2.min.css";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Select from "react-select";
 import { routes } from "../routes";
+import axios from "axios";
+import { useDoctorContext } from "../DoctorContext";
 
 function CreateDoctor() {
   const [FullName, setFullName] = useState("");
@@ -17,10 +19,12 @@ function CreateDoctor() {
   const [message, setmessage] = useState("");
   const [allcourses, setallcourses] = useState([]);
   const [Training, setTraining] = useState([]);
+  // const [doctors, setdoctors] = useState([]);
   const [alltrainingsAvailable, setalltrainingsAvailable] = useState([]);
   const [InstructorId, setInstructorId] = useState("");
   const [instructorImage, setinstructorImage] = useState([]);
-  const [training_name, settraining_name] = useState("");
+  const { alldoctors, setalldoctors } = useDoctorContext();
+  // const [training_name, settraining_name] = useState("");
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
@@ -177,6 +181,29 @@ function CreateDoctor() {
       console.error("Upload failed", error);
     }
   };
+  // // search for doctor
+  // const fetchDataa = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `https://university-mohamed.vercel.app${routes.instructor._id}${routes.instructor.searchInstructor}?page=1&size=20`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //           "refresh-token": refreshToken,
+  //         },
+  //       }
+  //     );
+
+  //     console.log(response.data);
+  //     setdoctors(response.data.Instructors);
+  //   } catch (error) {
+  //     console.error("Error fetching admin info:", error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   fetchDataa();
+  // }, [accessToken, refreshToken]);
+  // console.log(doctors);
   return (
     <>
       <div className="Create_Student">
@@ -250,15 +277,21 @@ function CreateDoctor() {
                 setinstructorImage(e.target.files[0]);
               }}
             />
-            <input
-              type="text"
-              class="form-control mt-3"
-              placeholder="Enter Doctor ID"
-              aria-label="InstructorId"
-              name="InstructorId"
-              onChange={(e) => {
-                setInstructorId(e.target.value);
+            <Select
+              isMulti
+              name="Training"
+              options={alldoctors.map((doctor) => {
+                return { value: doctor._id, label: doctor.FullName };
+              })}
+              onChange={(selectedOptions, e) => {
+                const selectedLabels = selectedOptions.map(
+                  (option) => option.value
+                );
+                setInstructorId(selectedLabels);
               }}
+              className="Materials_select"
+              classNamePrefix="select"
+              placeholder="Enter Doctor ID"
             />
           </div>
           <div class="col part2">
@@ -307,6 +340,7 @@ function CreateDoctor() {
               }}
               className="Materials_select"
               classNamePrefix="select"
+              placeholder="Select Matarial"
             />
             <Select
               isMulti
@@ -322,6 +356,7 @@ function CreateDoctor() {
               }}
               className="Materials_select"
               classNamePrefix="select"
+              placeholder="Select Training"
             />
           </div>
         </div>

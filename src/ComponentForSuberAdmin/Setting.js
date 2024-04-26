@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { routes } from "../routes";
@@ -133,6 +130,46 @@ function Setting() {
       ]);
     }
   };
+  // change Main Semester
+  const ChangeMainSemester = async () => {
+    try {
+      const response = await fetch(
+        "https://university-mohamed.vercel.app/Api/admin/setting/update",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+          body: JSON.stringify({
+            MainSemsterId,
+            MaxAllowTrainingToRegister,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        // Show SweetAlert on success
+        Swal.fire({
+          icon: "success",
+          title: "Setting updated successfully",
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      } else {
+        // Show an error message if needed
+        Swal.fire({
+          icon: "error",
+          title: "Fail",
+          text: "Setting update failed, please try again later",
+          timer: 4500,
+        });
+      }
+    } catch (error) {
+      console.error("Update failed", error);
+    }
+  };
 
   return (
     <>
@@ -223,6 +260,16 @@ function Setting() {
               type="button"
               class="btn btn-primary "
               onClick={() => {
+                ChangeMainSemester();
+              }}
+            >
+              Change Main Semester
+            </button>
+            <button
+              style={{ height: "37px" }}
+              type="button"
+              class="btn btn-primary "
+              onClick={() => {
                 UpdateSettings();
               }}
             >
@@ -236,5 +283,3 @@ function Setting() {
 }
 
 export default Setting;
-
->>>>>>> e452c927481eab59928cbcfb83fee448fbb46e79

@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../Styles_For_Admin/Create_Student_doctor_course_training.css";
 import Swal from "sweetalert2";
 import { red } from "@mui/material/colors";
 // import { Form } from "react-router-dom";
 import { routes } from "../routes";
+import axios from "axios";
+import Select from "react-select";
+import { useStudentContext } from "../StudentContext";
+
 function CreateStudent() {
   const [Full_Name, setFull_Name] = useState("");
   const [National_Id, setNational_Id] = useState("");
@@ -15,7 +19,7 @@ function CreateStudent() {
   const [message, setmessage] = useState("");
   const [studentImage, setstudentImage] = useState([]);
   const [studentId, setstudentId] = useState("");
-
+  const { allstudents, setallstudents } = useStudentContext();
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
 
@@ -112,6 +116,7 @@ function CreateStudent() {
       console.error("Upload failed", error);
     }
   };
+
   return (
     <>
       <div className="Create_Student">
@@ -216,15 +221,21 @@ function CreateStudent() {
                 setDate_of_Birth(e.target.value);
               }}
             />
-            <input
-              type="text"
-              class="form-control mt-3"
-              placeholder="Enter Student ID"
-              aria-label="studentId"
-              name="studentId"
-              onChange={(e) => {
-                setstudentId(e.target.value);
+            <Select
+              isMulti
+              name="colors"
+              options={allstudents.map((student) => {
+                return { value: student._id, label: student.Full_Name };
+              })}
+              onChange={(selectedOptions) => {
+                const selectedLabels = selectedOptions.map(
+                  (option) => option.value
+                );
+                setstudentId(selectedLabels);
               }}
+              className="Materials_select"
+              classNamePrefix="select"
+              placeholder="Enter Student ID"
             />
           </div>
         </form>
