@@ -59,9 +59,9 @@ function Setting() {
             Authorization: `Bearer ${accessToken}`,
             "refresh-token": refreshToken,
           },
-          body: JSON.stringify({
+          body:({
             ApiUrls,
-          }),
+          },
         }
       );
       const data = await response.json();
@@ -149,37 +149,32 @@ function Setting() {
               </tr>
             </thead>
             <tbody>
-              {Setting.map((setting, index) => (
-                <tr key={setting._id}>
-                  <th scope="row">{index + 1}</th>
-                  <td style={{ textAlign: "center" }}>{setting.name}</td>
-                  <td style={{ textAlign: "center" }}>{setting.desc}</td>
-                  <td>
-                    <div className="form-check form-switch">
-                      <div
-                        style={{
-                          width: "50px",
-                          height: "25px",
-                          backgroundColor:
-                            ApiUrls.find((apiUrl) => apiUrl.url === setting.url)
-                              ?.allow === "yes"
-                              ? "green"
-                              : "red",
-                          borderRadius: "12.5px",
-                          cursor: "pointer",
-                        }}
-                        onClick={() => {
-                          handleAllowToggleChange(
-                            setting.url,
-                            ApiUrls.find((apiUrl) => apiUrl.url === setting.url)
-                              ?.allow !== "yes"
-                          );
-                        }}
-                      ></div>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+              {Setting.map((setting, index) => {
+                return (
+                  <tr key={setting._id}>
+                    <th scope="row">{index + 1}</th>
+                    <td style={{ textAlign: "center" }}>{setting.name}</td>
+                    <td style={{ textAlign: "center" }}>{setting.desc}</td>
+                    <td>
+                      <div style={{}} class="form-check form-switch">
+                        <input
+                          style={{ width: "70px", height: "20px" }}
+                          className="form-check-input"
+                          type="checkbox"
+                          role="switch"
+                          id={`flexSwitchCheck`}
+                          onChange={(e) => {
+                            setallow(e.target.checked === true ? "yes" : "no");
+                            setApiUrls([{"url":setting.url,
+                            "allow":{allow}
+                          }]);
+                          }}
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </Table>
 
