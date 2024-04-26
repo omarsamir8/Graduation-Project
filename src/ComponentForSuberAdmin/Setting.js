@@ -2,18 +2,18 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { routes } from "../routes";
 import Swal from "sweetalert2";
-import { Table } from "react-bootstrap";
+import { Table, Form } from "react-bootstrap";
 
 function Setting() {
-  const [setting, setSetting] = useState([]);
-  const [apiUrls, setApiUrls] = useState([]);
-  const [mainSemesterId, setMainSemesterId] = useState("");
-  const [maxAllowTrainingToRegister, setMaxAllowTrainingToRegister] =
+  const [Setting, setSetting] = useState([]);
+  const [ApiUrls, setApiUrls] = useState([]);
+  const [MainSemsterId, setMainSemsterId] = useState("");
+  const [MaxAllowTrainingToRegister, setMaxAllowTrainingToRegister] =
     useState("1");
-  const [allSemesters, setAllSemesters] = useState([]);
+  const [AllSemesters, setAllSemesters] = useState([]);
 
-  const accessToken = localStorage.getItem("accessToken");
-  const refreshToken = localStorage.getItem("refreshToken");
+  const accessToken = localStorage.getItem("accesstoken");
+  const refreshToken = localStorage.getItem("refreshtoken");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,17 +38,17 @@ function Setting() {
   }, [accessToken, refreshToken]);
 
   useEffect(() => {
-    const storedApiUrls = JSON.parse(localStorage.getItem("apiUrls"));
+    const storedApiUrls = JSON.parse(localStorage.getItem("ApiUrls"));
     if (storedApiUrls) {
       setApiUrls(storedApiUrls);
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("apiUrls", JSON.stringify(apiUrls));
-  }, [apiUrls]);
+    localStorage.setItem("ApiUrls", JSON.stringify(ApiUrls));
+  }, [ApiUrls]);
 
-  const updateSettings = async () => {
+  const UpdateSettings = async () => {
     try {
       const response = await fetch(
         "https://university-mohamed.vercel.app/Api/admin/setting/update",
@@ -60,7 +60,7 @@ function Setting() {
             "refresh-token": refreshToken,
           },
           body: JSON.stringify({
-            apiUrls,
+            ApiUrls,
           }),
         }
       );
@@ -113,11 +113,11 @@ function Setting() {
   }, [accessToken, refreshToken]);
 
   const handleAllowToggleChange = (url, checked) => {
-    const existingApiUrlIndex = apiUrls.findIndex(
+    const existingApiUrlIndex = ApiUrls.findIndex(
       (apiUrl) => apiUrl.url === url
     );
     if (existingApiUrlIndex !== -1) {
-      const updatedApiUrls = [...apiUrls];
+      const updatedApiUrls = [...ApiUrls];
       updatedApiUrls[existingApiUrlIndex] = {
         ...updatedApiUrls[existingApiUrlIndex],
         allow: checked ? "yes" : "no",
@@ -149,7 +149,7 @@ function Setting() {
               </tr>
             </thead>
             <tbody>
-              {setting.map((setting, index) => (
+              {Setting.map((setting, index) => (
                 <tr key={setting._id}>
                   <th scope="row">{index + 1}</th>
                   <td style={{ textAlign: "center" }}>{setting.name}</td>
@@ -161,7 +161,7 @@ function Setting() {
                           width: "50px",
                           height: "25px",
                           backgroundColor:
-                            apiUrls.find((apiUrl) => apiUrl.url === setting.url)
+                            ApiUrls.find((apiUrl) => apiUrl.url === setting.url)
                               ?.allow === "yes"
                               ? "green"
                               : "red",
@@ -171,7 +171,7 @@ function Setting() {
                         onClick={() => {
                           handleAllowToggleChange(
                             setting.url,
-                            apiUrls.find((apiUrl) => apiUrl.url === setting.url)
+                            ApiUrls.find((apiUrl) => apiUrl.url === setting.url)
                               ?.allow !== "yes"
                           );
                         }}
@@ -188,22 +188,22 @@ function Setting() {
             className="Change-Main-semester"
           >
             <select
-              className="form-select form-select-md mb-3"
+              class="form-select form-select-md mb-3"
               aria-label=".form-select-lg example"
               style={{ width: "300px" }}
               onChange={(e) => {
-                setMainSemesterId(e.target.value);
+                setMainSemsterId(e.target.value);
               }}
             >
               <option selected>Select Main Semester</option>
-              {allSemesters.map((Sem) => (
+              {AllSemesters.map((Sem) => (
                 <option key={Sem._id} value={Sem._id}>
                   {Sem.name}
                 </option>
               ))}
             </select>
             <select
-              className="form-select form-select-md mb-3"
+              class="form-select form-select-md mb-3"
               aria-label=".form-select-lg example"
               style={{ width: "300px" }}
               onChange={(e) => {
@@ -218,9 +218,9 @@ function Setting() {
             <button
               style={{ height: "37px" }}
               type="button"
-              className="btn btn-primary"
+              class="btn btn-primary "
               onClick={() => {
-                updateSettings();
+                UpdateSettings();
               }}
             >
               Save Changes
@@ -233,3 +233,4 @@ function Setting() {
 }
 
 export default Setting;
+
