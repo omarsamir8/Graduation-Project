@@ -147,6 +147,207 @@ function NavBar() {
             <h3>{doctorinfo.FullName}</h3>
             <p>{doctorinfo.department}</p>
           </div>
+          <div>
+            <i
+              style={{ fontSize: "25px", cursor: "pointer" }}
+              class="fa-solid fa-circle-chevron-down"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModa2"
+            ></i>
+          </div>
+
+          <div
+            style={{ marginLeft: "450px", marginTop: "50px" }}
+            class="modal fade"
+            id="exampleModa2"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div style={{ width: "400px" }} class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5
+                    style={{
+                      marginBottom: "50px",
+                      fontWeight: "bold",
+                      fontFamily: "cursive",
+
+                      fontSize: "25px",
+                    }}
+                    class="modal-title"
+                    id="exampleModalLabel"
+                  >
+                    Profile Information{" "}
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  />
+                </div>
+                <div class="modal-body">
+                  <img
+                    style={{
+                      width: "120px",
+                      height: "120px",
+                      marginTop: "-70px",
+                    }}
+                    type="button"
+                    class=""
+                    src={doctorinfo.urlImg}
+                    alt=""
+                  />
+                  <div>
+                    <p style={{ color: "gray" }}>Name</p>
+                    <h3
+                      style={{
+                        marginTop: "-25px",
+                        fontFamily: "cursive",
+                        fontSize: "22px",
+                      }}
+                    >
+                      {doctorinfo.FullName}
+                    </h3>
+                  </div>
+                  <div>
+                    <p style={{ color: "gray" }}>Faculty</p>
+                    <h3
+                      style={{
+                        marginTop: "-20px",
+                        fontFamily: "cursive",
+                        fontSize: "22px",
+                      }}
+                    >
+                      Faculty of computers and artificial intelligence
+                    </h3>
+                  </div>
+                  <hr />
+                  <div>
+                    <p style={{ color: "gray" }}>Email </p>
+                    <h3
+                      style={{
+                        marginTop: "-20px",
+                        fontFamily: "cursive",
+                        fontSize: "22px",
+                      }}
+                    >
+                      {doctorinfo.email}
+                    </h3>
+                  </div>
+                  <div>
+                    <p style={{ color: "gray" }}>Role </p>
+                    <h3
+                      style={{
+                        marginTop: "-20px",
+                        fontFamily: "cursive",
+                        fontSize: "22px",
+                      }}
+                    >
+                      {doctorinfo.role}
+                    </h3>
+                  </div>
+                  <hr />
+                  <div>
+                    <p style={{ color: "gray" }}>Date Of Birth </p>
+                    <h3
+                      style={{
+                        marginTop: "-20px",
+                        fontFamily: "cursive",
+                        fontSize: "22px",
+                      }}
+                    >
+                      {new Date(doctorinfo.Date_of_Birth).toLocaleDateString()}
+                    </h3>
+                  </div>
+                  <div>
+                    <p style={{ color: "gray" }}> Gender </p>
+                    <h3
+                      style={{
+                        marginTop: "-20px",
+                        fontFamily: "cursive",
+                        fontSize: "22px",
+                      }}
+                    >
+                      {doctorinfo.gender}
+                    </h3>
+                  </div>
+                  <hr />
+                  <div>
+                    <p style={{ color: "gray" }}> Department </p>
+                    <h3
+                      style={{
+                        marginTop: "-20px",
+                        fontFamily: "cursive",
+                        fontSize: "22px",
+                      }}
+                    >
+                      {doctorinfo.department}
+                    </h3>
+                  </div>
+                  <div>
+                    <p style={{ color: "gray" }}> Phone </p>
+                    <h3
+                      style={{
+                        marginTop: "-20px",
+                        fontFamily: "cursive",
+                        fontSize: "22px",
+                      }}
+                    >
+                      {doctorinfo.phone}
+                    </h3>
+                  </div>
+                  <hr />
+                  <div>
+                    <p style={{ color: "gray" }}> Materials</p>
+                    {doctorinfo.Materials
+                      ? doctorinfo.Materials.map((mat) => {
+                          return (
+                            <h3
+                              style={{
+                                marginTop: "-10px",
+                                fontFamily: "cursive",
+                                fontSize: "22px",
+                              }}
+                            >
+                              {mat.course_name}
+                            </h3>
+                          );
+                        })
+                      : null}
+                  </div>
+                  <div>
+                    <p style={{ color: "gray" }}> Training</p>
+                    {doctorinfo.Training
+                      ? doctorinfo.Training.map((mat) => {
+                          return (
+                            <h3
+                              style={{
+                                marginTop: "-10px",
+                                fontFamily: "cursive",
+                                fontSize: "22px",
+                              }}
+                            >
+                              {mat.training_name}
+                            </h3>
+                          );
+                        })
+                      : null}
+                  </div>
+                </div>
+                <div style={{ marginBottom: "30px" }} class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>

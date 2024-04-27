@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { routes } from "../routes";
-import { Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import defulatimg from "../assets/traing2jpeg.jpeg";
 
 function Courses() {
@@ -23,6 +23,7 @@ function Courses() {
   const [studentId, setstudentId] = useState("");
   const [FinalExam, setFinalExam] = useState("");
   const [Oral, setOral] = useState("");
+  const [backToRegister, setbackToRegister] = useState("yes");
   const [Practical, setPractical] = useState("");
   const [mainsemester, setmainsemester] = useState([]);
   const [courseGradesInstruc, setcourseGradesInstruc] = useState([]);
@@ -237,6 +238,48 @@ function Courses() {
       console.error("Update failed", error);
     }
   };
+
+  // delete course
+  const deleteGrade = async (GradeId) => {
+    try {
+      const confirmed = await Swal.fire({
+        title: "Are you sure?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!",
+      });
+      if (confirmed.isConfirmed) {
+        const response = await fetch(
+          `https://university-mohamed.vercel.app/Api/student/Grades/deletecoursegrate?GradeId=${GradeId}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+            body: JSON.stringify({
+              backToRegister,
+            }),
+          }
+        );
+
+        if (response.ok) {
+          // On success, update the state to remove the deleted course
+          setcourseGradesInstruc((prevGrade) =>
+            prevGrade.filter((grade) => grade._id !== GradeId)
+          );
+          console.log(`Course with ID ${courseId} deleted successfully.`);
+        } else {
+          console.error(`Failed to delete course with ID ${GradeId}.`);
+        }
+      }
+    } catch (error) {
+      console.error("Delete failed", error);
+    }
+  };
+
   return (
     <>
       <div className="enrollcourse">
@@ -398,7 +441,13 @@ function Courses() {
       <div style={{ marginTop: "5rem" }} className="get_all_student">
         {allstudentregistercourses.length > 0 && (
           <>
-            <table style={{ textAlign: "center" }} class="table">
+            <Table
+              striped
+              bordered
+              hover
+              style={{ textAlign: "center" }}
+              class="table"
+            >
               <thead>
                 <tr>
                   <th scope="col">#ID</th>
@@ -407,7 +456,6 @@ function Courses() {
                   <th scope="col">National_Id</th>
                   <th scope="col">Department</th>
                   <th scope="col">CourseName</th>
-                  <th scope="col">Course_Grade</th>
                   <th scope="col">Submit</th>
                 </tr>
               </thead>
@@ -425,28 +473,15 @@ function Courses() {
                       <td>{student.coursesRegisterd[0]?.course_name}</td>
 
                       <td>
-                        {" "}
-                        <input
-                          style={{
-                            width: "150px",
-                            alignItems: "center",
-                            height: "25px",
-                          }}
-                          type="text"
-                          class="form-control"
-                          placeholder="Student Grade"
-                          aria-label="Student Grade"
-                          name="Student_Grade"
-                        />
-                      </td>
-                      <td>
-                        <button
+                        <Button
                           type="submit"
                           style={{
-                            height: "25px",
+                            height: "35px",
                             border: "none",
                             borderRadius: "5px",
                             backgroundColor: "#996ae4",
+                            color: "white",
+                            fontWeight: "bold",
                           }}
                           onClick={() => {
                             setsemsterId(mainsemester._id);
@@ -455,13 +490,13 @@ function Courses() {
                           }}
                         >
                           Upload
-                        </button>
+                        </Button>
                       </td>
                     </tr>
                   );
                 })}
               </tbody>
-            </table>
+            </Table>
           </>
         )}
       </div>
@@ -483,7 +518,7 @@ function Courses() {
             <th scope="col">Practical</th>
             <th scope="col">FinalExam</th>
             <th scope="col">TotalGrate</th>
-            <th scope="col">Update</th>
+            <th scope="col">Operation</th>
           </tr>
         </thead>
         <tbody>
@@ -519,6 +554,22 @@ function Courses() {
                     className="btn "
                   >
                     Update
+                  </button>
+                  <button
+                    style={{
+                      width: "80px",
+                      height: "40px",
+                      marginLeft: ".6rem",
+                      backgroundColor: "red",
+                      color: "white",
+                    }}
+                    onClick={() => {
+                      deleteGrade(results._id);
+                    }}
+                    type="button"
+                    className="btn "
+                  >
+                    Delete
                   </button>
                 </td>
               </tr>
