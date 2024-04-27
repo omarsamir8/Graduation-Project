@@ -299,6 +299,162 @@ function NavBar() {
             <h3>{admininfo.FullName}</h3>
             <p>{admininfo.role}</p>
           </div>
+          <div>
+            <i
+              style={{
+                fontSize: "20px",
+                cursor: "pointer",
+                marginBottom: "25px",
+              }}
+              class="fa-solid fa-circle-chevron-down"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModa2"
+            ></i>
+          </div>
+
+          <div
+            style={{ marginLeft: "450px", marginTop: "50px" }}
+            class="modal fade"
+            id="exampleModa2"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div style={{ width: "400px" }} class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5
+                    style={{
+                      marginBottom: "50px",
+                      fontWeight: "bold",
+                      fontFamily: "cursive",
+
+                      fontSize: "25px",
+                    }}
+                    class="modal-title"
+                    id="exampleModalLabel"
+                  >
+                    Profile Information{" "}
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  />
+                </div>
+                <div class="modal-body">
+                  <img
+                    style={{
+                      width: "120px",
+                      height: "120px",
+                      marginTop: "-70px",
+                    }}
+                    type="button"
+                    class=""
+                    src={admininfo.urlImg}
+                    alt=""
+                  />
+                  <div>
+                    <p style={{ color: "gray" }}>Name</p>
+                    <h3
+                      style={{
+                        marginTop: "-25px",
+                        fontFamily: "cursive",
+                        fontSize: "22px",
+                      }}
+                    >
+                      {admininfo.FullName}
+                    </h3>
+                  </div>
+                  <div>
+                    <p style={{ color: "gray" }}>Faculty</p>
+                    <h3
+                      style={{
+                        marginTop: "-20px",
+                        fontFamily: "cursive",
+                        fontSize: "22px",
+                      }}
+                    >
+                      Faculty of computers and artificial intelligence
+                    </h3>
+                  </div>
+                  <hr />
+                  <div>
+                    <p style={{ color: "gray" }}>Email </p>
+                    <h3
+                      style={{
+                        marginTop: "-20px",
+                        fontFamily: "cursive",
+                        fontSize: "22px",
+                      }}
+                    >
+                      {admininfo.email}
+                    </h3>
+                  </div>
+                  <div>
+                    <p style={{ color: "gray" }}>Role </p>
+                    <h3
+                      style={{
+                        marginTop: "-20px",
+                        fontFamily: "cursive",
+                        fontSize: "22px",
+                      }}
+                    >
+                      {admininfo.role}
+                    </h3>
+                  </div>
+                  <hr />
+                  <div>
+                    <p style={{ color: "gray" }}>Date Of Birth </p>
+                    <h3
+                      style={{
+                        marginTop: "-20px",
+                        fontFamily: "cursive",
+                        fontSize: "22px",
+                      }}
+                    >
+                      {new Date(admininfo.Date_of_Birth).toLocaleDateString()}
+                    </h3>
+                  </div>
+                  <div>
+                    <p style={{ color: "gray" }}> Gender </p>
+                    <h3
+                      style={{
+                        marginTop: "-20px",
+                        fontFamily: "cursive",
+                        fontSize: "22px",
+                      }}
+                    >
+                      {admininfo.gender}
+                    </h3>
+                  </div>
+
+                  <div>
+                    <p style={{ color: "gray" }}> Phone </p>
+                    <h3
+                      style={{
+                        marginTop: "-20px",
+                        fontFamily: "cursive",
+                        fontSize: "22px",
+                      }}
+                    >
+                      {admininfo.phone}
+                    </h3>
+                  </div>
+                </div>
+                <div style={{ marginBottom: "30px" }} class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>

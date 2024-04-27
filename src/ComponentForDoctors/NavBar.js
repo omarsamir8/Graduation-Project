@@ -145,11 +145,15 @@ function NavBar() {
 
           <div className="details">
             <h3>{doctorinfo.FullName}</h3>
-            <p>{doctorinfo.department}</p>
+            <p>{doctorinfo.role}</p>
           </div>
           <div>
             <i
-              style={{ fontSize: "25px", cursor: "pointer" }}
+              style={{
+                fontSize: "20px",
+                cursor: "pointer",
+                marginBottom: "25px",
+              }}
               class="fa-solid fa-circle-chevron-down"
               data-bs-toggle="modal"
               data-bs-target="#exampleModa2"

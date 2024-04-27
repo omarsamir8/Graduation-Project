@@ -151,7 +151,11 @@ function NavBar() {
           </div>
           <div>
             <i
-              style={{ fontSize: "25px", cursor: "pointer" }}
+              style={{
+                fontSize: "20px",
+                cursor: "pointer",
+                marginBottom: "25px",
+              }}
               class="fa-solid fa-circle-chevron-down"
               data-bs-toggle="modal"
               data-bs-target="#exampleModa2"
