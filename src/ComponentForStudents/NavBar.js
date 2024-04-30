@@ -289,7 +289,7 @@ function NavBar() {
                       }}
                       onClick={() => {
                         NavigateToRegisteredCourses();
-                        // handleCloseModal();
+                        handleCloseModal();
                       }}
                       className="NavLink"
                     >
@@ -353,7 +353,7 @@ function NavBar() {
                       }}
                       onClick={() => {
                         NavigateToSemesterGrades();
-                        // handleCloseModal();
+                        handleCloseModal();
                       }}
                       className="NavLink"
                     >
@@ -369,7 +369,7 @@ function NavBar() {
                       }}
                       onClick={() => {
                         NavigateToNewspaper();
-                        // handleCloseModal();
+                        handleCloseModal();
                       }}
                       className="NavLink"
                     >
