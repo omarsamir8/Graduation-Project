@@ -43,7 +43,7 @@ body {
   animation-timing-function: linear;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 500px) {
   .mainpage .sidebar {
     position: relative;
     margin-left: 2rem;
