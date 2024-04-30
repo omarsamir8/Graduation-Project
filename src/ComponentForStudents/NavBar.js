@@ -106,7 +106,7 @@ function NavBar() {
     }
   };
 
-  // 
+  //
   const handleCloseModal = () => {
     const modalBackdrop = document.querySelector(".modal-backdrop");
     if (modalBackdrop) {
@@ -221,6 +221,7 @@ function NavBar() {
                     SideBar
                   </h5>
                   <button
+                    style={{ marginRight: "40px" }}
                     type="button"
                     class="btn-close"
                     data-bs-dismiss="modal"
@@ -232,12 +233,12 @@ function NavBar() {
                     <li
                       onClick={() => {
                         handleClick("DashBoard");
-                      
-                        handleCloseModal();
+
+                        // handleCloseModal();
                       }}
                       style={{
                         textDecoration: "none",
-                        marginLeft: "5px",
+                        marginLeft: "2px",
                         color:
                           selectedComponent === "DashBoard"
                             ? "black"
@@ -247,6 +248,7 @@ function NavBar() {
                             ? "scale(1.1)"
                             : "scale(1)",
                         transition: "transform 0.3s ease",
+                        cursor: "pointer",
                       }}
                       className="Side_li"
                     >
@@ -255,9 +257,10 @@ function NavBar() {
                   </div>
                   <div className="item col-12">
                     <li
-                      onClick={() => {handleClick("RegisterForCourse")
-                      handleCloseModal();
-                    }}
+                      onClick={() => {
+                        handleClick("RegisterForCourse");
+                        // handleCloseModal();
+                      }}
                       style={{
                         textDecoration: "none",
                         color:
@@ -269,6 +272,8 @@ function NavBar() {
                             ? "scale(1.1)"
                             : "scale(1)",
                         transition: "transform 0.3s ease",
+                        marginLeft: "20px",
+                        cursor: "pointer",
                       }}
                       className="Side_li"
                     >
@@ -277,10 +282,14 @@ function NavBar() {
                   </div>
                   <div className="item col-12">
                     <li
-                      style={{ color: "black", marginLeft: "-10px" }}
+                      style={{
+                        color: "black",
+                        marginLeft: "5px",
+                        cursor: "pointer",
+                      }}
                       onClick={() => {
                         NavigateToRegisteredCourses();
-                        handleCloseModal();
+                        // handleCloseModal();
                       }}
                       className="NavLink"
                     >
@@ -289,9 +298,10 @@ function NavBar() {
                   </div>
                   <div className="item col-12">
                     <li
-                      onClick={() => {handleClick("RegisterForTraining")
-                      handleCloseModal();
-                    }}
+                      onClick={() => {
+                        handleClick("RegisterForTraining");
+                        // handleCloseModal();
+                      }}
                       style={{
                         textDecoration: "none",
                         color:
@@ -303,6 +313,7 @@ function NavBar() {
                             ? "scale(1.1)"
                             : "scale(1)",
                         transition: "transform 0.3s ease",
+                        cursor: "pointer",
                       }}
                       className="Side_li"
                     >
@@ -311,9 +322,10 @@ function NavBar() {
                   </div>
                   <div className="item col-12">
                     <li
-                      onClick={() => {handleClick("RegisteredTraining")
-                      handleCloseModal();
-                    }}
+                      onClick={() => {
+                        handleClick("RegisteredTraining");
+                        // handleCloseModal();
+                      }}
                       style={{
                         textDecoration: "none",
                         color:
@@ -325,6 +337,7 @@ function NavBar() {
                             ? "scale(1.1)"
                             : "scale(1)",
                         transition: "transform 0.3s ease",
+                        cursor: "pointer",
                       }}
                       className="Side_li"
                     >
@@ -333,10 +346,14 @@ function NavBar() {
                   </div>
                   <div className="item col-12">
                     <li
-                      style={{ color: "black", marginLeft: "-10px" }}
+                      style={{
+                        color: "black",
+                        marginLeft: "5px",
+                        cursor: "pointer",
+                      }}
                       onClick={() => {
                         NavigateToSemesterGrades();
-                        handleCloseModal();
+                        // handleCloseModal();
                       }}
                       className="NavLink"
                     >
@@ -345,10 +362,14 @@ function NavBar() {
                   </div>
                   <div className="item col-12">
                     <li
-                      style={{ color: "black", marginLeft: "-10px" }}
+                      style={{
+                        color: "black",
+                        marginLeft: "5px",
+                        cursor: "pointer",
+                      }}
                       onClick={() => {
                         NavigateToNewspaper();
-                        handleCloseModal();
+                        // handleCloseModal();
                       }}
                       className="NavLink"
                     >
@@ -357,11 +378,16 @@ function NavBar() {
                   </div>
                   <div className="item col-12">
                     <NavLink
-                      style={{ color: "black", marginLeft: "-10px" }}
+                      style={{
+                        color: "black",
+                        marginLeft: "-10px",
+                        cursor: "pointer",
+                      }}
                       className="NavLink"
-                      onClick={() => {setSelectedComponent("Department")
-                      handleCloseModal();
-                    }}
+                      onClick={() => {
+                        setSelectedComponent("Department");
+                        // handleCloseModal();
+                      }}
                     >
                       Department
                     </NavLink>
@@ -378,6 +404,7 @@ function NavBar() {
                 </div>
                 <div class="modal-footer">
                   <button
+                    style={{ marginRight: "50px" }}
                     type="button"
                     class="btn btn-secondary"
                     data-bs-dismiss="modal"

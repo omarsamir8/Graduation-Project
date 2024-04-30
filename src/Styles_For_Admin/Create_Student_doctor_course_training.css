@@ -164,7 +164,7 @@
 .marquee {
   font-weight: bold;
 }
-@media (max-width: 400px) {
+@media (max-width: 500px) {
   .Create_Student {
     display: flex;
     flex-wrap: wrap;
@@ -181,15 +181,12 @@
     flex-wrap: wrap;
     width: 20rem;
   }
-  .enrollcourse {
-    height: auto;
-  }
   .enrollcourse .course {
-    margin-left: 2rem;
-    width: 310px !important;
+    margin-left: 1rem;
+    width: 350px !important;
   }
   .enrollcourse .course img {
-    width: 270px;
+    width: 310px;
   }
   .loadmore {
     margin-left: 0;

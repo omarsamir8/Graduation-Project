@@ -113,7 +113,7 @@ export default function Registered_Courses() {
       <div className="col-12 Registered_Courses">
         <img src="./assets/images/benha.png" className="Benha_img" />
         <div className="Title_registered col-4">
-          <p className="col-12">
+          <p className="col-12 pp">
             Faculty of computers and artificial intelligence
           </p>
           <p className="col-12">Benha university</p>

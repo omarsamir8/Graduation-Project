@@ -90,4 +90,7 @@
   .nav-bar .search input {
     width: 20rem;
   }
+  #staticBackdrop {
+    width: 350px;
+  }
 }

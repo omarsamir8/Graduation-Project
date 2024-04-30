@@ -66,11 +66,16 @@ export default function Reports_student() {
             ? studentnewspaper[0].studentId.Full_Name
             : ""}
         </p>
-        <p className="col-12">Level : {level}</p>
-        <p className="col-12">
+        <p className="col-12 ">Level : {level}</p>
+        <p className="col-12 ">
           Semester :
           {studentnewspaper.length > 0
-            ? studentnewspaper[0].semsterId.name
+            ? studentnewspaper[0].semsterId.term
+            : ""}
+        </p>
+        <p className="col-12 ">
+          {studentnewspaper.length > 0
+            ? studentnewspaper[0].semsterId.year
             : ""}
         </p>
       </div>
