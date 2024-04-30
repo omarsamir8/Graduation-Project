@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { Button } from 'react-bootstrap'
-import Table from 'react-bootstrap/Table'
-import { useNavigate } from 'react-router-dom'
-import './Reports_student.scss'
-import Report from '../../ComponentForStudents/Report'
-import axios from 'axios'
-import { routes } from '../../routes'
+import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
+import Table from "react-bootstrap/Table";
+import { useNavigate } from "react-router-dom";
+import "./Reports_student.scss";
+import Report from "../../ComponentForStudents/Report";
+import axios from "axios";
+import { routes } from "../../routes";
 
-export default function Reports_student () {
-  const usenavigate = useNavigate()
+export default function Reports_student() {
+  const usenavigate = useNavigate();
   const NavigateToStudent = () => {
-    usenavigate('/student')
-  }
-  const accessToken = localStorage.getItem('accesstoken')
-  const refreshToken = localStorage.getItem('refreshtoken')
-  const [studentnewspaper, setstudentnewspaper] = useState([])
-  const [totalgpa, settotalgpa] = useState('')
-  const [totalhour, settotalhour] = useState('')
-  const [level, setlevel] = useState('')
+    usenavigate("/student");
+  };
+  const accessToken = localStorage.getItem("accesstoken");
+  const refreshToken = localStorage.getItem("refreshtoken");
+  const [studentnewspaper, setstudentnewspaper] = useState([]);
+  const [totalgpa, settotalgpa] = useState("");
+  const [totalhour, settotalhour] = useState("");
+  const [level, setlevel] = useState("");
   useEffect(() => {
     const fetchSemesterGrade = async () => {
       try {
@@ -26,74 +26,74 @@ export default function Reports_student () {
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
-              'refresh-token': refreshToken
-            }
+              "refresh-token": refreshToken,
+            },
           }
-        )
-        console.log(response.data)
-        setstudentnewspaper(response.data.semesters)
-        settotalgpa(response.data.totalGpaOverall)
-        settotalhour(response.data.totalCreditHours)
-        setlevel(response.data.level)
+        );
+        console.log(response.data);
+        setstudentnewspaper(response.data.semesters);
+        settotalgpa(response.data.totalGpaOverall);
+        settotalhour(response.data.totalCreditHours);
+        setlevel(response.data.level);
 
         // Log the updated state
       } catch (error) {
-        console.error('Error fetching student info:', error)
+        console.error("Error fetching student info:", error);
       }
-    }
+    };
 
-    fetchSemesterGrade()
-  }, [accessToken, refreshToken])
-  console.log(studentnewspaper)
+    fetchSemesterGrade();
+  }, [accessToken, refreshToken]);
+  console.log(studentnewspaper);
   return (
-    <div className=' col-12 Registered_Courses'>
-      <img src='./assets/images/benha.png' className='Benha_img' />
+    <div className=" col-12 Registered_Courses">
+      <img src="./assets/images/benha.png" className="Benha_img" />
 
-      <div className='Title_registered col-4'>
-        <p className='col-12'>
+      <div className="Title_registered col-4">
+        <p className="col-12">
           Faculty of computers and artificial intelligence
         </p>
-        <p className='col-12'>Benha university</p>
-        <p className='col-12'>
+        <p className="col-12">Benha university</p>
+        <p className="col-12">
           Student code :
           {studentnewspaper.length > 0
             ? studentnewspaper[0].studentId.National_Id
-            : ''}
+            : ""}
         </p>
-        <p className='col-12'>
+        <p className="col-12">
           Student name :
           {studentnewspaper.length > 0
             ? studentnewspaper[0].studentId.Full_Name
-            : ''}
+            : ""}
         </p>
-        <p className='col-12'>Level : {level}</p>
-        <p className='col-12'>
+        <p className="col-12">Level : {level}</p>
+        <p className="col-12">
           Semester :
           {studentnewspaper.length > 0
             ? studentnewspaper[0].semsterId.name
-            : ''}
+            : ""}
         </p>
       </div>
-      <img src='./assets/images/bfcai2.jpg' className='BFCAI_img' />
+      <img src="./assets/images/bfcai2.jpg" className="BFCAI_img" />
 
-      <div className='col-11 Table_courses'>
-        <div className='col-12'>
-          <div className='Line_div_report' />
+      <div className="col-11 Table_courses">
+        <div className="col-12">
+          <div className="Line_div_report" />
           <div>
             <Table
               striped
               bordered
               hover
-              size='md'
-              className=' Head_table col-12'
+              size="sm"
+              className=" Head_table col-12 "
             >
-              <th className='col-12 Title_table'>
+              <th className="col-12 Title_table">
                 <p> Level: {level}</p>
                 <p>
                   Academic Year:
                   {studentnewspaper.length > 0
                     ? studentnewspaper[0].semsterId.year
-                    : ''}
+                    : ""}
                 </p>
                 <p>
                   Total Hours:
@@ -104,27 +104,27 @@ export default function Reports_student () {
             </Table>
           </div>
           {studentnewspaper.map((sem, index) => (
-            <div className='col-12' key={index}>
+            <div className="col-12" key={index}>
               <div>
                 <Table
                   striped
                   bordered
                   hover
-                  size='md'
-                  className=' Head_table_2 col-12'
+                  size="sm"
+                  className=" Head_table_2 col-12"
                 >
                   <thead>
                     <tr>
-                      <th className='col-12 Title_table_2'>
+                      <th className="col-12 Title_table_2">
                         <p>
-                          Semester Name: {sem.semsterId.term}{' '}
+                          Semester Name: {sem.semsterId.term}{" "}
                           {sem.semsterId.year}
                         </p>
                       </th>
                     </tr>
                   </thead>
                 </Table>
-                <Table striped bordered hover size='md' className='col-12'>
+                <Table striped bordered hover size="sm" className="col-12">
                   <thead>
                     <tr>
                       <th>#</th>
@@ -153,15 +153,15 @@ export default function Reports_student () {
           ))}
         </div>
 
-        <div className='col-12 BackToStu_report'>
-          <Button className='BackToStuBtn' onClick={NavigateToStudent}>
+        <div className="col-12 BackToStu_report">
+          <Button className="BackToStuBtn" onClick={NavigateToStudent}>
             Back
           </Button>
-          <Button className='Print_semester' onClick={window.print}>
+          <Button className="Print_semester" onClick={window.print}>
             Print
           </Button>
         </div>
       </div>
     </div>
-  )
+  );
 }

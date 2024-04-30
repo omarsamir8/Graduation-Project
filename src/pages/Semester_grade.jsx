@@ -116,7 +116,7 @@ export default function Semester_grade() {
               </th>
             </Table>
 
-            <Table striped bordered hover size="md" className="col-12">
+            <Table striped bordered hover size="sm" className="col-12">
               <thead>
                 <tr>
                   <th>#</th>
