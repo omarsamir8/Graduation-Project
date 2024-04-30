@@ -344,7 +344,14 @@ function Training() {
         {allstudentregistertraining.length > 0 && (
           <>
             <h2> All Students Reg Training </h2>
-            <table style={{ textAlign: "center" }} className="table">
+            <Table
+              striped
+              bordered
+              hover
+              size="md"
+              style={{ textAlign: "center" }}
+              className="table"
+            >
               <thead>
                 <tr>
                   <th scope="col">#ID</th>
@@ -410,62 +417,63 @@ function Training() {
                   );
                 })}
               </tbody>
-            </table>
+            </Table>
           </>
         )}
       </div>
-
-      <Table
-        style={{ marginTop: "5rem", textAlign: "center" }}
-        striped
-        bordered
-        hover
-        size="md"
-        className="col-12"
-      >
-        <thead>
-          <tr>
-            <th scope="col">#ID</th>
-            <th scope="col">Student Name</th>
-            <th scope="col">Training Name</th>
-            <th scope="col">Grade</th>
-            <th scope="col">Update</th>
-          </tr>
-        </thead>
-        <tbody>
-          {studentResultReport.map((results, index) => {
-            return (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{results.studentId.Full_Name}</td>
-                <td>{results.trainingId.training_name}</td>
-                <td>{results.grade}</td>
-                <td>
-                  <button
-                    style={{
-                      width: "80px",
-                      height: "40px",
-                      marginLeft: ".6rem",
-                      backgroundColor: "#996ae4",
-                      color: "white",
-                    }}
-                    onClick={() => {
-                      setgrade(results.grade);
-                      setselectedTrainingResultId(results._id);
-                      setstudentId(results.studentId._id);
-                      // setTrainingId(results.trainingId._id);
-                    }}
-                    type="button"
-                    className="btn "
-                  >
-                    Update
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
+      {studentResultReport.length > 0 && (
+        <Table
+          style={{ marginTop: "5rem", textAlign: "center" }}
+          striped
+          bordered
+          hover
+          size="md"
+          className="col-12"
+        >
+          <thead>
+            <tr>
+              <th scope="col">#ID</th>
+              <th scope="col">Student Name</th>
+              <th scope="col">Training Name</th>
+              <th scope="col">Grade</th>
+              <th scope="col">Update</th>
+            </tr>
+          </thead>
+          <tbody>
+            {studentResultReport.map((results, index) => {
+              return (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{results.studentId.Full_Name}</td>
+                  <td>{results.trainingId.training_name}</td>
+                  <td>{results.grade}</td>
+                  <td>
+                    <button
+                      style={{
+                        width: "80px",
+                        height: "40px",
+                        marginLeft: ".6rem",
+                        backgroundColor: "#996ae4",
+                        color: "white",
+                      }}
+                      onClick={() => {
+                        setgrade(results.grade);
+                        setselectedTrainingResultId(results._id);
+                        setstudentId(results.studentId._id);
+                        // setTrainingId(results.trainingId._id);
+                      }}
+                      type="button"
+                      className="btn "
+                    >
+                      Update
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+      )}
     </>
   );
 }

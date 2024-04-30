@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { routes } from "../routes";
 import Swal from "sweetalert2";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { $Dashboard2_Components, $Dashboard_Components } from "../Atoms";
 import { useRecoilState } from "recoil";
 function NavBar() {
@@ -16,8 +16,9 @@ function NavBar() {
     setSelectedComponent2(componentName);
     window.scrollTo(0, 750);
   };
+  const navigate = useNavigate();
   function logout() {
-    Navigate("/");
+    navigate("/");
     localStorage.clear();
   }
   const [selectedComponent2, setSelectedComponent2] = useRecoilState(
@@ -86,6 +87,21 @@ function NavBar() {
     } catch (error) {
       console.error("Upload failed", error);
     }
+  };
+  //close model after click
+  const handleCloseModal = () => {
+    const modalBackdrop = document.querySelector(".modal-backdrop");
+    if (modalBackdrop) {
+      modalBackdrop.parentNode.removeChild(modalBackdrop);
+    }
+    const modal = document.getElementById("staticBackdrop");
+    if (modal) {
+      modal.classList.remove("show");
+      modal.removeAttribute("style"); // Remove any inline styles
+    }
+
+    // Re-enable scrolling on the body
+    document.body.style.overflow = "auto";
   };
   return (
     <>
@@ -183,7 +199,7 @@ function NavBar() {
             aria-hidden="true"
           >
             <div class="modal-dialog">
-              <div style={{ width: "400px" }} class="modal-content">
+              <div style={{ width: "350px" }} class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="staticBackdropLabel">
                     SideBar
@@ -198,7 +214,10 @@ function NavBar() {
                 <div class="modal-body">
                   <div className="item col-12">
                     <li
-                      onClick={() => handleClick("DashBoard")}
+                      onClick={() => {
+                        handleClick("DashBoard");
+                        handleCloseModal();
+                      }}
                       style={{
                         textDecoration: "none",
                         color:
@@ -218,7 +237,10 @@ function NavBar() {
                   </div>
                   <div className="item col-12">
                     <li
-                      onClick={() => handleClick("courses")}
+                      onClick={() => {
+                        handleClick("courses");
+                        handleCloseModal();
+                      }}
                       style={{
                         textDecoration: "none",
                         color:
@@ -238,7 +260,10 @@ function NavBar() {
                   </div>
                   <div className="item col-12">
                     <li
-                      onClick={() => handleClick("Training")}
+                      onClick={() => {
+                        handleClick("Training");
+                        handleCloseModal();
+                      }}
                       style={{
                         textDecoration: "none",
                         color:
@@ -250,11 +275,18 @@ function NavBar() {
                             ? "scale(1.1)"
                             : "scale(1)",
                         transition: "transform 0.3s ease",
+                        marginLeft: "20px",
                       }}
                       className="Side_li"
                     >
                       Training
                     </li>
+                    <p
+                      style={{ marginLeft: "5px", marginTop: "5px" }}
+                      onClick={logout}
+                    >
+                      Logout
+                    </p>
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -272,25 +304,25 @@ function NavBar() {
           <div>
             <i
               style={{
-                fontSize: "30px",
+                fontSize: "25px",
                 cursor: "pointer",
-                marginBottom: "5px",
+                marginTop: "-8px",
+                marginLeft: "0",
               }}
-              class="fa-solid fa-circle-chevron-down"
               data-bs-toggle="modal"
               data-bs-target="#exampleModa2"
+              class="fa-solid fa-arrow-down-z-a"
             ></i>
           </div>
 
           <div
-            style={{ marginLeft: "450px", marginTop: "50px" }}
             class="modal fade"
             id="exampleModa2"
             tabindex="-1"
             aria-labelledby="exampleModalLabel"
             aria-hidden="true"
           >
-            <div style={{ width: "400px" }} class="modal-dialog">
+            <div style={{ width: "420px" }} class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5
@@ -311,6 +343,7 @@ function NavBar() {
                     class="btn-close"
                     data-bs-dismiss="modal"
                     aria-label="Close"
+                    style={{ marginRight: "50px", marginTop: "-45px" }}
                   />
                 </div>
                 <div class="modal-body">
@@ -467,6 +500,7 @@ function NavBar() {
                     type="button"
                     class="btn btn-secondary"
                     data-bs-dismiss="modal"
+                    style={{ marginRight: "60px" }}
                   >
                     Close
                   </button>

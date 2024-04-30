@@ -426,7 +426,7 @@ function NavBar() {
             {/* <i class="fa-solid fa-info"></i> */}
             <i
               style={{
-                fontSize: "30px",
+                fontSize: "25px",
                 cursor: "pointer",
                 marginTop: "-8px",
                 marginLeft: "0",
@@ -443,7 +443,6 @@ function NavBar() {
             tabindex="-1"
             aria-labelledby="exampleModalLabel"
             aria-hidden="true"
-            style={{ width: "355px" }}
           >
             <div style={{ width: "400px" }} class="modal-dialog">
               <div class="modal-content">

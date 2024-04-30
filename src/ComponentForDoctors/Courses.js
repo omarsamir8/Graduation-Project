@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import { routes } from "../routes";
 import { Button, Table } from "react-bootstrap";
 import defulatimg from "../assets/traing2jpeg.jpeg";
-
+import "../Styles_For_Admin/category.css";
 function Courses() {
   const [selectedComponent2, setSelectedComponent2] = useRecoilState(
     $Dashboard2_Components
@@ -336,7 +336,10 @@ function Courses() {
           );
         })}
       </div>
-      <h4 style={{ marginLeft: "10px", marginTop: "10px", fontWeight: "bold" }}>
+      <h4
+        className="update"
+        style={{ marginLeft: "10px", marginTop: "10px", fontWeight: "bold" }}
+      >
         {selectedGradeId ? "Update Grade" : "Upload Grade"}
       </h4>
       <div
@@ -347,7 +350,7 @@ function Courses() {
           flexWrap: "wrap",
           gap: "10px",
         }}
-        className="addcategory category-search animate__animated animate__fadeInDown"
+        className="addcategory category-search animate__animated animate__fadeInDown uploadgrade"
       >
         <input
           style={{ width: "30%", marginLeft: "10px", height: "40px" }}
@@ -438,15 +441,18 @@ function Courses() {
           {selectedGradeId ? "Update Grade" : "Upload Grade"}
         </button>
       </div>
+
       <div style={{ marginTop: "5rem" }} className="get_all_student">
+        <h3 className="table2">All Student Reg Course</h3>
         {allstudentregistercourses.length > 0 && (
           <>
             <Table
               striped
               bordered
               hover
+              size="sm"
               style={{ textAlign: "center" }}
-              class="table"
+              class="table2"
             >
               <thead>
                 <tr>
@@ -500,14 +506,16 @@ function Courses() {
           </>
         )}
       </div>
-
+      <h3 style={{ marginLeft: "0px" }} className="table3">
+        Student Result To Update{" "}
+      </h3>
       <Table
-        style={{ marginTop: "5rem", textAlign: "center" }}
+        style={{ marginLeft: "0px", textAlign: "center" }}
         striped
         bordered
         hover
         size="md"
-        className="col-12"
+        className="col-12 table3"
       >
         <thead>
           <tr>

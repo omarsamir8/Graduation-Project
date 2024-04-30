@@ -164,6 +164,13 @@
 .marquee {
   font-weight: bold;
 }
+#uploadgrade {
+  margin-top: "20px";
+  height: "70px";
+  display: "flex";
+  flex-wrap: "wrap";
+  gap: "10px";
+}
 @media (max-width: 500px) {
   .Create_Student {
     display: flex;

@@ -3,21 +3,30 @@
     margin-left: 20px;
   }
   .addcategory {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 150px;
+    display: block;
+    margin-bottom: 0px;
     width: 100%;
   }
   .addcategory input {
-    width: 280px !important;
+    margin-left: 25px !important;
+    width: 310px !important;
   }
   .addcategory button {
-    margin-left: 10px;
+    margin-left: 25px !important;
+  }
+  .update {
+    margin-left: 25px !important;
+  }
+  .table2 {
+    margin-top: 300px !important;
+  }
+  .table3 {
+    margin-left: 30px !important;
   }
 }
-.mainpage{
+.mainpage {
   background-color: beige;
 }
-.marquee_allstudents{
+.marquee_allstudents {
   margin-top: 1rem;
 }
