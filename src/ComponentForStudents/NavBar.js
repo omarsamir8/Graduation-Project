@@ -117,6 +117,9 @@ function NavBar() {
       modal.classList.remove("show");
       modal.removeAttribute("style"); // Remove any inline styles
     }
+
+    // Re-enable scrolling on the body
+    document.body.style.overflow = "auto";
   };
 
   return (
@@ -233,8 +236,7 @@ function NavBar() {
                     <li
                       onClick={() => {
                         handleClick("DashBoard");
-
-                        // handleCloseModal();
+                        handleCloseModal();
                       }}
                       style={{
                         textDecoration: "none",
@@ -259,7 +261,7 @@ function NavBar() {
                     <li
                       onClick={() => {
                         handleClick("RegisterForCourse");
-                        // handleCloseModal();
+                        handleCloseModal();
                       }}
                       style={{
                         textDecoration: "none",
@@ -300,7 +302,7 @@ function NavBar() {
                     <li
                       onClick={() => {
                         handleClick("RegisterForTraining");
-                        // handleCloseModal();
+                        handleCloseModal();
                       }}
                       style={{
                         textDecoration: "none",
@@ -324,7 +326,7 @@ function NavBar() {
                     <li
                       onClick={() => {
                         handleClick("RegisteredTraining");
-                        // handleCloseModal();
+                        handleCloseModal();
                       }}
                       style={{
                         textDecoration: "none",
@@ -386,7 +388,7 @@ function NavBar() {
                       className="NavLink"
                       onClick={() => {
                         setSelectedComponent("Department");
-                        // handleCloseModal();
+                        handleCloseModal();
                       }}
                     >
                       Department

@@ -44,6 +44,9 @@ body {
 }
 
 @media (max-width: 500px) {
+  .mainpage {
+    width: 400px;
+  }
   .mainpage .sidebar {
     position: relative;
     margin-left: 2rem;
