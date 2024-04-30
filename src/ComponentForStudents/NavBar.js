@@ -20,8 +20,9 @@ function NavBar() {
     setSelectedComponent(componentName);
     // window.scrollTo(0, 750);
   };
+  const navigate = useNavigate();
   function logout() {
-    Navigate("/");
+    navigate("/");
     localStorage.clear();
   }
   const usenavigate = useNavigate();
@@ -403,6 +404,9 @@ function NavBar() {
                       Chat
                     </NavLink>
                   </div>
+                  <p onClick={logout} className="logout_Button">
+                    Logout
+                  </p>
                 </div>
                 <div class="modal-footer">
                   <button
@@ -418,15 +422,18 @@ function NavBar() {
             </div>
           </div>
           <div>
+            {/* <i class="fa-solid fa-circle-chevron-down"></i> */}
+            {/* <i class="fa-solid fa-info"></i> */}
             <i
               style={{
                 fontSize: "30px",
                 cursor: "pointer",
-                marginLeft: "-10px",
+                marginTop: "-8px",
+                marginLeft: "0",
               }}
-              class="fa-solid fa-circle-chevron-down"
               data-bs-toggle="modal"
               data-bs-target="#exampleModa2"
+              class="fa-solid fa-arrow-down-z-a"
             ></i>
           </div>
 
@@ -436,6 +443,7 @@ function NavBar() {
             tabindex="-1"
             aria-labelledby="exampleModalLabel"
             aria-hidden="true"
+            style={{ width: "355px" }}
           >
             <div style={{ width: "400px" }} class="modal-dialog">
               <div class="modal-content">
@@ -457,6 +465,7 @@ function NavBar() {
                     class="btn-close"
                     data-bs-dismiss="modal"
                     aria-label="Close"
+                    style={{ marginRight: "40px", marginTop: "-45px" }}
                   />
                 </div>
                 <div class="modal-body">
@@ -578,6 +587,7 @@ function NavBar() {
                     type="button"
                     class="btn btn-secondary"
                     data-bs-dismiss="modal"
+                    style={{ marginRight: "50px" }}
                   >
                     Close
                   </button>
