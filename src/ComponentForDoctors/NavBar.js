@@ -3,12 +3,26 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { routes } from "../routes";
 import Swal from "sweetalert2";
+import { Navigate } from "react-router-dom";
+import { $Dashboard2_Components, $Dashboard_Components } from "../Atoms";
+import { useRecoilState } from "recoil";
 function NavBar() {
   const [doctorinfo, setDoctorInfo] = useState([]);
   const [instructorImage, setinstructorImage] = useState([]);
   const [message, setmessage] = useState("");
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
+  const handleClick = (componentName) => {
+    setSelectedComponent2(componentName);
+    window.scrollTo(0, 750);
+  };
+  function logout() {
+    Navigate("/");
+    localStorage.clear();
+  }
+  const [selectedComponent2, setSelectedComponent2] = useRecoilState(
+    $Dashboard2_Components
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -147,12 +161,120 @@ function NavBar() {
             <h3>{doctorinfo.FullName}</h3>
             <p>{doctorinfo.role}</p>
           </div>
+          <button
+            type="button"
+            class="btn dropdown"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+            <i
+              style={{ fontSize: "35px", marginTop: "-5px" }}
+              class="fa-solid fa-list "
+            ></i>
+          </button>
+
+          <div
+            class="modal fade"
+            id="staticBackdrop"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div style={{ width: "400px" }} class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">
+                    SideBar
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div className="item col-12">
+                    <li
+                      onClick={() => handleClick("DashBoard")}
+                      style={{
+                        textDecoration: "none",
+                        color:
+                          selectedComponent2 === "DashBoard"
+                            ? "black"
+                            : "inherit",
+                        transform:
+                          selectedComponent2 === "DashBoard"
+                            ? "scale(1.1)"
+                            : "scale(1)",
+                        transition: "transform 0.3s ease",
+                      }}
+                      className="Side_li"
+                    >
+                      Dashboard
+                    </li>
+                  </div>
+                  <div className="item col-12">
+                    <li
+                      onClick={() => handleClick("courses")}
+                      style={{
+                        textDecoration: "none",
+                        color:
+                          selectedComponent2 === "courses"
+                            ? "black"
+                            : "inherit",
+                        transform:
+                          selectedComponent2 === "courses"
+                            ? "scale(1.1)"
+                            : "scale(1)",
+                        transition: "transform 0.3s ease",
+                      }}
+                      className="Side_li"
+                    >
+                      Courses
+                    </li>
+                  </div>
+                  <div className="item col-12">
+                    <li
+                      onClick={() => handleClick("Training")}
+                      style={{
+                        textDecoration: "none",
+                        color:
+                          selectedComponent2 === "Training"
+                            ? "black"
+                            : "inherit",
+                        transform:
+                          selectedComponent2 === "Training"
+                            ? "scale(1.1)"
+                            : "scale(1)",
+                        transition: "transform 0.3s ease",
+                      }}
+                      className="Side_li"
+                    >
+                      Training
+                    </li>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
           <div>
             <i
               style={{
-                fontSize: "20px",
+                fontSize: "30px",
                 cursor: "pointer",
-                marginBottom: "25px",
+                marginBottom: "5px",
               }}
               class="fa-solid fa-circle-chevron-down"
               data-bs-toggle="modal"

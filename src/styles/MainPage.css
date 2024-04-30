@@ -13,7 +13,7 @@ body {
   /* justify-content: space-between; */
   position: relative;
   flex-wrap: wrap;
- padding-bottom: 2rem;
+  padding-bottom: 2rem;
 }
 .mainpage .sidebar {
   position: fixed;
@@ -43,22 +43,24 @@ body {
   animation-timing-function: linear;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 450px) {
   .mainpage .sidebar {
     position: relative;
     margin-left: 2rem;
+    display: none;
   }
   .mainpage .poster {
     display: none;
   }
   .mainpage .container-page {
+    width: 100%;
     margin-left: 0; /* Adjust the margin as needed for smaller screens */
   }
 }
-.link{
+.link {
   text-decoration: none;
   color: white;
 }
-.link:hover{
+.link:hover {
   color: white;
 }

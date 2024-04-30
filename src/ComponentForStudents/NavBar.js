@@ -3,12 +3,31 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { routes } from "../routes";
 import Swal from "sweetalert2";
+import { Navigate } from "react-router-dom";
+import { $Dashboard_Components } from "../Atoms";
+import { useRecoilState } from "recoil";
+import { NavLink } from "react-bootstrap";
 function NavBar() {
   const [studentinfo, setStudentInfo] = useState([]);
   const [studentImage, setstudentImage] = useState("");
   const [message, setmessage] = useState("");
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
+
+  // const [SelectedComponent, SetSelectedComponent] = useState(null);
+
+  const handleClick = (componentName) => {
+    setSelectedComponent(componentName);
+    window.scrollTo(0, 750);
+  };
+  function logout() {
+    Navigate("/");
+    localStorage.clear();
+  }
+
+  const [selectedComponent, setSelectedComponent] = useRecoilState(
+    $Dashboard_Components
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -149,12 +168,187 @@ function NavBar() {
             <h3>{studentinfo.Full_Name}</h3>
             <p> Level : {studentinfo.level}</p>
           </div>
+
+          <button
+            type="button"
+            class="btn dropdown"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+            <i
+              style={{ fontSize: "35px", marginTop: "-5px" }}
+              class="fa-solid fa-list "
+            ></i>
+          </button>
+
+          <div
+            class="modal fade"
+            id="staticBackdrop"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div style={{ width: "400px" }} class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">
+                    SideBar
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div className="item col-12">
+                    <li
+                      onClick={() => handleClick("DashBoard")}
+                      style={{
+                        textDecoration: "none",
+                        marginLeft: "5px",
+                        color:
+                          selectedComponent === "DashBoard"
+                            ? "black"
+                            : "inherit",
+                        transform:
+                          selectedComponent === "DashBoard"
+                            ? "scale(1.1)"
+                            : "scale(1)",
+                        transition: "transform 0.3s ease",
+                      }}
+                      className="Side_li"
+                    >
+                      Dashboard
+                    </li>
+                  </div>
+                  <div className="item col-12">
+                    <li
+                      onClick={() => handleClick("RegisterForCourse")}
+                      style={{
+                        textDecoration: "none",
+                        color:
+                          selectedComponent === "RegisterForCourse"
+                            ? "black"
+                            : "inherit",
+                        transform:
+                          selectedComponent === "RegisterForCourse"
+                            ? "scale(1.1)"
+                            : "scale(1)",
+                        transition: "transform 0.3s ease",
+                      }}
+                      className="Side_li"
+                    >
+                      Register For Course
+                    </li>
+                  </div>
+                  <div className="item col-12">
+                    <NavLink
+                      style={{ color: "black", marginLeft: "-10px" }}
+                      onClick={Navigate("/Registered_Courses")}
+                      className="NavLink"
+                    >
+                      Registered Courses
+                    </NavLink>
+                  </div>
+                  <div className="item col-12">
+                    <li
+                      onClick={() => handleClick("RegisterForTraining")}
+                      style={{
+                        textDecoration: "none",
+                        color:
+                          selectedComponent === "RegisterForTraining"
+                            ? "black"
+                            : "inherit",
+                        transform:
+                          selectedComponent === "RegisterForTraining"
+                            ? "scale(1.1)"
+                            : "scale(1)",
+                        transition: "transform 0.3s ease",
+                      }}
+                      className="Side_li"
+                    >
+                      Register For Training
+                    </li>
+                  </div>
+                  <div className="item col-12">
+                    <li
+                      onClick={() => handleClick("RegisteredTraining")}
+                      style={{
+                        textDecoration: "none",
+                        color:
+                          selectedComponent === "RegisteredTraining"
+                            ? "black"
+                            : "inherit",
+                        transform:
+                          selectedComponent === "RegisteredTraining"
+                            ? "scale(1.1)"
+                            : "scale(1)",
+                        transition: "transform 0.3s ease",
+                      }}
+                      className="Side_li"
+                    >
+                      Registered Training
+                    </li>
+                  </div>
+                  <div className="item col-12">
+                    <NavLink
+                      style={{ color: "black", marginLeft: "-10px" }}
+                      to="/Semester_grade"
+                      className="NavLink"
+                    >
+                      Semester Grades
+                    </NavLink>
+                  </div>
+                  <div className="item col-12">
+                    <NavLink
+                      style={{ color: "black", marginLeft: "-10px" }}
+                      to="/Reports_student"
+                      className="NavLink"
+                    >
+                      Newspaper
+                    </NavLink>
+                  </div>
+                  <div className="item col-12">
+                    <NavLink
+                      style={{ color: "black", marginLeft: "-10px" }}
+                      className="NavLink"
+                      onClick={() => setSelectedComponent("Department")}
+                    >
+                      Department
+                    </NavLink>
+                  </div>
+
+                  <div className="item col-12">
+                    <NavLink
+                      style={{ color: "black", marginLeft: "-10px" }}
+                      className="NavLink"
+                    >
+                      Chat
+                    </NavLink>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
           <div>
             <i
               style={{
-                fontSize: "20px",
+                fontSize: "30px",
                 cursor: "pointer",
-                marginBottom: "25px",
+                marginLeft: "-10px",
               }}
               class="fa-solid fa-circle-chevron-down"
               data-bs-toggle="modal"
@@ -163,7 +357,6 @@ function NavBar() {
           </div>
 
           <div
-            style={{ marginLeft: "450px", marginTop: "50px" }}
             class="modal fade"
             id="exampleModa2"
             tabindex="-1"
@@ -178,7 +371,6 @@ function NavBar() {
                       marginBottom: "50px",
                       fontWeight: "bold",
                       fontFamily: "cursive",
-
                       fontSize: "25px",
                     }}
                     class="modal-title"

@@ -56,16 +56,38 @@
   font-weight: bold;
   color: rgb(110, 110, 110);
 }
+
+/* .show-navbar::hover .sidebar-container {
+  display: block;
+} */
+.dropdown {
+  display: none;
+}
 @media (max-width: 500px) {
   .nav-bar {
+    gap: 10px;
     margin-left: 2rem;
     width: 20rem;
     flex-wrap: wrap;
   }
+  .dropdown {
+    display: block;
+  }
   .nav-bar .info {
     margin-top: 1rem;
+    order: 1;
+  }
+  .nav-bar .info h3 {
+    font-size: 26px !important;
+    font-weight: 700 !important;
+  }
+  .nav-bar .info p {
+    font-size: 20px;
+  }
+  .nav-bar .search {
+    order: 2;
   }
   .nav-bar .search input {
-    width: 17rem;
+    width: 20rem;
   }
 }

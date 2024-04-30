@@ -8,6 +8,9 @@ import { useCourseContext } from "../CourseContext";
 import { routes } from "../routes";
 import Swal from "sweetalert2";
 import { usePageContext } from "../PageContext";
+import { NavLink, Navigate } from "react-router-dom";
+import { $Dashboard_Components } from "../Atoms";
+import { useRecoilState } from "recoil";
 
 function NavBar() {
   const [admininfo, setadmininfo] = useState([]);
@@ -25,6 +28,18 @@ function NavBar() {
   const { alldoctors, setalldoctors } = useDoctorContext();
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
+  const handleClick = (componentName) => {
+    setSelectedComponent(componentName);
+    window.scrollTo(0, 750);
+  };
+  function logout() {
+    Navigate("/");
+    localStorage.clear();
+  }
+
+  const [selectedComponent, setSelectedComponent] = useRecoilState(
+    $Dashboard_Components
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -299,12 +314,239 @@ function NavBar() {
             <h3>{admininfo.FullName}</h3>
             <p>{admininfo.role}</p>
           </div>
+          <button
+            type="button"
+            class="btn dropdown"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+            <i
+              style={{ fontSize: "35px", marginTop: "-5px" }}
+              class="fa-solid fa-list "
+            ></i>
+          </button>
+
+          <div
+            class="modal fade"
+            id="staticBackdrop"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div style={{ width: "400px" }} class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">
+                    SideBar
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div className="item col-12">
+                    <li
+                      onClick={() => handleClick("DashBoard")}
+                      style={{
+                        textDecoration: "none",
+                        color:
+                          selectedComponent === "DashBoard"
+                            ? "black"
+                            : "inherit",
+                        transform:
+                          selectedComponent === "DashBoard"
+                            ? "scale(1.1)"
+                            : "scale(1)",
+                        transition: "transform 0.3s ease",
+                      }}
+                      className="Side_li"
+                    >
+                      Dashboard
+                    </li>
+                  </div>
+                  <div className="item col-12">
+                    <li
+                      onClick={() => handleClick("CreateStudent")}
+                      style={{
+                        textDecoration: "none",
+                        color:
+                          selectedComponent === "CreateStudent"
+                            ? "black"
+                            : "inherit",
+                        transform:
+                          selectedComponent === "CreateStudent"
+                            ? "scale(1.1)"
+                            : "scale(1)",
+                        transition: "transform 0.3s ease",
+                      }}
+                      className="Side_li"
+                    >
+                      Add Student
+                    </li>
+                  </div>
+                  <div className="item col-12">
+                    <li
+                      onClick={() => handleClick("All_Students")}
+                      style={{
+                        textDecoration: "none",
+                        color:
+                          selectedComponent === "All_Students"
+                            ? "black"
+                            : "inherit",
+                        transform:
+                          selectedComponent === "All_Students"
+                            ? "scale(1.1)"
+                            : "scale(1)",
+                        transition: "transform 0.3s ease",
+                      }}
+                      className="Side_li"
+                    >
+                      All Students
+                    </li>
+                  </div>
+                  <div className="item col-12">
+                    <li
+                      onClick={() => handleClick("CreateDoctor")}
+                      style={{
+                        textDecoration: "none",
+                        color:
+                          selectedComponent === "CreateDoctor"
+                            ? "black"
+                            : "inherit",
+                        transform:
+                          selectedComponent === "CreateDoctor"
+                            ? "scale(1.1)"
+                            : "scale(1)",
+                        transition: "transform 0.3s ease",
+                      }}
+                      className="Side_li"
+                    >
+                      Add Doctor
+                    </li>
+                  </div>
+                  <div className="item col-12">
+                    <li
+                      onClick={() => handleClick("AllDoctors")}
+                      style={{
+                        textDecoration: "none",
+                        color:
+                          selectedComponent === "AllDoctors"
+                            ? "black"
+                            : "inherit",
+                        transform:
+                          selectedComponent === "AllDoctors"
+                            ? "scale(1.1)"
+                            : "scale(1)",
+                        transition: "transform 0.3s ease",
+                      }}
+                      className="Side_li"
+                    >
+                      All Doctors
+                    </li>
+                  </div>
+                  <div className="item col-12">
+                    <li
+                      onClick={() => handleClick("CreateCourse")}
+                      style={{
+                        textDecoration: "none",
+                        color:
+                          selectedComponent === "CreateCourse"
+                            ? "black"
+                            : "inherit",
+                        transform:
+                          selectedComponent === "CreateCourse"
+                            ? "scale(1.1)"
+                            : "scale(1)",
+                        transition: "transform 0.3s ease",
+                      }}
+                      className="Side_li"
+                    >
+                      Add Course
+                    </li>
+                  </div>
+                  <div className="item col-12">
+                    <li
+                      onClick={() => handleClick("CreateTraining")}
+                      style={{
+                        textDecoration: "none",
+                        color:
+                          selectedComponent === "CreateTraining"
+                            ? "black"
+                            : "inherit",
+                        transform:
+                          selectedComponent === "CreateTraining"
+                            ? "scale(1.1)"
+                            : "scale(1)",
+                        transition: "transform 0.3s ease",
+                      }}
+                      className="Side_li"
+                    >
+                      Add Training
+                    </li>
+                  </div>
+                  <div className="item col-12">
+                    <li
+                      onClick={() => handleClick("CreateSemester")}
+                      style={{
+                        textDecoration: "none",
+                        color:
+                          selectedComponent === "CraeteSemester"
+                            ? "black"
+                            : "inherit",
+                        transform:
+                          selectedComponent === "CraeteSemester"
+                            ? "scale(1.1)"
+                            : "scale(1)",
+                        transition: "transform 0.3s ease",
+                      }}
+                      className="Side_li"
+                    >
+                      Add Semester
+                    </li>
+                  </div>
+
+                  <div className="item col-12">
+                    <li
+                      onClick={() => handleClick("setting")}
+                      style={{
+                        textDecoration: "none",
+                        color:
+                          selectedComponent === "setting" ? "black" : "inherit",
+                        transform:
+                          selectedComponent === "setting"
+                            ? "scale(1.1)"
+                            : "scale(1)",
+                        transition: "transform 0.3s ease",
+                      }}
+                      className="Side_li"
+                    >
+                      Setting
+                    </li>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
           <div>
             <i
               style={{
-                fontSize: "20px",
+                fontSize: "30px",
                 cursor: "pointer",
-                marginBottom: "25px",
+                marginBottom: "5px",
               }}
               class="fa-solid fa-circle-chevron-down"
               data-bs-toggle="modal"
@@ -313,7 +555,7 @@ function NavBar() {
           </div>
 
           <div
-            style={{ marginLeft: "450px", marginTop: "50px" }}
+            // style={{ marginLeft: "450px", marginTop: "50px" }}
             class="modal fade"
             id="exampleModa2"
             tabindex="-1"
