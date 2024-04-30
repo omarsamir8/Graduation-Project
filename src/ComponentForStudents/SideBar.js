@@ -14,6 +14,8 @@ function SideBar () {
     window.scrollTo(0, 750)
   }
 
+
+
   function logout () {
     navigate('/')
     localStorage.clear()

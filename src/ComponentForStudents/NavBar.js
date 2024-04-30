@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { routes } from "../routes";
 import Swal from "sweetalert2";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { $Dashboard_Components } from "../Atoms";
 import { useRecoilState } from "recoil";
 import { NavLink } from "react-bootstrap";
@@ -18,12 +18,22 @@ function NavBar() {
 
   const handleClick = (componentName) => {
     setSelectedComponent(componentName);
-    window.scrollTo(0, 750);
+    // window.scrollTo(0, 750);
   };
   function logout() {
     Navigate("/");
     localStorage.clear();
   }
+  const usenavigate = useNavigate();
+  const NavigateToSemesterGrades = () => {
+    usenavigate("/Semester_grade");
+  };
+  const NavigateToRegisteredCourses = () => {
+    usenavigate("/Registered_Courses");
+  };
+  const NavigateToNewspaper = () => {
+    usenavigate("/Reports_student");
+  };
 
   const [selectedComponent, setSelectedComponent] = useRecoilState(
     $Dashboard_Components
@@ -95,6 +105,20 @@ function NavBar() {
       console.error("Upload failed", error);
     }
   };
+
+  // 
+  const handleCloseModal = () => {
+    const modalBackdrop = document.querySelector(".modal-backdrop");
+    if (modalBackdrop) {
+      modalBackdrop.parentNode.removeChild(modalBackdrop);
+    }
+    const modal = document.getElementById("staticBackdrop");
+    if (modal) {
+      modal.classList.remove("show");
+      modal.removeAttribute("style"); // Remove any inline styles
+    }
+  };
+
   return (
     <>
       <div className="nav-bar">
@@ -206,7 +230,11 @@ function NavBar() {
                 <div class="modal-body">
                   <div className="item col-12">
                     <li
-                      onClick={() => handleClick("DashBoard")}
+                      onClick={() => {
+                        handleClick("DashBoard");
+                      
+                        handleCloseModal();
+                      }}
                       style={{
                         textDecoration: "none",
                         marginLeft: "5px",
@@ -227,7 +255,9 @@ function NavBar() {
                   </div>
                   <div className="item col-12">
                     <li
-                      onClick={() => handleClick("RegisterForCourse")}
+                      onClick={() => {handleClick("RegisterForCourse")
+                      handleCloseModal();
+                    }}
                       style={{
                         textDecoration: "none",
                         color:
@@ -246,17 +276,22 @@ function NavBar() {
                     </li>
                   </div>
                   <div className="item col-12">
-                    <NavLink
+                    <li
                       style={{ color: "black", marginLeft: "-10px" }}
-                      onClick={Navigate("/Registered_Courses")}
+                      onClick={() => {
+                        NavigateToRegisteredCourses();
+                        handleCloseModal();
+                      }}
                       className="NavLink"
                     >
                       Registered Courses
-                    </NavLink>
+                    </li>
                   </div>
                   <div className="item col-12">
                     <li
-                      onClick={() => handleClick("RegisterForTraining")}
+                      onClick={() => {handleClick("RegisterForTraining")
+                      handleCloseModal();
+                    }}
                       style={{
                         textDecoration: "none",
                         color:
@@ -276,7 +311,9 @@ function NavBar() {
                   </div>
                   <div className="item col-12">
                     <li
-                      onClick={() => handleClick("RegisteredTraining")}
+                      onClick={() => {handleClick("RegisteredTraining")
+                      handleCloseModal();
+                    }}
                       style={{
                         textDecoration: "none",
                         color:
@@ -295,28 +332,36 @@ function NavBar() {
                     </li>
                   </div>
                   <div className="item col-12">
-                    <NavLink
+                    <li
                       style={{ color: "black", marginLeft: "-10px" }}
-                      to="/Semester_grade"
+                      onClick={() => {
+                        NavigateToSemesterGrades();
+                        handleCloseModal();
+                      }}
                       className="NavLink"
                     >
                       Semester Grades
-                    </NavLink>
+                    </li>
                   </div>
                   <div className="item col-12">
-                    <NavLink
+                    <li
                       style={{ color: "black", marginLeft: "-10px" }}
-                      to="/Reports_student"
+                      onClick={() => {
+                        NavigateToNewspaper();
+                        handleCloseModal();
+                      }}
                       className="NavLink"
                     >
                       Newspaper
-                    </NavLink>
+                    </li>
                   </div>
                   <div className="item col-12">
                     <NavLink
                       style={{ color: "black", marginLeft: "-10px" }}
                       className="NavLink"
-                      onClick={() => setSelectedComponent("Department")}
+                      onClick={() => {setSelectedComponent("Department")
+                      handleCloseModal();
+                    }}
                     >
                       Department
                     </NavLink>
