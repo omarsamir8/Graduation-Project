@@ -43,11 +43,9 @@ body {
   animation-timing-function: linear;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
   .mainpage {
-    width: 400px;
-    height: auto;
-    overflow: scroll;
+    width: 500px;
   }
   .mainpage .sidebar {
     position: relative;

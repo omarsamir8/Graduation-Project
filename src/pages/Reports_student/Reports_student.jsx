@@ -50,10 +50,10 @@ export default function Reports_student() {
       <img src="./assets/images/benha.png" className="Benha_img" />
 
       <div className="Title_registered col-4">
-        <p className="col-12">
+        <p className="col-12 pp">
           Faculty of computers and artificial intelligence
         </p>
-        <p className="col-12">Benha university</p>
+        <p className="col-12 pp">Benha university</p>
         <p className="col-12">
           Student code :
           {studentnewspaper.length > 0

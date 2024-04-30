@@ -71,11 +71,21 @@
 .DeleteAction {
   text-align: center !important;
 }
-@media (max-width: 500px) {
+@media (max-width: 400px) {
+  .Registered_Courses {
+    width: 380px;
+    font-size: 14px;
+  }
   .Benha_img {
     width: 100px;
   }
   .BFCAI_img {
     width: 80px;
+  }
+  .Table_courses {
+    margin-top: 50px;
+  }
+  .pp {
+    display: none;
   }
 }
