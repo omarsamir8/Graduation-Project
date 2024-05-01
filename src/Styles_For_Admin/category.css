@@ -23,6 +23,20 @@
   .table3 {
     margin-left: 30px !important;
   }
+  .semester {
+    display: flex;
+    flex-direction: column !important;
+  }
+  .semester input {
+    width: 320px !important;
+  }
+  .semester button {
+    margin-left: 10px;
+    width: 320px !important;
+  }
+  .table4 {
+    margin-top: 150px !important;
+  }
 }
 .mainpage {
   background-color: beige;

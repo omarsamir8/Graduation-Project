@@ -592,13 +592,14 @@ function NavBar() {
           <div>
             <i
               style={{
-                fontSize: "30px",
+                fontSize: "25px",
                 cursor: "pointer",
-                marginBottom: "5px",
+                marginTop: "-8px",
+                marginLeft: "0",
               }}
-              class="fa-solid fa-circle-chevron-down"
               data-bs-toggle="modal"
               data-bs-target="#exampleModa2"
+              class="fa-solid fa-arrow-down-z-a"
             ></i>
           </div>
 

@@ -224,7 +224,7 @@ function CreateSemester() {
             display: "flex",
             gap: "10px",
           }}
-          className="addcategory category-search animate__animated animate__fadeInDown"
+          className="semester category-search animate__animated animate__fadeInDown"
         >
           <input
             style={{ width: "30%", marginLeft: "10px", height: "40px" }}
@@ -291,7 +291,10 @@ function CreateSemester() {
             {selectedSemesterId ? "Update Semseter" : "Add Semester"}
           </button>
         </div>
-        <h4 style={{ marginLeft: "10px", marginTop: "-10px" }}>
+        <h4
+          className="table4"
+          style={{ marginLeft: "10px", marginTop: "-10px" }}
+        >
           All Semester{" "}
         </h4>
         <Table className="table">
