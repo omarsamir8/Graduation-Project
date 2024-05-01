@@ -8,7 +8,7 @@ import { useCourseContext } from "../CourseContext";
 import { routes } from "../routes";
 import Swal from "sweetalert2";
 import { usePageContext } from "../PageContext";
-import { NavLink, Navigate } from "react-router-dom";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import { $Dashboard_Components } from "../Atoms";
 import { useRecoilState } from "recoil";
 
@@ -32,8 +32,9 @@ function NavBar() {
     setSelectedComponent(componentName);
     window.scrollTo(0, 750);
   };
+  const navigate = useNavigate();
   function logout() {
-    Navigate("/");
+    navigate("/");
     localStorage.clear();
   }
 
@@ -230,6 +231,21 @@ function NavBar() {
       console.error("Upload failed", error);
     }
   };
+  //close model after click
+  const handleCloseModal = () => {
+    const modalBackdrop = document.querySelector(".modal-backdrop");
+    if (modalBackdrop) {
+      modalBackdrop.parentNode.removeChild(modalBackdrop);
+    }
+    const modal = document.getElementById("staticBackdrop");
+    if (modal) {
+      modal.classList.remove("show");
+      modal.removeAttribute("style"); // Remove any inline styles
+    }
+
+    // Re-enable scrolling on the body
+    document.body.style.overflow = "auto";
+  };
   return (
     <>
       <div className="nav-bar">
@@ -346,12 +362,16 @@ function NavBar() {
                     class="btn-close"
                     data-bs-dismiss="modal"
                     aria-label="Close"
+                    style={{ marginRight: "50px" }}
                   ></button>
                 </div>
                 <div class="modal-body">
                   <div className="item col-12">
                     <li
-                      onClick={() => handleClick("DashBoard")}
+                      onClick={() => {
+                        handleClick("DashBoard");
+                        handleCloseModal();
+                      }}
                       style={{
                         textDecoration: "none",
                         color:
@@ -371,7 +391,10 @@ function NavBar() {
                   </div>
                   <div className="item col-12">
                     <li
-                      onClick={() => handleClick("CreateStudent")}
+                      onClick={() => {
+                        handleClick("CreateStudent");
+                        handleCloseModal();
+                      }}
                       style={{
                         textDecoration: "none",
                         color:
@@ -391,7 +414,10 @@ function NavBar() {
                   </div>
                   <div className="item col-12">
                     <li
-                      onClick={() => handleClick("All_Students")}
+                      onClick={() => {
+                        handleClick("All_Students");
+                        handleCloseModal();
+                      }}
                       style={{
                         textDecoration: "none",
                         color:
@@ -411,7 +437,10 @@ function NavBar() {
                   </div>
                   <div className="item col-12">
                     <li
-                      onClick={() => handleClick("CreateDoctor")}
+                      onClick={() => {
+                        handleClick("CreateDoctor");
+                        handleCloseModal();
+                      }}
                       style={{
                         textDecoration: "none",
                         color:
@@ -431,7 +460,10 @@ function NavBar() {
                   </div>
                   <div className="item col-12">
                     <li
-                      onClick={() => handleClick("AllDoctors")}
+                      onClick={() => {
+                        handleClick("AllDoctors");
+                        handleCloseModal();
+                      }}
                       style={{
                         textDecoration: "none",
                         color:
@@ -451,7 +483,10 @@ function NavBar() {
                   </div>
                   <div className="item col-12">
                     <li
-                      onClick={() => handleClick("CreateCourse")}
+                      onClick={() => {
+                        handleClick("CreateCourse");
+                        handleCloseModal();
+                      }}
                       style={{
                         textDecoration: "none",
                         color:
@@ -471,7 +506,10 @@ function NavBar() {
                   </div>
                   <div className="item col-12">
                     <li
-                      onClick={() => handleClick("CreateTraining")}
+                      onClick={() => {
+                        handleClick("CreateTraining");
+                        handleCloseModal();
+                      }}
                       style={{
                         textDecoration: "none",
                         color:
@@ -491,7 +529,10 @@ function NavBar() {
                   </div>
                   <div className="item col-12">
                     <li
-                      onClick={() => handleClick("CreateSemester")}
+                      onClick={() => {
+                        handleClick("CreateSemester");
+                        handleCloseModal();
+                      }}
                       style={{
                         textDecoration: "none",
                         color:
@@ -512,7 +553,10 @@ function NavBar() {
 
                   <div className="item col-12">
                     <li
-                      onClick={() => handleClick("setting")}
+                      onClick={() => {
+                        handleClick("setting");
+                        handleCloseModal();
+                      }}
                       style={{
                         textDecoration: "none",
                         color:
@@ -528,12 +572,16 @@ function NavBar() {
                       Setting
                     </li>
                   </div>
+                  <p onClick={logout} className="logout_Button">
+                    Logout
+                  </p>
                 </div>
                 <div class="modal-footer">
                   <button
                     type="button"
                     class="btn btn-secondary"
                     data-bs-dismiss="modal"
+                    style={{ marginRight: "50px" }}
                   >
                     Close
                   </button>
@@ -583,6 +631,7 @@ function NavBar() {
                     class="btn-close"
                     data-bs-dismiss="modal"
                     aria-label="Close"
+                    style={{ marginRight: "40px", marginTop: "-45px" }}
                   />
                 </div>
                 <div class="modal-body">
@@ -690,6 +739,7 @@ function NavBar() {
                     type="button"
                     class="btn btn-secondary"
                     data-bs-dismiss="modal"
+                    style={{ marginRight: "50px" }}
                   >
                     Close
                   </button>
