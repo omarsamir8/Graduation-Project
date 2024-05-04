@@ -1,0 +1,51 @@
+.department {
+  margin-top: 20px;
+  background-color: #915ee4de;
+  padding: 20px;
+  color: white;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.department h5 {
+  font-weight: bold;
+}
+.department p {
+  margin-top: 0;
+}
+.dep-courses {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.dep-courses .dep-course {
+  padding: 5px;
+  color: white;
+  background-color: #fc73b5;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.dep-doctors {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.dep-doctor {
+  padding: 5px;
+  color: white;
+  background-color: #fc73b5;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.dep-doctors p {
+  /* width: 200px !important; */
+}

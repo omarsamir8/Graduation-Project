@@ -85,7 +85,6 @@ function CreateSemester() {
           },
         }
       );
-
       const data = await response.json();
       setAllSemesters(data.semsters);
     } catch (error) {
