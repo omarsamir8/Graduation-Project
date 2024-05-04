@@ -11,7 +11,6 @@
 .backgroundImg_info {
   display: flex;
   justify-content: center;
-
 }
 .studentInfo {
   width: 95%;
@@ -21,7 +20,7 @@
   flex-wrap: wrap;
   flex-direction: row;
 }
-.profile_photo{
+.profile_photo {
   border-radius: 50%;
 }
 .profile_info {
@@ -32,24 +31,23 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-
 }
-.info{
+.info {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   position: absolute;
-  left: 21rem;
-  bottom: 8rem;
+  left: 20rem;
+  bottom: 7rem;
 }
-.all_about_student{
+.all_about_student {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
 }
-.registered_courses_info{
+.registered_courses_info {
   background-color: whitesmoke;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   height: auto;
@@ -62,7 +60,7 @@
   gap: 10px;
   padding: 1rem 0;
 }
-.registered_trainings_info{
+.registered_trainings_info {
   background-color: whitesmoke;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   height: auto;
@@ -75,7 +73,7 @@
   gap: 10px;
   padding: 1rem 0;
 }
-.info_dash{
+.info_dash {
   background-color: grey;
   height: auto !important;
   display: flex;
@@ -84,7 +82,7 @@
   flex-wrap: wrap;
   text-align: center;
   gap: 5px;
-padding-top: 0.5rem;
+  padding-top: 0.5rem;
 
-border-radius: 5px;
+  border-radius: 5px;
 }
