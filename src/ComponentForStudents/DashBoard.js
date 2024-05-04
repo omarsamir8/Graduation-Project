@@ -154,7 +154,7 @@ function Dashboard() {
           </div>
         </div>
       </div>
-      {/* <TidioChat /> */}
+      <TidioChat />
     </>
   );
 }
