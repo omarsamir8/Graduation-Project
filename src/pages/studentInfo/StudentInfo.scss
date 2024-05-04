@@ -1,0 +1,90 @@
+.studentInfoPage {
+  width: 100%;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 2rem;
+  background-color: beige;
+}
+.backgroundImg_info {
+  display: flex;
+  justify-content: center;
+
+}
+.studentInfo {
+  width: 95%;
+  height: 20rem;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.profile_photo{
+  border-radius: 50%;
+}
+.profile_info {
+  position: absolute;
+  left: 6rem;
+  bottom: 9rem;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+}
+.info{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  position: absolute;
+  left: 21rem;
+  bottom: 8rem;
+}
+.all_about_student{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+.registered_courses_info{
+  background-color: whitesmoke;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  height: auto;
+  z-index: 100;
+  margin-top: 12rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 1rem 0;
+}
+.registered_trainings_info{
+  background-color: whitesmoke;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  height: auto;
+  z-index: 100;
+  margin-top: 12rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 1rem 0;
+}
+.info_dash{
+  background-color: grey;
+  height: auto !important;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  text-align: center;
+  gap: 5px;
+padding-top: 0.5rem;
+
+border-radius: 5px;
+}

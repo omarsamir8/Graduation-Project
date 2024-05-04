@@ -7,6 +7,7 @@ import { useStudentContext } from "../StudentContext";
 import { routes } from "../routes";
 import { Table } from "react-bootstrap";
 import { usePageContext } from "../PageContext";
+import { Link } from "react-router-dom";
 
 function All_Students() {
   const { allstudents, setallstudents } = useStudentContext();
@@ -162,6 +163,7 @@ function All_Students() {
     // Increment count by 1
   };
   console.log(Page);
+
   return (
     <>
       <div className="get_all_student">
@@ -273,38 +275,46 @@ function All_Students() {
             </tr>
           </thead>
           <tbody>
-            {allstudents.map((student) => (
-              <tr key={student._id}>
-                <th className="doctorInfo" scope="row">
-                  {student._id}
-                </th>
-                <td className="doctorInfo">{student.Full_Name}</td>
-                <td className="doctorInfo">{student.Student_Code}</td>
-                <td className="doctorInfo">{student.PhoneNumber}</td>
-                {/* <td>{student.semesterId.level}</td> */}
-                <td>
-                  <div className="row">
-                    <button
-                      style={{
-                        backgroundColor: "#996ae4",
-                        borderColor: "#996ae4",
-                      }}
-                      type="button"
-                      onClick={() => openUpdateModal(student)}
-                      className="btn btn-primary"
-                    >
-                      Update
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-danger"
-                      onClick={() => handleDelete(student._id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </td>
-              </tr>
+            {allstudents.map((student, index) => (
+              <>
+                {}
+                <tr key={index + 1}>
+                  <th className="doctorInfo" scope="row">
+                    {index + 1}
+                  </th>
+                  <td className="doctorInfo">{student.Full_Name}</td>
+                  <td className="doctorInfo">{student.Student_Code}</td>
+                  <td className="doctorInfo">{student.PhoneNumber}</td>
+                  {/* <td>{student.semesterId.level}</td> */}
+                  <td style={{display:"flex",justifyContent:"center"}}>
+                    <div className="row" >
+                      <button
+                        style={{
+                          backgroundColor: "#996ae4",
+                          borderColor: "#996ae4",
+                        }}
+                        type="button"
+                        onClick={() => openUpdateModal(student)}
+                        className="btn btn-primary"
+                      >
+                        Update
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-danger"
+                        onClick={() => handleDelete(student._id)}
+                      >
+                        Delete
+                      </button>
+                      <button type="button" className="btn btn-secondary">
+                      <Link to={`/student/${student._id}`} className="link">
+                    More Info
+                  </Link>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </>
             ))}
           </tbody>
         </Table>
