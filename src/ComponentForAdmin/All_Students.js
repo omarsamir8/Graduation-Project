@@ -286,8 +286,8 @@ function All_Students() {
                   <td className="doctorInfo">{student.Student_Code}</td>
                   <td className="doctorInfo">{student.PhoneNumber}</td>
                   {/* <td>{student.semesterId.level}</td> */}
-                  <td style={{display:"flex",justifyContent:"center"}}>
-                    <div className="row" >
+                  <td style={{ display: "flex", justifyContent: "center" }}>
+                    <div className="row">
                       <button
                         style={{
                           backgroundColor: "#996ae4",
@@ -307,9 +307,9 @@ function All_Students() {
                         Delete
                       </button>
                       <button type="button" className="btn btn-secondary">
-                      <Link to={`/student/${student._id}`} className="link">
-                    More Info
-                  </Link>
+                        <Link to={`/student/${student._id}`} className="link">
+                          More Info
+                        </Link>
                       </button>
                     </div>
                   </td>
