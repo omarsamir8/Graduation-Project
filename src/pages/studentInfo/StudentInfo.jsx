@@ -83,6 +83,7 @@ export default function StudentInfo() {
           }
         );
         console.log(response.data);
+        setTrainingsRegistered(response.data.result[0].trainingRegisterd);
       } catch (error) {
         console.error("Error fetching student info:", error);
       }
@@ -90,7 +91,7 @@ export default function StudentInfo() {
 
     fetchStudentTraining();
   }, [accessToken, refreshToken]);
- 
+  console.log(trainingsRegistered);
   return (
     <>
       <div className="studentInfoPage col-12">
@@ -211,25 +212,25 @@ export default function StudentInfo() {
                 <tr>
                   <th>#</th>
                   <th>Training Name</th>
-                  <th>Number Of Hours</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>{1}</td>
-                  <td>React (JS) </td>
-                  <td>60</td>
-                </tr>
-                <tr>
-                  <td>{1}</td>
-                  <td>Anguler (JS)</td>
-                  <td>50</td>
-                </tr>
-                <tr>
-                  <td>{1}</td>
-                  <td>Data Analysis</td>
-                  <td>40</td>
-                </tr>
+                {trainingsRegistered.map((training, index) => {
+                  return (
+                    <tr>
+                      <td>{index + 1}</td>
+                      <td>{training.training_name} </td>
+                      <td>
+                        {new Date(training.start_date).toLocaleDateString()}{" "}
+                      </td>
+                      <td>
+                        {new Date(training.end_date).toLocaleDateString()}{" "}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </Table>
           </div>

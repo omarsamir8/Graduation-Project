@@ -25,7 +25,7 @@ export default function RegisteredTraining() {
         );
         const data = await response.json();
         console.log(data);
-        setTrainingsRegistered(data.result.trainingRegisterd);
+        setTrainingsRegistered(data.result[0].trainingRegisterd);
       } catch (error) {
         console.error("Fetch failed", error);
       }
@@ -34,6 +34,7 @@ export default function RegisteredTraining() {
     fetchData();
   }, [accessToken, refreshToken]);
   console.log(trainingsRegistered);
+  console.log(trainingsRegistered.length);
   // delete Training Register
   const deleteTraining = async (trainingId) => {
     try {
@@ -75,28 +76,28 @@ export default function RegisteredTraining() {
   };
 
   // get training result
-  // useEffect(() => {
-  //   const fetchResultData = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         `https://university-mohamed.vercel.app/Api/Trainings/Results/search/trainings/result/by/student?select=trainingId,studentId`,
-  //         {
-  //           method: "GET",
-  //           headers: {
-  //             Authorization: `Bearer ${accessToken}`,
-  //             "refresh-token": refreshToken,
-  //           },
-  //         }
-  //       );
-  //       const data = await response.json();
-  //       setTrainingsResult(data.training);
-  //     } catch (error) {
-  //       console.error("Fetch failed", error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchResultData = async () => {
+      try {
+        const response = await fetch(
+          `https://university-mohamed.vercel.app/Api/Trainings/Results/search/trainings/result/by/student?select=trainingId,studentId`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+        const data = await response.json();
+        setTrainingsResult(data.training);
+      } catch (error) {
+        console.error("Fetch failed", error);
+      }
+    };
 
-  //   fetchResultData();
-  // }, [accessToken, refreshToken]);
+    fetchResultData();
+  }, [accessToken, refreshToken]);
 
   return (
     <>
@@ -113,7 +114,12 @@ export default function RegisteredTraining() {
             key={registeredTraining._id}
           >
             <p className="open-now">Open Now</p>
-            <img src={registeredTraining.images[0].url} alt="" />{" "}
+            <img
+              src={
+                registeredTraining.images ? registeredTraining.images[0] : null
+              }
+              alt=""
+            />{" "}
             <div className="info">
               <h3>{registeredTraining.training_name}</h3>
               <p style={{ marginTop: "-20px", color: "gray" }}>
