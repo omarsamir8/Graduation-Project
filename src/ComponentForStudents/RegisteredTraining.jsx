@@ -189,3 +189,5 @@ export default function RegisteredTraining() {
     </>
   );
 }
+
+

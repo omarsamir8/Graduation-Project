@@ -102,17 +102,17 @@ function Dashboard() {
           <div className="main-container">
             <div className="main">
               <i class="fa-solid fa-book-open" />
-              <h3>{coursesregisterd.length}</h3>
+              <h3>{coursesregisterd.length >0 ? coursesregisterd.length:0}</h3>
               <p>Total Course</p>
             </div>
             <div className="main">
               <i class="fa-solid fa-layer-group" />
-              <h3>{studentnewspaper.length}</h3>
+              <h3>{studentnewspaper.length >0 ? studentnewspaper.length :0}</h3>
               <p>Total Semester</p>
             </div>
             <div className="main">
               <i class="fa-brands fa-stack-overflow" />
-              <h3>{trainingsRegistered.length}</h3>
+              {/* <h3>{trainingsRegistered.length > 0 ? trainingsRegistered.length :0}</h3> */}
               <p>Total Training</p>
             </div>
           </div>

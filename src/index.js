@@ -10,6 +10,7 @@ import { TrainingProvider } from "./TrainingContext";
 import { CourseProvider } from "./CourseContext";
 import { PageProvider } from "./PageContext";
 
+
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>

@@ -142,13 +142,19 @@ export default function StudentInfo() {
               </h5>
             </div>
             <div className="single-det">
-              <h5>Total Hours : <span>{studentData.totalCreditHours}</span></h5>
+              <h5>
+                Total Hours : <span>{studentData.totalCreditHours}</span>
+              </h5>
             </div>
             <div className="single-det">
-              <h5>Total GPA :<span> {studentData.TotalGpa}</span></h5>
+              <h5>
+                Total GPA :<span> {studentData.TotalGpa}</span>
+              </h5>
             </div>
             <div className="single-det">
-              <h5>Gender : <span>{studentData.gender}</span></h5>
+              <h5>
+                Gender : <span>{studentData.gender}</span>
+              </h5>
             </div>
           </div>
           <div className="det">

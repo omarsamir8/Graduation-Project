@@ -2,8 +2,10 @@ import { React, useEffect, useState } from "react";
 import "../styles/Dashboard.css";
 
 import { routes } from "../routes";
+import AcquisitionsChart from "./Chart/Chart";
 function DashBoard() {
   const [selectedComponent, setSelectedComponent] = useState(null);
+
   const [dashboardinfo, setdashboardinfo] = useState([]);
   const handleSidebarClick = (componentName) => {
     setSelectedComponent(componentName);
@@ -133,6 +135,7 @@ function DashBoard() {
           </div>
         </div>
       </div>
+      <AcquisitionsChart />
     </>
   );
 }
