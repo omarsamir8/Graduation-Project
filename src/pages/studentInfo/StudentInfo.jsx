@@ -58,6 +58,7 @@ export default function StudentInfo() {
           }
         );
         console.log(response.data);
+        setcoursesregisterd(response.data.register.coursesRegisterd);
       } catch (error) {
         console.error("Error fetching student info:", error);
       }
@@ -65,7 +66,7 @@ export default function StudentInfo() {
 
     fetchStudentcCursesAndTraining();
   }, [accessToken, refreshToken]);
-
+  console.log(coursesregisterd);
   return (
     <>
       <div className="studentInfoPage col-12">
@@ -88,21 +89,32 @@ export default function StudentInfo() {
           <div className="det">
             <div className="single-det col-12">
               {/* <i class="fa-solid fa-signature"></i> */}
-              <h5>Name : {studentData.Full_Name}</h5>
+              <h5>
+                Name : <span>{studentData.Full_Name}</span>
+              </h5>
             </div>
             <div className="single-det">
-              <h5>Student Code : {studentData.Student_Code}</h5>
+              <h5>
+                Student Code : <span>{studentData.Student_Code}</span>
+              </h5>
             </div>
             <div className="single-det">
-              <h5>National ID : {studentData.National_Id}</h5>
+              <h5>
+                National ID :<span>{studentData.National_Id}</span>{" "}
+              </h5>
             </div>
             <div className="single-det">
-              <h5>Phone Number : {studentData.PhoneNumber}</h5>
+              <h5>
+                Phone Number : <span>{studentData.PhoneNumber}</span>
+              </h5>
             </div>
             <div className="single-det">
               <h5>
                 Birth Date :{" "}
-                {new Date(studentData.Date_of_Birth).toLocaleDateString()}
+                <span>
+                  {" "}
+                  {new Date(studentData.Date_of_Birth).toLocaleDateString()}
+                </span>
               </h5>
             </div>
           </div>
@@ -110,23 +122,33 @@ export default function StudentInfo() {
             <div className="single-det">
               <h5>
                 Term :{" "}
-                {studentData.semsterInfo ? studentData.semsterInfo.term : null}
+                <span>
+                  {" "}
+                  {studentData.semsterInfo
+                    ? studentData.semsterInfo.term
+                    : null}
+                </span>
               </h5>
             </div>
             <div className="single-det">
               <h5>
                 Academic Year :
-                {studentData.semsterInfo ? studentData.semsterInfo.year : null}{" "}
+                <span>
+                  {" "}
+                  {studentData.semsterInfo
+                    ? studentData.semsterInfo.year
+                    : null}{" "}
+                </span>
               </h5>
             </div>
             <div className="single-det">
-              <h5>Total Hours : {studentData.totalCreditHours}</h5>
+              <h5>Total Hours : <span>{studentData.totalCreditHours}</span></h5>
             </div>
             <div className="single-det">
-              <h5>Total GPA : {studentData.TotalGpa}</h5>
+              <h5>Total GPA :<span> {studentData.TotalGpa}</span></h5>
             </div>
             <div className="single-det">
-              <h5>Gender : {studentData.gender}</h5>
+              <h5>Gender : <span>{studentData.gender}</span></h5>
             </div>
           </div>
           <div className="det">
@@ -140,21 +162,15 @@ export default function StudentInfo() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>{1}</td>
-                  <td>Discrete Mathimatic</td>
-                  <td>3</td>
-                </tr>
-                <tr>
-                  <td>{1}</td>
-                  <td>Discrete Mathimatic</td>
-                  <td>3</td>
-                </tr>
-                <tr>
-                  <td>{1}</td>
-                  <td>Discrete Mathimatic</td>
-                  <td>3</td>
-                </tr>
+                {coursesregisterd.map((course, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{course.course_name}</td>
+                      <td>{course.credit_hour}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </Table>
           </div>

@@ -50,7 +50,7 @@
   align-items: center;
   gap: 50px;
   padding: 20px;
-  margin-top: 7rem;
+  margin-top: 10rem;
 }
 .single-details .det {
   height: auto;
@@ -70,10 +70,13 @@
 .single-det {
   width: 100%;
   display: flex;
-
   gap: 20px;
   align-items: center;
   margin-top: 15px;
+  span{
+font-size: 1.1rem;
+color: gray;
+  }
 }
 
 .single-det i {
