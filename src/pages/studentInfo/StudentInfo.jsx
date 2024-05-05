@@ -9,7 +9,7 @@ import { routes } from "../../routes";
 import { Button, Table } from "react-bootstrap";
 
 export default function StudentInfo() {
-  const { StudentInfo } = useParams();
+  const { studentId } = useParams();
 
   const { allstudents, setallstudents } = useStudentContext();
   const [studentInfo, setStudentInfo] = useState([]);
@@ -80,7 +80,7 @@ export default function StudentInfo() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://university-mohamed.vercel.app${routes.courseRegister._id}${routes.courseRegister.GetRegisterInfoByAdmin}?studentId=${StudentInfo._id}`,
+          `https://university-mohamed.vercel.app${routes.courseRegister._id}${routes.courseRegister.GetRegisterInfoByAdmin}?studentId=${studentId._id}`,
           {
             method: "GET",
             headers: {
@@ -102,7 +102,7 @@ export default function StudentInfo() {
     };
 
     fetchData();
-  }, [accessToken, refreshToken,StudentInfo]);
+  }, [accessToken, refreshToken,studentId]);
 
   return (
     <>
