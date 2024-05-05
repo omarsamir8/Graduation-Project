@@ -8,9 +8,6 @@
 //   { value: 8, label: 'الجمعيات المتاحة' },
 //   { value: 89, label: 'المتطوعين' },
 
-
- 
-
 // ];
 
 // const size = {
@@ -30,9 +27,9 @@
 //                   series={[{ data: [5, 8, 89] }]}  // Use your actual data here
 //                   width={500}
 //                   height={300}
-                  
+
 //                 />
-                
+
 //                 </div>
 //               </div>
 //               <div className='col-md-6 col-sm-12'>
@@ -59,10 +56,9 @@
 //           </div>
 
 //         </div>
-  
-         
+
 //         </>
-  
+
 //       );
 // }
 
@@ -84,8 +80,6 @@
 //     />
 //   );
 // }
-
-
 
 // import React, { useEffect } from 'react';
 // import Chart from 'chart.js/auto';
@@ -158,11 +152,9 @@
 
 // export default AcquisitionsChart;
 
-
-
-import React, { useEffect, useState } from 'react';
-import Chart from 'chart.js/auto';
-import { routes } from '../../routes';
+import React, { useEffect, useState } from "react";
+import Chart from "chart.js/auto";
+import { routes } from "../../routes";
 
 const accessToken = localStorage.getItem("accesstoken");
 const refreshToken = localStorage.getItem("refreshtoken");
@@ -188,26 +180,27 @@ const AcquisitionsChart = () => {
 
         // Update acquisitions data
         const chartData = [
-          { year: "Students", count: data.info.students }, 
+          { year: "Students", count: data.info.students },
           { year: "Instructors", count: data.info.instructors },
           { year: "Courses", count: data.info.courses },
           { year: "Training", count: data.info.training },
           { year: "Semesters", count: data.info.semsters },
-        
         ];
         setAcquisitionsData(chartData);
 
         // Chart rendering logic
-        const ctx = document.getElementById('acquisitions').getContext('2d');
+        const ctx = document.getElementById("acquisitions").getContext("2d");
         new Chart(ctx, {
-          type: 'bar',
+          type: "bar",
           data: {
-            labels: chartData.map(row => row.year),
-            datasets: [{
-              label: 'Acquisitions by all',
-              data: chartData.map(row => row.count)
-            }]
-          }
+            labels: chartData.map((row) => row.year),
+            datasets: [
+              {
+                label: "Acquisitions by all",
+                data: chartData.map((row) => row.count),
+              },
+            ],
+          },
         });
       } catch (error) {
         console.error("Fetch failed", error);
@@ -218,13 +211,10 @@ const AcquisitionsChart = () => {
   }, [accessToken, refreshToken]); // Ensure useEffect runs only when access tokens change
 
   return (
-    <div style={{ width: '1000px',marginTop:"2rem" }}>
+    <div style={{ width: "1000px", marginTop: "2rem" }}>
       <canvas id="acquisitions"></canvas>
     </div>
   );
 };
 
 export default AcquisitionsChart;
-
-
-
