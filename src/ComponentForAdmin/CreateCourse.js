@@ -407,7 +407,8 @@ function CreateCourse() {
       <div className="enrollcourse">
         {allcourses.map((course) => (
           <div className="course" key={course._id}>
-            <p className="open-now">Open Now</p> <img src={testImg} alt="" />
+            <p className="open-now">Open Now</p>{" "}
+            <img src={course.images ? course.images[0].url : testImg} alt="" />
             <div className="infooo">
               <h3>{course.course_name}</h3>
               <p>4 Months</p>
