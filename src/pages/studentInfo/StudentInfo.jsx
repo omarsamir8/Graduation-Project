@@ -43,7 +43,7 @@ export default function StudentInfo() {
   }, [accessToken, refreshToken]);
   console.log(studentData);
 
-  // get courses an training registerd
+  // get courses registerd
   useEffect(() => {
     const fetchStudentcCursesAndTraining = async () => {
       try {
@@ -67,6 +67,30 @@ export default function StudentInfo() {
     fetchStudentcCursesAndTraining();
   }, [accessToken, refreshToken]);
   console.log(coursesregisterd);
+
+  // get training registerd
+  useEffect(() => {
+    const fetchStudentTraining = async () => {
+      try {
+        const response = await axios.get(
+          `https://university-mohamed.vercel.app/Api/Trainings/Registers/get/trainings/registerd/info/by/admin?studentId=${studentId}
+            `,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching student info:", error);
+      }
+    };
+
+    fetchStudentTraining();
+  }, [accessToken, refreshToken]);
+ 
   return (
     <>
       <div className="studentInfoPage col-12">
