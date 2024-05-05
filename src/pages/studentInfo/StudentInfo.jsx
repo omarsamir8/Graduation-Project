@@ -11,12 +11,8 @@ import { Button, Table } from "react-bootstrap";
 export default function StudentInfo() {
   const { studentId } = useParams();
 
-  let { semesterinfo, setsemesterinfo } = useState([]);
   let [studentData, setstudentData] = useState({});
-  const [studentnewspaper, setstudentnewspaper] = useState([]);
-  const [totalgpa, settotalgpa] = useState("");
-  const [totalhour, settotalhour] = useState("");
-  const [level, setlevel] = useState("");
+
   const [trainingsRegistered, setTrainingsRegistered] = useState([]);
   const [coursesregisterd, setcoursesregisterd] = useState([]);
   const accessToken = localStorage.getItem("accesstoken");
@@ -69,7 +65,6 @@ export default function StudentInfo() {
 
     fetchStudentcCursesAndTraining();
   }, [accessToken, refreshToken]);
-  console.log(studentnewspaper);
 
   return (
     <>
@@ -106,6 +101,7 @@ export default function StudentInfo() {
             </div>
             <div className="single-det">
               <h5>
+                Birth Date :{" "}
                 {new Date(studentData.Date_of_Birth).toLocaleDateString()}
               </h5>
             </div>
