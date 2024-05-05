@@ -9,7 +9,7 @@ import { routes } from "../../routes";
 
 export default function StudentInfo() {
   const { StudentInfo } = useParams();
-
+  const { studentId,setstudentId } = useState("");
   const { allstudents, setallstudents } = useStudentContext();
   const [studentInfo, setStudentInfo] = useState([]);
   const [studentnewspaper, setstudentnewspaper] = useState([]);
@@ -116,10 +116,10 @@ export default function StudentInfo() {
 
   // get registerd courses
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (studentId) => {
       try {
         const response = await fetch(
-          `https://university-mohamed.vercel.app${routes.courseRegister._id}${routes.courseRegister.GetRegisterInfoByAdmin}?studentId=${StudentInfo._id}`,
+          `https://university-mohamed.vercel.app${routes.courseRegister._id}${routes.courseRegister.GetRegisterInfoByAdmin}?studentId=${studentId}`,
           {
             method: "GET",
             headers: {
@@ -131,8 +131,9 @@ export default function StudentInfo() {
         const data = await response.json();
         console.log(data);
         setcoursesregisterd(data.register.coursesRegisterd);
+       
         console.log(coursesregisterd);
-        console.log(studentInfo)
+        console.log(studentId)
       
         
       } catch (error) {
