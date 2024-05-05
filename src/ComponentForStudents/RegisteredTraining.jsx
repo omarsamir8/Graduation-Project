@@ -24,6 +24,7 @@ export default function RegisteredTraining() {
           }
         );
         const data = await response.json();
+        console.log(data);
         setTrainingsRegistered(data.result.trainingRegisterd);
       } catch (error) {
         console.error("Fetch failed", error);
@@ -32,7 +33,7 @@ export default function RegisteredTraining() {
 
     fetchData();
   }, [accessToken, refreshToken]);
-
+  console.log(trainingsRegistered);
   // delete Training Register
   const deleteTraining = async (trainingId) => {
     try {
@@ -189,5 +190,3 @@ export default function RegisteredTraining() {
     </>
   );
 }
-
-
