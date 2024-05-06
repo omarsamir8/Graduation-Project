@@ -237,7 +237,14 @@ function Login() {
             <p style={{ fontSize: "15px", color: "red" }} className="error">
               {message}
             </p>
-            <a href="#forgetpassword">Forget Password?</a>
+            <a
+              href="#forgetpassword"
+              onClick={() => {
+                navigate("/forgetpassword");
+              }}
+            >
+              Forget Password?
+            </a>
             {/* </div> */}
             <button className="button" onClick={check}>
               Login
