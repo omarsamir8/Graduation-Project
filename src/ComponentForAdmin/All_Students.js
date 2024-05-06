@@ -23,6 +23,7 @@ function All_Students() {
   const [gender, setgender] = useState("");
   const [semesterId, setsemesterId] = useState("");
   const [count, setcount] = useState(1);
+  const [department, setdepartment] = useState("");
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
@@ -97,6 +98,7 @@ function All_Students() {
             Date_of_Birth,
             gender,
             semesterId,
+            department,
             // studentImage,
           }),
         }
@@ -204,6 +206,22 @@ function All_Students() {
                   setgender(e.target.value);
                 }}
               />
+              <select
+                className="form-control mt-3"
+                aria-label="department"
+                name="department"
+                onChange={(e) => {
+                  setdepartment(e.target.value);
+                }}
+              >
+                <option value="" disabled selected hidden>
+                  Select Department
+                </option>
+                <option value="is">IS</option>
+                <option value="cs">CS</option>
+                <option value="ai">AI</option>
+                <option value="sc">SC</option>
+              </select>
             </div>
             <div class="col part2">
               <input
@@ -268,6 +286,9 @@ function All_Students() {
               <th className="doctorInfo" scope="col">
                 Phone
               </th>
+              <th className="doctorInfo" scope="col">
+                Gender
+              </th>
               {/* <th scope="col">Level</th> */}
               <th className="doctorInfo" scope="col">
                 Operations
@@ -285,6 +306,7 @@ function All_Students() {
                   <td className="doctorInfo">{student.Full_Name}</td>
                   <td className="doctorInfo">{student.Student_Code}</td>
                   <td className="doctorInfo">{student.PhoneNumber}</td>
+                  <td className="doctorInfo">{student.gender}</td>
                   {/* <td>{student.semesterId.level}</td> */}
                   <td style={{ display: "flex", justifyContent: "center" }}>
                     <div className="row">

@@ -412,10 +412,11 @@ function CreateTraining() {
           allTrainings.map((training) => (
             <div className="course" key={training._id}>
               <p className="open-now">Open Now</p>{" "}
-              <img
-                src={training.images ? training.images[0].url : testImg}
-                alt=""
-              />
+              {training && training.images && training.images.length > 0 ? (
+                <img src={training.images[0].url} alt="" />
+              ) : (
+                <img src={testImg} alt="" />
+              )}
               <div className="infooo">
                 <h3>{training.training_name}</h3>
                 <p>4 Months</p>

@@ -13,6 +13,7 @@ import ScrollToTopButton from "./ScroollButton/ScrollToTopButton ";
 import StudentResultReport from "./pages/StudentGradeReoprt/StudentGradeReoprt";
 import TrainingResyltReport from "./pages/TrainingResyltReport/TrainingResyltReport";
 import StudentInfo from "./pages/studentInfo/StudentInfo";
+import DoctorInfo from "./pages/DoctorInfo/DoctorInfo";
 function App() {
   return (
     <>
@@ -31,6 +32,7 @@ function App() {
             <Route path="/Reports_student" element={<Reports_student />} />
             <Route path="/training/:trainingId" element={<Training_Info />} />
             <Route path="/student/:studentId" element={<StudentInfo />} />
+            <Route path="/doctor/:doctorId" element={<DoctorInfo />} />
             <Route
               path="/traiingres/:TrainingId"
               element={<TrainingResyltReport />}

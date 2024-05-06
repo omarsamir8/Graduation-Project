@@ -7,6 +7,7 @@ import Select from "react-select";
 import { routes } from "../routes";
 import { Table } from "react-bootstrap";
 import { usePageContext } from "../PageContext";
+import { Link } from "react-router-dom";
 
 function AllDoctors() {
   const { alldoctors, setalldoctors } = useDoctorContext();
@@ -389,10 +390,10 @@ function AllDoctors() {
             </tr>
           </thead>
           <tbody>
-            {alldoctors.map((doctor) => (
+            {alldoctors.map((doctor, index) => (
               <tr key={doctor._id}>
                 <th className="doctorInfo" scope="row">
-                  {doctor._id}
+                  {index + 1}
                 </th>
                 <td className="doctorInfo">{doctor.FullName}</td>
                 <td className="doctorInfo">{doctor.email}</td>
@@ -417,6 +418,11 @@ function AllDoctors() {
                       onClick={() => handleDelete(doctor._id)}
                     >
                       Delete
+                    </button>
+                    <button type="button" className="btn btn-secondary">
+                      <Link to={`/doctor/${doctor._id}`} className="link">
+                        More Info
+                      </Link>
                     </button>
                   </div>
                 </td>

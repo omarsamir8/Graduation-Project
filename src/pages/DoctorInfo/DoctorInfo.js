@@ -1,25 +1,23 @@
-import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Background from "../../../src/assets/55.jpg";
 import profile_info from "../../../src/poster1.jpg";
-import "./StudentInfo.scss";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Table } from "react-bootstrap";
-
-export default function StudentInfo() {
-  const { studentId } = useParams();
-  let [studentData, setstudentData] = useState({});
-  const [trainingsRegistered, setTrainingsRegistered] = useState([]);
-  const [coursesregisterd, setcoursesregisterd] = useState([]);
+function DoctorInfo() {
+  const { doctorId } = useParams();
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
-
-  // get student information
+  const [doctorInfo, setdoctorInfo] = useState([]);
+  const [semesterinfo, setsemesterinfo] = useState([]);
+  const [doctormatarial, setdoctormatarial] = useState([]);
+  const [doctorTraining, setdoctorTraining] = useState([]);
+  // get Doctor information
   useEffect(() => {
     const fetchStudentInfo = async () => {
       try {
         const response = await axios.get(
-          `https://university-mohamed.vercel.app/Api/students/get/information/by/admin?studentId=${studentId}
+          `https://university-mohamed.vercel.app/Api/instructors/get/info/by/admin?InstructorId=${doctorId}
           `,
           {
             headers: {
@@ -29,7 +27,9 @@ export default function StudentInfo() {
           }
         );
         console.log(response.data);
-        setstudentData(response.data.result);
+        setdoctorInfo(response.data.user);
+        setdoctormatarial(response.data.user.Materials);
+        setdoctorTraining(response.data.user.Training);
       } catch (error) {
         console.error("Error fetching student info:", error);
       }
@@ -37,14 +37,15 @@ export default function StudentInfo() {
 
     fetchStudentInfo();
   }, [accessToken, refreshToken]);
-  console.log(studentData);
+  console.log(doctorInfo);
+  console.log(doctormatarial);
 
-  // get courses registerd
+  //   get main semester info
   useEffect(() => {
-    const fetchStudentcCursesAndTraining = async () => {
+    const fetchStudentInfo = async () => {
       try {
         const response = await axios.get(
-          `https://university-mohamed.vercel.app/Api/students/registers/get/Register/info/by/admin?studentId=${studentId}
+          `https://university-mohamed.vercel.app/Api/semsters/get/main/semster/Info/by/admin
           `,
           {
             headers: {
@@ -54,40 +55,14 @@ export default function StudentInfo() {
           }
         );
         console.log(response.data);
-        setcoursesregisterd(response.data.register.coursesRegisterd);
+        setsemesterinfo(response.data.semster);
       } catch (error) {
         console.error("Error fetching student info:", error);
       }
     };
 
-    fetchStudentcCursesAndTraining();
+    fetchStudentInfo();
   }, [accessToken, refreshToken]);
-  console.log(coursesregisterd);
-
-  // get training registerd
-  useEffect(() => {
-    const fetchStudentTraining = async () => {
-      try {
-        const response = await axios.get(
-          `https://university-mohamed.vercel.app/Api/Trainings/Registers/get/trainings/registerd/info/by/admin?studentId=${studentId}
-            `,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "refresh-token": refreshToken,
-            },
-          }
-        );
-        console.log(response.data);
-        setTrainingsRegistered(response.data.result[0].trainingRegisterd);
-      } catch (error) {
-        console.error("Error fetching student info:", error);
-      }
-    };
-
-    fetchStudentTraining();
-  }, [accessToken, refreshToken]);
-  console.log(trainingsRegistered);
   return (
     <>
       <div className="studentInfoPage col-12">
@@ -95,38 +70,39 @@ export default function StudentInfo() {
           <img src={Background} alt="Not found" className="studentInfo" />
           <div className="profile_info">
             <img
-              src={studentData.url ? studentData.url : profile_info}
+              src={doctorInfo.urlImg ? doctorInfo.urlImg : profile_info}
               className="profile_photo"
               alt=""
             />
           </div>
           <div className="infoo">
-            <h4>{studentData.Full_Name}</h4>
+            <h4>{doctorInfo.FullName}</h4>
 
-            <h5 style={{ marginTop: "-5px" }}>Level : {studentData.level}</h5>
+            <h5 style={{ marginTop: "-5px" }}>
+              Department : {doctorInfo.department}
+            </h5>
           </div>
         </div>
         <div className="single-details">
           <div className="det">
             <div className="single-det col-12">
-              {/* <i class="fa-solid fa-signature"></i> */}
               <h5>
-                Name : <span>{studentData.Full_Name}</span>
+                Name : <span>{doctorInfo.FullName}</span>
               </h5>
             </div>
             <div className="single-det">
               <h5>
-                Student Code : <span>{studentData.Student_Code}</span>
+                Email : <span>{doctorInfo.email}</span>
               </h5>
             </div>
             <div className="single-det">
               <h5>
-                National ID :<span>{studentData.National_Id}</span>{" "}
+                National ID :<span>{doctorInfo.National_Id}</span>{" "}
               </h5>
             </div>
             <div className="single-det">
               <h5>
-                Phone Number : <span>{studentData.PhoneNumber}</span>
+                Phone Number : <span>{doctorInfo.phone}</span>
               </h5>
             </div>
             <div className="single-det">
@@ -134,7 +110,7 @@ export default function StudentInfo() {
                 Birth Date :{" "}
                 <span>
                   {" "}
-                  {new Date(studentData.Date_of_Birth).toLocaleDateString()}
+                  {new Date(doctorInfo.Date_of_Birth).toLocaleDateString()}
                 </span>
               </h5>
             </div>
@@ -142,44 +118,32 @@ export default function StudentInfo() {
           <div className="det">
             <div className="single-det">
               <h5>
-                Term :{" "}
-                <span>
-                  {" "}
-                  {studentData.semsterInfo
-                    ? studentData.semsterInfo.term
-                    : null}
-                </span>
+                Term : <span>{semesterinfo.term}</span>
               </h5>
             </div>
             <div className="single-det">
               <h5>
-                Academic Year :
-                <span>
-                  {" "}
-                  {studentData.semsterInfo
-                    ? studentData.semsterInfo.year
-                    : null}{" "}
-                </span>
+                Academic Year :<span>{semesterinfo.year}</span>
               </h5>
             </div>
             <div className="single-det">
               <h5>
-                Total Hours : <span>{studentData.totalCreditHours}</span>
+                Role : <span>{doctorInfo.role}</span>
               </h5>
             </div>
             <div className="single-det">
               <h5>
-                Total GPA :<span> {studentData.TotalGpa}</span>
+                Gender :<span> {doctorInfo.gender}</span>
               </h5>
             </div>
             <div className="single-det">
               <h5>
-                Gender : <span>{studentData.gender}</span>
+                Department : <span>{doctorInfo.department}</span>
               </h5>
             </div>
           </div>
           <div className="det">
-            <h4>Registerd Course</h4>
+            <h4>Doctor Matarial</h4>
             <Table striped bordered hover size="md" className="col-12">
               <thead>
                 <tr>
@@ -189,7 +153,7 @@ export default function StudentInfo() {
                 </tr>
               </thead>
               <tbody>
-                {coursesregisterd.map((course, index) => {
+                {doctormatarial.map((course, index) => {
                   return (
                     <tr key={index}>
                       <td>{index + 1}</td>
@@ -202,7 +166,7 @@ export default function StudentInfo() {
             </Table>
           </div>
           <div className="det">
-            <h4>Registerd Training</h4>
+            <h4>Doctor Training</h4>
             <Table striped bordered hover size="md" className="col-12">
               <thead>
                 <tr>
@@ -213,7 +177,7 @@ export default function StudentInfo() {
                 </tr>
               </thead>
               <tbody>
-                {trainingsRegistered.map((training, index) => {
+                {doctorTraining.map((training, index) => {
                   return (
                     <tr>
                       <td>{index + 1}</td>
@@ -235,3 +199,4 @@ export default function StudentInfo() {
     </>
   );
 }
+export default DoctorInfo;
