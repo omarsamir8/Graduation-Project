@@ -14,6 +14,7 @@ import StudentResultReport from "./pages/StudentGradeReoprt/StudentGradeReoprt";
 import TrainingResyltReport from "./pages/TrainingResyltReport/TrainingResyltReport";
 import StudentInfo from "./pages/studentInfo/StudentInfo";
 import DoctorInfo from "./pages/DoctorInfo/DoctorInfo";
+import Generate_department from "./pages/Generate_department/Generate_department";
 function App() {
   return (
     <>
@@ -30,6 +31,7 @@ function App() {
               element={<Registered_Courses />}
             />
             <Route path="/Reports_student" element={<Reports_student />} />
+            <Route path="/generate_department" element={<Generate_department />} />
             <Route path="/training/:trainingId" element={<Training_Info />} />
             <Route path="/student/:studentId" element={<StudentInfo />} />
             <Route path="/doctor/:doctorId" element={<DoctorInfo />} />

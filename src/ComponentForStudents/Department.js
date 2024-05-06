@@ -1,5 +1,11 @@
-import "../styles/department.css";
+import { Button } from "react-bootstrap";
+import "../styles/department.scss";
+import { useNavigate } from "react-router-dom";
 function Department() {
+  const usenavigate = useNavigate();
+  const NavigateToQuiz = () => {
+    usenavigate("/generate_department");
+  };
   const DepMat = [
     "Opreating system",
     " Databases 1",
@@ -278,7 +284,15 @@ function Department() {
             })}
           </div>
         </div>
+        {/* Form for recommend department */}
+        <div className="recommendation_title col-12">
+         <h4 className="col-12">Department Recommendation</h4>
+         <div className="go_to_quiz">
+        <Button onClick={NavigateToQuiz}>Go to quiz</Button>
       </div>
+        </div>
+      </div>
+     
     </>
   );
 }

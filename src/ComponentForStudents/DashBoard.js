@@ -31,7 +31,7 @@ function Dashboard() {
         );
         console.log(response.data);
         setstudentnewspaper(response.data.semesters);
-        settotalgpa(response.data.totalGpaOverall);
+        settotalgpa(response.data.result.totalGpaOverall);
         settotalhour(response.data.totalCreditHours);
         setlevel(response.data.level);
 
@@ -60,7 +60,8 @@ function Dashboard() {
           }
         );
         const data = await response.json();
-        setTrainingsRegistered(data.result.trainingRegisterd);
+        console.log(data)
+        setTrainingsRegistered(data.result[0].trainingRegisterd);
       } catch (error) {
         console.error("Fetch failed", error);
       }
@@ -107,12 +108,12 @@ function Dashboard() {
             </div>
             <div className="main">
               <i class="fa-solid fa-layer-group" />
-              <h3>{studentnewspaper.length >0 ? studentnewspaper.length :0}</h3>
+              <h3>{studentnewspaper.length}</h3>
               <p>Total Semester</p>
             </div>
             <div className="main">
               <i class="fa-brands fa-stack-overflow" />
-              {/* <h3>{trainingsRegistered.length > 0 ? trainingsRegistered.length :0}</h3> */}
+              <h3>{trainingsRegistered.length > 0 ? trainingsRegistered.length :0}</h3>
               <p>Total Training</p>
             </div>
           </div>
