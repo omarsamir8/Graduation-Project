@@ -75,6 +75,18 @@ function SideBar() {
             Training
           </li>
         </div>
+
+        {/* <div className="item col-12">
+          <i class="fa-solid fa-registered"></i>
+          <NavLink
+            onClick={() => setSelectedComponent2("StudentsResult")}
+            style={{ textDecoration: "none" }}
+            className="NavLink"
+          >
+            Student Result
+          </NavLink>
+        </div> */}
+
         <div
           style={{ marginLeft: "15px", marginBottom: "10px" }}
           className="login col-12"
