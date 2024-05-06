@@ -75,13 +75,6 @@ function SideBar() {
             Training
           </li>
         </div>
-        <div className="item col-12">
-          <i class="fa-solid fa-book-open" />
-          <li onClick={() => navigate("/forgetpassword")} className="Side_li">
-            Forget Password
-          </li>
-        </div>
-
         <div
           style={{ marginLeft: "15px", marginBottom: "10px" }}
           className="login col-12"
