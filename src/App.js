@@ -16,6 +16,7 @@ import StudentInfo from "./pages/studentInfo/StudentInfo";
 import DoctorInfo from "./pages/DoctorInfo/DoctorInfo";
 import Generate_department from "./pages/Generate_department/Generate_department";
 import ForgetPassword from "./pages/ForgetPassword";
+import ConfirmPassword from "./pages/ConfirmPassword";
 function App() {
   return (
     <>
@@ -24,6 +25,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/forgetpassword" element={<ForgetPassword />} />
+            <Route path="/forgetpassword/:key" element={<ConfirmPassword />} />
             <Route path="/student" element={<MainPageForStudent />} />
             <Route path="/doctor" element={<MainPageForDoctor />} />
             <Route path="/admin" element={<MainPageForAdmin />} />

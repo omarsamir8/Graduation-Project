@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Login.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 // import { routes } from "../routes";
 import Swal from "sweetalert2";
 
-function ForgetPassword() {
+function ConfirmPassword() {
   const navigate = useNavigate();
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
-  const [email, setemail] = useState("");
-  const [myRole, setmyRole] = useState("");
-  const sendemail = async () => {
+
+  const { key } = useParams();
+  const [password, setpassword] = useState("");
+  const [confrimPassword, setconfrimPassword] = useState("");
+  console.log(key);
+  const resetpassword = async () => {
     try {
       const response = await fetch(
-        `https://university-mohamed.vercel.app/Api/auth/forgetPassword`,
+        `https://university-mohamed.vercel.app/Api/auth/reset/password`,
         {
           method: "POST",
           headers: {
@@ -23,8 +26,9 @@ function ForgetPassword() {
             "refresh-token": refreshToken,
           },
           body: JSON.stringify({
-            email,
-            myRole,
+            key,
+            password,
+            confrimPassword,
           }),
         }
       );
@@ -33,7 +37,7 @@ function ForgetPassword() {
       if (response.ok) {
         Swal.fire({
           icon: "success",
-          title: "Email And Role Sended successfully",
+          title: "Password Changed successfully",
           showConfirmButton: false,
           timer: 4500,
         });
@@ -57,49 +61,46 @@ function ForgetPassword() {
         <div className="col-12 login-container">
           <div className=" col-12 login">
             <div className="col-12 title">
-              <h1 className="col-12 login_title">Forget Password ?</h1>
+              <h1 className="col-12 login_title">Confirm Password ?</h1>
               <h1 className="col-12 login_title">Welcom Back ?</h1>
             </div>
             <div className="col-12 labelWithInput">
-              <Form.Label className="input_label">Enter Your Email</Form.Label>
+              <Form.Label className="input_label">New Password </Form.Label>
               <Form.Control
-                type="email"
+                type="password"
+                name="password"
+                onChange={(e) => {
+                  setpassword(e.target.value);
+                }}
                 required
-                placeholder="Enter Your Email here"
+                placeholder="Enter your New password here"
                 className="login_input"
-                onChange={(e) => {
-                  setemail(e.target.value);
-                }}
               />
-              <select
-                className="form-control mt-3"
-                style={{ width: "90%" }}
-                aria-label="department"
-                name="department"
-                onChange={(e) => {
-                  setmyRole(e.target.value);
+            </div>
+            <div className="col-12 labelWithInput">
+              <Form.Label className="input_label">
+                Confirm New Password{" "}
+              </Form.Label>
+              <Form.Control
+                type="password"
+                name="confrimPassword"
+                onClick={(e) => {
+                  setconfrimPassword(e.target.value);
                 }}
-              >
-                <option value="" disabled selected hidden>
-                  Select Role
-                </option>
-                <option value="student">Student</option>
-                <option value="instructor">Doctor</option>
-                <option value="admin">Admin</option>
-              </select>
+                required
+                placeholder="Confirm Your New Password Here"
+                className="login_input"
+              />
             </div>
             <button
-              style={{
-                marginTop: "10px",
-                width: "90%",
-              }}
+              style={{ marginTop: "10px", width: "90%" }}
               className="button"
               onClick={() => {
-                sendemail();
+                resetpassword();
               }}
             >
-              Send Email
-            </button>
+              Change Password
+            </button>{" "}
             <a
               href="#forgetpassword"
               style={{ marginTop: "10px" }}
@@ -123,4 +124,4 @@ function ForgetPassword() {
   );
 }
 
-export default ForgetPassword;
+export default ConfirmPassword;
