@@ -50,20 +50,24 @@
   /* width: 200px !important; */
 }
 
-
-.go_to_quiz{
+.go_to_quiz {
   text-align: center;
- margin-top: 3rem;
- width: 100%;
-
-  
+  margin-top: 3rem;
+  width: 100%;
 }
-.go_to_quiz Button{
+.go_to_quiz Button {
   padding: 0.9rem 1.5rem;
 }
 
-.recommendation_title{
-  h4{
+.recommendation_title {
+  background-color: gainsboro;
+
+  h4 {
     font-family: cursive;
   }
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }

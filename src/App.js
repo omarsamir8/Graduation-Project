@@ -15,7 +15,12 @@ import TrainingResyltReport from "./pages/TrainingResyltReport/TrainingResyltRep
 import StudentInfo from "./pages/studentInfo/StudentInfo";
 import DoctorInfo from "./pages/DoctorInfo/DoctorInfo";
 import Generate_department from "./pages/Generate_department/Generate_department";
+<<<<<<< HEAD
 import ScanQr from "./pages/ScanQr/ScanQr";
+=======
+import ForgetPassword from "./pages/ForgetPassword";
+import ConfirmPassword from "./pages/ConfirmPassword";
+>>>>>>> a97517612603068c98dc83483210b77a04313036
 function App() {
   return (
     <>
@@ -23,6 +28,8 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login />} />
+            <Route path="/forgetpassword" element={<ForgetPassword />} />
+            <Route path="/forgetpassword/:key" element={<ConfirmPassword />} />
             <Route path="/student" element={<MainPageForStudent />} />
             <Route path="/doctor" element={<MainPageForDoctor />} />
             <Route path="/admin" element={<MainPageForAdmin />} />
@@ -33,7 +40,10 @@ function App() {
               element={<Registered_Courses />}
             />
             <Route path="/Reports_student" element={<Reports_student />} />
-            <Route path="/generate_department" element={<Generate_department />} />
+            <Route
+              path="/generate_department"
+              element={<Generate_department />}
+            />
             <Route path="/training/:trainingId" element={<Training_Info />} />
             <Route path="/student/:studentId" element={<StudentInfo />} />
             <Route path="/doctor/:doctorId" element={<DoctorInfo />} />
