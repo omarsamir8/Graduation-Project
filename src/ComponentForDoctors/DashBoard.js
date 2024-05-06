@@ -2,6 +2,7 @@ import { React, useEffect, useState } from 'react'
 import '../styles/Dashboard.css'
 import axios from 'axios'
 import { routes } from '../routes'
+import { useNavigate } from 'react-router-dom'
 function Dashboard () {
   const [selectedComponent2, setSelectedComponent2] = useState(null)
   const handleSidebarClick = (componentName) => {
@@ -9,6 +10,10 @@ function Dashboard () {
   }
   const [doctorMatarials, setdoctorMatarials] = useState([])
   const [doctorTrainings, setdoctorTrainings] = useState([])
+  const usenavigate = useNavigate();
+  const NavigateToScan = () => {
+    usenavigate("/Scan");
+  };
   const accessToken = localStorage.getItem('accesstoken')
   const refreshToken = localStorage.getItem('refreshtoken')
   // get doctor matarial
@@ -93,6 +98,7 @@ function Dashboard () {
             </p>
           </div>
         </div>
+        {/* <button onClick={NavigateToScan}></button> */}
       </div>
     </>
   )

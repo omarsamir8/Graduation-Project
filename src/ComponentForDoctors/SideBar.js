@@ -8,6 +8,10 @@ function SideBar () {
   const [isClicked, setIsClicked] = useState(false)
   const [Color, setColor] = useState('')
   const [SelectedComponent, SetSelectedComponent] = useState(null)
+  const usenavigate = useNavigate();
+  const NavigateToScan = () => {
+    usenavigate("/Scan");
+  };
   const handleClick = (componentName) => {
     setSelectedComponent2(componentName)
     window.scrollTo(0, 750)
@@ -73,6 +77,22 @@ function SideBar () {
             className='Side_li'
           >
             Training
+          </li>
+        </div>
+        <div className='item col-12'>
+          <i class='fa-solid fa-book-open' />
+          <li
+            onClick={NavigateToScan}
+            style={{
+              textDecoration: 'none',
+              color: selectedComponent2 === 'Training' ? 'black' : 'inherit',
+              transform:
+                selectedComponent2 === 'Training' ? 'scale(1.1)' : 'scale(1)',
+              transition: 'transform 0.3s ease'
+            }}
+            className='Side_li'
+          >
+            Scanner
           </li>
         </div>
 

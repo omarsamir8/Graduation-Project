@@ -15,6 +15,7 @@ import TrainingResyltReport from "./pages/TrainingResyltReport/TrainingResyltRep
 import StudentInfo from "./pages/studentInfo/StudentInfo";
 import DoctorInfo from "./pages/DoctorInfo/DoctorInfo";
 import Generate_department from "./pages/Generate_department/Generate_department";
+import ScanQr from "./pages/ScanQr/ScanQr";
 function App() {
   return (
     <>
@@ -26,6 +27,7 @@ function App() {
             <Route path="/doctor" element={<MainPageForDoctor />} />
             <Route path="/admin" element={<MainPageForAdmin />} />
             <Route path="/superadmin" element={<MainPageForSuberAdmin />} />
+            <Route path="/Scan" element={<ScanQr />} />
             <Route
               path="/Registered_Courses"
               element={<Registered_Courses />}
