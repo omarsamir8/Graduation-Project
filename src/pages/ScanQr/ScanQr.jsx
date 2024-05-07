@@ -1,6 +1,6 @@
 import { Html5QrcodeScanner } from "html5-qrcode";
 import { useEffect, useState } from "react";
-
+import "./ScanQr.scss";
 export default function ScanQr() {
   const [scanResult, setScanResult] = useState(null);
   useEffect(() => {
@@ -22,14 +22,15 @@ export default function ScanQr() {
   }, []);
 
   return (
-    <div className="App">
+    <div className="ScanQr">
       <h1>Qr Code Scanner</h1>
+
       {scanResult ? (
-        <div>
+        <div className="camera">
           success:<a href={"http://" + scanResult}>{scanResult}</a>
         </div>
       ) : (
-        <div id="reader"></div>
+        <div className="camera" id="reader"></div>
       )}
     </div>
   );

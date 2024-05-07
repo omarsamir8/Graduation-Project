@@ -29,7 +29,7 @@ function Attendece() {
   return (
     <>
       <div style={{ textAlign: "center" }} className="department">
-        <h3>Genrate My QR</h3>
+        <h3>Genrate Attendece QR</h3>
         <Button
           style={{
             background: "#996ae4",

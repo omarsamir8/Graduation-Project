@@ -288,7 +288,12 @@ function Department() {
         <div style={{ background: "" }} className="recommendation_title col-12">
           <h4 className="col-12">Department Recommendation</h4>
           <div className="go_to_quiz">
-            <Button onClick={NavigateToQuiz}>Go to quiz</Button>
+            <Button
+              style={{ backgroundColor: "#996ae4", borderColor: "#996ae4" }}
+              onClick={NavigateToQuiz}
+            >
+              Go to quiz
+            </Button>
           </div>
         </div>
       </div>

@@ -395,7 +395,22 @@ function NavBar() {
                       Department
                     </NavLink>
                   </div>
-
+                  <div className="item col-12">
+                    <NavLink
+                      className="NavLink"
+                      style={{
+                        color: "black",
+                        marginLeft: "-10px",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => {
+                        setSelectedComponent("Attendece");
+                        handleCloseModal();
+                      }}
+                    >
+                      Attendece
+                    </NavLink>
+                  </div>
                   <div className="item col-12">
                     <NavLink
                       style={{ color: "black", marginLeft: "-10px" }}
