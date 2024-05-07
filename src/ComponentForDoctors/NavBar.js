@@ -16,6 +16,7 @@ function NavBar() {
     setSelectedComponent2(componentName);
     window.scrollTo(0, 750);
   };
+
   const navigate = useNavigate();
   function logout() {
     navigate("/");
@@ -281,6 +282,27 @@ function NavBar() {
                     >
                       Training
                     </li>
+                    <div className="item col-12">
+                      <i class="fa-solid fa-book-open" />
+                      <li
+                        onClick={navigate("/Scan")}
+                        style={{
+                          textDecoration: "none",
+                          color:
+                            selectedComponent2 === "Training"
+                              ? "black"
+                              : "inherit",
+                          transform:
+                            selectedComponent2 === "Training"
+                              ? "scale(1.1)"
+                              : "scale(1)",
+                          transition: "transform 0.3s ease",
+                        }}
+                        className="Side_li"
+                      >
+                        Scanner
+                      </li>
+                    </div>
                     <p
                       style={{ marginLeft: "5px", marginTop: "5px" }}
                       onClick={logout}
