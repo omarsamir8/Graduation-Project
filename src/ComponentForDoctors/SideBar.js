@@ -122,6 +122,7 @@ function SideBar() {
         >
           <i class="fa-solid fa-right-from-bracket" />
           <p onClick={logout}>Logout</p>
+          <h2>Hello</h2>
         </div>
       </div>
     </>
