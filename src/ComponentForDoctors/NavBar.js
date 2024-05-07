@@ -283,10 +283,10 @@ function NavBar() {
                       Training
                     </li>
                     <div className="item col-12">
-                      <i class="fa-solid fa-book-open" />
                       <li
                         onClick={() => {
                           navigate("/Scan");
+                          handleCloseModal();
                         }}
                         style={{
                           textDecoration: "none",
