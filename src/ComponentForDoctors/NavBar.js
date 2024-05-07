@@ -285,7 +285,9 @@ function NavBar() {
                     <div className="item col-12">
                       <i class="fa-solid fa-book-open" />
                       <li
-                        onClick={navigate("/Scan")}
+                        onClick={() => {
+                          navigate("/Scan");
+                        }}
                         style={{
                           textDecoration: "none",
                           color:
