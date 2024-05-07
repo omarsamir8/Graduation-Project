@@ -1,30 +1,23 @@
-<<<<<<< HEAD
-import { NavLink, useNavigate } from 'react-router-dom'
-import { useRecoilState } from 'recoil'
-import { $Dashboard2_Components } from '../Atoms'
-import '../styles/SideBar.css'
-import { useState } from 'react'
-function SideBar () {
-  const navigate = useNavigate()
-  const [isClicked, setIsClicked] = useState(false)
-  const [Color, setColor] = useState('')
-  const [SelectedComponent, SetSelectedComponent] = useState(null)
-  const usenavigate = useNavigate();
-  const NavigateToScan = () => {
-    usenavigate("/Scan");
-  };
-=======
+
 import { NavLink, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { $Dashboard2_Components } from "../Atoms";
 import "../styles/SideBar.css";
 import { useState } from "react";
+
+
+
+
 function SideBar() {
   const navigate = useNavigate();
   const [isClicked, setIsClicked] = useState(false);
   const [Color, setColor] = useState("");
   const [SelectedComponent, SetSelectedComponent] = useState(null);
->>>>>>> a97517612603068c98dc83483210b77a04313036
+  const usenavigate = useNavigate();
+  const NavigateToScan = () => {
+    usenavigate("/Scan");
+  };
+
   const handleClick = (componentName) => {
     setSelectedComponent2(componentName);
     window.scrollTo(0, 750);
@@ -92,7 +85,7 @@ function SideBar() {
             Training
           </li>
         </div>
-<<<<<<< HEAD
+
         <div className='item col-12'>
           <i class='fa-solid fa-book-open' />
           <li
@@ -121,8 +114,8 @@ function SideBar() {
           </NavLink>
         </div> */}
 
-=======
->>>>>>> a97517612603068c98dc83483210b77a04313036
+
+
         <div
           style={{ marginLeft: "15px", marginBottom: "10px" }}
           className="login col-12"
