@@ -349,6 +349,7 @@ function Courses() {
           display: "flex",
           flexWrap: "wrap",
           gap: "10px",
+          marginBottom: "10px",
         }}
         className="addcategory category-search animate__animated animate__fadeInDown uploadgrade"
       >
@@ -428,7 +429,7 @@ function Courses() {
         />
         <button
           style={{
-            width: "280px",
+            width: "305px",
             height: "40px",
             marginLeft: ".6rem",
             backgroundColor: "#996ae4",
@@ -441,10 +442,13 @@ function Courses() {
           {selectedGradeId ? "Update Grade" : "Upload Grade"}
         </button>
       </div>
+      {allstudentregistercourses.length > 0 && (
+        <div
+          style={{ marginTop: "7rem", marginLeft: "10px" }}
+          className="get_all_student"
+        >
+          <h3 className="table2">All Student Reg Course</h3>
 
-      <div style={{ marginTop: "5rem" }} className="get_all_student">
-        <h3 className="table2">All Student Reg Course</h3>
-        {allstudentregistercourses.length > 0 && (
           <>
             <Table
               striped
@@ -504,87 +508,93 @@ function Courses() {
               </tbody>
             </Table>
           </>
-        )}
-      </div>
-      <h3 style={{ marginLeft: "0px" }} className="table3">
-        Student Result To Update{" "}
-      </h3>
-      <Table
-        style={{ marginLeft: "0px", textAlign: "center" }}
-        striped
-        bordered
-        hover
-        size="md"
-        className="col-12 table3"
-      >
-        <thead>
-          <tr>
-            <th scope="col">#ID</th>
-            <th scope="col">Student Name</th>
-            <th scope="col">Course Name</th>
-            <th scope="col">YearWorks</th>
-            <th scope="col">Practical</th>
-            <th scope="col">FinalExam</th>
-            <th scope="col">TotalGrate</th>
-            <th scope="col">Operation</th>
-          </tr>
-        </thead>
-        <tbody>
-          {courseGradesInstruc.map((results, index) => {
-            return (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{results.studentId.Full_Name}</td>
-                <td>{results.courseId.course_name}</td>
-                <td>{results.YearWorks}</td>
-                <td>{results.Practical}</td>
-                <td>{results.FinalExam}</td>
-                <td>{results.TotalGrate}</td>
-                <td>
-                  <button
-                    style={{
-                      width: "80px",
-                      height: "40px",
-                      marginLeft: ".6rem",
-                      backgroundColor: "#996ae4",
-                      color: "white",
-                    }}
-                    onClick={() => {
-                      setcourseId(results.courseId._id);
-                      setstudentId(results.studentId._id);
-                      setMidterm(results.Midterm);
-                      setOral(results.Oral);
-                      setPractical(results.Practical);
-                      setFinalExam(results.FinalExam);
-                      setselectedGradeId(results._id);
-                    }}
-                    type="button"
-                    className="btn "
-                  >
-                    Update
-                  </button>
-                  <button
-                    style={{
-                      width: "80px",
-                      height: "40px",
-                      marginLeft: ".6rem",
-                      backgroundColor: "red",
-                      color: "white",
-                    }}
-                    onClick={() => {
-                      deleteGrade(results._id);
-                    }}
-                    type="button"
-                    className="btn "
-                  >
-                    Delete
-                  </button>
-                </td>
+        </div>
+      )}
+
+      {courseGradesInstruc.length > 0 && (
+        <div style={{ marginTop: "0px", marginLeft: "10px" }}>
+          <hr style={{ marginTop: "80px" }} />
+          <h3 style={{ marginLeft: "0px" }} className="table3">
+            Student Result To Update{" "}
+          </h3>
+          <Table
+            style={{ marginLeft: "0px", textAlign: "center" }}
+            striped
+            bordered
+            hover
+            size="md"
+            className="col-12 table3"
+          >
+            <thead>
+              <tr>
+                <th scope="col">#ID</th>
+                <th scope="col">Student Name</th>
+                <th scope="col">Course Name</th>
+                <th scope="col">YearWorks</th>
+                <th scope="col">Practical</th>
+                <th scope="col">FinalExam</th>
+                <th scope="col">TotalGrate</th>
+                <th scope="col">Operation</th>
               </tr>
-            );
-          })}
-        </tbody>
-      </Table>
+            </thead>
+            <tbody>
+              {courseGradesInstruc.map((results, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{results.studentId.Full_Name}</td>
+                    <td>{results.courseId.course_name}</td>
+                    <td>{results.YearWorks}</td>
+                    <td>{results.Practical}</td>
+                    <td>{results.FinalExam}</td>
+                    <td>{results.TotalGrate}</td>
+                    <td>
+                      <button
+                        style={{
+                          width: "80px",
+                          height: "40px",
+                          marginLeft: ".6rem",
+                          backgroundColor: "#996ae4",
+                          color: "white",
+                        }}
+                        onClick={() => {
+                          setcourseId(results.courseId._id);
+                          setstudentId(results.studentId._id);
+                          setMidterm(results.Midterm);
+                          setOral(results.Oral);
+                          setPractical(results.Practical);
+                          setFinalExam(results.FinalExam);
+                          setselectedGradeId(results._id);
+                        }}
+                        type="button"
+                        className="btn "
+                      >
+                        Update
+                      </button>
+                      <button
+                        style={{
+                          width: "80px",
+                          height: "40px",
+                          marginLeft: ".6rem",
+                          backgroundColor: "red",
+                          color: "white",
+                        }}
+                        onClick={() => {
+                          deleteGrade(results._id);
+                        }}
+                        type="button"
+                        className="btn "
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+        </div>
+      )}
     </>
   );
 }
