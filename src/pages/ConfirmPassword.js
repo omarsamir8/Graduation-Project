@@ -7,23 +7,20 @@ import Swal from "sweetalert2";
 
 function ConfirmPassword() {
   const navigate = useNavigate();
-  const accessToken = localStorage.getItem("accesstoken");
-  const refreshToken = localStorage.getItem("refreshtoken");
-
   const { key } = useParams();
   const [password, setpassword] = useState("");
   const [confrimPassword, setconfrimPassword] = useState("");
   console.log(key);
+  console.log(password);
+  console.log(confrimPassword);
   const resetpassword = async () => {
     try {
       const response = await fetch(
-        `https://university-mohamed.vercel.app/Api/auth/reset/password`,
+        `https://university-mohamed.vercel.app/Api/auth/reset/password/aaa`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-            "refresh-token": refreshToken,
           },
           body: JSON.stringify({
             key,
@@ -84,7 +81,7 @@ function ConfirmPassword() {
               <Form.Control
                 type="password"
                 name="confrimPassword"
-                onClick={(e) => {
+                onChange={(e) => {
                   setconfrimPassword(e.target.value);
                 }}
                 required
