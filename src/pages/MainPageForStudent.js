@@ -10,6 +10,7 @@ import RegisteredTraining from "../ComponentForStudents/RegisteredTraining";
 import { useRecoilState } from "recoil";
 import { $Dashboard_Components } from "../Atoms";
 import Department from "../ComponentForStudents/Department";
+import Attendece from "../ComponentForStudents/Attendece";
 // import axios from "axios";
 
 function MainPageForStudents() {
@@ -40,6 +41,7 @@ function MainPageForStudents() {
               <RegisteredTraining />
             )}
             {selectedComponent === "Department" && <Department />}
+            {selectedComponent === "Attendece" && <Attendece />}
           </div>
         </div>
       </div>
