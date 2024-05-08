@@ -3,10 +3,14 @@ import { Html5QrcodeScanner } from "html5-qrcode";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import "./ScanQr.scss";
+import Swal from "sweetalert2";
 
 function ScanQr() {
+  const accessToken = localStorage.getItem("accesstoken");
+  const refreshToken = localStorage.getItem("refreshtoken");
   const [scanResults, setScanResults] = useState([]);
   const [names, setNames] = useState([]);
+  const [data1, setdata1] = useState("");
 
   useEffect(() => {
     const Scanner = new Html5QrcodeScanner("reader", {
@@ -21,6 +25,7 @@ function ScanQr() {
 
     function success(result) {
       setScanResults((prevResults) => [...prevResults, result]);
+      setdata1(result.replace(/[""]/g, ""));
     }
 
     function error(err) {
@@ -32,13 +37,56 @@ function ScanQr() {
     };
   }, []);
 
+  // get qr data
+  const GetQrCodeData = async () => {
+    try {
+      const response = await fetch(
+        `https://university-mohamed.vercel.app/Api/instructors/scann/qr`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+          body: JSON.stringify({
+            data1,
+          }),
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      setScanResults(data.result.student);
+      if (response.ok) {
+        Swal.fire({
+          icon: "success",
+          title: "QR CODE DATA DONE SUCCESSFULLY",
+          showConfirmButton: false,
+          timer: 4500,
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Fail",
+          text: data.error_Message
+            ? data.error_Message[0].message
+            : data.message,
+          timer: 4500,
+        });
+      }
+    } catch (error) {
+      console.error("Login failed", error);
+    }
+  };
+  console.log(scanResults);
+  // save pdf
   function saveScansToPDF() {
     const pdf = new jsPDF();
     pdf.setFontSize(12);
     pdf.text(20, 20, "Scanned QR Code Data:");
 
     const tableData = scanResults.map((data, index) => {
-      return [data, names[index] || ""];
+      return [data.Full_Name, names[index] || ""];
     });
 
     const headers = ["Scanned QR Code Data", "Name"];
@@ -54,21 +102,38 @@ function ScanQr() {
 
     pdf.save("qr_scan_data.pdf");
   }
-
   return (
     <div className="ScanQr">
       <h1>QR Code Scanner</h1>
-      <button
-        style={{
-          marginBottom: "10px",
-          border: "none",
-          padding: "10px",
-          borderRadius: "5px",
-        }}
-        onClick={saveScansToPDF}
-      >
-        Download PDF
-      </button>
+
+      <div style={{ display: "flex", gap: "50px", justifyContent: "center" }}>
+        {" "}
+        <button
+          style={{
+            marginBottom: "10px",
+            border: "none",
+            padding: "10px",
+            borderRadius: "5px",
+          }}
+          onClick={saveScansToPDF}
+        >
+          Download PDF
+        </button>
+        <button
+          style={{
+            marginBottom: "10px",
+            border: "none",
+            padding: "10px",
+            borderRadius: "5px",
+          }}
+          onClick={() => {
+            GetQrCodeData();
+          }}
+        >
+          Get Qr Data
+        </button>
+      </div>
+
       {scanResults.length > 0 ? (
         <div>
           {scanResults.map((result, index) => (
