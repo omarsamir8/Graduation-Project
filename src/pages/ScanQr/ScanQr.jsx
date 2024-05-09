@@ -83,13 +83,14 @@ function ScanQr() {
   function saveScansToPDF() {
     const pdf = new jsPDF();
     pdf.setFontSize(12);
-    pdf.text(20, 20, "Scanned QR Code Data:");
+    pdf.text(20, 20, "Scanned QR Code Data:Attendence");
 
-    const tableData = scanResults.map((data, index) => {
-      return [data.Full_Name, names[index] || ""];
-    });
+    const tableData = scanResults.map((data) => [
+      data.Full_Name,
+      data.Student_Code,
+    ]);
 
-    const headers = ["Scanned QR Code Data", "Name"];
+    const headers = ["Name", "Student Code"];
     const tableConfig = {
       startY: 30,
       head: [headers],
