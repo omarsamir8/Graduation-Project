@@ -24,6 +24,7 @@ function CreateDoctor() {
   const [InstructorId, setInstructorId] = useState("");
   const [instructorImage, setinstructorImage] = useState([]);
   const { alldoctors, setalldoctors } = useDoctorContext();
+
   // const [training_name, settraining_name] = useState("");
 
   const accessToken = localStorage.getItem("accesstoken");
@@ -332,7 +333,7 @@ function CreateDoctor() {
               options={allcourses.map((course) => {
                 return { value: course._id, label: course.course_name };
               })}
-              onChange={(selectedOptions) => {
+              onChange={(selectedOptions, e) => {
                 const selectedLabels = selectedOptions.map(
                   (option) => option.value
                 );

@@ -178,6 +178,7 @@ function CreateStudent() {
               <option value="cs">CS</option>
               <option value="ai">AI</option>
               <option value="sc">SC</option>
+              <option value="not specify">Not Specify</option>
             </select>
             <input
               type="file"

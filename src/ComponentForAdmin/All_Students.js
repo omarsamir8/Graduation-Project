@@ -221,6 +221,7 @@ function All_Students() {
                 <option value="cs">CS</option>
                 <option value="ai">AI</option>
                 <option value="sc">SC</option>
+                <option value="not specify">not specify</option>
               </select>
             </div>
             <div class="col part2">
