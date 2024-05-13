@@ -166,7 +166,7 @@ function AllDoctors() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-mohamed.vercel.app/Api/courses/searchcourse?size=20",
+          `https://university-mohamed.vercel.app${routes.course._id}${routes.course.searchCourseByAdmin}?size=20&sort=course_name`,
           {
             method: "GET",
             headers: {
@@ -176,6 +176,7 @@ function AllDoctors() {
           }
         );
         const data = await response.json();
+        console.log(data);
         if (Array.isArray(data.courses)) {
           setallcourses((prevCourses) => [...prevCourses, ...data.courses]);
         }
@@ -195,7 +196,7 @@ function AllDoctors() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://university-mohamed.vercel.app/Api/training/alltraining?page=1&size=20",
+          `https://university-mohamed.vercel.app${routes.Training._id}${routes.Training.allTrainingByAdmin}?page=1&size=20&sort=training_name`,
           {
             method: "GET",
             headers: {
@@ -322,6 +323,7 @@ function AllDoctors() {
               }}
               className="Materials_select"
               classNamePrefix="select"
+              placeholder="Select Doctor Matarial"
             />
             <Select
               isMulti
@@ -337,6 +339,7 @@ function AllDoctors() {
               }}
               className="Materials_select"
               classNamePrefix="select"
+              placeholder="Select Doctor Training"
             />
             {/* <input
               type="text"
