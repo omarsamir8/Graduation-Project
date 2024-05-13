@@ -252,17 +252,20 @@ function AllDoctors() {
                 setphone(e.target.value);
               }}
             />
-            <input
-              type="gender"
-              class="form-control mt-3"
-              placeholder="Enter Gender"
+            <select
+              className="form-control mt-3"
               aria-label="gender"
               name="gender"
-              value={gender}
               onChange={(e) => {
                 setgender(e.target.value);
               }}
-            />
+            >
+              <option value="" disabled selected hidden>
+                Select Gender
+              </option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
             <select
               className="form-control mt-3"
               aria-label="department"
