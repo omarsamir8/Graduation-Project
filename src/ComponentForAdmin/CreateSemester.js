@@ -296,7 +296,7 @@ function CreateSemester() {
         >
           All Semester{" "}
         </h4>
-        <Table className="table">
+        <Table striped bordered hover className="table">
           <thead>
             <tr>
               <th className="doctorInfo" scope="col">

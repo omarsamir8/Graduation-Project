@@ -16,6 +16,7 @@ function CreateCourse() {
   const [allcoursees, setallcoursees] = useState([]);
   const [selectedCourseId, setSelectedCourseId] = useState(null);
   const [message, setmessage] = useState("");
+  const [department, setdepartment] = useState([]);
   let { Page, setPage } = usePageContext(1);
   const [courseImage, setcourseImage] = useState([]);
   const [courseId, setcourseId] = useState("");
@@ -23,7 +24,12 @@ function CreateCourse() {
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
-
+  const departments = [
+    { value: "cs", title: "Computer Science" },
+    { value: "is", title: "Information Systems" },
+    { value: "sc", title: "Software Engineering" },
+    { value: "ai", title: "Artificial Intelligence" },
+  ];
   // create course
   const createcourse = async () => {
     try {
@@ -42,6 +48,7 @@ function CreateCourse() {
             OpenForRegistration,
             desc,
             Prerequisites,
+            department,
           }),
         }
       );
@@ -169,6 +176,7 @@ function CreateCourse() {
             OpenForRegistration,
             desc,
             Prerequisites,
+            department,
           }),
         }
       );
@@ -324,6 +332,7 @@ function CreateCourse() {
               }}
             />
             <input
+              multiple
               type="file"
               class="form-control mt-3"
               placeholder="Enter Student Image"
@@ -365,7 +374,22 @@ function CreateCourse() {
               <option value="true">True </option>
               <option value="false">False</option>
             </select>
-
+            <Select
+              isMulti
+              name="colors"
+              options={departments.map((dep) => {
+                return { value: dep.value, label: dep.title };
+              })}
+              onChange={(selectedOptions) => {
+                const selectedLabels = selectedOptions.map(
+                  (option) => option.value
+                );
+                setdepartment(selectedLabels);
+              }}
+              className="Materials_select"
+              classNamePrefix="select"
+              placeholder="Select Course Department "
+            />
             <Select
               isMulti
               name="colors"
@@ -407,7 +431,9 @@ function CreateCourse() {
       <div className="enrollcourse">
         {allcourses.map((course) => (
           <div className="course" key={course._id}>
-            <p className="open-now">Open Now</p>{" "}
+            <p className="open-now">
+              {course.OpenForRegistration === true ? "Open Now" : "Closed Now"}
+            </p>{" "}
             <img src={course.images ? course.images[0].url : testImg} alt="" />
             <div className="infooo">
               <h3>{course.course_name}</h3>
