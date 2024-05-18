@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "jspdf-autotable";
 import Swal from "sweetalert2";
 import { routes } from "../routes";
 import { Link } from "react-router-dom";
+import { Table } from "react-bootstrap"; // Assuming you are using react-bootstrap
 
 export default function RegisteredTraining() {
   const [trainingsRegistered, setTrainingsRegistered] = useState([]);
   const [trainingsResult, setTrainingsResult] = useState([]);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
+
   // get registered training
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +26,9 @@ export default function RegisteredTraining() {
         );
         const data = await response.json();
         console.log(data);
-        setTrainingsRegistered(data.result[0].trainingRegisterd);
+        if (data.result && data.result[0]) {
+          setTrainingsRegistered(data.result[0].trainingRegisterd || []);
+        }
       } catch (error) {
         console.error("Fetch failed", error);
       }
@@ -33,8 +36,10 @@ export default function RegisteredTraining() {
 
     fetchData();
   }, [accessToken, refreshToken]);
+
   console.log(trainingsRegistered);
   console.log(trainingsRegistered.length);
+
   // delete Training Register
   const deleteTraining = async (trainingId) => {
     try {
@@ -80,17 +85,19 @@ export default function RegisteredTraining() {
     const fetchResultData = async () => {
       try {
         const response = await fetch(
-          `https://university-mohamed.vercel.app/Api/Trainings/Results/search/trainings/result/by/student?select=trainingId,studentId`,
+          `https://university-mohamed.vercel.app/Api/Trainings/Results/search/trainings/result/by/student?select=trainingId,studentId,grade`,
           {
             method: "GET",
             headers: {
+              "Content-Type": "application/json",
               Authorization: `Bearer ${accessToken}`,
               "refresh-token": refreshToken,
             },
           }
         );
         const data = await response.json();
-        setTrainingsResult(data.training);
+        console.log(data);
+        setTrainingsResult(data.training || []);
       } catch (error) {
         console.error("Fetch failed", error);
       }
@@ -98,6 +105,7 @@ export default function RegisteredTraining() {
 
     fetchResultData();
   }, [accessToken, refreshToken]);
+  console.log(trainingsResult);
 
   return (
     <>
@@ -121,7 +129,7 @@ export default function RegisteredTraining() {
                   : null
               }
               alt=""
-            />{" "}
+            />
             <div className="info">
               <h3>{registeredTraining.training_name}</h3>
               <p style={{ marginTop: "-20px", color: "gray" }}>
@@ -134,7 +142,6 @@ export default function RegisteredTraining() {
               </p>
             </div>
             <div className="up-del-btn">
-              {" "}
               <button
                 type="button"
                 className="btn btn-danger"
@@ -161,7 +168,7 @@ export default function RegisteredTraining() {
           </div>
         ))}
       </div>
-      {/* {trainingsResult.length > 0 && (
+      {trainingsResult.length > 0 && (
         <>
           <h3
             style={{
@@ -173,7 +180,13 @@ export default function RegisteredTraining() {
           >
             Training Result
           </h3>
-          <Table style={{ textAlign: "center" }} className="table">
+          <Table
+            striped
+            bordered
+            hover
+            style={{ textAlign: "center" }}
+            className="table"
+          >
             <thead>
               <tr>
                 <th scope="col">#ID</th>
@@ -194,7 +207,7 @@ export default function RegisteredTraining() {
             </tbody>
           </Table>
         </>
-      )} */}
+      )}
     </>
   );
 }
