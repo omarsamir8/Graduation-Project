@@ -116,7 +116,9 @@ export default function RegisteredTraining() {
             <p className="open-now">Open Now</p>
             <img
               src={
-                registeredTraining.images ? registeredTraining.images[0] : null
+                registeredTraining.ImgUrls
+                  ? registeredTraining.ImgUrls[0]
+                  : null
               }
               alt=""
             />{" "}
@@ -159,7 +161,7 @@ export default function RegisteredTraining() {
           </div>
         ))}
       </div>
-      {trainingsResult.length > 0 && (
+      {/* {trainingsResult.length > 0 && (
         <>
           <h3
             style={{
@@ -192,7 +194,7 @@ export default function RegisteredTraining() {
             </tbody>
           </Table>
         </>
-      )}
+      )} */}
     </>
   );
 }
