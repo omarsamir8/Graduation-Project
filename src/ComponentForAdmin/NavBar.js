@@ -115,7 +115,7 @@ function NavBar() {
     try {
       // if (searchvalue.trim() !== "") {
       const response = await axios.get(
-        `https://university-mohamed.vercel.app${routes.Training._id}${routes.Training.allTrainingByAdmin}?select=training_name,start_date,OpenForRegister,Training&page=${Page}&size=8&search=${training_value}&sort=Full_Name`,
+        `https://university-mohamed.vercel.app/Api/trainings/get/all/trainings/info/by/admin?select=training_name,start_date,OpenForRegister,Training,ImgUrls&page=${Page}&size=8&search=${training_value}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

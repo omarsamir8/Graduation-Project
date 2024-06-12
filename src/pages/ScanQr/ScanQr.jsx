@@ -78,6 +78,7 @@ function ScanQr() {
       console.error("Login failed", error);
     }
   };
+  console.log(typeof scanResults);
   console.log(scanResults);
   // save pdf
   function saveScansToPDF() {
@@ -85,10 +86,7 @@ function ScanQr() {
     pdf.setFontSize(12);
     pdf.text(20, 20, "Scanned QR Code Data:Attendence");
 
-    const tableData = scanResults.map((data) => [
-      data.Full_Name,
-      data.Student_Code,
-    ]);
+    const tableData = [scanResults.Full_Name, scanResults.Student_Code];
 
     const headers = ["Name", "Student Code"];
     const tableConfig = {
