@@ -15,13 +15,27 @@ import TrainingResyltReport from "./pages/TrainingResyltReport/TrainingResyltRep
 import StudentInfo from "./pages/studentInfo/StudentInfo";
 import DoctorInfo from "./pages/DoctorInfo/DoctorInfo";
 import Generate_department from "./pages/Generate_department/Generate_department";
-
+import TitleAnimation from "../src/Loader/TitleAnimation.jsx";
 import ScanQr from "./pages/ScanQr/ScanQr";
 
 import ForgetPassword from "./pages/ForgetPassword";
 import ConfirmPassword from "./pages/ConfirmPassword";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const loadingTimeout = setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+
+    return () => {
+      clearTimeout(loadingTimeout);
+    };
+  }, []);
+  if (loading) {
+    return <TitleAnimation />;
+  }
   return (
     <>
       <div className="App">

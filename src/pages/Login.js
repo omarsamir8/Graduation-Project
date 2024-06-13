@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import { routes } from "../routes";
 import Swal from "sweetalert2";
+import TitleAnimation from "../Loader/TitleAnimation";
 
 function Login() {
   const navigate = useNavigate();
@@ -13,14 +14,13 @@ function Login() {
   const [message, setmessage] = useState("");
   const [type, settype] = useState("");
   const [name, setname] = useState("");
+  const [loading, setLoading] = useState(false); // تم إضافة حالة التحميل
 
   useEffect(() => {
-    // تحديث قيمة name عندما يتغير نوع المستخدم
     if (type === "student") {
       setname(Student_Code);
     } else if (type === "doctor" || type === "admin") {
       setname(email);
-      // قد تحتاج إلى استخدام قيمة البريد الإلكتروني هنا
     }
   }, [type, Student_Code, email]);
 
@@ -66,10 +66,11 @@ function Login() {
       localStorage.setItem("refreshtoken", data.refreshToken);
 
       if (response.ok) {
-        // If login is successful, navigate to the "/student" page
-        navigate("/student");
+        setLoading(true); // بدء التحميل
+        setTimeout(() => {
+          navigate("/student");
+        }, 1500); // التوجيه بعد 1.5 ثانية
       } else {
-        // Show an error message if needed
         Swal.fire({
           icon: "error",
           title: "Fail",
@@ -103,10 +104,11 @@ function Login() {
       localStorage.setItem("refreshtoken", data.refreshToken);
 
       if (response.ok) {
-        // If login is successful, navigate to the "/doctor" page
-        navigate("/doctor");
+        setLoading(true); // بدء التحميل
+        setTimeout(() => {
+          navigate("/doctor");
+        }, 1500); // التوجيه بعد 1.5 ثانية
       } else {
-        // Show an error message if needed
         Swal.fire({
           icon: "error",
           title: "Fail",
@@ -140,12 +142,16 @@ function Login() {
       localStorage.setItem("refreshtoken", data.refreshToken);
 
       if (response.ok && data.role === "admin") {
-        // If login is successful, navigate to the "/admin" page
-        navigate("/admin");
+        setLoading(true); // بدء التحميل
+        setTimeout(() => {
+          navigate("/admin");
+        }, 1500); // التوجيه بعد 1.5 ثانية
       } else if (response.ok && data.role === "superAdmin") {
-        navigate("/superadmin");
+        setLoading(true); // بدء التحميل
+        setTimeout(() => {
+          navigate("/superadmin");
+        }, 1500); // التوجيه بعد 1.5 ثانية
       } else {
-        // Show an error message if needed
         Swal.fire({
           icon: "error",
           title: "Fail",
@@ -159,21 +165,21 @@ function Login() {
       console.error("Login failed", error);
     }
   };
-  console.log(message);
+
+  if (loading) {
+    return <TitleAnimation />;
+  }
+
   return (
     <>
       <div className="col-12 login-page">
         <div className="col-12 login-container">
-          {/* <form></form> */}
           <div className=" col-12 login">
             <div className="col-12 title">
               <h1 className="col-12 login_title">Login</h1>
               <h1 className="col-12 login_title">Welcome back !</h1>
             </div>
 
-            {/* <div className="inputs col-12"> */}
-            {/* <h4>Login As .......</h4> */}
-            {/* <p className="col-12">Enter Your Account Details</p> */}
             <div className="kind">
               <label className="col-12">Login As...</label>
               <div className="col-12 radio_inputs">
@@ -245,7 +251,6 @@ function Login() {
             >
               Forget Password?
             </a>
-            {/* </div> */}
             <button className="button" onClick={check}>
               Login
             </button>

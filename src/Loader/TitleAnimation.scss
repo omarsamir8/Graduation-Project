@@ -1,0 +1,16 @@
+// TitleAnimation.scss
+
+.Loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 100vh; // Adjust as needed
+  width: 100%;
+  text-align: center;
+  .circle-loader {
+    border-color: #d908f5 !important; // Customize the spinner color
+    width: 100px; // Adjust spinner size
+    height: 100px; // Adjust spinner size
+  }
+}

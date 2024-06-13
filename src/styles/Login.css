@@ -26,7 +26,7 @@
 .login-container .login {
   width: 30rem;
   height: auto;
-  background-color: white;
+  background-color: whitesmoke;
   display: flex;
   flex-direction: column;
   justify-content: center;

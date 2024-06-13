@@ -124,8 +124,8 @@ export default function RegisteredTraining() {
             <p className="open-now">Open Now</p>
             <img
               src={
-                registeredTraining.ImgUrls
-                  ? registeredTraining.ImgUrls[0]
+                registeredTraining.images
+                  ? registeredTraining.images[0].url
                   : null
               }
               alt=""
