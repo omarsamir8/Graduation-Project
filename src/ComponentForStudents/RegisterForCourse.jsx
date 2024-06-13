@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { routes } from "../routes";
 import defulatimg from "../assets/traing2jpeg.jpeg";
+import TitleAnimation from "../Loader/TitleAnimation";
 
 export default function RegisterForCourse() {
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
   const [allcoursesavailable, setallcoursesavailable] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // Fetch all Courses
   useEffect(() => {
@@ -24,6 +26,14 @@ export default function RegisterForCourse() {
         );
         const data = await response.json();
         setallcoursesavailable(data.validCourses);
+        if (response.ok) {
+          setLoading(true);
+          setTimeout(() => {
+            setLoading(false);
+          }, 1500);
+        } else {
+          setLoading(true);
+        }
       } catch (error) {
         console.error("Fetch failed", error);
       }
@@ -66,6 +76,9 @@ export default function RegisterForCourse() {
     }
   };
 
+  if (loading) {
+    return <TitleAnimation />;
+  }
   return (
     <>
       <div className="Create_Student">

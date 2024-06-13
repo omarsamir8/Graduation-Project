@@ -4,6 +4,7 @@ import axios from "axios";
 import { routes } from "../routes";
 
 import TidioChat from "./TidioChat";
+import TitleAnimation from "../Loader/TitleAnimation";
 function Dashboard() {
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
@@ -17,6 +18,7 @@ function Dashboard() {
     { role: "user", text: "Hey, how are you today?" },
     { role: "ai", text: "I am doing very well!" },
   ];
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchSemesterGrade = async () => {
       try {
@@ -34,6 +36,11 @@ function Dashboard() {
         settotalgpa(response.data.totalGpaOverall);
         settotalhour(response.data.totalCreditHours);
         setlevel(response.data.level);
+
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1500);
 
         // Log the updated state
       } catch (error) {
@@ -96,6 +103,9 @@ function Dashboard() {
 
     fetchData();
   }, [accessToken, refreshToken]);
+  if (loading) {
+    return <TitleAnimation />;
+  }
   return (
     <>
       <div className="dashboard-container">

@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import { routes } from "../routes";
 import { Link } from "react-router-dom";
 import defulatimg from "../assets/traing2jpeg.jpeg";
+import TitleAnimation from "../Loader/TitleAnimation";
 
 export default function RegisterForTraining() {
   const [alltrainingsAvailable, setalltrainingsAvailable] = useState([]);
@@ -11,6 +12,7 @@ export default function RegisterForTraining() {
   const [training, setTraining] = useState(null);
   const [startdate, setstartdate] = useState("");
   const [enddate, setenddate] = useState("");
+  const [loading, setLoading] = useState(false);
   // Register for training
   const RegisterForTraining = async (tainingId) => {
     try {
@@ -60,6 +62,14 @@ export default function RegisterForTraining() {
         );
         const data = await response.json();
         setalltrainingsAvailable(data.trainings);
+        if (response.ok) {
+          setLoading(true);
+          setTimeout(() => {
+            setLoading(false);
+          }, 1500);
+        } else {
+          setLoading(true);
+        }
         console.log(data);
       } catch (error) {
         console.error("Fetch failed", error);
@@ -68,6 +78,10 @@ export default function RegisterForTraining() {
     console.log("startdate :", startdate);
     fetchData();
   }, [accessToken, refreshToken]);
+
+  if (loading) {
+    return <TitleAnimation />;
+  }
   return (
     <>
       <div className="Create_Student">
@@ -118,4 +132,3 @@ export default function RegisterForTraining() {
     </>
   );
 }
-
