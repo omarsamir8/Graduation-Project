@@ -28,6 +28,7 @@ function NavBar() {
   const { alldoctors, setalldoctors } = useDoctorContext();
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
+  const [imgName, setimgName] = useState("");
   const handleClick = (componentName) => {
     setSelectedComponent(componentName);
     window.scrollTo(0, 750);
@@ -57,6 +58,7 @@ function NavBar() {
 
         console.log(response.data);
         setadmininfo(response.data.user);
+        setimgName(response.data.user.urlImg);
       } catch (error) {
         console.error("Error fetching admin info:", error);
       }
@@ -64,6 +66,7 @@ function NavBar() {
 
     fetchData();
   }, [accessToken, refreshToken]);
+  console.log(imgName);
   // search for students
   const fetchData = async () => {
     try {
@@ -246,6 +249,62 @@ function NavBar() {
     // Re-enable scrolling on the body
     document.body.style.overflow = "auto";
   };
+
+  // delete Photo
+
+  const DeleteAdminImage = async () => {
+    try {
+      const confirmed = await Swal.fire({
+        title: "Are you sure?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!",
+      });
+
+      if (confirmed.isConfirmed) {
+        const response = await axios.patch(
+          `https://university-mohamed.vercel.app/Api/admins/delete/image/from/admin/by/admin`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+
+        const data = response.data;
+        console.log(data);
+
+        if (response.status === 200) {
+          Swal.fire({
+            icon: "success",
+            title: "Admin Img Deleted Successfully",
+            showConfirmButton: false,
+            timer: 3500,
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Failed To Delete Admin Img",
+            showConfirmButton: false,
+            timer: 3500,
+          });
+        }
+      }
+    } catch (error) {
+      console.error("Delete failed", error);
+      Swal.fire({
+        icon: "error",
+        title: "Failed To Delete Admin Img",
+        text: error.response?.data?.message || "An error occurred",
+        showConfirmButton: false,
+        timer: 3500,
+      });
+    }
+  };
   return (
     <>
       <div className="nav-bar">
@@ -311,6 +370,15 @@ function NavBar() {
                     data-bs-dismiss="modal"
                   >
                     Close
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    onClick={() => {
+                      DeleteAdminImage();
+                    }}
+                  >
+                    Delete Image
                   </button>
                   <button
                     onClick={() => {

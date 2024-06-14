@@ -104,6 +104,62 @@ function NavBar() {
     // Re-enable scrolling on the body
     document.body.style.overflow = "auto";
   };
+
+  // delete Photo
+
+  const DeleteDoctorImage = async () => {
+    try {
+      const confirmed = await Swal.fire({
+        title: "Are you sure?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!",
+      });
+
+      if (confirmed.isConfirmed) {
+        const response = await axios.patch(
+          `https://university-mohamed.vercel.app/Api/instructors/delete/image/to/instructor/by/instructor`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "refresh-token": refreshToken,
+            },
+          }
+        );
+
+        const data = response.data;
+        console.log(data);
+
+        if (response.status === 200) {
+          Swal.fire({
+            icon: "success",
+            title: "Admin Img Deleted Successfully",
+            showConfirmButton: false,
+            timer: 3500,
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Failed To Delete Admin Img",
+            showConfirmButton: false,
+            timer: 3500,
+          });
+        }
+      }
+    } catch (error) {
+      console.error("Delete failed", error);
+      Swal.fire({
+        icon: "error",
+        title: "Failed To Delete Admin Img",
+        text: error.response?.data?.message || "An error occurred",
+        showConfirmButton: false,
+        timer: 3500,
+      });
+    }
+  };
   return (
     <>
       <div className="nav-bar">
@@ -159,6 +215,15 @@ function NavBar() {
                     data-bs-dismiss="modal"
                   >
                     Close
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    onClick={() => {
+                      DeleteDoctorImage();
+                    }}
+                  >
+                    Delete Image
                   </button>
                   <button
                     onClick={() => {
