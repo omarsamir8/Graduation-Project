@@ -116,12 +116,12 @@ function Dashboard() {
               <h3>
                 {coursesregisterd.length > 0 ? coursesregisterd.length : 0}
               </h3>
-              <p>Total Course</p>
+              <p>Total courses</p>
             </div>
             <div className="main">
               <i class="fa-solid fa-layer-group" />
               <h3>{studentnewspaper.length}</h3>
-              <p>Total Semester</p>
+              <p>Total semesters</p>
             </div>
             <div className="main">
               <i class="fa-brands fa-stack-overflow" />
@@ -130,7 +130,7 @@ function Dashboard() {
                   ? trainingsRegistered.length
                   : 0}
               </h3>
-              <p>Total Training</p>
+              <p>Total trainings</p>
             </div>
           </div>
           <div className="main-container">
@@ -142,12 +142,12 @@ function Dashboard() {
             <div className="main">
               <i class="fa-solid fa-clock" />
               <h3>{totalhour}</h3>
-              <p>Total Hours</p>
+              <p>Total hours</p>
             </div>
             <div className="main">
               <i class="fa-solid fa-message" />
               <h3>8</h3>
-              <p>unread messages</p>
+              <p>Unread messages</p>
             </div>
           </div>
         </div>

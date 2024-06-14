@@ -160,7 +160,11 @@ function AllAdmins() {
   };
   return (
     <>
-      <div className="All_Admins">
+      <div className="All_Admins" style={{marginTop:"1rem"}}>
+      <marquee className="marquee" scrollamount="10">
+          {" "}
+          This section is related to all admins exissting in BFCAI{" "}
+        </marquee>
         <div className="Create_Student" style={{ display: showform }}>
           <h2 className="create_student">Update Student</h2>
           <form class="row mt-4">

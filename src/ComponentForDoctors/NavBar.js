@@ -136,14 +136,14 @@ function NavBar() {
         if (response.status === 200) {
           Swal.fire({
             icon: "success",
-            title: "Admin Img Deleted Successfully",
+            title: "Doctor image deleted successfully",
             showConfirmButton: false,
             timer: 3500,
           });
         } else {
           Swal.fire({
             icon: "error",
-            title: "Failed To Delete Admin Img",
+            title: "Failed to delete doctor image",
             showConfirmButton: false,
             timer: 3500,
           });
@@ -153,7 +153,7 @@ function NavBar() {
       console.error("Delete failed", error);
       Swal.fire({
         icon: "error",
-        title: "Failed To Delete Admin Img",
+        title: "Failed to delete doctor image",
         text: error.response?.data?.message || "An error occurred",
         showConfirmButton: false,
         timer: 3500,

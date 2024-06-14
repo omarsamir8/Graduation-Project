@@ -287,6 +287,10 @@ function StudentGrades() {
           marginTop: "20px",
         }}
       >
+          <marquee className="marquee" scrollamount="10">
+          {" "}
+          This section is related to update any grade for previous semesters for any student{" "}
+        </marquee>
         <Select
           isMulti
           name="colors"

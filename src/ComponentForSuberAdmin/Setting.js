@@ -173,7 +173,11 @@ function Setting() {
 
   return (
     <>
-      <div className="setting-page">
+      <div className="setting-page" style={{marginTop:"1rem"}}>
+      <marquee className="marquee" scrollamount="10">
+          {" "}
+          This section is related to all settings exissting in site to control all {" "}
+        </marquee>
         <div className="single-setting">
           <Table striped bordered hover className="table">
             <thead className="thead-dark">

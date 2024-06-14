@@ -181,7 +181,7 @@ function Login() {
             </div>
 
             <div className="kind">
-              <label className="col-12">Login As...</label>
+              <label className="col-12">Login as...</label>
               <div className="col-12 radio_inputs">
                 <input
                   type="radio"
@@ -214,7 +214,7 @@ function Login() {
               </div>
             </div>
             <div className="col-12 labelWithInput">
-              <Form.Label className="input_label">Email Or Code *</Form.Label>
+              <Form.Label className="input_label">Email or code <span className="required">*</span></Form.Label>
               <Form.Control
                 type="text"
                 name={name}
@@ -226,7 +226,7 @@ function Login() {
               />
             </div>
             <div className="col-12 labelWithInput">
-              <Form.Label className="input_label">Password *</Form.Label>
+              <Form.Label className="input_label">Password <span className="required">*</span></Form.Label>
               <Form.Control
                 type="password"
                 name="password"

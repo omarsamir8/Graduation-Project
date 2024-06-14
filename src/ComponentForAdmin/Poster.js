@@ -38,10 +38,10 @@ function Poster (props) {
             September ,2024
           </p>
           <h2 className=' animate__animated animate__backInRight'>
-            Welcom Back, {admininfo.FullName} !
+            Welcome Back, {admininfo.FullName} !
           </h2>
           <p className='p2  animate__animated animate__backInRight'>
-            Alwayes Stay Updated In Your Student Portal
+            Alwayes stay updated in your student portal
           </p>
         </div>
         <img

@@ -48,7 +48,7 @@ function Dashboard () {
             <div className='main'>
               <i class='fa-solid fa-book-open' />
               <h3>{doctorMatarials.length}</h3>
-              <p>Number of Course</p>
+              <p>Number of courses</p>
             </div>
             <div className='main'>
               <i class='fa-solid fa-check' />
@@ -58,24 +58,24 @@ function Dashboard () {
             <div className='main'>
               <i class='fa-solid fa-square-xmark' />
               <h3>20</h3>
-              <p> fallen student </p>
+              <p> Fallen student </p>
             </div>
           </div>
           <div className='main-container'>
             <div className='main'>
               <i class='fa-brands fa-stack-overflow' />
               <h3>{doctorTrainings.length}</h3>
-              <p>Number Of Training</p>
+              <p>Number of trainings</p>
             </div>
             <div className='main'>
               <i class='fa-solid fa-check' />
               <h3>300</h3>
-              <p>Successful students</p>
+              <p>Successfull students</p>
             </div>
             <div className='main'>
               <i class='fa-solid fa-square-xmark' />
               <h3>25</h3>
-              <p>fallen student</p>
+              <p>Fallen student</p>
             </div>
           </div>
         </div>

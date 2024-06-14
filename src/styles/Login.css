@@ -176,3 +176,7 @@
     border-radius: 50%;
   }
 }
+.required{
+  color: red;
+  font-size: 1.2rem;
+}
