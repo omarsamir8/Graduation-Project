@@ -158,3 +158,7 @@ function ScanQr() {
 }
 
 export default ScanQr;
+
+
+
+       
