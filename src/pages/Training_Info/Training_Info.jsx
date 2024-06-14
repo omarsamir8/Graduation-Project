@@ -74,7 +74,6 @@ const TrainingInfo = () => {
                 return null;
               }
             })}
-
             {/* {trainingimages.length > 0 && (
               <img src={trainingimages[0].url} alt="" />
             )}
