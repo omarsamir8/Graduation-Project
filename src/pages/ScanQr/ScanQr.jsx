@@ -4,6 +4,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import "./ScanQr.scss";
 import Swal from "sweetalert2";
+import { Table } from "react-bootstrap";
 
 function ScanQr() {
   const accessToken = localStorage.getItem("accesstoken");
@@ -24,7 +25,7 @@ function ScanQr() {
     Scanner.render(success, error);
 
     function success(result) {
-      setScanResults((prevResults) => [...prevResults, result]);
+      setScanResults((prevResults) => [...[prevResults], result]);
       setdata1(result.replace(/[""]/g, ""));
     }
 
@@ -36,7 +37,7 @@ function ScanQr() {
       Scanner.stop();
     };
   }, []);
-
+  console.log(scanResults);
   // get qr data
   const GetQrCodeData = async () => {
     try {
@@ -153,6 +154,27 @@ function ScanQr() {
       ) : (
         <div className="camera" id="reader"></div>
       )}
+      <Table striped bordered hover className="table mt-3">
+        <thead>
+          <tr>
+            <th className="doctorInfo" scope="col">
+              FullName
+            </th>
+            <th className="doctorInfo" scope="col">
+              Student_code
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <>
+            {}
+            <tr>
+              <td className="doctorInfo">{scanResults.Full_Name}</td>
+              <td className="doctorInfo">{scanResults.Student_Code}</td>
+            </tr>
+          </>
+        </tbody>
+      </Table>
     </div>
   );
 }
