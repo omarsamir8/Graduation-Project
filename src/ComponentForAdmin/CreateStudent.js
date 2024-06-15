@@ -7,6 +7,7 @@ import { routes } from "../routes";
 import axios from "axios";
 import Select from "react-select";
 import { useStudentContext } from "../StudentContext";
+import TitleAnimation from "../Loader/TitleAnimation";
 
 function CreateStudent() {
   const [Full_Name, setFull_Name] = useState("");
@@ -22,8 +23,9 @@ function CreateStudent() {
   const { allstudents, setallstudents } = useStudentContext();
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
-
+  const [loading, setLoading] = useState(false);
   const createstudent = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         `https://university-mohamed.vercel.app${routes.student._id}${routes.student.createStudent}`,
@@ -50,7 +52,7 @@ function CreateStudent() {
       setmessage(data.message);
       if (response.ok) {
         // Show SweetAlert on success
-
+        setLoading(false);
         Swal.fire({
           icon: "success",
           title: "Student added successfully",
@@ -58,6 +60,7 @@ function CreateStudent() {
           timer: 3500,
         });
       } else {
+        setLoading(false);
         // Show an error message if needed
         Swal.fire({
           icon: "error",
@@ -75,6 +78,7 @@ function CreateStudent() {
 
   // Upload Student Image
   const uploadstudentimage = async () => {
+    setLoading(true);
     try {
       const formData = new FormData();
       formData.append("studentImage", studentImage);
@@ -95,6 +99,7 @@ function CreateStudent() {
       console.log(data);
       setmessage(data.message);
       if (response.ok) {
+        setLoading(false);
         // Show SweetAlert on success
         Swal.fire({
           icon: "success",
@@ -103,6 +108,7 @@ function CreateStudent() {
           timer: 3500,
         });
       } else {
+        setLoading(false);
         // Show an error message if needed
         Swal.fire({
           icon: "error",
@@ -116,6 +122,9 @@ function CreateStudent() {
       console.error("Upload failed", error);
     }
   };
+  if (loading) {
+    return <TitleAnimation />;
+  }
 
   return (
     <>

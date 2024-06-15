@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { routes } from "../routes";
 import { Table } from "react-bootstrap";
 import defulatimg from "../assets/traing2jpeg.jpeg";
+import TitleAnimation from "../Loader/TitleAnimation";
 
 function Training() {
   const [selectedComponent2, setSelectedComponent2] = useRecoilState(
@@ -21,12 +22,13 @@ function Training() {
     []
   );
   const [studentId, setstudentId] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const [grade, setgrade] = useState("");
   const [studentResultReport, setStudentResultReport] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(
           `https://university-mohamed.vercel.app${routes.instructor._id}${routes.instructor.InstructorInfo}`,
@@ -38,8 +40,12 @@ function Training() {
           }
         );
         console.log(response.data);
-
         setdoctorTrainings(response.data.user.Training);
+        if (response.ok) {
+          setLoading(false);
+        } else {
+          setLoading(false);
+        }
       } catch (error) {
         console.error("Error fetching doctor info:", error);
       }
@@ -72,6 +78,7 @@ function Training() {
 
   // Function to get students registered in a course
   const fetchRegisteredStudents = async (trainingId) => {
+    setLoading(true);
     console.log(trainingId);
     try {
       const response = await axios.get(
@@ -86,6 +93,11 @@ function Training() {
       console.log(trainingId);
       console.log(response.data);
       setallstudentregistertraining(response.data.TrainingRegisted);
+      if (response.ok) {
+        setLoading(false);
+      } else {
+        setLoading(false);
+      }
     } catch (error) {
       console.error("Error fetching registered students:", error);
     }
@@ -94,6 +106,7 @@ function Training() {
 
   // upload training grade
   const Upload_grade = async (studentId, trainingId) => {
+    setLoading(true);
     try {
       const response = await fetch(
         `https://university-mohamed.vercel.app${routes.TrainingResult._id}${routes.TrainingResult.uploadByInstructor}`,
@@ -115,6 +128,7 @@ function Training() {
       console.log(data);
 
       if (response.ok) {
+        setLoading(false);
         Swal.fire({
           icon: "success",
           title: "Upload Training grade successfully",
@@ -122,6 +136,7 @@ function Training() {
           timer: 3500,
         });
       } else {
+        setLoading(false);
         // Show an error message if needed
         Swal.fire({
           icon: "error",
@@ -137,6 +152,7 @@ function Training() {
 
   // update grade
   const updateGrade = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         `https://university-mohamed.vercel.app/Api/Trainings/Results/update/result/by/instructor?TrainingResultId=${selectedTrainingResultId}`,
@@ -156,6 +172,7 @@ function Training() {
       );
       const data = await response.json();
       if (response.ok) {
+        setLoading(false);
         // Show SweetAlert on success
         Swal.fire({
           icon: "success",
@@ -183,6 +200,7 @@ function Training() {
         setgrade(null);
         // setselectedTrainingResultId(null);
       } else {
+        setLoading(false);
         // Show an error message if needed
         Swal.fire({
           icon: "error",
@@ -198,6 +216,7 @@ function Training() {
   // Get result of training for student
 
   const fetchResultData = async (trainingId) => {
+    setLoading(true);
     try {
       const response = await axios.get(
         `https://university-mohamed.vercel.app/Api/Trainings/Results/search/trainings/result/by/instructor?select=trainingId,studentId,grade&trainingId=${trainingId}&page=1&size=10`,
@@ -209,13 +228,19 @@ function Training() {
         }
       );
       console.log(response.data);
-
       setStudentResultReport(response.data.training || []);
+      if (response.ok) {
+        setLoading(false);
+      } else {
+        setLoading(false);
+      }
     } catch (error) {
       console.error("Error fetching student result:", error);
     }
   };
-
+  if (loading) {
+    return <TitleAnimation />;
+  }
   return (
     <>
       <div className="enrollcourse">

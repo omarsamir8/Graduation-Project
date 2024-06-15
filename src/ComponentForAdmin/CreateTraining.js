@@ -6,6 +6,7 @@ import { routes } from "../routes";
 import testImg from "../assets/traing2jpeg.jpeg";
 import { usePageContext } from "../PageContext";
 import Select from "react-select";
+import TitleAnimation from "../Loader/TitleAnimation";
 
 function CreateTraining() {
   const [training_name, settraining_name] = useState("");
@@ -25,9 +26,10 @@ function CreateTraining() {
   const [TrainingImage, setTrainingImage] = useState([]);
   const [trainingId, settrainingId] = useState("");
   const [alltrainingsAvailable, setalltrainingsAvailable] = useState([]);
-
+  const [loading, setLoading] = useState(false);
   // create Training
   const createTraining = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         `https://university-mohamed.vercel.app${routes.Training._id}${routes.Training.AddTraining}`,
@@ -54,6 +56,7 @@ function CreateTraining() {
       console.log(data.message);
 
       if (response.ok) {
+        setLoading(false);
         // Show SweetAlert on success
         Swal.fire({
           icon: "success",
@@ -62,6 +65,7 @@ function CreateTraining() {
           timer: 3500,
         });
       } else {
+        setLoading(false);
         // Show an error message if needed
         if (data.message === "Training name already exists") {
           Swal.fire({
@@ -96,6 +100,7 @@ function CreateTraining() {
         confirmButtonText: "Yes, delete it!",
       });
       if (confirmed.isConfirmed) {
+        setLoading(true);
         const response = await fetch(
           `https://university-mohamed.vercel.app${routes.Training._id}${routes.Training.deleteTraining}?training_id=${trainingId}`,
           {
@@ -108,13 +113,27 @@ function CreateTraining() {
         );
 
         if (response.ok) {
+          setLoading(false);
           // On success, update the state to remove the deleted course
           setAllTrainings((prevTrainings) =>
             prevTrainings.filter((training) => training._id !== trainingId)
           );
           console.log(`Training with ID ${trainingId} deleted successfully.`);
+          Swal.fire({
+            icon: "success",
+            title: "Training Deleted successfully",
+            showConfirmButton: false,
+            timer: 3500,
+          });
         } else {
+          setLoading(false);
           console.error(`Failed to delete training with ID ${trainingId}.`);
+          Swal.fire({
+            icon: "error",
+            title: "Fail",
+            text: "Training Deleted Failed",
+            timer: 4500,
+          });
         }
       }
     } catch (error) {
@@ -124,6 +143,7 @@ function CreateTraining() {
 
   // update Training
   const updateTraining = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         `https://university-mohamed.vercel.app${routes.Training._id}${routes.Training.updateTraining}?training_id=${selectedTrainingId}`,
@@ -146,6 +166,7 @@ function CreateTraining() {
       );
       const data = await response.json();
       if (response.ok) {
+        setLoading(false);
         // Show SweetAlert on success
         Swal.fire({
           icon: "success",
@@ -179,6 +200,7 @@ function CreateTraining() {
         setend_date("");
         setrequirements("");
       } else {
+        setLoading(false);
         // Show an error message if needed
         Swal.fire({
           icon: "error",
@@ -199,6 +221,7 @@ function CreateTraining() {
 
   // upload training photo
   const uploadtrainingimage = async () => {
+    setLoading(true);
     try {
       const formData = new FormData();
       formData.append("TrainingImage", TrainingImage);
@@ -220,6 +243,7 @@ function CreateTraining() {
       console.log(data);
       setmessage(data.message);
       if (response.ok) {
+        setLoading(false);
         // Show SweetAlert on success
         Swal.fire({
           icon: "success",
@@ -228,6 +252,7 @@ function CreateTraining() {
           timer: 3500,
         });
       } else {
+        setLoading(false);
         // Show an error message if needed
         Swal.fire({
           icon: "error",
@@ -276,6 +301,10 @@ function CreateTraining() {
     fetchData();
   }, [accessToken, refreshToken]);
   console.log(alltrainingsAvailable);
+
+  if (loading) {
+    return <TitleAnimation />;
+  }
   return (
     <>
       <div className="Create_Student">

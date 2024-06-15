@@ -5,6 +5,7 @@ import "../styles/studentgradesearchbysuberadmin.css";
 import Swal from "sweetalert2";
 import { routes } from "../routes";
 import { Table } from "react-bootstrap";
+import TitleAnimation from "../Loader/TitleAnimation";
 
 function StudentGrades() {
   const accessToken = localStorage.getItem("accesstoken");
@@ -22,12 +23,13 @@ function StudentGrades() {
   const [resultsbysuberadmin, setresultsbysuberadmin] = useState([]);
   const [selectedGradeId, setselectedGradeId] = useState("");
   const [backToRegister, setbackToRegister] = useState("yes");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchsearchforcourse = async () => {
       try {
         const response = await axios.get(
-          `https://university-mohamed.vercel.app/Api/courses/search/for/courses/by/Admin?search=&sort=course_name&page=1&size=20&select=course_name`,
+          `https://university-mohamed.vercel.app/Api/courses/search/for/courses/by/Admin?sort=-course_name&page=1&size=10`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -72,6 +74,7 @@ function StudentGrades() {
   console.log(allstudents);
   // upload grade
   const Upload_grade = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         `https://university-mohamed.vercel.app/Api/students/Grades/add/grade/by/admin`,
@@ -98,7 +101,7 @@ function StudentGrades() {
       // setmessage(data.message);
       if (response.ok) {
         // Show SweetAlert on success
-
+        setLoading(false);
         Swal.fire({
           icon: "success",
           title: "Upload grade successfully",
@@ -106,6 +109,7 @@ function StudentGrades() {
           timer: 3500,
         });
       } else {
+        setLoading(false);
         // Show an error message if needed
         Swal.fire({
           icon: "error",
@@ -166,6 +170,7 @@ function StudentGrades() {
 
   // update grade
   const updateGrade = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         `https://university-mohamed.vercel.app/Api/students/Grades/update/grade/by/admin?GradeId=${selectedGradeId}`,
@@ -188,6 +193,7 @@ function StudentGrades() {
       );
       const data = await response.json();
       if (response.ok) {
+        setLoading(false);
         // Show SweetAlert on success
         Swal.fire({
           icon: "success",
@@ -222,6 +228,7 @@ function StudentGrades() {
         setPractical("");
         setFinalExam("");
       } else {
+        setLoading(false);
         // Show an error message if needed
         Swal.fire({
           icon: "error",
@@ -247,6 +254,7 @@ function StudentGrades() {
         confirmButtonText: "Yes, delete it!",
       });
       if (confirmed.isConfirmed) {
+        setLoading(true);
         const response = await fetch(
           `https://university-mohamed.vercel.app/Api/students/Grades/delete/grade/by/admin?GradeId=${GradeId}`,
           {
@@ -262,12 +270,14 @@ function StudentGrades() {
         );
 
         if (response.ok) {
+          setLoading(false);
           // On success, update the state to remove the deleted course
           setresultsbysuberadmin((prevGrade) =>
             prevGrade.filter((grade) => grade._id !== GradeId)
           );
           console.log(`Course with ID ${courseId} deleted successfully.`);
         } else {
+          setLoading(false);
           console.error(`Failed to delete course with ID ${GradeId}.`);
         }
       }
@@ -275,6 +285,9 @@ function StudentGrades() {
       console.error("Delete failed", error);
     }
   };
+  if (loading) {
+    return <TitleAnimation />;
+  }
   return (
     <>
       <div
@@ -287,9 +300,10 @@ function StudentGrades() {
           marginTop: "20px",
         }}
       >
-          <marquee className="marquee" scrollamount="10">
+        <marquee className="marquee" scrollamount="10">
           {" "}
-          This section is related to update any grade for previous semesters for any student{" "}
+          This section is related to update any grade for previous semesters for
+          any student{" "}
         </marquee>
         <Select
           isMulti
@@ -343,7 +357,7 @@ function StudentGrades() {
           }}
           className="Materials_select2"
           classNamePrefix="select"
-          placeholder="Select Student ID"
+          placeholder="Select Semster ID"
         />
         <input
           style={{ width: "30%", height: "40px" }}

@@ -8,6 +8,7 @@ import { routes } from "../routes";
 import { Button, Table } from "react-bootstrap";
 import defulatimg from "../assets/traing2jpeg.jpeg";
 import "../Styles_For_Admin/category.css";
+import TitleAnimation from "../Loader/TitleAnimation";
 function Courses() {
   const [selectedComponent2, setSelectedComponent2] = useRecoilState(
     $Dashboard2_Components
@@ -30,9 +31,10 @@ function Courses() {
   const [selectedGradeId, setselectedGradeId] = useState("");
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
-
+  const [loading, setLoading] = useState(false);
   // Function to get students registered in a course
   const fetchRegisteredStudents = async (courseId) => {
+    setLoading(true);
     console.log(courseId);
     try {
       const response = await axios.get(
@@ -47,6 +49,11 @@ function Courses() {
       console.log(courseId);
       console.log(response.data);
       setallstudentregistercourses(response.data.registers);
+      if (response.ok) {
+        setLoading(false);
+      } else {
+        setLoading(false);
+      }
     } catch (error) {
       console.error("Error fetching registered students:", error);
     }
@@ -56,6 +63,7 @@ function Courses() {
   // get doctor materials
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(
           `https://university-mohamed.vercel.app${routes.instructor._id}${routes.instructor.InstructorInfo}`,
@@ -68,6 +76,11 @@ function Courses() {
         );
         console.log(response.data);
         setdoctorMatarials(response.data.user.Materials);
+        if (response.ok) {
+          setLoading(false);
+        } else {
+          setLoading(false);
+        }
       } catch (error) {
         console.error("Error fetching doctor info:", error);
       }
@@ -80,6 +93,7 @@ function Courses() {
 
   useEffect(() => {
     const fetchDataa = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(
           `https://university-mohamed.vercel.app${routes.semster._id}${routes.semster.MainSemsterInfoByInstructor}`,
@@ -92,6 +106,11 @@ function Courses() {
         );
         console.log(response.data);
         setmainsemester(response.data.semster);
+        if (response.ok) {
+          setLoading(false);
+        } else {
+          setLoading(false);
+        }
       } catch (error) {
         console.error("Error fetching doctor info:", error);
       }
@@ -102,6 +121,7 @@ function Courses() {
 
   // Upload grades for students
   const Upload_grade = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         `https://university-mohamed.vercel.app${routes.studentGrades._id}${routes.studentGrades.AddGradeByInstructor}`,
@@ -128,7 +148,7 @@ function Courses() {
       // setmessage(data.message);
       if (response.ok) {
         // Show SweetAlert on success
-
+        setLoading(false);
         Swal.fire({
           icon: "success",
           title: "Upload grade successfully",
@@ -136,6 +156,7 @@ function Courses() {
           timer: 3500,
         });
       } else {
+        setLoading(false);
         // Show an error message if needed
         Swal.fire({
           icon: "error",
@@ -151,6 +172,7 @@ function Courses() {
   // get result For Student
 
   const fetchDataaa = async (courseId) => {
+    setLoading(true);
     try {
       const response = await axios.get(
         `https://university-mohamed.vercel.app/Api/students/Grades/search/by/instructor?courseId=${courseId}&size=7&page=1&select=studentId,courseId,Points,Grade,FinalExam,Oral,Practical,Midterm,YearWorks,semsterId,TotalGrate`,
@@ -163,6 +185,11 @@ function Courses() {
       );
       console.log(response.data);
       setcourseGradesInstruc(response.data.grades);
+      if (response.ok) {
+        setLoading(false);
+      } else {
+        setLoading(false);
+      }
     } catch (error) {
       console.error("Error fetching doctor info:", error);
     }
@@ -170,6 +197,7 @@ function Courses() {
 
   // update grade
   const updateGrade = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         `https://university-mohamed.vercel.app/Api/students/Grades/update/grade/by/instructor?GradeId=${selectedGradeId}`,
@@ -192,6 +220,7 @@ function Courses() {
       );
       const data = await response.json();
       if (response.ok) {
+        setLoading(false);
         // Show SweetAlert on success
         Swal.fire({
           icon: "success",
@@ -226,6 +255,7 @@ function Courses() {
         setPractical("");
         setFinalExam("");
       } else {
+        setLoading(false);
         // Show an error message if needed
         Swal.fire({
           icon: "error",
@@ -251,6 +281,7 @@ function Courses() {
         confirmButtonText: "Yes, delete it!",
       });
       if (confirmed.isConfirmed) {
+        setLoading(true);
         const response = await fetch(
           `https://university-mohamed.vercel.app/Api/student/Grades/deletecoursegrate?GradeId=${GradeId}`,
           {
@@ -266,23 +297,39 @@ function Courses() {
         );
 
         if (response.ok) {
+          setLoading(false);
           // On success, update the state to remove the deleted course
           setcourseGradesInstruc((prevGrade) =>
             prevGrade.filter((grade) => grade._id !== GradeId)
           );
           console.log(`Course with ID ${courseId} deleted successfully.`);
+          Swal.fire({
+            icon: "success",
+            title: "Fail",
+            text: "Course Grade Deleted Successfully",
+            timer: 4500,
+          });
         } else {
+          setLoading(false);
           console.error(`Failed to delete course with ID ${GradeId}.`);
+          Swal.fire({
+            icon: "error",
+            title: "Fail",
+            text: "Course Grade Deleted Failed",
+            timer: 4500,
+          });
         }
       }
     } catch (error) {
       console.error("Delete failed", error);
     }
   };
-
+  if (loading) {
+    return <TitleAnimation />;
+  }
   return (
     <>
-      <div className="enrollcourse">
+      <div style={{ width: "1020px" }} className="enrollcourse">
         {doctorMatarials.map((material) => {
           return (
             <div

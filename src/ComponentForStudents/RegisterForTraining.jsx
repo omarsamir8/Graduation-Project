@@ -15,6 +15,7 @@ export default function RegisterForTraining() {
   const [loading, setLoading] = useState(false);
   // Register for training
   const RegisterForTraining = async (tainingId) => {
+    setLoading(true);
     try {
       const response = await fetch(
         `https://university-mohamed.vercel.app${routes.RegisterTraining._id}${routes.RegisterTraining.addTraining}?trainingId=${tainingId}`,
@@ -28,6 +29,7 @@ export default function RegisterForTraining() {
       );
 
       if (response.ok) {
+        setLoading(false);
         Swal.fire({
           icon: "success",
           title: "Course registered successfully",
@@ -35,6 +37,7 @@ export default function RegisterForTraining() {
           timer: 3500,
         });
       } else {
+        setLoading(false);
         Swal.fire({
           icon: "error",
           title: "Failed",
@@ -49,6 +52,7 @@ export default function RegisterForTraining() {
   // Fetch all Trainings
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const response = await fetch(
           `https://university-mohamed.vercel.app${routes.Training._id}${routes.Training.allTrainingBystudent}?page=1&size=20`,
@@ -63,12 +67,9 @@ export default function RegisterForTraining() {
         const data = await response.json();
         setalltrainingsAvailable(data.trainings);
         if (response.ok) {
-          setLoading(true);
-          setTimeout(() => {
-            setLoading(false);
-          }, 1500);
+          setLoading(false);
         } else {
-          setLoading(true);
+          setLoading(false);
         }
         console.log(data);
       } catch (error) {

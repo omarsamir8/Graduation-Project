@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { routes } from "../routes";
 import Swal from "sweetalert2";
 import { Table, Form } from "react-bootstrap";
+import TitleAnimation from "../Loader/TitleAnimation";
 
 function Setting() {
   const [Setting, setSetting] = useState([]);
@@ -14,6 +15,7 @@ function Setting() {
 
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,6 +51,7 @@ function Setting() {
   }, [ApiUrls]);
 
   const UpdateSettings = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         "https://university-mohamed.vercel.app/Api/admin/setting/update",
@@ -66,6 +69,7 @@ function Setting() {
       );
       const data = await response.json();
       if (response.ok) {
+        setLoading(false);
         // Show SweetAlert on success
         Swal.fire({
           icon: "success",
@@ -74,6 +78,7 @@ function Setting() {
           timer: 3500,
         });
       } else {
+        setLoading(false);
         // Show an error message if needed
         Swal.fire({
           icon: "error",
@@ -132,6 +137,7 @@ function Setting() {
   };
   // change Main Semester
   const ChangeMainSemester = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         "https://university-mohamed.vercel.app/Api/admin/setting/update",
@@ -150,6 +156,7 @@ function Setting() {
       );
 
       if (response.ok) {
+        setLoading(false);
         // Show SweetAlert on success
         Swal.fire({
           icon: "success",
@@ -158,6 +165,7 @@ function Setting() {
           timer: 3500,
         });
       } else {
+        setLoading(false);
         // Show an error message if needed
         Swal.fire({
           icon: "error",
@@ -170,13 +178,16 @@ function Setting() {
       console.error("Update failed", error);
     }
   };
-
+  if (loading) {
+    return <TitleAnimation />;
+  }
   return (
     <>
-      <div className="setting-page" style={{marginTop:"1rem"}}>
-      <marquee className="marquee" scrollamount="10">
+      <div className="setting-page" style={{ marginTop: "1rem" }}>
+        <marquee className="marquee" scrollamount="10">
           {" "}
-          This section is related to all settings exissting in site to control all {" "}
+          This section is related to all settings exissting in site to control
+          all{" "}
         </marquee>
         <div className="single-setting">
           <Table striped bordered hover className="table">

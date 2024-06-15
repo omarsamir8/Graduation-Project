@@ -8,6 +8,7 @@ import { routes } from "../routes";
 import { Table } from "react-bootstrap";
 import { usePageContext } from "../PageContext";
 import { Link } from "react-router-dom";
+import TitleAnimation from "../Loader/TitleAnimation";
 
 function All_Students() {
   const { allstudents, setallstudents } = useStudentContext();
@@ -24,7 +25,7 @@ function All_Students() {
   const [semesterId, setsemesterId] = useState("");
   const [count, setcount] = useState(1);
   const [department, setdepartment] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
 
@@ -40,6 +41,7 @@ function All_Students() {
         confirmButtonText: "Yes, delete it!",
       });
       if (confirmed.isConfirmed) {
+        setLoading(true);
         const response = await fetch(
           `https://university-mohamed.vercel.app${routes.student._id}${routes.student.deleteStudent}?userId=${studentId}`,
           {
@@ -52,13 +54,27 @@ function All_Students() {
         );
 
         if (response.ok) {
+          setLoading(false);
           // Remove the deleted doctor from the state
           setallstudents((prevDoctors) =>
             prevDoctors.filter((student) => student._id !== studentId)
           );
           console.log(`Doctor with ID ${studentId} deleted successfully.`);
+          Swal.fire({
+            icon: "success",
+            title: "Student Deleted successfully",
+            showConfirmButton: false,
+            timer: 3500,
+          });
         } else {
+          setLoading(false);
           console.error(`Failed to delete doctor with ID ${studentId}.`);
+          Swal.fire({
+            icon: "failed",
+            title: "Student Deleted Failed",
+            showConfirmButton: false,
+            timer: 3500,
+          });
         }
       }
     } catch (error) {
@@ -80,6 +96,7 @@ function All_Students() {
   }
   // update students
   const updateStudent = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         `https://university-mohamed.vercel.app${routes.student._id}${routes.student.updateStudent}?userId=${selectedStudent._id}`,
@@ -105,6 +122,7 @@ function All_Students() {
       );
       const data = await response.json();
       if (response.ok) {
+        setLoading(false);
         // Show SweetAlert on success
         Swal.fire({
           icon: "success",
@@ -141,6 +159,7 @@ function All_Students() {
         setgender("");
         setsemesterId("");
       } else {
+        setLoading(false);
         // Show an error message if needed
         Swal.fire({
           icon: "error",
@@ -165,6 +184,9 @@ function All_Students() {
     // Increment count by 1
   };
   console.log(Page);
+  if (loading) {
+    return <TitleAnimation />;
+  }
 
   return (
     <>

@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import { routes } from "../routes";
 import Swal from "sweetalert2";
 import TitleAnimation from "../Loader/TitleAnimation";
+import Spinner from "react-bootstrap/Spinner";
 
 function Login() {
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ function Login() {
   };
 
   const check = () => {
+    setLoading(true); // بدء التحميل عند الضغط على زر تسجيل الدخول
     if (type === "student") {
       handleLoginForStudent();
       console.log("this login for students");
@@ -43,7 +45,8 @@ function Login() {
       handleLoginforadmin();
       console.log("this login for admins and superadmins");
     } else {
-      console.log("you must select typee ");
+      console.log("you must select type");
+      setLoading(false); // إيقاف التحميل إذا لم يتم تحديد النوع
     }
   };
 
@@ -66,11 +69,12 @@ function Login() {
       localStorage.setItem("refreshtoken", data.refreshToken);
 
       if (response.ok) {
-        setLoading(true); // بدء التحميل
         setTimeout(() => {
+          setLoading(false);
           navigate("/student");
         }, 1500); // التوجيه بعد 1.5 ثانية
       } else {
+        setLoading(false);
         Swal.fire({
           icon: "error",
           title: "Fail",
@@ -82,6 +86,7 @@ function Login() {
       }
     } catch (error) {
       console.error("Login failed", error);
+      setLoading(false); // إيقاف التحميل عند حدوث خطأ
     }
   };
 
@@ -104,11 +109,12 @@ function Login() {
       localStorage.setItem("refreshtoken", data.refreshToken);
 
       if (response.ok) {
-        setLoading(true); // بدء التحميل
         setTimeout(() => {
+          setLoading(false);
           navigate("/doctor");
         }, 1500); // التوجيه بعد 1.5 ثانية
       } else {
+        setLoading(false);
         Swal.fire({
           icon: "error",
           title: "Fail",
@@ -120,6 +126,7 @@ function Login() {
       }
     } catch (error) {
       console.error("Login failed", error);
+      setLoading(false); // إيقاف التحميل عند حدوث خطأ
     }
   };
 
@@ -142,16 +149,17 @@ function Login() {
       localStorage.setItem("refreshtoken", data.refreshToken);
 
       if (response.ok && data.role === "admin") {
-        setLoading(true); // بدء التحميل
         setTimeout(() => {
+          setLoading(false);
           navigate("/admin");
         }, 1500); // التوجيه بعد 1.5 ثانية
       } else if (response.ok && data.role === "superAdmin") {
-        setLoading(true); // بدء التحميل
         setTimeout(() => {
+          setLoading(false);
           navigate("/superadmin");
         }, 1500); // التوجيه بعد 1.5 ثانية
       } else {
+        setLoading(false);
         Swal.fire({
           icon: "error",
           title: "Fail",
@@ -163,6 +171,7 @@ function Login() {
       }
     } catch (error) {
       console.error("Login failed", error);
+      setLoading(false); // إيقاف التحميل عند حدوث خطأ
     }
   };
 
@@ -174,10 +183,10 @@ function Login() {
     <>
       <div className="col-12 login-page">
         <div className="col-12 login-container">
-          <div className=" col-12 login">
+          <div className="col-12 login">
             <div className="col-12 title">
               <h1 className="col-12 login_title">Login</h1>
-              <h1 className="col-12 login_title">Welcome back !</h1>
+              <h1 className="col-12 login_title">Welcome back!</h1>
             </div>
 
             <div className="kind">
@@ -214,7 +223,9 @@ function Login() {
               </div>
             </div>
             <div className="col-12 labelWithInput">
-              <Form.Label className="input_label">Email or code <span className="required">*</span></Form.Label>
+              <Form.Label className="input_label">
+                Email or code <span className="required">*</span>
+              </Form.Label>
               <Form.Control
                 type="text"
                 name={name}
@@ -226,7 +237,9 @@ function Login() {
               />
             </div>
             <div className="col-12 labelWithInput">
-              <Form.Label className="input_label">Password <span className="required">*</span></Form.Label>
+              <Form.Label className="input_label">
+                Password <span className="required">*</span>
+              </Form.Label>
               <Form.Control
                 type="password"
                 name="password"

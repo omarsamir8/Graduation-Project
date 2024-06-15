@@ -21,6 +21,7 @@ function Dashboard() {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchSemesterGrade = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(
           `https://university-mohamed.vercel.app${routes.studentGrades._id}${routes.studentGrades.NewspaperBystudent}`,
@@ -37,10 +38,11 @@ function Dashboard() {
         settotalhour(response.data.totalCreditHours);
         setlevel(response.data.level);
 
-        setLoading(true);
-        setTimeout(() => {
+        if (response.ok) {
           setLoading(false);
-        }, 1500);
+        } else {
+          setLoading(false);
+        }
 
         // Log the updated state
       } catch (error) {
@@ -55,6 +57,7 @@ function Dashboard() {
   // get total training registered
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const response = await fetch(
           `https://university-mohamed.vercel.app${routes.RegisterTraining._id}${routes.RegisterTraining.getTrainingRegisterdInfoTostu}`,
@@ -69,6 +72,11 @@ function Dashboard() {
         const data = await response.json();
         console.log(data);
         setTrainingsRegistered(data.result[0].trainingRegisterd);
+        if (response.ok) {
+          setLoading(false);
+        } else {
+          setLoading(false);
+        }
       } catch (error) {
         console.error("Fetch failed", error);
       }
@@ -81,6 +89,7 @@ function Dashboard() {
   // get registerd courses
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const response = await fetch(
           `https://university-mohamed.vercel.app${routes.courseRegister._id}${routes.courseRegister.GetRegisterInfoByStudent}`,
@@ -96,6 +105,11 @@ function Dashboard() {
         console.log(data);
         setcoursesregisterd(data.register.coursesRegisterd);
         console.log(coursesregisterd);
+        if (response.ok) {
+          setLoading(false);
+        } else {
+          setLoading(false);
+        }
       } catch (error) {
         console.error("Fetch failed", error);
       }

@@ -8,6 +8,7 @@ import { routes } from "../routes";
 import { Table } from "react-bootstrap";
 import { usePageContext } from "../PageContext";
 import { Link } from "react-router-dom";
+import TitleAnimation from "../Loader/TitleAnimation";
 
 function AllDoctors() {
   const { alldoctors, setalldoctors } = useDoctorContext();
@@ -29,6 +30,7 @@ function AllDoctors() {
   const [Training, setTraining] = useState([]);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
+  const [loading, setLoading] = useState(false);
 
   //  delete doctors
   const handleDelete = async (doctorId) => {
@@ -42,6 +44,7 @@ function AllDoctors() {
         confirmButtonText: "Yes, delete it!",
       });
       if (confirmed.isConfirmed) {
+        setLoading(true);
         const response = await fetch(
           `https://university-mohamed.vercel.app${routes.instructor._id}${routes.instructor.deleteInstructor}?userId=${doctorId}`,
           {
@@ -54,13 +57,27 @@ function AllDoctors() {
         );
 
         if (response.ok) {
+          setLoading(false);
           // Remove the deleted doctor from the state
           setalldoctors((prevDoctors) =>
             prevDoctors.filter((doctor) => doctor._id !== doctorId)
           );
           console.log(`Doctor with ID ${doctorId} deleted successfully.`);
+          Swal.fire({
+            icon: "success",
+            title: "Doctor Deleted successfully",
+            showConfirmButton: false,
+            timer: 3500,
+          });
         } else {
+          setLoading(false);
           console.error(`Failed to delete doctor with ID ${doctorId}.`);
+          Swal.fire({
+            icon: "error",
+            title: "Doctor Deleted Failed",
+            showConfirmButton: false,
+            timer: 3500,
+          });
         }
       }
     } catch (error) {
@@ -81,6 +98,7 @@ function AllDoctors() {
   };
   // update Doctor
   const updateDoctor = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         `https://university-mohamed.vercel.app${routes.instructor._id}${routes.instructor.updateInstructor}?userId=${selecteddoctor._id}`,
@@ -106,6 +124,7 @@ function AllDoctors() {
       );
       const data = await response.json();
       if (response.ok) {
+        setLoading(false);
         // Show SweetAlert on success
         Swal.fire({
           icon: "success",
@@ -142,6 +161,7 @@ function AllDoctors() {
         setphone("");
         setdepartment("");
       } else {
+        setLoading(false);
         // Show an error message if needed
         Swal.fire({
           icon: "error",
@@ -223,6 +243,9 @@ function AllDoctors() {
     setPage((prevPage) => prevPage - 1);
     // Increment count by 1
   };
+  if (loading) {
+    return <TitleAnimation />;
+  }
   return (
     <>
       <div className="Create_Student" style={{ display: showform }}>

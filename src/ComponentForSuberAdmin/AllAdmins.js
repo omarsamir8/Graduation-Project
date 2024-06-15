@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { routes } from "../routes";
 import Swal from "sweetalert2";
 import { Table } from "react-bootstrap";
+import TitleAnimation from "../Loader/TitleAnimation";
 
 function AllAdmins() {
   const [alladmins, setalladmins] = useState([]);
@@ -17,6 +18,7 @@ function AllAdmins() {
   const [test, settest] = useState(false);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -52,6 +54,7 @@ function AllAdmins() {
   }
   // update Admins
   const updateAdmin = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         `https://university-mohamed.vercel.app${routes.Admin._id}${routes.Admin.updateAdmin}?userId=${selectedAdmin._id}`,
@@ -74,6 +77,7 @@ function AllAdmins() {
       );
 
       if (response.ok) {
+        setLoading(false);
         // Show SweetAlert on success
         Swal.fire({
           icon: "success",
@@ -108,6 +112,7 @@ function AllAdmins() {
         setpassword("");
         setgender("");
       } else {
+        setLoading(false);
         // Show an error message if needed
         Swal.fire({
           icon: "error",
@@ -133,6 +138,7 @@ function AllAdmins() {
         confirmButtonText: "Yes, delete it!",
       });
       if (confirmed.isConfirmed) {
+        setLoading(true);
         const response = await fetch(
           `https://university-mohamed.vercel.app${routes.Admin._id}${routes.Admin.deleteAdmin}?userId=${adminId}`,
           {
@@ -145,23 +151,40 @@ function AllAdmins() {
         );
 
         if (!response.ok) {
+          setLoading(false);
           // Remove the deleted doctor from the state
           setalladmins((prevAdmins) =>
             prevAdmins.filter((admin) => admin._id !== adminId)
           );
           console.log(`Doctor with ID ${adminId} deleted successfully.`);
+          Swal.fire({
+            icon: "success",
+            title: "Admin Deleted successfully",
+            showConfirmButton: false,
+            timer: 3500,
+          });
         } else {
+          setLoading(false);
           console.error(`Failed to delete doctor with ID ${adminId}.`);
+          Swal.fire({
+            icon: "error",
+            title: "Fail",
+            text: "Admin Deleted failed, please try again later",
+            timer: 4500,
+          });
         }
       }
     } catch (error) {
       console.error("Delete failed", error);
     }
   };
+  if (loading) {
+    return <TitleAnimation />;
+  }
   return (
     <>
-      <div className="All_Admins" style={{marginTop:"1rem"}}>
-      <marquee className="marquee" scrollamount="10">
+      <div className="All_Admins" style={{ marginTop: "1rem" }}>
+        <marquee className="marquee" scrollamount="10">
           {" "}
           This section is related to all admins exissting in BFCAI{" "}
         </marquee>

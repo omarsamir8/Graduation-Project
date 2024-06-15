@@ -6,6 +6,7 @@ import Select from "react-select";
 import { routes } from "../routes";
 import axios from "axios";
 import { useDoctorContext } from "../DoctorContext";
+import TitleAnimation from "../Loader/TitleAnimation";
 
 function CreateDoctor() {
   const [FullName, setFullName] = useState("");
@@ -24,7 +25,7 @@ function CreateDoctor() {
   const [InstructorId, setInstructorId] = useState("");
   const [instructorImage, setinstructorImage] = useState([]);
   const { alldoctors, setalldoctors } = useDoctorContext();
-
+  const [loading, setLoading] = useState(false);
   // const [training_name, settraining_name] = useState("");
 
   const accessToken = localStorage.getItem("accesstoken");
@@ -62,6 +63,7 @@ function CreateDoctor() {
   }, [allcourses]);
   // create doctor
   const createdoctor = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         `https://university-mohamed.vercel.app${routes.instructor._id}${routes.instructor.createInstructor}`,
@@ -89,6 +91,7 @@ function CreateDoctor() {
       console.log(data);
       setmessage(data.message);
       if (response.ok) {
+        setLoading(false);
         // Show SweetAlert on success
 
         Swal.fire({
@@ -98,6 +101,7 @@ function CreateDoctor() {
           timer: 3500,
         });
       } else {
+        setLoading(false);
         // Show an error message if needed
         Swal.fire({
           icon: "error",
@@ -141,6 +145,7 @@ function CreateDoctor() {
 
   // upload Doctor Photo
   const uploadDoctorimage = async () => {
+    setLoading(true);
     try {
       const formData = new FormData();
       formData.append("instructorImage", instructorImage);
@@ -162,6 +167,7 @@ function CreateDoctor() {
       console.log(data);
       setmessage(data.message);
       if (response.ok) {
+        setLoading(false);
         // Show SweetAlert on success
         Swal.fire({
           icon: "success",
@@ -170,6 +176,7 @@ function CreateDoctor() {
           timer: 3500,
         });
       } else {
+        setLoading(false);
         // Show an error message if needed
         Swal.fire({
           icon: "error",
@@ -205,6 +212,9 @@ function CreateDoctor() {
   //   fetchDataa();
   // }, [accessToken, refreshToken]);
   // console.log(doctors);
+  if (loading) {
+    return <TitleAnimation />;
+  }
   return (
     <>
       <div className="Create_Student">

@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { useCourseContext } from "../CourseContext";
 import testImg from "../assets/traing2jpeg.jpeg";
 import { usePageContext } from "../PageContext";
+import TitleAnimation from "../Loader/TitleAnimation";
 function CreateCourse() {
   const [course_name, setcourse_name] = useState("");
   const [Prerequisites, setPrerequisites] = useState([]);
@@ -21,7 +22,7 @@ function CreateCourse() {
   const [courseImage, setcourseImage] = useState([]);
   const [courseId, setcourseId] = useState("");
   const [courses, setcourses] = useState([]);
-
+  const [loading, setLoading] = useState(false);
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
   const departments = [
@@ -32,6 +33,7 @@ function CreateCourse() {
   ];
   // create course
   const createcourse = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         `https://university-mohamed.vercel.app${routes.course._id}${routes.course.AddCourse}`,
@@ -58,6 +60,7 @@ function CreateCourse() {
       console.log(data.message);
 
       if (response.ok) {
+        setLoading(false);
         // Show SweetAlert on success
         Swal.fire({
           icon: "success",
@@ -66,6 +69,7 @@ function CreateCourse() {
           timer: 3500,
         });
       } else {
+        setLoading(false);
         // Show an error message if needed
         if (data.message === "Course name already exists") {
           Swal.fire({
@@ -132,6 +136,7 @@ function CreateCourse() {
         confirmButtonText: "Yes, delete it!",
       });
       if (confirmed.isConfirmed) {
+        setLoading(true);
         const response = await fetch(
           `https://university-mohamed.vercel.app${routes.course._id}${routes.course.deleteCourse}?courseId=${courseId}`,
           {
@@ -144,13 +149,27 @@ function CreateCourse() {
         );
 
         if (response.ok) {
+          setLoading(false);
           // On success, update the state to remove the deleted course
           setallcourses((prevCourses) =>
             prevCourses.filter((course) => course._id !== courseId)
           );
           console.log(`Course with ID ${courseId} deleted successfully.`);
+          Swal.fire({
+            icon: "success",
+            title: "Course Failed successfully",
+            showConfirmButton: false,
+            timer: 3500,
+          });
         } else {
+          setLoading(false);
           console.error(`Failed to delete course with ID ${courseId}.`);
+          Swal.fire({
+            icon: "error",
+            title: "Fail",
+            text: "Course Deleted failed, please try again later",
+            timer: 4500,
+          });
         }
       }
     } catch (error) {
@@ -160,6 +179,7 @@ function CreateCourse() {
 
   // update course
   const updateCourse = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         `https://university-mohamed.vercel.app${routes.course._id}${routes.course.updateCourse}?courseId=${selectedCourseId}`,
@@ -182,6 +202,7 @@ function CreateCourse() {
       );
       const data = await response.json();
       if (response.ok) {
+        setLoading(false);
         // Show SweetAlert on success
         Swal.fire({
           icon: "success",
@@ -213,6 +234,7 @@ function CreateCourse() {
         setOpenForRegistration("");
         setcredit_hour("");
       } else {
+        setLoading(false);
         // Show an error message if needed
         Swal.fire({
           icon: "error",
@@ -232,6 +254,7 @@ function CreateCourse() {
 
   // uplode course photo
   const uploadcourseimage = async () => {
+    setLoading(true);
     try {
       const formData = new FormData();
       formData.append("courseImage", courseImage);
@@ -252,6 +275,7 @@ function CreateCourse() {
       console.log(data);
       setmessage(data.message);
       if (response.ok) {
+        setLoading(false);
         // Show SweetAlert on success
         Swal.fire({
           icon: "success",
@@ -260,6 +284,7 @@ function CreateCourse() {
           timer: 3500,
         });
       } else {
+        setLoading(false);
         // Show an error message if needed
         Swal.fire({
           icon: "error",
@@ -280,7 +305,9 @@ function CreateCourse() {
     setPage((prevPage) => prevPage - 1);
     // Increment count by 1
   };
-
+  if (loading) {
+    return <TitleAnimation />;
+  }
   return (
     <>
       <div className="Create_Student">

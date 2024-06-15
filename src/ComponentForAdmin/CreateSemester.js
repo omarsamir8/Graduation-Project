@@ -3,6 +3,7 @@ import "../Styles_For_Admin/category.css";
 import Swal from "sweetalert2";
 import { routes } from "../routes";
 import { Table } from "react-bootstrap";
+import TitleAnimation from "../Loader/TitleAnimation";
 function CreateSemester() {
   const [name, setname] = useState("");
   // const [level, setlevel] = useState("");
@@ -15,9 +16,11 @@ function CreateSemester() {
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
   let [count, setcount] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   // create Semester
   const Createsemester = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         `https://university-mohamed.vercel.app${routes.semster._id}${routes.semster.addsemster}`,
@@ -42,6 +45,7 @@ function CreateSemester() {
       console.log(data.message);
 
       if (response.ok) {
+        setLoading(false);
         // Show SweetAlert on success
         Swal.fire({
           icon: "success",
@@ -50,6 +54,7 @@ function CreateSemester() {
           timer: 3500,
         });
       } else {
+        setLoading(false);
         // Show an error message if needed
         if (data.message === "Semster name is already Exist") {
           Swal.fire({
@@ -111,6 +116,7 @@ function CreateSemester() {
         confirmButtonText: "Yes, delete it!",
       });
       if (confirmed.isConfirmed) {
+        setLoading(true);
         const response = await fetch(
           `https://university-mohamed.vercel.app${routes.semster._id}${routes.semster.deletesemster}?semsterId=${semsterId}`,
           {
@@ -123,13 +129,27 @@ function CreateSemester() {
         );
 
         if (response.ok) {
+          setLoading(false);
           // On success, update the state to remove the deleted course
           setAllSemesters((prevSemesters) =>
             prevSemesters.filter((semester) => semester._id !== semsterId)
           );
           console.log(`Course with ID ${semsterId} deleted successfully.`);
+          Swal.fire({
+            icon: "success",
+            title: "Semester Deleted successfully",
+            showConfirmButton: false,
+            timer: 3500,
+          });
         } else {
+          setLoading(false);
           console.error(`Failed to delete course with ID ${semsterId}.`);
+          Swal.fire({
+            icon: "error",
+            title: "Fail",
+            text: "Semester Deleted Failed",
+            timer: 4500,
+          });
         }
       }
     } catch (error) {
@@ -138,6 +158,7 @@ function CreateSemester() {
   };
   // update semester
   const updateSemester = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         `https://university-mohamed.vercel.app${routes.semster._id}${routes.semster.updatesemster}?semsterId=${selectedSemesterId}`,
@@ -158,6 +179,7 @@ function CreateSemester() {
       );
       const data = response.json();
       if (response.ok) {
+        setLoading(false);
         // Show SweetAlert on success
         Swal.fire({
           icon: "success",
@@ -188,6 +210,7 @@ function CreateSemester() {
         setyear("");
         setMax_Hours("");
       } else {
+        setLoading(false);
         // Show an error message if needed
         Swal.fire({
           icon: "error",
@@ -211,7 +234,9 @@ function CreateSemester() {
     // Increment count by 1
   };
   console.log(count);
-
+  if (loading) {
+    return <TitleAnimation />;
+  }
   return (
     <>
       <div className="CreateSemester">

@@ -13,6 +13,7 @@ export default function RegisterForCourse() {
   // Fetch all Courses
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const response = await fetch(
           `https://university-mohamed.vercel.app${routes.student._id}${routes.student.Availablecourses}`,
@@ -27,12 +28,9 @@ export default function RegisterForCourse() {
         const data = await response.json();
         setallcoursesavailable(data.validCourses);
         if (response.ok) {
-          setLoading(true);
-          setTimeout(() => {
-            setLoading(false);
-          }, 1500);
+          setLoading(false);
         } else {
-          setLoading(true);
+          setLoading(false);
         }
       } catch (error) {
         console.error("Fetch failed", error);
@@ -44,6 +42,7 @@ export default function RegisterForCourse() {
   console.log(allcoursesavailable);
   // Register for course
   const RegisterForCourse = async (courseId) => {
+    setLoading(true);
     try {
       const response = await fetch(
         `https://university-mohamed.vercel.app${routes.courseRegister._id}${routes.courseRegister.addCourse}?courseId=${courseId}`,
@@ -57,6 +56,7 @@ export default function RegisterForCourse() {
       );
       const data = await response.json();
       if (response.ok) {
+        setLoading(false);
         Swal.fire({
           icon: "success",
           title: "Course registered successfully",
@@ -64,6 +64,7 @@ export default function RegisterForCourse() {
           timer: 3500,
         });
       } else {
+        setLoading(false);
         Swal.fire({
           icon: "error",
           title: "Failed",
