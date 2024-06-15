@@ -158,7 +158,7 @@ function NavBar() {
     try {
       // if (searchvalue.trim() !== "") {
       const response = await axios.get(
-        `https://university-mohamed.vercel.app${routes.course._id}${routes.course.searchCourseByAdmin}?page=${Page}&size=12&sort=course_name
+        `https://university-mohamed.vercel.app${routes.course._id}${routes.course.searchCourseByAdmin}?page=${Page}&size=12
           &search=${training_value}`,
         {
           headers: {

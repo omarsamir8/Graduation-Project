@@ -99,7 +99,7 @@ function CreateCourse() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://university-mohamed.vercel.app${routes.course._id}${routes.course.searchCourseByAdmin}?&size=20&page=1`,
+          `https://university-mohamed.vercel.app${routes.course._id}${routes.course.searchCourseByAdmin}?page=1&size=10&select=course_name,credit_hour,ImgUrls`,
           {
             method: "GET",
             headers: {
