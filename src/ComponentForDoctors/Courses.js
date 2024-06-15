@@ -338,8 +338,8 @@ function Courses() {
               key={material._id}
             >
               <p className="open-now">Open Now</p>{" "}
-              {material && material.images && material.images.length > 0 ? (
-                <img src={material.images[0].url} alt="" />
+              {material && material.ImgUrls && material.ImgUrls.length === 0 ? (
+                <img src={material.ImgUrls[0]} alt="" />
               ) : (
                 <img src={defulatimg} alt="" />
               )}
@@ -369,6 +369,7 @@ function Courses() {
                   style={{
                     backgroundColor: "#996ae4",
                     borderColor: "#996ae4",
+                    marginBottom: "5px",
                   }}
                   onClick={() => {
                     fetchDataaa(material._id);

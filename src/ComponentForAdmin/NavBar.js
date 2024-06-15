@@ -29,7 +29,6 @@ function NavBar() {
   const { alldoctors, setalldoctors } = useDoctorContext();
   const accessToken = localStorage.getItem("accesstoken");
   const refreshToken = localStorage.getItem("refreshtoken");
-  const [loading, setLoading] = useState(false);
   const [imgName, setimgName] = useState("");
   const handleClick = (componentName) => {
     setSelectedComponent(componentName);
@@ -71,7 +70,6 @@ function NavBar() {
   console.log(imgName);
   // search for students
   const fetchData = async () => {
-    setLoading(true);
     try {
       const response = await axios.get(
         `https://university-mohamed.vercel.app${routes.student._id}${routes.student.searchstudent}?page=${Page}&size=12&search=${search_student_value}&sort=Full_Name`,
@@ -85,11 +83,6 @@ function NavBar() {
 
       console.log(response.data);
       setallstudents(response.data.students);
-      if (response.ok) {
-        setLoading(false);
-      } else {
-        setLoading(false);
-      }
     } catch (error) {
       console.error("Error fetching admin info:", error);
     }
@@ -100,7 +93,6 @@ function NavBar() {
   console.log(allstudents);
   // search for doctor
   const fetchDataa = async () => {
-    setLoading(true);
     try {
       const response = await axios.get(
         `https://university-mohamed.vercel.app${routes.instructor._id}${routes.instructor.searchInstructor}?page=${Page}&size=12&search=${doctor_value}&sort=FullName`,
@@ -114,11 +106,6 @@ function NavBar() {
 
       console.log(response.data);
       setalldoctors(response.data.Instructors);
-      if (response.ok) {
-        setLoading(false);
-      } else {
-        setLoading(false);
-      }
     } catch (error) {
       console.error("Error fetching admin info:", error);
     }
@@ -129,7 +116,6 @@ function NavBar() {
   console.log(alldoctors);
   // search for training
   const fetchsearchfortraining = async () => {
-    setLoading(true);
     try {
       // if (searchvalue.trim() !== "") {
       const response = await axios.get(
@@ -145,11 +131,7 @@ function NavBar() {
       const data = response.data;
       console.log(data);
       setAllTrainings(data.trainings);
-      if (response.ok) {
-        setLoading(false);
-      } else {
-        setLoading(false);
-      }
+
       // Here you can update the state related to the search or perform any other actions with the data
     } catch (error) {
       // }
@@ -173,7 +155,6 @@ function NavBar() {
   console.log(allTrainings);
   // serach for course
   const fetchsearchforcourse = async () => {
-    setLoading(true);
     try {
       // if (searchvalue.trim() !== "") {
       const response = await axios.get(
@@ -191,11 +172,7 @@ function NavBar() {
       console.log(data);
       setallcourses(data.courses);
       console.log(allcourses);
-      if (response.ok) {
-        setLoading(false);
-      } else {
-        setLoading(false);
-      }
+
       // Here you can update the state related to the search or perform any other actions with the data
     } catch (error) {
       // }
@@ -329,9 +306,7 @@ function NavBar() {
       });
     }
   };
-  if (loading) {
-    return <TitleAnimation />;
-  }
+
   return (
     <>
       <div className="nav-bar">

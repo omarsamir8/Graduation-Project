@@ -305,6 +305,10 @@ function CreateTraining() {
   if (loading) {
     return <TitleAnimation />;
   }
+
+  function makecamelcase(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
   return (
     <>
       <div className="Create_Student">
@@ -450,7 +454,7 @@ function CreateTraining() {
                 alt=""
               />
               <div className="infooo">
-                <h3>{training.training_name}</h3>
+                <h3>{makecamelcase(training.training_name)}</h3>
                 <p>4 Months</p>
               </div>
               <div className="up-del-btn">

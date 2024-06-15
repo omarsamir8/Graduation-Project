@@ -117,7 +117,7 @@ function CreateStudent() {
           timer: 4500,
         });
       }
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       console.error("Upload failed", error);
     }
