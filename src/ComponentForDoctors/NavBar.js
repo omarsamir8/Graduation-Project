@@ -400,7 +400,7 @@ function NavBar() {
               }}
               data-bs-toggle="modal"
               data-bs-target="#exampleModa2"
-              class="fa-solid fa-arrow-down-z-a"
+              class="fa-solid fa-arrow-down"
             ></i>
           </div>
 
@@ -411,7 +411,7 @@ function NavBar() {
             aria-labelledby="exampleModalLabel"
             aria-hidden="true"
           >
-            <div style={{ width: "420px" }} class="modal-dialog">
+            <div style={{ width: "380px" }} class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5
@@ -432,7 +432,7 @@ function NavBar() {
                     class="btn-close"
                     data-bs-dismiss="modal"
                     aria-label="Close"
-                    style={{ marginRight: "50px", marginTop: "-45px" }}
+                    style={{ marginRight: "0px", marginTop: "-45px" }}
                   />
                 </div>
                 <div class="modal-body">
@@ -589,7 +589,7 @@ function NavBar() {
                     type="button"
                     class="btn btn-secondary"
                     data-bs-dismiss="modal"
-                    style={{ marginRight: "60px" }}
+                    style={{ marginRight: "0px" }}
                   >
                     Close
                   </button>

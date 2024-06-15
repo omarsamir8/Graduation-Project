@@ -3,12 +3,15 @@ import { useRecoilState } from "recoil";
 import { $Dashboard2_Components } from "../Atoms";
 import "../styles/SideBar.css";
 import { useState } from "react";
+import axios from "axios";
 
 function SideBar() {
   const navigate = useNavigate();
   const [isClicked, setIsClicked] = useState(false);
   const [Color, setColor] = useState("");
   const [SelectedComponent, SetSelectedComponent] = useState(null);
+  const accessToken = localStorage.getItem("accesstoken");
+  const refreshToken = localStorage.getItem("refreshtoken");
   const usenavigate = useNavigate();
   const NavigateToScan = () => {
     usenavigate("/Scan");
@@ -18,13 +21,35 @@ function SideBar() {
     setSelectedComponent2(componentName);
     window.scrollTo(0, 750);
   };
-  function logout() {
-    navigate("/");
-    localStorage.clear();
-  }
+
   const [selectedComponent2, setSelectedComponent2] = useRecoilState(
     $Dashboard2_Components
   );
+
+  const DoctorLogout = async () => {
+    try {
+      // if (searchvalue.trim() !== "") {
+      const response = await axios.get(
+        `https://university-mohamed.vercel.app/Api/instructors/logout`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+        }
+      );
+      const data = response.data;
+      console.log(data);
+      if (data.message === "user logout successfully") {
+        navigate("/");
+        localStorage.clear();
+      }
+      // Here you can update the state related to the search or perform any other actions with the data
+    } catch (error) {
+      // }
+      console.error("Error fetching search results:", error);
+    }
+  };
   return (
     <>
       <div className="sidebar-container">
@@ -115,7 +140,7 @@ function SideBar() {
           className="login col-12"
         >
           <i class="fa-solid fa-right-from-bracket" />
-          <p onClick={logout}>Logout</p>
+          <p onClick={DoctorLogout}>Logout</p>
         </div>
       </div>
     </>

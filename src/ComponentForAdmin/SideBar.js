@@ -3,24 +3,48 @@ import "../styles/SideBar.css";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { $Dashboard_Components } from "../Atoms";
+import axios from "axios";
 function SideBar() {
   const [className, setclassName] = useState("");
   const [isClicked, setIsClicked] = useState(false);
   const [Color, setColor] = useState("");
   const [SelectedComponent, SetSelectedComponent] = useState(null);
+  const accessToken = localStorage.getItem("accesstoken");
+  const refreshToken = localStorage.getItem("refreshtoken");
   const handleClick = (componentName) => {
     setSelectedComponent(componentName);
     window.scrollTo(0, 750);
   };
   const navigate = useNavigate();
-  function logout() {
-    navigate("/");
-    localStorage.clear();
-  }
+
   const [selectedComponent, setSelectedComponent] = useRecoilState(
     $Dashboard_Components
   );
 
+  const AdminLogout = async () => {
+    try {
+      // if (searchvalue.trim() !== "") {
+      const response = await axios.get(
+        `https://university-mohamed.vercel.app/Api/admins/logout`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+        }
+      );
+      const data = response.data;
+      console.log(data);
+      if (data.message === "user logout successfully") {
+        navigate("/");
+        localStorage.clear();
+      }
+      // Here you can update the state related to the search or perform any other actions with the data
+    } catch (error) {
+      // }
+      console.error("Error fetching search results:", error);
+    }
+  };
   return (
     <>
       <div className="sidebar-container">
@@ -197,7 +221,7 @@ function SideBar() {
         </div>
         <div className="login col-12">
           <i class="sideIcon fa-solid fa-right-from-bracket" />
-          <p onClick={logout} className="logout_Button">
+          <p onClick={AdminLogout} className="logout_Button">
             Logout
           </p>
         </div>

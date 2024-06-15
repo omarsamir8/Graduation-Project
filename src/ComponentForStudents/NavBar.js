@@ -511,7 +511,7 @@ function NavBar() {
               }}
               data-bs-toggle="modal"
               data-bs-target="#exampleModa2"
-              class="fa-solid fa-arrow-down-z-a"
+              class="fa-solid fa-arrow-down"
             ></i>
           </div>
 

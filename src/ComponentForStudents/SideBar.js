@@ -4,24 +4,52 @@ import { useRecoilState } from "recoil";
 import { $Dashboard_Components } from "../Atoms";
 import Semester_grade from "../pages/Semester_grade";
 import { useState } from "react";
+import axios from "axios";
 function SideBar() {
   const navigate = useNavigate();
   const [isClicked, setIsClicked] = useState(false);
   const [Color, setColor] = useState("");
   const [SelectedComponent, SetSelectedComponent] = useState(null);
+  const accessToken = localStorage.getItem("accesstoken");
+  const refreshToken = localStorage.getItem("refreshtoken");
   const handleClick = (componentName) => {
     setSelectedComponent(componentName);
     window.scrollTo(0, 750);
   };
 
-  function logout() {
-    navigate("/");
-    localStorage.clear();
-  }
+  // function logout() {
+  //   navigate("/");
+  //   localStorage.clear();
+  // }
 
   const [selectedComponent, setSelectedComponent] = useRecoilState(
     $Dashboard_Components
   );
+
+  const StudentLogout = async () => {
+    try {
+      // if (searchvalue.trim() !== "") {
+      const response = await axios.get(
+        `https://university-mohamed.vercel.app/Api/students/logout`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "refresh-token": refreshToken,
+          },
+        }
+      );
+      const data = response.data;
+      console.log(data);
+      if (data.message === "user logout successfully") {
+        navigate("/");
+        localStorage.clear();
+      }
+      // Here you can update the state related to the search or perform any other actions with the data
+    } catch (error) {
+      // }
+      console.error("Error fetching search results:", error);
+    }
+  };
   return (
     <>
       <div className="sidebar-container">
@@ -175,7 +203,7 @@ function SideBar() {
         </div>
         <div className="login col-12">
           <i class="fa-solid fa-right-from-bracket" />
-          <p onClick={logout} className="logout_Button">
+          <p onClick={StudentLogout} className="logout_Button">
             Logout
           </p>
         </div>
