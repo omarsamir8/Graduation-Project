@@ -68,7 +68,7 @@ export default function RegisterForCourse() {
         Swal.fire({
           icon: "error",
           title: "Failed",
-          text: data.error_Message[0].message,
+          text: "Course Registered Failed",
           timer: 4500,
         });
       }

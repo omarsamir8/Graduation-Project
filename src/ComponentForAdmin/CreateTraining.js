@@ -205,7 +205,7 @@ function CreateTraining() {
         Swal.fire({
           icon: "error",
           title: "Fail",
-          text: data.error_Message[0].message,
+          text: "Trainng Updated Failed",
           timer: 4500,
         });
       }
