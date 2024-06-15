@@ -338,8 +338,8 @@ function Courses() {
               key={material._id}
             >
               <p className="open-now">Open Now</p>{" "}
-              {material && material.ImgUrls && material.ImgUrls.length === 0 ? (
-                <img src={material.ImgUrls[0]} alt="" />
+              {material && material.images && material.images.length > 0 ? (
+                <img src={material.images[0].url} alt="" />
               ) : (
                 <img src={defulatimg} alt="" />
               )}
