@@ -5,7 +5,6 @@ import Form from "react-bootstrap/Form";
 import { routes } from "../routes";
 import Swal from "sweetalert2";
 import TitleAnimation from "../Loader/TitleAnimation";
-import Spinner from "react-bootstrap/Spinner";
 
 function Login() {
   const navigate = useNavigate();
