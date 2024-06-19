@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import { routes } from "../routes";
 import defulatimg from "../assets/traing2jpeg.jpeg";
 import TitleAnimation from "../Loader/TitleAnimation";
+import { Link } from "react-router-dom";
 
 export default function RegisterForCourse() {
   const accessToken = localStorage.getItem("accesstoken");
@@ -68,7 +69,9 @@ export default function RegisterForCourse() {
         Swal.fire({
           icon: "error",
           title: "Failed",
-          text: "Course Registered Failed",
+          text: data.error_Message
+            ? data.error_Message[0].message
+            : data.message,
           timer: 4500,
         });
       }
@@ -116,6 +119,11 @@ export default function RegisterForCourse() {
                 onClick={() => RegisterForCourse(course._id)}
               >
                 Register Now
+              </button>
+              <button type="button" class="btn btn-secondary">
+                <Link to={`/course/${course._id}`} className="link">
+                  More Info
+                </Link>
               </button>
             </div>
           </div>

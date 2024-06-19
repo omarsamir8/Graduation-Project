@@ -21,6 +21,7 @@ import ScanQr from "./pages/ScanQr/ScanQr";
 import ForgetPassword from "./pages/ForgetPassword";
 import ConfirmPassword from "./pages/ConfirmPassword";
 import { useEffect, useState } from "react";
+import CourseInfo from "./pages/SinglePageForCourse/SinglePageForCourse.js";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -59,6 +60,7 @@ function App() {
               element={<Generate_department />}
             />
             <Route path="/training/:trainingId" element={<Training_Info />} />
+            <Route path="/course/:courseId" element={<CourseInfo />} />
             <Route path="/student/:studentId" element={<StudentInfo />} />
             <Route path="/doctor/:doctorId" element={<DoctorInfo />} />
             <Route

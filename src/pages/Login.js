@@ -14,7 +14,9 @@ function Login() {
   const [message, setmessage] = useState("");
   const [type, settype] = useState("");
   const [name, setname] = useState("");
-  const [loading, setLoading] = useState(false); // تم إضافة حالة التحميل
+  const [loading, setLoading] = useState(false);
+  const accessToken = localStorage.getItem("accesstoken");
+  const refreshToken = localStorage.getItem("refreshtoken"); // تم إضافة حالة التحميل
 
   useEffect(() => {
     if (type === "student") {

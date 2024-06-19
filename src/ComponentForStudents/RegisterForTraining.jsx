@@ -27,7 +27,7 @@ export default function RegisterForTraining() {
           },
         }
       );
-
+      const data = await response.json();
       if (response.ok) {
         setLoading(false);
         Swal.fire({
@@ -41,7 +41,9 @@ export default function RegisterForTraining() {
         Swal.fire({
           icon: "error",
           title: "Failed",
-          text: "It is not allowed for you to register this training",
+          text: data.error_Message
+            ? data.error_Message[0].message
+            : data.message,
           timer: 4500,
         });
       }

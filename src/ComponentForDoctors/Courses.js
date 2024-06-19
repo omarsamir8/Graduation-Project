@@ -379,6 +379,11 @@ function Courses() {
                 >
                   Update Student Grade
                 </button>
+                {/* <button type="button" class="btn btn-secondary">
+                  <Link to={`/course/${material._id}`} className="link">
+                    More Info
+                  </Link>
+                </button> */}
               </div>
             </div>
           );
