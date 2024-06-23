@@ -198,7 +198,10 @@ function SideBar() {
         </div>
 
         <div className="item col-12">
-          <i class="fa-solid fa-message" />
+          <i
+            class="fa-solid fa-message"
+            onClick={() => (window.location.href = "http://localhost:3001")}
+          />
           <NavLink className="NavLink">Chat</NavLink>
         </div>
         <div className="login col-12">

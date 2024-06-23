@@ -215,7 +215,11 @@ function SideBar() {
 
         <div className="item col-12">
           <i class="sideIcon fa-solid fa-message" />
-          <li style={{ textDecoration: "none" }} className="Side_li">
+          <li
+            style={{ textDecoration: "none" }}
+            className="Side_li"
+            onClick={() => (window.location.href = "http://localhost:3001")}
+          >
             Chat
           </li>
         </div>
